@@ -1,0 +1,15 @@
+
+html, body, #mapcanvas {
+  height: 100%;
+  margin: 0px;
+  padding: 0px
+}
+
+#mapcanvas{
+  border: 1px rgb(100,100,100) dotted;
+  
+}
+
+.error{
+  color: rgb(100, 0, 0);
+}
