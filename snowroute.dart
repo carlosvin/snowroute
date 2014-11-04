@@ -53,7 +53,7 @@ class PositioningView {
   final logElement = querySelector("#log");
   final mapOptions = new MapOptions()
       ..zoom = 8
-      ..center = new LatLng(-34.397, 150.644)
+      ..center = new LatLng(0, 0)
       ..mapTypeId = MapTypeId.ROADMAP;
   final InfoWindow info = new InfoWindow()
     ..content = "you";
@@ -82,6 +82,8 @@ class PositioningView {
         positioning.positions.values.last.coords.latitude, 
         positioning.positions.values.last.coords.longitude);
     info.position = map.center;
+    var speed = positioning.positions.values.last.coords.speed;
+    info.content = "$speed km/h";
     info.open(map);
     
   }

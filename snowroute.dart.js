@@ -3571,15 +3571,15 @@ var $$ = Object.create(null);
     }
   },
   MappedListIterable: {
-    "^": "ListIterable;__internal$_source,_f",
+    "^": "ListIterable;_source,_f",
     _f$1: function(arg0) {
       return this._f.call$1(arg0);
     },
     get$length: function(_) {
-      return J.get$length$asx(this.__internal$_source);
+      return J.get$length$asx(this._source);
     },
     elementAt$1: function(_, index) {
-      return this._f$1(J.elementAt$1$ax(this.__internal$_source, index));
+      return this._f$1(J.elementAt$1$ax(this._source, index));
     },
     $asListIterable: function($S, $T) {
       return [$T];
@@ -4030,7 +4030,7 @@ var $$ = Object.create(null);
         throw H.wrapException(P.StateError$("Future already completed"));
       this._state = 1;
     },
-    get$_value: function() {
+    get$_async$_value: function() {
       return this._resultOrListeners;
     },
     get$_error: function() {
@@ -4174,7 +4174,7 @@ var $$ = Object.create(null);
             return;
           }
           t3.listenerHasValue_1 = true;
-          sourceValue = t1.source_4.get$_hasValue() ? t1.source_4.get$_value() : null;
+          sourceValue = t1.source_4.get$_hasValue() ? t1.source_4.get$_async$_value() : null;
           t3.listenerValueOrError_2 = sourceValue;
           t3.isPropagationAborted_3 = false;
           t2 = !hasError;
@@ -5196,11 +5196,11 @@ var $$ = Object.create(null);
       var t1, t2;
       t1 = this.get$_handleData();
       t2 = this.get$_handleError();
-      this._subscription = this._stream._source.listen$3$onDone$onError(t1, this.get$_handleDone(), t2);
+      this._subscription = this._stream._async$_source.listen$3$onDone$onError(t1, this.get$_handleDone(), t2);
     }
   },
   _MapStream: {
-    "^": "_ForwardingStream;_transform,_source",
+    "^": "_ForwardingStream;_transform,_async$_source",
     _transform$1: function(arg0) {
       return this._transform.call$1(arg0);
     },
@@ -5793,13 +5793,13 @@ var $$ = Object.create(null);
         if (strings == null)
           return;
         cell = strings[key];
-        return cell == null ? null : cell.get$_collection$_value();
+        return cell == null ? null : cell.get$_value();
       } else if (typeof key === "number" && (key & 0x3ffffff) === key) {
         nums = this._nums;
         if (nums == null)
           return;
         cell = nums[key];
-        return cell == null ? null : cell.get$_collection$_value();
+        return cell == null ? null : cell.get$_value();
       } else
         return this._get$1(key);
     },
@@ -5812,7 +5812,7 @@ var $$ = Object.create(null);
       index = this._findBucketIndex$2(bucket, key);
       if (index < 0)
         return;
-      return bucket[index].get$_collection$_value();
+      return bucket[index].get$_value();
     },
     $indexSet: function(_, key, value) {
       var strings, nums;
@@ -5847,7 +5847,7 @@ var $$ = Object.create(null);
       else {
         index = this._findBucketIndex$2(bucket, key);
         if (index >= 0)
-          bucket[index].set$_collection$_value(value);
+          bucket[index].set$_value(value);
         else
           bucket.push(this._newLinkedCell$2(key, value));
       }
@@ -5871,14 +5871,14 @@ var $$ = Object.create(null);
         return;
       cell = bucket.splice(index, 1)[0];
       this._unlinkCell$1(cell);
-      return cell.get$_collection$_value();
+      return cell.get$_value();
     },
     forEach$1: function(_, action) {
       var cell, modifications;
       cell = this._first;
       modifications = this._modifications;
       for (; cell != null;) {
-        action.call$2(cell.get$_key(), cell.get$_collection$_value());
+        action.call$2(cell.get$_key(), cell.get$_value());
         if (modifications !== this._modifications)
           throw H.wrapException(P.ConcurrentModificationError$(this));
         cell = cell.get$_next();
@@ -5889,7 +5889,7 @@ var $$ = Object.create(null);
       if (cell == null)
         table[key] = this._newLinkedCell$2(key, value);
       else
-        cell.set$_collection$_value(value);
+        cell.set$_value(value);
     },
     _removeHashTableEntry$2: function(table, key) {
       var cell;
@@ -5900,7 +5900,7 @@ var $$ = Object.create(null);
         return;
       this._unlinkCell$1(cell);
       delete table[key];
-      return cell.get$_collection$_value();
+      return cell.get$_value();
     },
     _newLinkedCell$2: function(key, value) {
       var cell, last;
@@ -5965,7 +5965,7 @@ var $$ = Object.create(null);
     $isFunction: true
   },
   LinkedHashMapCell: {
-    "^": "Object;_key<,_collection$_value@,_next@,_previous@"
+    "^": "Object;_key<,_value@,_next@,_previous@"
   },
   LinkedHashMapKeyIterable: {
     "^": "IterableBase;_map",
@@ -7108,7 +7108,7 @@ var $$ = Object.create(null);
     "%": "CDATASection|CharacterData|Comment|ProcessingInstruction|Text"
   },
   Coordinates: {
-    "^": "Interceptor;latitude=,longitude=",
+    "^": "Interceptor;latitude=,longitude=,speed=",
     "%": "Coordinates"
   },
   DomError: {
@@ -8155,6 +8155,9 @@ var $$ = Object.create(null);
   },
   InfoWindow: {
     "^": "MVCObject;_onCloseclick,_onContentChanged,_onDomready,_onPositionChanged,_onZindexChanged,$$unsafe",
+    set$content: function(_, $content) {
+      return this.$$unsafe.callMethod$2("setContent", [$content]);
+    },
     InfoWindow$1: function(opts) {
       var t1 = $.get$event();
       this._onCloseclick = t1.getStreamProviderFor$2(this, "closeclick");
@@ -8324,7 +8327,7 @@ var $$ = Object.create(null);
     t7 = $.get$maps();
     t8 = J.$index$asx(t7, "LatLng");
     t8 = t8 != null ? t8 : J.$index$asx($.get$context(), "Object");
-    t8 = P.JsObject_JsObject(t8, [-34.397, 150.644, null]);
+    t8 = P.JsObject_JsObject(t8, [0, 0, null]);
     t6.$indexSet(t5, "center", t8);
     t8 = $.get$MapTypeId_ROADMAP();
     if (!!J.getInterceptor(t8).$isMapTypeId)
@@ -8335,11 +8338,10 @@ var $$ = Object.create(null);
     t8 = J.$index$asx(t7, "InfoWindow");
     t6 = t8 != null ? t8 : J.$index$asx(t7, "MVCObject");
     t6 = t6 != null ? t6 : J.$index$asx($.get$context(), "Object");
-    t6 = P.JsObject_JsObject(t6, [null]);
-    t7 = new Z.InfoWindow(null, null, null, null, null, t6);
-    t7.InfoWindow$1(null);
-    t6.callMethod$2("setContent", ["you"]);
-    view = new K.PositioningView(t2, t3, t4, new Z.MapOptions(t5), t7, null, false);
+    t6 = new Z.InfoWindow(null, null, null, null, null, P.JsObject_JsObject(t6, [null]));
+    t6.InfoWindow$1(null);
+    t6.set$content(0, "you");
+    view = new K.PositioningView(t2, t3, t4, new Z.MapOptions(t5), t6, null, false);
     view.PositioningView$0();
     K.PositioningControl$(new K.Positioning(t1), view);
   }, "call$0", "main$closure", 0, 0, 11],
@@ -8357,7 +8359,7 @@ var $$ = Object.create(null);
   PositioningControl_closure: {
     "^": "Closure:60;this_0",
     call$1: [function(position) {
-      var t1, t2, t3, t4, t5, t6;
+      var t1, t2, t3, t4, t5, t6, t7;
       t1 = this.this_0;
       t2 = t1.view;
       t3 = t2.logElement;
@@ -8374,20 +8376,24 @@ var $$ = Object.create(null);
         t5 = t1.get$values(t1);
         t6 = t5._iterable;
         t6 = J.get$latitude$x(J.get$coords$x(t5._f$1(t6.get$last(t6))));
+        t5 = t1.get$values(t1);
+        t7 = t5._iterable;
+        t7 = J.get$longitude$x(J.get$coords$x(t5._f$1(t7.get$last(t7))));
+        t5 = J.$index$asx($.get$maps(), "LatLng");
+        t5 = t5 != null ? t5 : J.$index$asx($.get$context(), "Object");
+        t5 = P.JsObject_JsObject(t5, [t6, t7, null]);
+        t4.$$unsafe.callMethod$2("setCenter", [t5]);
+        t4 = t2.info;
+        t5 = t2.map.$$unsafe.callMethod$1("getCenter");
+        t5 = t5 == null ? null : new Z.LatLng(t5);
+        t6 = t4.$$unsafe;
+        t6.callMethod$2("setPosition", [t5 == null ? null : t5.$$unsafe]);
         t1 = t1.get$values(t1);
         t5 = t1._iterable;
-        t5 = J.get$longitude$x(J.get$coords$x(t1._f$1(t5.get$last(t5))));
-        t1 = J.$index$asx($.get$maps(), "LatLng");
-        t1 = t1 != null ? t1 : J.$index$asx($.get$context(), "Object");
-        t1 = P.JsObject_JsObject(t1, [t6, t5, null]);
-        t4.$$unsafe.callMethod$2("setCenter", [t1]);
-        t1 = t2.map.$$unsafe.callMethod$1("getCenter");
-        t1 = t1 == null ? null : new Z.LatLng(t1);
-        t4 = t2.info.$$unsafe;
-        t4.callMethod$2("setPosition", [t1 == null ? null : t1.$$unsafe]);
-        t1 = t2.map;
-        t1 = t1.$$unsafe;
-        t4.callMethod$2("open", [t1, null]);
+        t4.set$content(0, H.S(J.get$speed$x(J.get$coords$x(t1._f$1(t5.get$last(t5))))) + " km/h");
+        t2 = t2.map;
+        t1 = t2.$$unsafe;
+        t6.callMethod$2("open", [t1, null]);
         t3.textContent = "Updates";
       } else
         t3.textContent = "No updates";
@@ -8706,6 +8712,9 @@ J.get$longitude$x = function(receiver) {
 };
 J.get$message$x = function(receiver) {
   return J.getInterceptor$x(receiver).get$message(receiver);
+};
+J.get$speed$x = function(receiver) {
+  return J.getInterceptor$x(receiver).get$speed(receiver);
 };
 J.map$1$ax = function(receiver, a0) {
   return J.getInterceptor$ax(receiver).map$1(receiver, a0);
