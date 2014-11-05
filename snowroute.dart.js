@@ -4148,7 +4148,7 @@ var $$ = Object.create(null);
         throw H.wrapException(P.StateError$("Future already completed"));
       this._state = 1;
     },
-    get$_async$_value: function() {
+    get$_value: function() {
       return this._resultOrListeners;
     },
     get$_error: function() {
@@ -4292,7 +4292,7 @@ var $$ = Object.create(null);
             return;
           }
           t3.listenerHasValue_1 = true;
-          sourceValue = t1.source_4.get$_hasValue() ? t1.source_4.get$_async$_value() : null;
+          sourceValue = t1.source_4.get$_hasValue() ? t1.source_4.get$_value() : null;
           t3.listenerValueOrError_2 = sourceValue;
           t3.isPropagationAborted_3 = false;
           t2 = !hasError;
@@ -4665,13 +4665,9 @@ var $$ = Object.create(null);
       return new P.StateError("Cannot add event while adding a stream");
     },
     add$1: function(_, value) {
-      var t1 = this._state;
-      if (t1 >= 4)
+      if (this._state >= 4)
         throw H.wrapException(this._badEventState$0());
-      if ((t1 & 1) !== 0)
-        this._sendData$1(value);
-      else if ((t1 & 3) === 0)
-        this._ensurePendingEvents$0().add$1(0, new P._DelayedData(value, null));
+      this._async$_add$1(value);
     },
     addError$2: function(error, stackTrace) {
       var t1 = this._state;
@@ -5956,13 +5952,13 @@ var $$ = Object.create(null);
         if (strings == null)
           return;
         cell = strings[key];
-        return cell == null ? null : cell.get$_value();
+        return cell == null ? null : cell.get$_collection$_value();
       } else if (typeof key === "number" && (key & 0x3ffffff) === key) {
         nums = this._nums;
         if (nums == null)
           return;
         cell = nums[key];
-        return cell == null ? null : cell.get$_value();
+        return cell == null ? null : cell.get$_collection$_value();
       } else
         return this._get$1(key);
     },
@@ -5975,7 +5971,7 @@ var $$ = Object.create(null);
       index = this._findBucketIndex$2(bucket, key);
       if (index < 0)
         return;
-      return bucket[index].get$_value();
+      return bucket[index].get$_collection$_value();
     },
     $indexSet: function(_, key, value) {
       var strings, nums;
@@ -6010,7 +6006,7 @@ var $$ = Object.create(null);
       else {
         index = this._findBucketIndex$2(bucket, key);
         if (index >= 0)
-          bucket[index].set$_value(value);
+          bucket[index].set$_collection$_value(value);
         else
           bucket.push(this._newLinkedCell$2(key, value));
       }
@@ -6034,7 +6030,7 @@ var $$ = Object.create(null);
         return;
       cell = bucket.splice(index, 1)[0];
       this._unlinkCell$1(cell);
-      return cell.get$_value();
+      return cell.get$_collection$_value();
     },
     clear$0: function(_) {
       if (this._collection$_length > 0) {
@@ -6052,7 +6048,7 @@ var $$ = Object.create(null);
       cell = this._first;
       modifications = this._modifications;
       for (; cell != null;) {
-        action.call$2(cell.get$_key(), cell.get$_value());
+        action.call$2(cell.get$_key(), cell.get$_collection$_value());
         if (modifications !== this._modifications)
           throw H.wrapException(P.ConcurrentModificationError$(this));
         cell = cell.get$_next();
@@ -6063,7 +6059,7 @@ var $$ = Object.create(null);
       if (cell == null)
         table[key] = this._newLinkedCell$2(key, value);
       else
-        cell.set$_value(value);
+        cell.set$_collection$_value(value);
     },
     _removeHashTableEntry$2: function(table, key) {
       var cell;
@@ -6074,7 +6070,7 @@ var $$ = Object.create(null);
         return;
       this._unlinkCell$1(cell);
       delete table[key];
-      return cell.get$_value();
+      return cell.get$_collection$_value();
     },
     _newLinkedCell$2: function(key, value) {
       var cell, last;
@@ -6139,7 +6135,7 @@ var $$ = Object.create(null);
     $isFunction: true
   },
   LinkedHashMapCell: {
-    "^": "Object;_key<,_value@,_next@,_previous@"
+    "^": "Object;_key<,_collection$_value@,_next@,_previous@"
   },
   LinkedHashMapKeyIterable: {
     "^": "IterableBase;_map",
@@ -7607,16 +7603,12 @@ var $$ = Object.create(null);
   Geolocation_watchPosition__closure: {
     "^": "Closure:29;box_0,this_3",
     call$1: [function(position) {
-      var t1, t2, t3;
+      var t1, t2;
       t1 = this.box_0.controller_1;
       t2 = C.Geolocation_methods._ensurePosition$1(this.this_3, position);
       if (t1._state >= 4)
         H.throwExpression(t1._badEventState$0());
-      t3 = t1._state;
-      if ((t3 & 1) !== 0)
-        t1._sendData$1(t2);
-      else if ((t3 & 3) === 0)
-        t1._ensurePendingEvents$0().add$1(0, new P._DelayedData(t2, null));
+      t1._async$_add$1(t2);
     }, "call$1", null, 2, 0, null, 57, "call"],
     $isFunction: true
   },
@@ -8815,7 +8807,7 @@ var $$ = Object.create(null);
 ["", "snowroute.dart", , K, {
   "^": "",
   main: [function() {
-    var t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, view;
+    var t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12;
     t1 = P.LinkedHashMap_LinkedHashMap(null, null, null, P.DateTime, W.Geoposition);
     t2 = document.querySelector("#status");
     t3 = document.querySelector("#log");
@@ -8837,31 +8829,33 @@ var $$ = Object.create(null);
     t8 = J.$index$asx(t5, "Polyline");
     t8 = t8 != null ? t8 : J.$index$asx(t5, "MVCObject");
     t8 = t8 != null ? t8 : J.$index$asx($.get$context(), "Object");
-    t8 = new Z.Polyline(null, null, null, null, null, null, null, null, P.JsObject_JsObject(t8, [t7]));
-    t8.Polyline$1(new Z.PolylineOptions(t7));
+    t8 = P.JsObject_JsObject(t8, [t7]);
+    t9 = new Z.Polyline(null, null, null, null, null, null, null, null, t8);
+    t9.Polyline$1(new Z.PolylineOptions(t7));
     t7 = document.querySelector("#mapcanvas");
-    t9 = J.$index$asx($.get$context(), "Object");
-    t9 = P.JsObject_JsObject(t9, []);
-    t10 = J.getInterceptor$ax(t9);
-    t10.$indexSet(t9, "zoom", 10);
-    t11 = J.$index$asx(t5, "LatLng");
-    t11 = t11 != null ? t11 : J.$index$asx($.get$context(), "Object");
-    t11 = P.JsObject_JsObject(t11, [0, 0, null]);
-    t10.$indexSet(t9, "center", t11);
-    t11 = $.get$MapTypeId_ROADMAP();
-    if (!!J.getInterceptor(t11).$isMapTypeId)
-      t11 = t11.$$unsafe;
+    t10 = J.$index$asx($.get$context(), "Object");
+    t10 = P.JsObject_JsObject(t10, []);
+    t11 = J.getInterceptor$ax(t10);
+    t11.$indexSet(t10, "zoom", 10);
+    t12 = J.$index$asx(t5, "LatLng");
+    t12 = t12 != null ? t12 : J.$index$asx($.get$context(), "Object");
+    t12 = P.JsObject_JsObject(t12, [0, 0, null]);
+    t11.$indexSet(t10, "center", t12);
+    t12 = $.get$MapTypeId_ROADMAP();
+    if (!!J.getInterceptor(t12).$isMapTypeId)
+      t12 = t12.$$unsafe;
     else
-      t11 = t11 == null ? null : H.throwExpression("bad type");
-    t10.$indexSet(t9, "mapTypeId", t11);
-    t11 = J.$index$asx(t5, "Map");
-    t5 = t11 != null ? t11 : J.$index$asx(t5, "MVCObject");
+      t12 = t12 == null ? null : H.throwExpression("bad type");
+    t11.$indexSet(t10, "mapTypeId", t12);
+    t12 = J.$index$asx(t5, "Map");
+    t5 = t12 != null ? t12 : J.$index$asx(t5, "MVCObject");
     t5 = t5 != null ? t5 : J.$index$asx($.get$context(), "Object");
-    t5 = new Z.GMap(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, P.JsObject_JsObject(t5, [t7, t9]));
-    t5.GMap$2(t7, new Z.MapOptions(t9));
-    view = new K.PositioningView(t2, t3, t4, t6, t8, t5, false);
-    view.PositioningView$0();
-    K.PositioningControl$(new K.Positioning(t1), view);
+    t5 = P.JsObject_JsObject(t5, [t7, t10]);
+    t11 = new Z.GMap(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, t5);
+    t11.GMap$2(t7, new Z.MapOptions(t10));
+    t2.textContent = "?";
+    t8.callMethod$2("setMap", [t5]);
+    K.PositioningControl$(new K.Positioning(t1), new K.PositioningView(t2, t3, t4, t6, t9, t11, false));
   }, "call$0", "main$closure", 0, 0, 12],
   PositioningControl: {
     "^": "Object;positioning,view,buttonStart,buttonStop,buttonPause,chrono,duration,timer",
@@ -9018,23 +9012,6 @@ var $$ = Object.create(null);
     "^": "Object;status,logElement,chrono,info,line,map,isError",
     map$1: function($receiver, arg0) {
       return this.map.call$1(arg0);
-    },
-    PositioningView$0: function() {
-      var t1, t2, t3, t4;
-      this.status.textContent = "?";
-      t1 = this.line.$$unsafe;
-      t1.callMethod$2("setMap", [this.map.$$unsafe]);
-      t2 = Z.MVCArray_$wrapSerializables(t1.callMethod$1("getPath"), Z.LatLng_$wrap$closure());
-      t3 = $.get$maps();
-      t4 = J.$index$asx(t3, "LatLng");
-      t4 = t4 != null ? t4 : J.$index$asx($.get$context(), "Object");
-      t4 = P.JsObject_JsObject(t4, [10, 10, null]);
-      t2.$$unsafe.callMethod$2("push", [t2._unwrap$1(new Z.LatLng(t4))]);
-      t1 = Z.MVCArray_$wrapSerializables(t1.callMethod$1("getPath"), Z.LatLng_$wrap$closure());
-      t3 = J.$index$asx(t3, "LatLng");
-      t2 = t3 != null ? t3 : J.$index$asx($.get$context(), "Object");
-      t2 = P.JsObject_JsObject(t2, [11, 11, null]);
-      t1.$$unsafe.callMethod$2("push", [t1._unwrap$1(new Z.LatLng(t2))]);
     }
   }
 },
@@ -9093,9 +9070,6 @@ $$ = null;
   H.RawReceivePortImpl.$isObject = TRUE;
   H._IsolateEvent.$isObject = TRUE;
   H._IsolateContext.$isObject = TRUE;
-  _ = P.EventSink;
-  _.$isEventSink = TRUE;
-  _.$isObject = TRUE;
   _ = P.bool;
   _.$isbool = TRUE;
   _.$isObject = TRUE;
@@ -9103,13 +9077,8 @@ $$ = null;
   _.$isStackTrace = TRUE;
   _.$isObject = TRUE;
   P.Object.$isObject = TRUE;
-  _ = Z.MouseEvent;
-  _.$isMouseEvent = TRUE;
-  _.$isSerializable = TRUE;
-  _.$asSerializable = [P.JsObject];
-  _.$isObject = TRUE;
-  _ = P.Comparable;
-  _.$isComparable = TRUE;
+  _ = P.EventSink;
+  _.$isEventSink = TRUE;
   _.$isObject = TRUE;
   _ = Z.LatLng;
   _.$isLatLng = TRUE;
@@ -9118,6 +9087,14 @@ $$ = null;
   _.$isObject = TRUE;
   _ = A.Serializable;
   _.$isSerializable = TRUE;
+  _.$isObject = TRUE;
+  _ = Z.MouseEvent;
+  _.$isMouseEvent = TRUE;
+  _.$isSerializable = TRUE;
+  _.$asSerializable = [P.JsObject];
+  _.$isObject = TRUE;
+  _ = P.Comparable;
+  _.$isComparable = TRUE;
   _.$isObject = TRUE;
   _ = Z.PolyMouseEvent;
   _.$isPolyMouseEvent = TRUE;

@@ -127,8 +127,6 @@ class PositioningView {
   PositioningView(){
     status.text = "?";
     line.map = map;
-    line.path.push(new LatLng(10, 10));
-    line.path.push(new LatLng(11, 11));
   }
   
   void update(Positioning positioning){
