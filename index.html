@@ -1,23 +1,40 @@
-<!DOCTYPE html>
+<!DOCTYPE html><html><head><script src="packages/web_components/platform.concat.js"></script>
+<script src="packages/web_components/dart_support.js"></script>
 
-<html>
-  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Snowroute</title>
     
-    <script async type="application/dart" src="snowroute.dart"></script>
-    <script src="packages/browser/dart.js"></script>
+    
+    
     <script src="packages/browser/interop.js"></script>
 <!--     <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> -->
-    <script src=" https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
    
     
-    <link rel="stylesheet" href="snowroute.css">
-  </head>
+    <style>
+html, body, #mapcanvas {
+  height: 100%;
+  margin: 0px;
+  padding: 0px
+}
+
+#mapcanvas{
+  border: 1px rgb(100,100,100) dotted;
+  
+}
+
+.error{
+  color: rgb(100, 0, 0);
+}
+
+#buttonGroup{
+  display: inline-block;
+}</style>
+  <link rel="stylesheet" type="text/css" href="packages/polymer/src/build/log_injector.css"></head>
   <body>
     <p id="status"></p>
-    <p  id="chrono"></p>
+    <p id="chrono"></p>
     <div id="buttonGroup">
       <button id="buttonStart">Start</button>
       <button id="buttonPause">Pause</button>
@@ -25,5 +42,6 @@
     </div>
     <p id="log"></p>
     <div id="mapcanvas"></div>
-  </body>
-</html>
+  
+
+<script type="application/dart" src="index.html_bootstrap.dart"></script><script src="packages/browser/dart.js"></script></body></html>

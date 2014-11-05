@@ -7391,14 +7391,15 @@ var $$ = Object.create(null);
       var t1, options, controller;
       t1 = {};
       options = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
+      options.$indexSet(0, "enableHighAccuracy", enableHighAccuracy);
       t1.watchId_0 = null;
       t1.controller_1 = null;
       controller = P.StreamController_StreamController(new W.Geolocation_watchPosition_closure(t1, receiver), new W.Geolocation_watchPosition_closure0(t1, receiver, options), null, null, true, W.Geoposition);
       t1.controller_1 = controller;
       return H.setRuntimeTypeInfo(new P._ControllerStream(controller), [null]);
     },
-    watchPosition$0: function($receiver) {
-      return this.watchPosition$3$enableHighAccuracy$maximumAge$timeout($receiver, null, null, null);
+    watchPosition$1$enableHighAccuracy: function($receiver, enableHighAccuracy) {
+      return this.watchPosition$3$enableHighAccuracy$maximumAge$timeout($receiver, enableHighAccuracy, null, null);
     },
     _ensurePosition$1: function(receiver, domPosition) {
       var exception;
@@ -8863,7 +8864,7 @@ var $$ = Object.create(null);
     K.PositioningControl$(new K.Positioning(t1), view);
   }, "call$0", "main$closure", 0, 0, 12],
   PositioningControl: {
-    "^": "Object;positioning,view,buttonStart,buttonStop,buttonPause,chrono,duration",
+    "^": "Object;positioning,view,buttonStart,buttonStop,buttonPause,chrono,duration,timer",
     drawTime$1: [function(t) {
       var t1 = this.chrono;
       this.view.chrono.textContent = P.Duration$(0, 0, J.$tdiv$n(J.$mul$ns(t1.get$elapsedTicks(), 1000000), $.Stopwatch__frequency), 0, 0, 0).toString$0(0);
@@ -8872,7 +8873,7 @@ var $$ = Object.create(null);
     }, "call$1", "get$drawTime", 2, 0, 70],
     PositioningControl$2: function(positioning, view) {
       var t1;
-      J.watchPosition$0$x(window.navigator.geolocation).listen$2$onError(new K.PositioningControl_closure(this), new K.PositioningControl_closure0(this));
+      J.watchPosition$1$enableHighAccuracy$x(window.navigator.geolocation, true).listen$2$onError(new K.PositioningControl_closure(this), new K.PositioningControl_closure0(this));
       this.view.logElement.textContent = "Finding gps";
       t1 = J.get$onClick$x(this.buttonStart);
       H.setRuntimeTypeInfo(new W._EventStreamSubscription(0, t1._target, t1._eventType, W._wrapZone(new K.PositioningControl_closure1(this)), t1._useCapture), [H.getTypeArgumentByIndex(t1, 0)])._tryResume$0();
@@ -8888,7 +8889,7 @@ var $$ = Object.create(null);
         t3 = document.querySelector("#buttonPause");
         H.Primitives_initTicker();
         $.Stopwatch__frequency = $.Primitives_timerFrequency;
-        t3 = new K.PositioningControl(positioning, view, t1, t2, t3, new P.Stopwatch(null, null), P.Duration$(0, 0, 0, 0, 0, 1));
+        t3 = new K.PositioningControl(positioning, view, t1, t2, t3, new P.Stopwatch(null, null), P.Duration$(0, 0, 0, 0, 0, 1), null);
         t3.PositioningControl$2(positioning, view);
         return t3;
       }}
@@ -8899,13 +8900,8 @@ var $$ = Object.create(null);
       var t1, t2, t3, t4, t5;
       t1 = this.this_0;
       t2 = t1.positioning;
-      if (t2.addPosition$1(position)) {
-        t3 = t1.chrono;
-        t3 = t3._start != null && t3._stop == null;
-      } else
-        t3 = false;
       t1 = t1.view;
-      if (t3) {
+      if (t2.addPosition$1(position)) {
         if (t1.isError) {
           t1.isError = false;
           J.get$classes$x(t1.status).remove$1(0, "error");
@@ -8972,7 +8968,7 @@ var $$ = Object.create(null);
           t3.clear$0(0);
         }
         t2.start$0(0);
-        P.Timer_Timer$periodic(t1.duration, t1.get$drawTime());
+        t1.timer = P.Timer_Timer$periodic(t1.duration, t1.get$drawTime());
       }
       return;
     }, "call$1", null, 2, 0, null, 44, "call"],
@@ -9369,8 +9365,8 @@ J.toString$0 = function(receiver) {
 J.trim$0$s = function(receiver) {
   return J.getInterceptor$s(receiver).trim$0(receiver);
 };
-J.watchPosition$0$x = function(receiver) {
-  return J.getInterceptor$x(receiver).watchPosition$0(receiver);
+J.watchPosition$1$enableHighAccuracy$x = function(receiver, a0) {
+  return J.getInterceptor$x(receiver).watchPosition$1$enableHighAccuracy(receiver, a0);
 };
 C.Geolocation_methods = W.Geolocation.prototype;
 C.JSArray_methods = J.JSArray.prototype;
@@ -15749,7 +15745,7 @@ function dart_precompiled($collectedClasses) {
   if ($desc instanceof Array)
     $desc = $desc[1];
   SubscribeStreamProvider_add_closure.prototype = $desc;
-  function PositioningControl(positioning, view, buttonStart, buttonStop, buttonPause, chrono, duration) {
+  function PositioningControl(positioning, view, buttonStart, buttonStop, buttonPause, chrono, duration, timer) {
     this.positioning = positioning;
     this.view = view;
     this.buttonStart = buttonStart;
@@ -15757,6 +15753,7 @@ function dart_precompiled($collectedClasses) {
     this.buttonPause = buttonPause;
     this.chrono = chrono;
     this.duration = duration;
+    this.timer = timer;
   }
   PositioningControl.builtin$cls = "PositioningControl";
   if (!"name" in PositioningControl)

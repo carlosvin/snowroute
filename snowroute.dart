@@ -16,9 +16,10 @@ class PositioningControl {
   final buttonPause = querySelector('#buttonPause');
   final Stopwatch chrono = new Stopwatch();
   final Duration duration = new Duration(seconds: 1);
+  Timer timer;
   
   PositioningControl(this.positioning, this.view){
-    window.navigator.geolocation.watchPosition()
+    window.navigator.geolocation.watchPosition(enableHighAccuracy: true)
       .listen(
           (Geoposition position) {addPosition(position);},
           onError: (error) => view.handleError(error));
@@ -39,7 +40,7 @@ class PositioningControl {
         positioning.clear();
       }
       chrono.start();
-      Timer timer = new Timer.periodic(duration, drawTime);
+      timer = new Timer.periodic(duration, drawTime);
 
     }
   }
@@ -48,7 +49,6 @@ class PositioningControl {
     if (chrono.isRunning){
       chrono.stop();
     }
-    
   }
   
   void pause(){
@@ -63,7 +63,7 @@ class PositioningControl {
   }
   
   void addPosition(Geoposition position){
-    if (positioning.addPosition(position) && chrono.isRunning){
+    if (positioning.addPosition(position)){
       view.update(positioning);
       view.log("Moving");
     }
