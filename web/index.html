@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Snowroute</title>
-    
-    <script async type="application/dart" src="snowroute.dart"></script>
-    <script src="packages/browser/dart.js"></script>
-    <script src="packages/browser/interop.js"></script>
-<!--     <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> -->
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-   
-    
-    <link rel="stylesheet" href="snowroute.css">
-  </head>
-  <body>
-    <p id="status"></p>
-    <p  id="chrono"></p>
-    <div id="buttonGroup">
-      <button id="buttonStart">Start</button>
-      <button id="buttonPause">Pause</button>
-      <button id="buttonStop">Stop</button>
-    </div>
-    <p id="log"></p>
-    <div id="mapcanvas"></div>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snowroute</title>
+  
+  <link rel="import" href="packages/core_elements/core_icon_button.html">
+  <link rel="import" href="packages/core_elements/av_icons.html">
+  <link rel="stylesheet" href="snowroute.css">
+  
+  <!-- <script async type="application/dart" src="snowroute.dart"></script>-->
+  <script src="packages/browser/dart.js"></script>
+  <script src="packages/browser/interop.js"></script>
+  <!-- <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+<!--    <script src="packages/web_components/dart_support.js"></script>-->
+
+  <link rel="import" href="positioning_control.html">
+</head>
+<body unresolved>
+
+  <positioning-control></positioning-control>
+
+  <script type="application/dart">export 'package:polymer/init.dart';</script>
+
+</body>
 </html>

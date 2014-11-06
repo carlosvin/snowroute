@@ -1,12 +1,18 @@
 import 'dart:html';
 import 'dart:async';
 import 'package:google_maps/google_maps.dart';
+import 'package:polymer/polymer.dart';
 
-void main() {
-  Positioning positioning = new Positioning();
-  PositioningView view = new PositioningView();
-  PositioningControl control = new PositioningControl(positioning, view);
-}
+//void main() {
+//  initPolymer().run(() {
+//    // Code that doesn't need to wait.
+//    Polymer.onReady.then((_) {
+//      Positioning positioning = new Positioning();
+//      PositioningView view = new PositioningView();
+//      PositioningControl control = new PositioningControl(positioning, view);
+//    });
+//  });
+//}
 
 class PositioningControl {
   final Positioning positioning;
@@ -19,16 +25,15 @@ class PositioningControl {
   Timer timer;
   
   PositioningControl(this.positioning, this.view){
-    window.navigator.geolocation.watchPosition(enableHighAccuracy: true)
-      .listen(
-          (Geoposition position) {addPosition(position);},
-          onError: (error) => view.handleError(error));
-    
     view.log("Finding gps");
     buttonStart.onClick.listen((_) => start());
     buttonStop.onClick.listen((_) => stop());
     buttonPause.onClick.listen((_) => pause());
-
+    window.navigator.geolocation.watchPosition(enableHighAccuracy: true)
+          .listen(
+              (Geoposition position) {addPosition(position);},
+              onError: (error) => view.handleError(error));
+        
   }
   
   void start(){
@@ -104,7 +109,6 @@ class PositioningView {
   final status = querySelector("#status");
   final logElement = querySelector("#log");
   final chrono = querySelector("#chrono");
-  final info = new InfoWindow();
   
   final line = new Polyline(
       new PolylineOptions ()
@@ -121,7 +125,8 @@ class PositioningView {
         ..center = new LatLng(0, 0)
         ..mapTypeId = MapTypeId.ROADMAP
       );
-  
+  final info = new InfoWindow();
+
   bool isError = false;
   
   PositioningView(){
