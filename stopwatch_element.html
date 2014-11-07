@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/core_elements/core_icon_button.html">
+<link rel="import" href="packages/core_elements/av_icons.html">
+
+<polymer-element name="stopwatch-element">
+
+  <template>
+    <style>
+      :host {
+        text-align: center;
+        display: inline-block;
+        padding: 10px 10px 10px 10px;
+      }
+    </style>
+    <div>
+      <div>
+        {{counter}}
+      </div>
+      <div>
+        <core-icon-button icon="av:play-arrow" on-click="{{start}}" id="startButton"></core-icon-button>
+        <core-icon-button icon="av:pause" on-click="{{pause}}" id="pauseButton"></core-icon-button>
+        <core-icon-button icon="av:stop" on-click="{{stop}}" id="stopButton"></core-icon-button>
+      </div>
+    </div>
+  </template>
+
+  <script type="application/dart" src="stopwatch_element.dart"></script>
+
+</polymer-element>
