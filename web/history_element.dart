@@ -33,4 +33,12 @@ class HistoryElement extends PolymerElement {
       return true;
     }
   }
+  
+  void delete(Event event, var detail, var target) {
+    String key = target.attributes['key'];
+    String removed = localStorage.remove(key);
+    if (removed != null){
+      keys.remove(key);
+    }
+  }
 }
