@@ -1,11 +1,15 @@
 <link rel="import" href="packages/polymer/polymer.html">
 <link rel="import" href="stopwatch_element.html">
+<link rel="import" href="tracking_element.html">
+<link rel="import" href="history_element.html">
 
 <polymer-element name="positioning-control"> 
   
   <template>
-    <p>: {{message}}</p>
+    <span>{{message}}</span>
+    <tracking-element id="tracking_element"></tracking-element>
     <stopwatch-element id="watch_element"></stopwatch-element>
+    <history-element id="history_element"></history-element>
   </template> 
   
   <script type="application/dart" src="positioning_control.dart"></script>

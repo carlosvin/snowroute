@@ -1,0 +1,18 @@
+<link rel="import" href="packages/polymer/polymer.html">
+
+<polymer-element name="tracking-element"> 
+  
+  <template>
+     <style>
+      span {
+        padding: 1%;
+        font-family: monospace;
+        border: 1px rgb(100,200,0) dotted;
+      }
+    </style>
+    <span class="gpsStatus">{{ gpsStatus }}</span>
+    <span class=speedAverage>{{ speedAverage }}</span>
+  </template> 
+  
+  <script type="application/dart" src="tracking_element.dart"></script>
+</polymer-element>

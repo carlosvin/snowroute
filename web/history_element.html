@@ -1,0 +1,17 @@
+<link rel="import" href="packages/polymer/polymer.html">
+
+<polymer-element name="history-element"> 
+  
+  <template>
+	<style>
+    </style>
+    
+    <ul>
+      <template repeat="{{ k in persistency.keys}}">
+      <li>{{ k }}</li>
+      </template>
+    </ul>
+  </template> 
+  
+  <script type="application/dart" src="history_element.dart"></script>
+</polymer-element>
