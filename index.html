@@ -1,5 +1,6 @@
-<!DOCTYPE html><html><head><script src="packages/web_components/platform.concat.js"></script>
+<!DOCTYPE html><!--  <html manifest="manifest.appcache">  --><html><head><script src="packages/web_components/platform.concat.js"></script>
 <script src="packages/web_components/dart_support.js"></script>
+
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,8 +10,8 @@
   <link rel="import" href="packages/core_elements/core_icon_button.html">
   <link rel="import" href="packages/core_elements/av_icons.html">
   <link rel="stylesheet" href="snowroute.css">
-  -->
-  <!--  
+ 
+
   <script src="packages/browser/dart.js"></script>
   <script src="packages/web_components/dart_support.js"></script>
   
@@ -1379,12 +1380,30 @@ core-icon {
   
 </polymer-element>
 
+
+
+<polymer-element name="history-element"> 
+  
+  <template>
+	<style>
+    </style>
+    <ul>
+      <template repeat="{{ k in keys }}">
+      <li id="{{ k }}">{{ k }} <core-icon-button icon="remove" on-click="{{ delete }}" key="{{ k }}"></core-icon-button></li>
+      </template>
+    </ul>
+  </template> 
+  
+  
+</polymer-element>
+
 <polymer-element name="positioning-control"> 
   
   <template>
     <span>{{message}}</span>
     <tracking-element id="tracking_element"></tracking-element>
     <stopwatch-element id="watch_element"></stopwatch-element>
+    <history-element id="history_element"></history-element>
   </template> 
   
   

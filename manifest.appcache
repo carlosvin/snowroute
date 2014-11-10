@@ -1,0 +1,9 @@
+CACHE MANIFEST
+/*.css
+/packages/*.js
+
+#NETWORK:
+#login.asp
+
+FALLBACK:
+/html/ /offline.html

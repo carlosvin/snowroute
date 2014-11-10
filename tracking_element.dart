@@ -1,3 +1,5 @@
+library tracking;
+
 import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
 import 'dart:html';
@@ -17,24 +19,29 @@ class TrackingElement extends PolymerElement with ChangeNotifier  {
     super.attached();
     window.navigator.geolocation.watchPosition(enableHighAccuracy: true)
       .listen((Geoposition position) {addPosition(position);},
-      onError: (error) => handleError(error));
+      onError: (PositionError error) => handleError(error));
   }
   
   @override
   void detached() {
     super.detached();
+    clear();
   }  
   
-  handleError(Error error){
-    gpsStatus = error.toString();
+  handleError(PositionError  error){
+    gpsStatus = error.message;
   }
   
-  addPosition(Geoposition position){
-    var lat = position.coords.latitude;
-    var long = position.coords.longitude;
-    gpsStatus = "$lat , $long";
-    if (positioning.addPosition(position)){
+  addPosition(Geoposition geoPosition){
+    if (positioning.addPosition(geoPosition)){
       speedAverage = "${positioning.speedAvg}km/h";
+      gpsStatus = positioning.last.toString();
+
     }
+
+  }
+  
+  void clear (){
+    positioning.clear();
   }
 }
