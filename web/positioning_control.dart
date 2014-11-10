@@ -42,9 +42,11 @@ class PositioningControl extends PolymerElement {
   }
   
   void save(){
-    historyElement.persistency.add(trackingElement.positioning)
-    .then((value) { print("added $value");})
-    .catchError((e){ log("$e");});
+    if ( historyElement.add(trackingElement.positioning)){
+      log("Saved ${trackingElement.positioning.first.timestamp}");
+    }else{
+      log("Error saving");
+    }
   }
   
   void log(String m){
