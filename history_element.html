@@ -1,14 +1,15 @@
 <link rel="import" href="packages/polymer/polymer.html">
 <link rel="import" href="packages/core_elements/core_icon_button.html">
+<link rel="import" href="positioning_li_element.html">
 
-<polymer-element name="history-element"> 
+<polymer-element name="history-element" > 
   
   <template>
 	<style>
     </style>
-    <ul>
-      <template repeat="{{ k in keys }}">
-      <li id="{{ k }}">{{ k }} <core-icon-button icon="remove" on-click="{{ delete }}" key="{{ k }}"></core-icon-button></li>
+    <ul on-delete="{{onDelete}}">
+      <template repeat="{{ positioning in practices.values }}">
+      <li is="positioning-li-element" positioning="{{ positioning }}"> </li>
       </template>
     </ul>
   </template> 

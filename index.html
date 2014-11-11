@@ -1382,14 +1382,30 @@ core-icon {
 
 
 
+
+
+<polymer-element name="positioning-li-element" extends="li"> 
+  
+  <template>
+	<style>
+      :host{}
+    </style>
+    <label>{{ positioning.key }}</label>
+    <core-icon-button icon="remove" on-tap="{{delete}}"></core-icon-button>
+    
+  </template> 
+  
+  
+</polymer-element>
+
 <polymer-element name="history-element"> 
   
   <template>
 	<style>
     </style>
-    <ul>
-      <template repeat="{{ k in keys }}">
-      <li id="{{ k }}">{{ k }} <core-icon-button icon="remove" on-click="{{ delete }}" key="{{ k }}"></core-icon-button></li>
+    <ul on-delete="{{onDelete}}">
+      <template repeat="{{ positioning in practices.values }}">
+      <li is="positioning-li-element" positioning="{{ positioning }}"> </li>
       </template>
     </ul>
   </template> 

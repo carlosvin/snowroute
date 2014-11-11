@@ -1,0 +1,16 @@
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/core_elements/core_icon_button.html">
+
+<polymer-element name="positioning-li-element"  extends="li"> 
+  
+  <template>
+	<style>
+      :host{}
+    </style>
+    <label>{{ positioning.key }}</label>
+    <core-icon-button icon="remove"  on-tap="{{delete}}"></core-icon-button>
+    
+  </template> 
+  
+  <script type="application/dart" src="positioning_li_element.dart"></script>
+</polymer-element>
