@@ -1,16 +1,45 @@
 <link rel="import" href="packages/polymer/polymer.html">
+
 <link rel="import" href="stopwatch_element.html">
 <link rel="import" href="tracking_element.html">
 <link rel="import" href="history_element.html">
 
+<link rel="import" href="packages/core_elements/core_toolbar.html">
+<link rel="import" href="packages/paper_elements/paper_icon_button.html">
+
 <polymer-element name="positioning-control"> 
-  
   <template>
-    <span>{{message}}</span>
-    <tracking-element id="tracking_element"></tracking-element>
-    <stopwatch-element id="watch_element"></stopwatch-element>
-    <history-element id="history_element"></history-element>
+    <style>
+    :host {
+      height: 100%;
+    }
+    
+    core-toolbar{
+      background: #4285f4;
+      color: #f1f1f1;
+      fill: #f1f1f1;
+    }
+    
+    stopwatch-element{
+      margin: 2%;
+      padding: 2%;
+      border: 1px rgba(20, 20, 100, 0.3) solid;
+      border-radius: 1%;
+    }
+    
+    </style>
+    
+    <core-toolbar>
+      <paper-icon-button icon="menu"></paper-icon-button>
+      <span flex>Snow Route</span>
+      <span>{{ message }}</span>
+    </core-toolbar>
+    
+    <div layout vertical flex>
+        <stopwatch-element id="watch_element"></stopwatch-element>
+        <tracking-element id="tracking_element"></tracking-element>
+        <history-element id="history_element"></history-element>
+    </div>
   </template> 
-  
   <script type="application/dart" src="positioning_control.dart"></script>
 </polymer-element>

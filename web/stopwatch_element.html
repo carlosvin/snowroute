@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 
 <link rel="import" href="packages/polymer/polymer.html">
-<link rel="import" href="packages/core_elements/core_icon_button.html">
+
+<link rel="import" href="packages/paper_elements/paper_fab.html">
 <link rel="import" href="packages/core_elements/av_icons.html">
+<link rel="import" href="packages/core_elements/core_icons.html">
 
 <polymer-element name="stopwatch-element">
 
   <template>
     <style>
       :host {
+        font-size: larger;
         text-align: center;
-        display: inline-block;
-        padding: 10px 10px 10px 10px;
+      }
+      .buttons > *{
+        background: #4285f4;
+        color: #f1f1f1;
+        fill: #f1f1f1;
+        margin: 1%;
       }
     </style>
     <div>
-      <div>
-        {{counter}}
-      </div>
-      <div>
-        <core-icon-button icon="av:play-arrow" on-click="{{start}}" id="startButton"></core-icon-button>
-        <core-icon-button icon="av:pause" on-click="{{pause}}" id="pauseButton"></core-icon-button>
-        <core-icon-button icon="av:stop" on-click="{{stop}}" id="stopButton"></core-icon-button>
-      </div>
+      {{counter}}
+    </div>
+    <div class="buttons">
+      <paper-fab icon="av:play-arrow" on-click="{{start}}" id="startButton"></paper-fab>
+      <paper-fab icon="av:pause" on-click="{{pause}}" id="pauseButton"></paper-fab>
+      <paper-fab icon="av:stop" on-click="{{stop}}" id="stopButton"></paper-fab>
     </div>
   </template>
 

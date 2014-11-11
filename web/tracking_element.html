@@ -4,14 +4,22 @@
   
   <template>
      <style>
-      span {
-        padding: 1%;
-        font-family: monospace;
-        border: 1px rgb(100,200,0) dotted;
+      table {
+        border: thin #4285f4 solid;
+        text-align: center;
+        margin: 4%;
       }
     </style>
-    <span class="gpsStatus">{{ gpsStatus }}</span>
-    <span class=speedAverage>{{ speedAverage }}</span>
+    <table flex>
+      <tr>
+        <th>GPS Status</th>
+        <th>Speed AVG</th>
+      </tr>
+      <tr>
+        <td>{{ gpsStatus }}</td>
+        <td>{{ speedAverage }}</td>
+      </tr>
+    </table>
   </template> 
   
   <script type="application/dart" src="tracking_element.dart"></script>

@@ -5,33 +5,22 @@
  <head>
 
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
   <title>Snowroute</title>
   
-   <!-- 
-  <link rel="import" href="packages/core_elements/core_icon_button.html">
-  <link rel="import" href="packages/core_elements/av_icons.html">
-  <link rel="stylesheet" href="snowroute.css">
- 
-
-  <script src="packages/browser/dart.js"></script>
-  <script src="packages/web_components/dart_support.js"></script>
-  
-  <script type="application/dart">export 'snowroute.dart';</script>
-
-  <script src="packages/browser/interop.js"></script>
- 
-  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-
-  -->
+  <link rel="stylesheet" href="style.css">
+    
   <link rel="import" href="positioning_control.html">
-  <script type="application/dart">export 'package:polymer/init.dart';</script>
-
+  
 </head>
 
-<body unresolved>
-
+<body unresolved >
   <positioning-control></positioning-control>
+
+  <script type="application/dart">export 'package:polymer/init.dart';</script>
+
 </body>
 </html>
