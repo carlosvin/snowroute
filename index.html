@@ -3,29 +3,26 @@
 
 
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
   <title>Snowroute</title>
   
-   <!-- 
-  <link rel="import" href="packages/core_elements/core_icon_button.html">
-  <link rel="import" href="packages/core_elements/av_icons.html">
-  <link rel="stylesheet" href="snowroute.css">
- 
-
-  <script src="packages/browser/dart.js"></script>
-  <script src="packages/web_components/dart_support.js"></script>
+  <style>html, body{
+  font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
   
-  <script type="application/dart">export 'snowroute.dart';</script>
+  height: 100%;
+  margin: 0;
+}
 
-  <script src="packages/browser/interop.js"></script>
- 
-  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-
-  -->
+.error {
+  background-color: rbga(255,0,0, 0.1);
+  color: rgb(100,0,0);
+}</style>
+    
   
   
-
 <link rel="stylesheet" type="text/css" href="packages/polymer/src/build/log_injector.css"></head>
 
 <body unresolved=""><div hidden=""><style shim-shadowdom="">
@@ -320,7 +317,16 @@ html /deep/ [segment], html /deep/ segment {
 -->
 
 
+
+
 <script src="packages/web_components/interop_support.js"></script>
+
+
+<script>
+// This empty script is here to workaround issue
+// https://github.com/dart-lang/core-elements/issues/11
+</script>
+
 
 <!-- Dart note: load polymer for Dart and JS from the same place -->
 
@@ -761,6 +767,1241 @@ html /deep/ core-icon {
 
 
 
+
+
+
+
+
+<script>
+// This empty script is here to workaround issue
+// https://github.com/dart-lang/core-elements/issues/11
+</script>
+
+
+
+
+<polymer-element name="paper-focusable" attributes="active focused disabled isToggle" tabindex="0" on-down="{{downAction}}" on-up="{{upAction}}" on-focus="{{focusAction}}" on-blur="{{blurAction}}" on-contextmenu="{{contextMenuAction}}">
+
+  <template>
+    <style>
+      :host([disabled]) {
+        pointer-events: none;
+      }
+    </style>
+    <content></content>
+  </template>
+
+  <script>
+    Polymer('paper-focusable', {
+
+      publish: {
+
+        /**
+         * If true, the button is currently active either because the
+         * user is holding down the button, or the button is a toggle
+         * and is currently in the active state.
+         *
+         * @attribute active
+         * @type boolean
+         * @default false
+         */
+        active: {value: false, reflect: true},
+
+        /**
+         * If true, the element currently has focus due to keyboard
+         * navigation.
+         *
+         * @attribute focused
+         * @type boolean
+         * @default false
+         */
+        focused: {value: false, reflect: true},
+
+        /**
+         * If true, the user is currently holding down the button.
+         *
+         * @attribute pressed
+         * @type boolean
+         * @default false
+         */
+        pressed: {value: false, reflect: true},
+
+        /**
+         * If true, the user cannot interact with this element.
+         *
+         * @attribute disabled
+         * @type boolean
+         * @default false
+         */
+        disabled: {value: false, reflect: true},
+
+        /**
+         * If true, the button toggles the active state with each tap.
+         * Otherwise, the button becomes active when the user is holding
+         * it down.
+         *
+         * @attribute isToggle
+         * @type boolean
+         * @default false
+         */
+        isToggle: {value: false, reflect: false}
+
+      },
+
+      disabledChanged: function() {
+        if (this.disabled) {
+          this.removeAttribute('tabindex');
+        } else {
+          this.setAttribute('tabindex', 0);
+        }
+      },
+
+      downAction: function() {
+        this.pressed = true;
+        this.focused = false;
+
+        if (this.isToggle) {
+          this.active = !this.active;
+        } else {
+          this.active = true;
+        }
+      },
+
+      // Pulling up the context menu for an item should focus it; but we need to
+      // be careful about how we deal with down/up events surrounding context
+      // menus. The up event typically does not fire until the context menu
+      // closes: so we focus immediately.
+      //
+      // This fires _after_ downAction.
+      contextMenuAction: function(e) {
+        // Note that upAction may fire _again_ on the actual up event.
+        this.upAction(e);
+        this.focusAction();
+      },
+
+      upAction: function() {
+        this.pressed = false;
+
+        if (!this.isToggle) {
+          this.active = false;
+        }
+      },
+
+      focusAction: function() {
+        if (!this.pressed) {
+          // Only render the "focused" state if the element gains focus due to
+          // keyboard navigation.
+          this.focused = true;
+        }
+      },
+
+      blurAction: function() {
+        this.focused = false;
+      }
+
+    });
+
+  </script>
+</polymer-element>
+
+
+
+<polymer-element name="paper-ripple" attributes="initialOpacity opacityDecayVelocity">
+<template>
+
+  <style>
+
+    :host {
+      display: block;
+      position: relative;
+    }
+
+    :host-context([noink]) {
+      pointer-events: none;
+    }
+
+    #bg, #waves, .wave-container, .wave {
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #bg, .wave {
+      opacity: 0;
+    }
+
+    #waves, .wave {
+      overflow: hidden;
+    }
+
+    .wave-container, .wave {
+      border-radius: 50%;
+    }
+
+    :host(.circle) #bg,
+    :host(.circle) #waves {
+      border-radius: 50%;
+    }
+
+    :host(.circle) .wave-container {
+      overflow: hidden;
+    }
+
+  </style>
+
+  <div id="bg"></div>
+  <div id="waves">
+  </div>
+
+</template>
+<script>
+
+  (function() {
+
+    var waveMaxRadius = 150;
+    //
+    // INK EQUATIONS
+    //
+    function waveRadiusFn(touchDownMs, touchUpMs, anim) {
+      // Convert from ms to s.
+      var touchDown = touchDownMs / 1000;
+      var touchUp = touchUpMs / 1000;
+      var totalElapsed = touchDown + touchUp;
+      var ww = anim.width, hh = anim.height;
+      // use diagonal size of container to avoid floating point math sadness
+      var waveRadius = Math.min(Math.sqrt(ww * ww + hh * hh), waveMaxRadius) * 1.1 + 5;
+      var duration = 1.1 - .2 * (waveRadius / waveMaxRadius);
+      var tt = (totalElapsed / duration);
+
+      var size = waveRadius * (1 - Math.pow(80, -tt));
+      return Math.abs(size);
+    }
+
+    function waveOpacityFn(td, tu, anim) {
+      // Convert from ms to s.
+      var touchDown = td / 1000;
+      var touchUp = tu / 1000;
+      var totalElapsed = touchDown + touchUp;
+
+      if (tu <= 0) {  // before touch up
+        return anim.initialOpacity;
+      }
+      return Math.max(0, anim.initialOpacity - touchUp * anim.opacityDecayVelocity);
+    }
+
+    function waveOuterOpacityFn(td, tu, anim) {
+      // Convert from ms to s.
+      var touchDown = td / 1000;
+      var touchUp = tu / 1000;
+
+      // Linear increase in background opacity, capped at the opacity
+      // of the wavefront (waveOpacity).
+      var outerOpacity = touchDown * 0.3;
+      var waveOpacity = waveOpacityFn(td, tu, anim);
+      return Math.max(0, Math.min(outerOpacity, waveOpacity));
+    }
+
+    // Determines whether the wave should be completely removed.
+    function waveDidFinish(wave, radius, anim) {
+      var waveOpacity = waveOpacityFn(wave.tDown, wave.tUp, anim);
+
+      // If the wave opacity is 0 and the radius exceeds the bounds
+      // of the element, then this is finished.
+      return waveOpacity < 0.01 && radius >= Math.min(wave.maxRadius, waveMaxRadius);
+    };
+
+    function waveAtMaximum(wave, radius, anim) {
+      var waveOpacity = waveOpacityFn(wave.tDown, wave.tUp, anim);
+
+      return waveOpacity >= anim.initialOpacity && radius >= Math.min(wave.maxRadius, waveMaxRadius);
+    }
+
+    //
+    // DRAWING
+    //
+    function drawRipple(ctx, x, y, radius, innerAlpha, outerAlpha) {
+      // Only animate opacity and transform
+      if (outerAlpha !== undefined) {
+        ctx.bg.style.opacity = outerAlpha;
+      }
+      ctx.wave.style.opacity = innerAlpha;
+
+      var s = radius / (ctx.containerSize / 2);
+      var dx = x - (ctx.containerWidth / 2);
+      var dy = y - (ctx.containerHeight / 2);
+
+      ctx.wc.style.webkitTransform = 'translate3d(' + dx + 'px,' + dy + 'px,0)';
+      ctx.wc.style.transform = 'translate3d(' + dx + 'px,' + dy + 'px,0)';
+
+      // 2d transform for safari because of border-radius and overflow:hidden clipping bug.
+      // https://bugs.webkit.org/show_bug.cgi?id=98538
+      ctx.wave.style.webkitTransform = 'scale(' + s + ',' + s + ')';
+      ctx.wave.style.transform = 'scale3d(' + s + ',' + s + ',1)';
+    }
+
+    //
+    // SETUP
+    //
+    function createWave(elem) {
+      var elementStyle = window.getComputedStyle(elem);
+      var fgColor = elementStyle.color;
+
+      var inner = document.createElement('div');
+      inner.style.backgroundColor = fgColor;
+      inner.classList.add('wave');
+
+      var outer = document.createElement('div');
+      outer.classList.add('wave-container');
+      outer.appendChild(inner);
+
+      var container = elem.$.waves;
+      container.appendChild(outer);
+
+      elem.$.bg.style.backgroundColor = fgColor;
+
+      var wave = {
+        bg: elem.$.bg,
+        wc: outer,
+        wave: inner,
+        waveColor: fgColor,
+        maxRadius: 0,
+        isMouseDown: false,
+        mouseDownStart: 0.0,
+        mouseUpStart: 0.0,
+        tDown: 0,
+        tUp: 0
+      };
+      return wave;
+    }
+
+    function removeWaveFromScope(scope, wave) {
+      if (scope.waves) {
+        var pos = scope.waves.indexOf(wave);
+        scope.waves.splice(pos, 1);
+        // FIXME cache nodes
+        wave.wc.remove();
+      }
+    };
+
+    // Shortcuts.
+    var pow = Math.pow;
+    var now = Date.now;
+    if (window.performance && performance.now) {
+      now = performance.now.bind(performance);
+    }
+
+    function cssColorWithAlpha(cssColor, alpha) {
+        var parts = cssColor.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+        if (typeof alpha == 'undefined') {
+            alpha = 1;
+        }
+        if (!parts) {
+          return 'rgba(255, 255, 255, ' + alpha + ')';
+        }
+        return 'rgba(' + parts[1] + ', ' + parts[2] + ', ' + parts[3] + ', ' + alpha + ')';
+    }
+
+    function dist(p1, p2) {
+      return Math.sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
+    }
+
+    function distanceFromPointToFurthestCorner(point, size) {
+      var tl_d = dist(point, {x: 0, y: 0});
+      var tr_d = dist(point, {x: size.w, y: 0});
+      var bl_d = dist(point, {x: 0, y: size.h});
+      var br_d = dist(point, {x: size.w, y: size.h});
+      return Math.max(tl_d, tr_d, bl_d, br_d);
+    }
+
+    Polymer('paper-ripple', {
+
+      /**
+       * The initial opacity set on the wave.
+       *
+       * @attribute initialOpacity
+       * @type number
+       * @default 0.25
+       */
+      initialOpacity: 0.25,
+
+      /**
+       * How fast (opacity per second) the wave fades out.
+       *
+       * @attribute opacityDecayVelocity
+       * @type number
+       * @default 0.8
+       */
+      opacityDecayVelocity: 0.8,
+
+      backgroundFill: true,
+      pixelDensity: 2,
+
+      eventDelegates: {
+        down: 'downAction',
+        up: 'upAction'
+      },
+
+      ready: function() {
+        this.waves = [];
+      },
+
+      downAction: function(e) {
+        var wave = createWave(this);
+
+        this.cancelled = false;
+        wave.isMouseDown = true;
+        wave.tDown = 0.0;
+        wave.tUp = 0.0;
+        wave.mouseUpStart = 0.0;
+        wave.mouseDownStart = now();
+
+        var rect = this.getBoundingClientRect();
+        var width = rect.width;
+        var height = rect.height;
+        var touchX = e.x - rect.left;
+        var touchY = e.y - rect.top;
+
+        wave.startPosition = {x:touchX, y:touchY};
+
+        if (this.classList.contains("recenteringTouch")) {
+          wave.endPosition = {x: width / 2,  y: height / 2};
+          wave.slideDistance = dist(wave.startPosition, wave.endPosition);
+        }
+        wave.containerSize = Math.max(width, height);
+        wave.containerWidth = width;
+        wave.containerHeight = height;
+        wave.maxRadius = distanceFromPointToFurthestCorner(wave.startPosition, {w: width, h: height});
+
+        // The wave is circular so constrain its container to 1:1
+        wave.wc.style.top = (wave.containerHeight - wave.containerSize) / 2 + 'px';
+        wave.wc.style.left = (wave.containerWidth - wave.containerSize) / 2 + 'px';
+        wave.wc.style.width = wave.containerSize + 'px';
+        wave.wc.style.height = wave.containerSize + 'px';
+
+        this.waves.push(wave);
+
+        if (!this._loop) {
+          this._loop = this.animate.bind(this, {
+            width: width,
+            height: height
+          });
+          requestAnimationFrame(this._loop);
+        }
+        // else there is already a rAF
+      },
+
+      upAction: function() {
+        for (var i = 0; i < this.waves.length; i++) {
+          // Declare the next wave that has mouse down to be mouse'ed up.
+          var wave = this.waves[i];
+          if (wave.isMouseDown) {
+            wave.isMouseDown = false
+            wave.mouseUpStart = now();
+            wave.mouseDownStart = 0;
+            wave.tUp = 0.0;
+            break;
+          }
+        }
+        this._loop && requestAnimationFrame(this._loop);
+      },
+
+      cancel: function() {
+        this.cancelled = true;
+      },
+
+      animate: function(ctx) {
+        var shouldRenderNextFrame = false;
+
+        var deleteTheseWaves = [];
+        // The oldest wave's touch down duration
+        var longestTouchDownDuration = 0;
+        var longestTouchUpDuration = 0;
+        // Save the last known wave color
+        var lastWaveColor = null;
+        // wave animation values
+        var anim = {
+          initialOpacity: this.initialOpacity,
+          opacityDecayVelocity: this.opacityDecayVelocity,
+          height: ctx.height,
+          width: ctx.width
+        }
+
+        for (var i = 0; i < this.waves.length; i++) {
+          var wave = this.waves[i];
+
+          if (wave.mouseDownStart > 0) {
+            wave.tDown = now() - wave.mouseDownStart;
+          }
+          if (wave.mouseUpStart > 0) {
+            wave.tUp = now() - wave.mouseUpStart;
+          }
+
+          // Determine how long the touch has been up or down.
+          var tUp = wave.tUp;
+          var tDown = wave.tDown;
+          longestTouchDownDuration = Math.max(longestTouchDownDuration, tDown);
+          longestTouchUpDuration = Math.max(longestTouchUpDuration, tUp);
+
+          // Obtain the instantenous size and alpha of the ripple.
+          var radius = waveRadiusFn(tDown, tUp, anim);
+          var waveAlpha =  waveOpacityFn(tDown, tUp, anim);
+          var waveColor = cssColorWithAlpha(wave.waveColor, waveAlpha);
+          lastWaveColor = wave.waveColor;
+
+          // Position of the ripple.
+          var x = wave.startPosition.x;
+          var y = wave.startPosition.y;
+
+          // Ripple gravitational pull to the center of the canvas.
+          if (wave.endPosition) {
+
+            // This translates from the origin to the center of the view  based on the max dimension of  
+            var translateFraction = Math.min(1, radius / wave.containerSize * 2 / Math.sqrt(2) );
+
+            x += translateFraction * (wave.endPosition.x - wave.startPosition.x);
+            y += translateFraction * (wave.endPosition.y - wave.startPosition.y);
+          }
+
+          // If we do a background fill fade too, work out the correct color.
+          var bgFillColor = null;
+          if (this.backgroundFill) {
+            var bgFillAlpha = waveOuterOpacityFn(tDown, tUp, anim);
+            bgFillColor = cssColorWithAlpha(wave.waveColor, bgFillAlpha);
+          }
+
+          // Draw the ripple.
+          drawRipple(wave, x, y, radius, waveAlpha, bgFillAlpha);
+
+          // Determine whether there is any more rendering to be done.
+          var maximumWave = waveAtMaximum(wave, radius, anim);
+          var waveDissipated = waveDidFinish(wave, radius, anim);
+          var shouldKeepWave = !waveDissipated || maximumWave;
+          var shouldRenderWaveAgain = !waveDissipated && !maximumWave;
+          shouldRenderNextFrame = shouldRenderNextFrame || shouldRenderWaveAgain;
+          if (!shouldKeepWave || this.cancelled) {
+            deleteTheseWaves.push(wave);
+          }
+       }
+
+        if (shouldRenderNextFrame) {
+          requestAnimationFrame(this._loop);
+        }
+
+        for (var i = 0; i < deleteTheseWaves.length; ++i) {
+          var wave = deleteTheseWaves[i];
+          removeWaveFromScope(this, wave);
+        }
+
+        if (!this.waves.length && this._loop) {
+          // clear the background color
+          this.$.bg.style.backgroundColor = null;
+          this._loop = null;
+          this.fire('core-transitionend');
+        }
+      }
+
+    });
+
+  })();
+
+</script>
+</polymer-element>
+
+
+
+<polymer-element name="paper-shadow">
+
+  <template>
+
+    <style no-shim="">/*
+ * @license
+ * Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+ * This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+ * The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+ * The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+ * Code distributed by Google as part of the polymer project is also
+ * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+ */
+
+.paper-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.paper-shadow-animated.paper-shadow {
+  transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.paper-shadow-top-z-1 {
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+}
+
+.paper-shadow-bottom-z-1 {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+.paper-shadow-top-z-2 {
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.paper-shadow-bottom-z-2 {
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+}
+
+.paper-shadow-top-z-3 {
+  box-shadow: 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.paper-shadow-bottom-z-3 {
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
+}
+
+.paper-shadow-top-z-4 {
+  box-shadow: 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+}
+
+.paper-shadow-bottom-z-4 {
+  box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22);
+}
+
+.paper-shadow-top-z-5 {
+  box-shadow: 0 40px 77px 0 rgba(0, 0, 0, 0.22);
+}
+
+.paper-shadow-bottom-z-5 {
+  box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2);
+}
+
+.paper-shadow-animate-z-1-z-2.paper-shadow-top {
+  -webkit-transition: none;
+  -webkit-animation: animate-shadow-top-z-1-z-2 0.7s infinite alternate;
+}
+
+.paper-shadow-animate-z-1-z-2 .paper-shadow-bottom {
+  -webkit-transition: none;
+  -webkit-animation: animate-shadow-bottom-z-1-z-2 0.7s infinite alternate;
+}
+
+@-webkit-keyframes animate-shadow-top-z-1-z-2 {
+  0% {
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+  }
+  100% {
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+}
+
+@-webkit-keyframes animate-shadow-bottom-z-1-z-2 {
+  0% {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  }
+  100% {
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+  }
+}</style>
+
+  </template>
+
+  <script>
+    Polymer('paper-shadow', {
+
+      publish: {
+        /**
+         * If set, the shadow is applied to this node.
+         *
+         * @attribute target
+         * @type Element
+         * @default null
+         */
+        target: {value: null, reflect: true},
+
+        /**
+         * The z-depth of this shadow, from 0-5.
+         *
+         * @attribute z
+         * @type number
+         * @default 1
+         */
+        z: {value: 1, reflect: true},
+
+        /**
+         * If true, the shadow animates between z-depth changes.
+         *
+         * @attribute animated
+         * @type boolean
+         * @default false
+         */
+        animated: {value: false, reflect: true},
+
+        /**
+         * Workaround: getComputedStyle is wrong sometimes so `paper-shadow`
+         * may overwrite the `position` CSS property. Set this property to
+         * true to prevent this.
+         *
+         * @attribute hasPosition
+         * @type boolean
+         * @default false
+         */
+        hasPosition: false
+      },
+
+      // NOTE: include template so that styles are loaded, but remove
+      // so that we can decide dynamically what part to include
+      registerCallback: function(polymerElement) {
+        var template = polymerElement.querySelector('template');
+        this._style = template.content.querySelector('style');
+        this._style.removeAttribute('no-shim');
+      },
+
+      fetchTemplate: function() {
+        return null;
+      },
+
+      attached: function() {
+        // If no target is bound at attach, default the target to the parent
+        // element or shadow host.
+        if (!this.target) {
+          if (!this.parentElement && this.parentNode.host) {
+            this.target = this.parentNode.host;
+          } else if (this.parentElement && (window.ShadowDOMPolyfill ? this.parentElement !== wrap(document.body) : this.parentElement !== document.body)) {
+            this.target = this.parentElement;
+          }
+        }
+      },
+
+      targetChanged: function(old) {
+        if (old) {
+          this.removeShadow(old);
+        }
+        if (this.target) {
+          this.addShadow(this.target);
+        }
+      },
+
+      zChanged: function(old) {
+        if (this.target && this.target._paperShadow) {
+          var shadow = this.target._paperShadow;
+          ['top', 'bottom'].forEach(function(s) {
+            shadow[s].classList.remove('paper-shadow-' + s + '-z-' + old);
+            shadow[s].classList.add('paper-shadow-' + s + '-z-' + this.z);
+          }.bind(this));
+        }
+      },
+
+      animatedChanged: function() {
+        if (this.target && this.target._paperShadow) {
+          var shadow = this.target._paperShadow;
+          ['top', 'bottom'].forEach(function(s) {
+            if (this.animated) {
+              shadow[s].classList.add('paper-shadow-animated');
+            } else {
+              shadow[s].classList.remove('paper-shadow-animated');
+            }
+          }.bind(this));
+        }
+      },
+
+      addShadow: function(node) {
+        if (node._paperShadow) {
+          return;
+        }
+
+        if (!node._hasShadowStyle) {
+          if (!node.shadowRoot) {
+            node.createShadowRoot().innerHTML = '<content></content>';
+          }
+          this.installScopeStyle(this._style, 'shadow', node.shadowRoot);
+          node._hasShadowStyle = true;
+        }
+
+        var computed = getComputedStyle(node);
+        if (!this.hasPosition && computed.position === 'static') {
+          node.style.position = 'relative';
+        }
+        node.style.overflow = 'visible';
+
+        // Both the top and bottom shadows are children of the target, so
+        // it does not affect the classes and CSS properties of the target.
+        ['top', 'bottom'].forEach(function(s) {
+          var inner = (node._paperShadow && node._paperShadow[s]) || document.createElement('div');
+          inner.classList.add('paper-shadow');
+          inner.classList.add('paper-shadow-' + s + '-z-' + this.z);
+          if (this.animated) {
+            inner.classList.add('paper-shadow-animated');
+          }
+
+          if (node.shadowRoot) {
+            node.shadowRoot.insertBefore(inner, node.shadowRoot.firstChild);
+          } else {
+            node.insertBefore(inner, node.firstChild);
+          }
+
+          node._paperShadow = node._paperShadow || {};
+          node._paperShadow[s] = inner;
+        }.bind(this));
+
+      },
+
+      removeShadow: function(node) {
+        if (!node._paperShadow) {
+          return;
+        }
+
+        ['top', 'bottom'].forEach(function(s) {
+          node._paperShadow[s].remove();
+        });
+        node._paperShadow = null;
+
+        node.style.position = null;
+      }
+
+    });
+  </script>
+</polymer-element>
+
+
+<polymer-element name="paper-button" extends="paper-focusable" attributes="label raisedButton iconSrc icon" role="button">
+
+  <template>
+
+    <style>/*
+ * @license
+ * Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+ * This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+ * The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+ * The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+ * Code distributed by Google as part of the polymer project is also
+ * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+ */
+
+:host {
+  display: inline-block;
+  position: relative;
+  border: 0;
+  background: transparent;
+  text-align: center;
+  font: inherit;
+  text-transform: uppercase;
+  outline: none;
+  border-radius: 3px;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+:host(.hover:hover) {
+  background: #e4e4e4;
+}
+
+:host([raisedButton]) {
+  background: #dfdfdf;
+}
+
+:host([raisedButton].hover:hover) {
+  background: #d6d6d6;
+}
+
+:host([disabled]) {
+  background: #eaeaea !important;
+  color: #a8a8a8 !important;
+  cursor: auto;
+}
+
+#shadow-container {
+  border-radius: inherit;
+}
+
+#clip {
+  position: relative;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+/*
+#focusBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  border-radius: inherit;
+  background: #c3c3c3;
+  -webkit-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:host([focused]) #focusBg {
+  -webkit-transition: none;
+  transition: none;
+  -webkit-animation: focus-fade 0.7s infinite alternate;
+  animation: focus-fade 0.7s infinite alternate;
+}
+
+@-webkit-keyframes focus-fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes focus-fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+*/
+
+#ripple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  color: #d1d1d1;
+  pointer-events: none;
+}
+
+:host([raisedButton]) #ripple {
+  color: #cecece;
+}
+
+#ripple::shadow canvas {
+  top: 0;
+  left: 0;
+}
+
+#content {
+  /* needed to position the ink behind the content */
+  position: relative;
+}
+
+#icon {
+  margin: 8px;
+}
+
+#content > span {
+  display: inline-block;
+  margin: 0.5em;
+}</style>
+
+    <template if="{{raisedButton}}">
+      <div fit="" id="shadow-container">
+        <paper-shadow id="shadow" z="{{z}}" animated=""></paper-shadow>
+      </div>
+    </template>
+
+    <div id="clip">
+      <!-- <div id="focusBg"></div> -->
+      <paper-ripple id="ripple"></paper-ripple>
+      <div id="content">
+        <template if="{{iconSrc || icon}}">
+          <core-icon id="icon" src="{{iconSrc}}" icon="{{icon}}"></core-icon>
+        </template>
+        <template if="{{label}}">
+          <span>{{label}}</span>
+        </template>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+    Polymer('paper-button', {
+
+      publish: {
+
+        /**
+         * The label of the button.
+         *
+         * @attribute label
+         * @type string
+         * @default ''
+         */
+        label: '',
+
+        /**
+         * If true, the button will be styled as a "raised" button.
+         *
+         * @attribute raisedButton
+         * @type boolean
+         * @default false
+         */
+        raisedButton: {value: false, reflect: true},
+
+        /**
+         * (optional) The URL of an image for an icon to use in the button.
+         * Should not use `icon` property if you are using this property.
+         *
+         * @attribute iconSrc
+         * @type string
+         * @default ''
+         */
+         iconSrc: '',
+
+         /**
+          * (optional) Specifies the icon name or index in the set of icons
+          * available in the icon set. If using this property, load the icon
+          * set separately where the icon is used. Should not use `src`
+          * if you are using this property.
+          *
+          * @attribute icon
+          * @type string
+          * @default ''
+          */
+         icon: ''
+
+      },
+
+      z: 1,
+
+      attached: function() {
+        if (this.textContent && this.textContent.match(/\S+/)) {
+          console.warn('Using textContent to label the button is deprecated. Use the "label" property instead');
+          this.label = this.textContent;
+        }
+      },
+
+      activeChanged: function() {
+        this.super();
+
+        if (this.active) {
+          // FIXME: remove when paper-ripple can have a default 'down' state.
+          if (!this.lastEvent) {
+            var rect = this.getBoundingClientRect();
+            this.lastEvent = {
+              x: rect.left + rect.width / 2,
+              y: rect.top + rect.height / 2
+            }
+          }
+          this.$.ripple.downAction(this.lastEvent);
+        } else {
+          this.$.ripple.upAction();
+        }
+        this.adjustZ();
+      },
+
+      focusedChanged: function() {
+        this.super();
+        this.adjustZ();
+      },
+
+      disabledChanged: function() {
+        this.super();
+        this.adjustZ();
+      },
+
+      // waitForSpillCompleted: function(callback) {
+      //   this.async(callback, null, (this.$.ink.spillCompleted ? 0 : this.duration));
+      // },
+
+      // resetInk: function() {
+      //   this.active = false;
+      //   this.$.ink.reset();
+      // },
+
+      insideButton: function(x, y) {
+        var rect = this.getBoundingClientRect();
+        return (rect.left <= x) && (x <= rect.right) && (rect.top <= y) && (y <= rect.bottom);
+      },
+
+      adjustZ: function() {
+        if (this.focused) {
+          this.classList.add('paper-shadow-animate-z-1-z-2');
+        } else {
+          this.classList.remove('paper-shadow-animate-z-1-z-2');
+
+          if (this.active) {
+            this.z = 2;
+          } else if (this.disabled) {
+            this.z = 0;
+          } else {
+            this.z = 1;
+          }
+
+        }
+      },
+
+      downAction: function(e) {
+        this.super(e);
+        this.lastEvent = e;
+      },
+
+      labelChanged: function() {
+        this.setAttribute('aria-label', this.label);
+      }
+
+    });
+  </script>
+</polymer-element>
+
+
+<polymer-element name="paper-icon-button" extends="paper-button" attributes="fill">
+
+  <template>
+
+    <style>/*
+Copyright 2013 The Polymer Authors. All rights reserved.
+Use of this source code is governed by a BSD-style
+license that can be found in the LICENSE file.
+*/
+
+:host([disabled]) {
+  background: none !important;
+}
+
+:host([disabled]) /deep/ #icon {
+  fill: #c9c9c9;
+}
+
+:host(:not([fill])) /deep/ #focusBg {
+  border-radius: 50%;
+}</style>
+
+    <shadow></shadow>
+
+  </template>
+
+  <script>
+  
+    Polymer('paper-icon-button', {
+
+      publish: {
+
+        /**
+         * If true, the ripple expands to a square to fill the containing box.
+         *
+         * @attribute fill
+         * @type boolean
+         * @default false
+         */
+        fill: {value: false, reflect: true}
+
+      },
+
+      ready: function() {
+        this.$.ripple.classList.add('recenteringTouch');
+        this.fillChanged();
+      },
+
+      fillChanged: function() {
+        this.$.ripple.classList.toggle('circle', !this.fill);
+      },
+
+      iconChanged: function(oldIcon) {
+        if (!this.label) {
+          this.setAttribute('aria-label', this.icon);
+        }
+      }
+
+    });
+    
+  </script>
+  
+</polymer-element>
+
+
+<polymer-element name="paper-fab" extends="paper-icon-button">
+
+  <template>
+
+    <style>/*
+ * @license
+ * Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+ * This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+ * The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+ * The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+ * Code distributed by Google as part of the polymer project is also
+ * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+ */
+
+:host {
+  box-sizing: border-box;
+  width: 56px;
+  height: 56px;
+  background: #d23f31;
+  border-radius: 50%;
+  fill: #fff;
+}
+
+:host(.mini) {
+  width: 40px;
+  height: 40px;
+}
+
+:host /deep/ #focusBg {
+  display: none;
+}
+
+:host /deep/ #icon {
+  display: block;
+  margin: 16px;
+}
+
+:host(.mini) /deep/ #icon {
+  margin: 8px;
+}
+</style>
+
+    <shadow></shadow>
+
+  </template>
+
+  <script>
+    Polymer('paper-fab', {
+
+      publish: {
+
+        /**
+         * See [`<paper-button>`](../paper-button).
+         *
+         * @attribute raisedButton
+         * @type boolean
+         * @default true
+         */
+        raisedButton: {value: true, reflect: true}
+
+      }
+
+    });
+  </script>
+</polymer-element>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <polymer-element name="core-iconset-svg" extends="core-meta" attributes="iconSize">
 
   <script>
@@ -878,6 +2119,50 @@ html /deep/ core-icon {
   </script>
 
 </polymer-element>
+
+<core-iconset-svg id="av" iconsize="24">
+<svg><defs>
+<g id="closed-caption"><path d="M19,4H5C3.9,4,3,4.9,3,6v12c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V6C21,4.9,20.1,4,19,4z M11,11H9.5v-0.5h-2v3h2V13H11v1c0,0.6-0.4,1-1,1H7c-0.6,0-1-0.4-1-1v-4c0-0.6,0.4-1,1-1h3c0.6,0,1,0.4,1,1V11z M18,11h-1.5v-0.5h-2v3h2V13H18v1c0,0.6-0.4,1-1,1h-3c-0.6,0-1-0.4-1-1v-4c0-0.6,0.4-1,1-1h3c0.6,0,1,0.4,1,1V11z"></path></g>
+<g id="fast-forward"><path d="M4,18l8.5-6L4,6V18z M13,6v12l8.5-6L13,6z"></path></g>
+<g id="fast-rewind"><path d="M11,18V6l-8.5,6L11,18z M11.5,12l8.5,6V6L11.5,12z"></path></g>
+<g id="games"><path d="M15,7.5V2H9v5.5l3,3L15,7.5z M7.5,9H2v6h5.5l3-3L7.5,9z M9,16.5V22h6v-5.5l-3-3L9,16.5z M16.5,9l-3,3l3,3H22V9H16.5z"></path></g>
+<g id="high-quality"><path d="M19,4H5C3.9,4,3,4.9,3,6v12c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V6C21,4.9,20.1,4,19,4z M11,15H9.5v-2h-2v2H6V9h1.5v2.5h2V9H11V15z M18,14c0,0.6-0.4,1-1,1h-0.8v1.5h-1.5V15H14c-0.6,0-1-0.4-1-1v-4c0-0.6,0.4-1,1-1h3c0.6,0,1,0.4,1,1V14z M14.5,13.5h2v-3h-2V13.5z"></path></g>
+<g id="loop"><path d="M12,4V1L8,5l4,4V6c3.3,0,6,2.7,6,6c0,1-0.3,2-0.7,2.8l1.5,1.5C19.5,15,20,13.6,20,12C20,7.6,16.4,4,12,4z M12,18c-3.3,0-6-2.7-6-6c0-1,0.3-2,0.7-2.8L5.2,7.7C4.5,9,4,10.4,4,12c0,4.4,3.6,8,8,8v3l4-4l-4-4V18z"></path></g>
+<g id="mic"><path d="M12,14c1.7,0,3-1.3,3-3l0-6c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3v6C9,12.7,10.3,14,12,14z M17.3,11c0,3-2.5,5.1-5.3,5.1c-2.8,0-5.3-2.1-5.3-5.1H5c0,3.4,2.7,6.2,6,6.7V21h2v-3.3c3.3-0.5,6-3.3,6-6.7H17.3z"></path></g>
+<g id="mic-none"><path d="M12,14c1.7,0,3-1.3,3-3l0-6c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3v6C9,12.7,10.3,14,12,14z M10.8,4.9c0-0.7,0.5-1.2,1.2-1.2c0.7,0,1.2,0.5,1.2,1.2l0,6.2c0,0.7-0.5,1.2-1.2,1.2c-0.7,0-1.2-0.5-1.2-1.2V4.9z M17.3,11c0,3-2.5,5.1-5.3,5.1c-2.8,0-5.3-2.1-5.3-5.1H5c0,3.4,2.7,6.2,6,6.7V21h2v-3.3c3.3-0.5,6-3.3,6-6.7H17.3z"></path></g>
+<g id="mic-off"><path d="M19,11h-1.7c0,0.7-0.2,1.4-0.4,2l1.2,1.2C18.7,13.3,19,12.2,19,11z"></path><path d="M15,11.2c0-0.1,0-0.1,0-0.2V5c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3v0.2L15,11.2z"></path><path d="M4.3,3L3,4.3l6,6L9,11c0,1.7,1.3,3,3,3c0.2,0,0.4,0,0.7-0.1l1.7,1.7c-0.7,0.3-1.5,0.5-2.3,0.5c-2.8,0-5.3-2.1-5.3-5.1H5c0,3.4,2.7,6.2,6,6.7V21h2v-3.3c0.9-0.1,1.8-0.5,2.5-0.9l4.2,4.2l1.3-1.3L4.3,3z"></path></g>
+<g id="movie"><path d="M18,4l2,4h-3l-2-4h-2l2,4h-3l-2-4H8l2,4H7L5,4H4C2.9,4,2,4.9,2,6l0,12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V4H18z"></path></g>
+<g id="news"><path d="M20.3,4.7L18.7,3L17,4.7L15.3,3l-1.7,1.7L12,3l-1.7,1.7L8.7,3L7,4.7L5.3,3L3.7,4.7L2,3v16c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2l0-16L20.3,4.7z M12,19H4v-7h8V19z M20,19h-7v-1h7V19z M20,17h-7v-1h7V17z M20,15h-7v-1h7V15z M20,13h-7v-1h7V13z M20,11H4V8h16V11z"></path></g>
+<g id="pause"><path d="M6,19h4V5H6V19z M14,5v14h4V5H14z"></path></g>
+<g id="pause-circle-fill"><path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M11,16H9V8h2V16z M15,16h-2V8h2V16z"></path></g>
+<g id="pause-circle-outline"><path d="M9,16h2V8H9V16z M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M12,20c-4.4,0-8-3.6-8-8s3.6-8,8-8c4.4,0,8,3.6,8,8S16.4,20,12,20z M13,16h2V8h-2V16z"></path></g>
+<g id="play-arrow"><polygon points="8,5 8,19 19,12 "></polygon></g>
+<g id="play-circle-fill"><path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M10,16.5v-9l6,4.5L10,16.5z"></path></g>
+<g id="play-circle-outline"><path d="M10,16.5l6-4.5l-6-4.5V16.5z M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M12,20c-4.4,0-8-3.6-8-8s3.6-8,8-8c4.4,0,8,3.6,8,8S16.4,20,12,20z"></path></g>
+<g id="queue"><path d="M4,6H2v14c0,1.1,0.9,2,2,2h14v-2H4V6z M20,2H8C6.9,2,6,2.9,6,4v12c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V4C22,2.9,21.1,2,20,2z M19,11h-4v4h-2v-4H9V9h4V5h2v4h4V11z"></path></g>
+<g id="replay"><path d="M12,5V1L7,6l5,5V7c3.3,0,6,2.7,6,6s-2.7,6-6,6c-3.3,0-6-2.7-6-6H4c0,4.4,3.6,8,8,8c4.4,0,8-3.6,8-8S16.4,5,12,5z"></path></g>
+<g id="shuffle"><path d="M10.6,9.2L5.4,4L4,5.4l5.2,5.2L10.6,9.2z M14.5,4l2,2L4,18.6L5.4,20L18,7.5l2,2V4H14.5z M14.8,13.4l-1.4,1.4l3.1,3.1l-2,2H20v-5.5l-2,2L14.8,13.4z"></path></g>
+<g id="skip-next"><path d="M6,18l8.5-6L6,6V18z M16,6v12h2V6H16z"></path></g>
+<g id="skip-previous"><rect x="6" y="6" width="2" height="12"></rect><polygon points="9.5,12 18,18 18,6 "></polygon></g>
+<g id="stop"><rect x="6" y="6" width="12" height="12"></rect></g>
+<g id="videocam"><path d="M17,10.5V7c0-0.6-0.4-1-1-1H4C3.4,6,3,6.4,3,7v10c0,0.6,0.4,1,1,1h12c0.6,0,1-0.4,1-1v-3.5l4,4v-11L17,10.5z"></path></g>
+<g id="videocam-off"><path d="M21,6.5l-4,4V7c0-0.6-0.4-1-1-1H9.8L21,17.2V6.5z M3.3,2L2,3.3L4.7,6H4C3.4,6,3,6.4,3,7v10c0,0.6,0.4,1,1,1h12c0.2,0,0.4-0.1,0.5-0.2l3.2,3.2l1.3-1.3L3.3,2z"></path></g>
+<g id="video-youtube"><path d="M20,4.4C19.4,4.2,15.7,4,12,4C8.3,4,4.6,4.2,4,4.4c-1.6,0.5-2,4-2,7.6s0.4,7.1,2,7.6c0.6,0.2,4.3,0.4,8,0.4c3.7,0,7.4-0.2,8-0.4c1.6-0.5,2-4,2-7.6S21.6,4.9,20,4.4z M10,16.5v-9l6,4.5L10,16.5z"></path></g>
+<g id="volume-down"><path d="M18.5,12c0-1.8-1-3.3-2.5-4V16C17.5,15.3,18.5,13.8,18.5,12z M5,9c0,0,0,6,0,6h4l5,5V4L9,9H5z"></path></g>
+<g id="volume-mute"><path d="M7,9c0,0,0,6,0,6h4l5,5V4l-5,5H7z"></path></g>
+<g id="volume-off"><path d="M16.5,12c0-1.8-1-3.3-2.5-4v2.2l2.5,2.5C16.5,12.4,16.5,12.2,16.5,12z M19,12c0,0.9-0.2,1.8-0.5,2.6l1.5,1.5c0.7-1.2,1-2.7,1-4.2c0-4.3-3-7.9-7-8.8v2.1C16.9,6.2,19,8.8,19,12z M4.3,3L3,4.3L7.7,9H3c0,0,0,6,0,6h4l5,5v-6.7l4.3,4.3c-0.7,0.5-1.4,0.9-2.3,1.2v2.1c1.4-0.3,2.6-0.9,3.7-1.8l2,2l1.3-1.3l-9-9L4.3,3z M12,4L9.9,6.1L12,8.2V4z"></path></g>
+<g id="volume-up"><path d="M3,9c0,0,0,6,0,6h4l5,5V4L7,9H3z M16.5,12c0-1.8-1-3.3-2.5-4V16C15.5,15.3,16.5,13.8,16.5,12z M14,3.2v2.1c2.9,0.9,5,3.5,5,6.7s-2.1,5.8-5,6.7v2.1c4-0.9,7-4.5,7-8.8S18,4.1,14,3.2z"></path></g>
+<g id="web"><path d="M20,4H4C2.9,4,2,4.9,2,6l0,12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M15,18H4v-4h11V18z M15,13H4V9h11V13z M20,18h-4V9h4V18z"></path></g>
+</defs></svg>
+</core-iconset-svg>
+
+
+
+
+
+
+
+
 
 <core-iconset-svg id="icons" iconsize="24">
 <svg><defs>
@@ -1148,6 +2433,72 @@ html /deep/ core-icon {
 </core-iconset-svg>
 
 
+
+
+
+<polymer-element name="stopwatch-element">
+
+  <template>
+    <style>
+      :host {
+        font-size: larger;
+        text-align: center;
+      }
+      .buttons > *{
+        background: #4285f4;
+        color: #f1f1f1;
+        fill: #f1f1f1;
+        margin: 1%;
+      }
+    </style>
+    <div>
+      {{counter}}
+    </div>
+    <div class="buttons">
+      <paper-fab icon="av:play-arrow" on-click="{{start}}" id="startButton"></paper-fab>
+      <paper-fab icon="av:pause" on-click="{{pause}}" id="pauseButton"></paper-fab>
+      <paper-fab icon="av:stop" on-click="{{stop}}" id="stopButton"></paper-fab>
+    </div>
+  </template>
+
+  
+
+</polymer-element>
+
+
+
+<polymer-element name="tracking-element"> 
+  
+  <template>
+     <style>
+      table {
+        border: thin #4285f4 solid;
+        text-align: center;
+        width: 100%;
+      }
+      
+      td{
+        padding: 1%;
+      }
+    </style>
+    <table>
+      <tbody><tr>
+        <th>GPS Status</th>
+        <th>Speed AVG</th>
+      </tr>
+      <tr>
+        <td>{{ gpsStatus }}</td>
+        <td>{{ speedAverage }}</td>
+      </tr>
+    </tbody></table>
+  </template> 
+  
+  
+</polymer-element>
+
+
+
+
 <polymer-element name="core-icon-button" attributes="src icon active">
 
   <template>
@@ -1282,116 +2633,22 @@ core-icon {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<core-iconset-svg id="av" iconsize="24">
-<svg><defs>
-<g id="closed-caption"><path d="M19,4H5C3.9,4,3,4.9,3,6v12c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V6C21,4.9,20.1,4,19,4z M11,11H9.5v-0.5h-2v3h2V13H11v1c0,0.6-0.4,1-1,1H7c-0.6,0-1-0.4-1-1v-4c0-0.6,0.4-1,1-1h3c0.6,0,1,0.4,1,1V11z M18,11h-1.5v-0.5h-2v3h2V13H18v1c0,0.6-0.4,1-1,1h-3c-0.6,0-1-0.4-1-1v-4c0-0.6,0.4-1,1-1h3c0.6,0,1,0.4,1,1V11z"></path></g>
-<g id="fast-forward"><path d="M4,18l8.5-6L4,6V18z M13,6v12l8.5-6L13,6z"></path></g>
-<g id="fast-rewind"><path d="M11,18V6l-8.5,6L11,18z M11.5,12l8.5,6V6L11.5,12z"></path></g>
-<g id="games"><path d="M15,7.5V2H9v5.5l3,3L15,7.5z M7.5,9H2v6h5.5l3-3L7.5,9z M9,16.5V22h6v-5.5l-3-3L9,16.5z M16.5,9l-3,3l3,3H22V9H16.5z"></path></g>
-<g id="high-quality"><path d="M19,4H5C3.9,4,3,4.9,3,6v12c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V6C21,4.9,20.1,4,19,4z M11,15H9.5v-2h-2v2H6V9h1.5v2.5h2V9H11V15z M18,14c0,0.6-0.4,1-1,1h-0.8v1.5h-1.5V15H14c-0.6,0-1-0.4-1-1v-4c0-0.6,0.4-1,1-1h3c0.6,0,1,0.4,1,1V14z M14.5,13.5h2v-3h-2V13.5z"></path></g>
-<g id="loop"><path d="M12,4V1L8,5l4,4V6c3.3,0,6,2.7,6,6c0,1-0.3,2-0.7,2.8l1.5,1.5C19.5,15,20,13.6,20,12C20,7.6,16.4,4,12,4z M12,18c-3.3,0-6-2.7-6-6c0-1,0.3-2,0.7-2.8L5.2,7.7C4.5,9,4,10.4,4,12c0,4.4,3.6,8,8,8v3l4-4l-4-4V18z"></path></g>
-<g id="mic"><path d="M12,14c1.7,0,3-1.3,3-3l0-6c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3v6C9,12.7,10.3,14,12,14z M17.3,11c0,3-2.5,5.1-5.3,5.1c-2.8,0-5.3-2.1-5.3-5.1H5c0,3.4,2.7,6.2,6,6.7V21h2v-3.3c3.3-0.5,6-3.3,6-6.7H17.3z"></path></g>
-<g id="mic-none"><path d="M12,14c1.7,0,3-1.3,3-3l0-6c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3v6C9,12.7,10.3,14,12,14z M10.8,4.9c0-0.7,0.5-1.2,1.2-1.2c0.7,0,1.2,0.5,1.2,1.2l0,6.2c0,0.7-0.5,1.2-1.2,1.2c-0.7,0-1.2-0.5-1.2-1.2V4.9z M17.3,11c0,3-2.5,5.1-5.3,5.1c-2.8,0-5.3-2.1-5.3-5.1H5c0,3.4,2.7,6.2,6,6.7V21h2v-3.3c3.3-0.5,6-3.3,6-6.7H17.3z"></path></g>
-<g id="mic-off"><path d="M19,11h-1.7c0,0.7-0.2,1.4-0.4,2l1.2,1.2C18.7,13.3,19,12.2,19,11z"></path><path d="M15,11.2c0-0.1,0-0.1,0-0.2V5c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3v0.2L15,11.2z"></path><path d="M4.3,3L3,4.3l6,6L9,11c0,1.7,1.3,3,3,3c0.2,0,0.4,0,0.7-0.1l1.7,1.7c-0.7,0.3-1.5,0.5-2.3,0.5c-2.8,0-5.3-2.1-5.3-5.1H5c0,3.4,2.7,6.2,6,6.7V21h2v-3.3c0.9-0.1,1.8-0.5,2.5-0.9l4.2,4.2l1.3-1.3L4.3,3z"></path></g>
-<g id="movie"><path d="M18,4l2,4h-3l-2-4h-2l2,4h-3l-2-4H8l2,4H7L5,4H4C2.9,4,2,4.9,2,6l0,12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V4H18z"></path></g>
-<g id="news"><path d="M20.3,4.7L18.7,3L17,4.7L15.3,3l-1.7,1.7L12,3l-1.7,1.7L8.7,3L7,4.7L5.3,3L3.7,4.7L2,3v16c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2l0-16L20.3,4.7z M12,19H4v-7h8V19z M20,19h-7v-1h7V19z M20,17h-7v-1h7V17z M20,15h-7v-1h7V15z M20,13h-7v-1h7V13z M20,11H4V8h16V11z"></path></g>
-<g id="pause"><path d="M6,19h4V5H6V19z M14,5v14h4V5H14z"></path></g>
-<g id="pause-circle-fill"><path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M11,16H9V8h2V16z M15,16h-2V8h2V16z"></path></g>
-<g id="pause-circle-outline"><path d="M9,16h2V8H9V16z M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M12,20c-4.4,0-8-3.6-8-8s3.6-8,8-8c4.4,0,8,3.6,8,8S16.4,20,12,20z M13,16h2V8h-2V16z"></path></g>
-<g id="play-arrow"><polygon points="8,5 8,19 19,12 "></polygon></g>
-<g id="play-circle-fill"><path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M10,16.5v-9l6,4.5L10,16.5z"></path></g>
-<g id="play-circle-outline"><path d="M10,16.5l6-4.5l-6-4.5V16.5z M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M12,20c-4.4,0-8-3.6-8-8s3.6-8,8-8c4.4,0,8,3.6,8,8S16.4,20,12,20z"></path></g>
-<g id="queue"><path d="M4,6H2v14c0,1.1,0.9,2,2,2h14v-2H4V6z M20,2H8C6.9,2,6,2.9,6,4v12c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V4C22,2.9,21.1,2,20,2z M19,11h-4v4h-2v-4H9V9h4V5h2v4h4V11z"></path></g>
-<g id="replay"><path d="M12,5V1L7,6l5,5V7c3.3,0,6,2.7,6,6s-2.7,6-6,6c-3.3,0-6-2.7-6-6H4c0,4.4,3.6,8,8,8c4.4,0,8-3.6,8-8S16.4,5,12,5z"></path></g>
-<g id="shuffle"><path d="M10.6,9.2L5.4,4L4,5.4l5.2,5.2L10.6,9.2z M14.5,4l2,2L4,18.6L5.4,20L18,7.5l2,2V4H14.5z M14.8,13.4l-1.4,1.4l3.1,3.1l-2,2H20v-5.5l-2,2L14.8,13.4z"></path></g>
-<g id="skip-next"><path d="M6,18l8.5-6L6,6V18z M16,6v12h2V6H16z"></path></g>
-<g id="skip-previous"><rect x="6" y="6" width="2" height="12"></rect><polygon points="9.5,12 18,18 18,6 "></polygon></g>
-<g id="stop"><rect x="6" y="6" width="12" height="12"></rect></g>
-<g id="videocam"><path d="M17,10.5V7c0-0.6-0.4-1-1-1H4C3.4,6,3,6.4,3,7v10c0,0.6,0.4,1,1,1h12c0.6,0,1-0.4,1-1v-3.5l4,4v-11L17,10.5z"></path></g>
-<g id="videocam-off"><path d="M21,6.5l-4,4V7c0-0.6-0.4-1-1-1H9.8L21,17.2V6.5z M3.3,2L2,3.3L4.7,6H4C3.4,6,3,6.4,3,7v10c0,0.6,0.4,1,1,1h12c0.2,0,0.4-0.1,0.5-0.2l3.2,3.2l1.3-1.3L3.3,2z"></path></g>
-<g id="video-youtube"><path d="M20,4.4C19.4,4.2,15.7,4,12,4C8.3,4,4.6,4.2,4,4.4c-1.6,0.5-2,4-2,7.6s0.4,7.1,2,7.6c0.6,0.2,4.3,0.4,8,0.4c3.7,0,7.4-0.2,8-0.4c1.6-0.5,2-4,2-7.6S21.6,4.9,20,4.4z M10,16.5v-9l6,4.5L10,16.5z"></path></g>
-<g id="volume-down"><path d="M18.5,12c0-1.8-1-3.3-2.5-4V16C17.5,15.3,18.5,13.8,18.5,12z M5,9c0,0,0,6,0,6h4l5,5V4L9,9H5z"></path></g>
-<g id="volume-mute"><path d="M7,9c0,0,0,6,0,6h4l5,5V4l-5,5H7z"></path></g>
-<g id="volume-off"><path d="M16.5,12c0-1.8-1-3.3-2.5-4v2.2l2.5,2.5C16.5,12.4,16.5,12.2,16.5,12z M19,12c0,0.9-0.2,1.8-0.5,2.6l1.5,1.5c0.7-1.2,1-2.7,1-4.2c0-4.3-3-7.9-7-8.8v2.1C16.9,6.2,19,8.8,19,12z M4.3,3L3,4.3L7.7,9H3c0,0,0,6,0,6h4l5,5v-6.7l4.3,4.3c-0.7,0.5-1.4,0.9-2.3,1.2v2.1c1.4-0.3,2.6-0.9,3.7-1.8l2,2l1.3-1.3l-9-9L4.3,3z M12,4L9.9,6.1L12,8.2V4z"></path></g>
-<g id="volume-up"><path d="M3,9c0,0,0,6,0,6h4l5,5V4L7,9H3z M16.5,12c0-1.8-1-3.3-2.5-4V16C15.5,15.3,16.5,13.8,16.5,12z M14,3.2v2.1c2.9,0.9,5,3.5,5,6.7s-2.1,5.8-5,6.7v2.1c4-0.9,7-4.5,7-8.8S18,4.1,14,3.2z"></path></g>
-<g id="web"><path d="M20,4H4C2.9,4,2,4.9,2,6l0,12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M15,18H4v-4h11V18z M15,13H4V9h11V13z M20,18h-4V9h4V18z"></path></g>
-</defs></svg>
-</core-iconset-svg>
-
-
-
-
-
-<polymer-element name="stopwatch-element">
-
-  <template>
-    <style>
-      :host {
-        text-align: center;
-        display: inline-block;
-        padding: 10px 10px 10px 10px;
-      }
-    </style>
-    <div>
-      <div>
-        {{counter}}
-      </div>
-      <div>
-        <core-icon-button icon="av:play-arrow" on-click="{{start}}" id="startButton"></core-icon-button>
-        <core-icon-button icon="av:pause" on-click="{{pause}}" id="pauseButton"></core-icon-button>
-        <core-icon-button icon="av:stop" on-click="{{stop}}" id="stopButton"></core-icon-button>
-      </div>
-    </div>
-  </template>
-
-  
-
-</polymer-element>
-
-
-
-<polymer-element name="tracking-element"> 
-  
-  <template>
-     <style>
-      span {
-        padding: 1%;
-        font-family: monospace;
-        border: 1px rgb(100,200,0) dotted;
-      }
-    </style>
-    <span class="gpsStatus">{{ gpsStatus }}</span>
-    <span class="speedAverage">{{ speedAverage }}</span>
-  </template> 
-  
-  
-</polymer-element>
-
-
-
-
-
 <polymer-element name="positioning-li-element" extends="li"> 
   
   <template>
 	<style>
-      :host{}
+      positioning-li-element{
+        display: inline-table;
+      }
+      positioning-li-element > *{
+        padding: 1%;
+        border: solid 1px rgba(0,0,0,0.2);
+      }
     </style>
-    <label>{{ positioning.key }}</label>
-    <core-icon-button icon="remove" on-tap="{{delete}}"></core-icon-button>
+    <span>Duration: {{ positioning.duration }}</span>
+    <span>Total distance: {{ positioning.totalDistance }} m</span>
+    <span>Speed Avg: {{ positioning.speedAvg }} km/h</span>
+    <paper-icon-button icon="delete" on-tap="{{delete}}"></paper-icon-button>
     
   </template> 
   
@@ -1405,7 +2662,7 @@ core-icon {
     </style>
     <ul on-delete="{{onDelete}}">
       <template repeat="{{ positioning in practices.values }}">
-      <li is="positioning-li-element" positioning="{{ positioning }}"> </li>
+        <li is="positioning-li-element" positioning="{{ positioning }}"> </li>
       </template>
     </ul>
   </template> 
@@ -1413,19 +2670,194 @@ core-icon {
   
 </polymer-element>
 
-<polymer-element name="positioning-control"> 
+
+
+<polymer-element name="core-toolbar" noscript="">
+<template>
+
+  <style>/*
+Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
+
+:host {
+  /* technical */
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  /* size */
+  height: 64px;
+  /* typography */
+  font-size: 1.3em;
+  /* background */
+  background-color: #CFD8DC;
+}
+
+:host(.animate) {
+  /* transition */
+  transition: height 0.18s ease-in;
+}
+
+:host(.medium-tall) {
+  height: 128px;
+}
+
+:host(.tall) {
+  height: 192px;
+}
+
+.toolbar-tools {
+  position: relative;
+  height: 64px;
+  padding: 0 8px;
+  pointer-events: none;
+}
+
+/* narrow layout */
+:host(.core-narrow),
+:host-context(.core-narrow) {
+  height: 56px;
+}
+
+polyfill-next-selector { content: ':host.core-narrow.medium-tall, .core-narrow :host.medium-tall'; }
+:host(.core-narrow.medium-tall),
+:host-context(.core-narrow):host(.medium-tall) {
+  height: 112px;
+}
+
+polyfill-next-selector { content: ':host.core-narrow.tall, .core-narrow :host.tall'; }
+:host(.core-narrow.tall),
+:host-context(.core-narrow):host(.tall) {
+  height: 168px;
+}
+
+polyfill-next-selector { content: ':host.core-narrow .toolbar-tools, .core-narrow :host .toolbar-tools'; }
+:host(.core-narrow) .toolbar-tools,
+:host-context(.core-narrow) .toolbar-tools {
+  height: 56px;
+  padding: 0;
+}
+
+/* middle bar */
+#middleBar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+:host(.tall, .medium-tall) #middleBar {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+/* bottom bar */
+#bottomBar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* make elements (e.g. buttons) respond to mouse/touch events */
+polyfill-next-selector { content: '.toolbar-tools > *'; }
+::content > * {
+  pointer-events: auto;
+}
+
+/* elements spacing */
+polyfill-next-selector { content: '.toolbar-tools > *'; }
+::content > * {
+  margin: 0 8px;
+}
+
+/* misc helpers */
+polyfill-next-selector { content: '.toolbar-tools > .fit'; }
+::content > .fit {
+  position: absolute;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  margin: 0;
+}
+
+polyfill-next-selector { content: ':host .indent'; }
+::content > .indent {
+  margin-left: 60px;
+}
+</style>
+
+  <div id="bottomBar" class="toolbar-tools" center="" horizontal="" layout="">
+    <content select=".bottom"></content>
+  </div>
   
+  <div id="middleBar" class="toolbar-tools" center="" horizontal="" layout="">
+    <content select=".middle"></content>
+  </div>
+
+  <div id="topBar" class="toolbar-tools" center="" horizontal="" layout="">
+    <content></content>
+  </div>
+
+</template>
+</polymer-element>
+
+
+
+
+
+<polymer-element name="positioning-control"> 
   <template>
-    <span>{{message}}</span>
-    <tracking-element id="tracking_element"></tracking-element>
-    <stopwatch-element id="watch_element"></stopwatch-element>
-    <history-element id="history_element"></history-element>
+    <style>
+      :host {
+        height: 100%;
+      }
+      
+      core-toolbar{
+        background: #4285f4;
+        color: #f1f1f1;
+        fill: #f1f1f1;
+      }
+      
+      stopwatch-element{
+        margin: 2%;
+        padding: 2%;
+        border: 1px rgba(20, 20, 100, 0.3) solid;
+        border-radius: 1%;
+      }
+      
+      tracking-element{
+        margin: 2%;
+        padding: 2%;
+      }
+      
+    </style>
+    
+    <core-toolbar>
+      <paper-icon-button icon="menu"></paper-icon-button>
+      <span flex="">Snow Route</span>
+      <span>{{ message }}</span>
+    </core-toolbar>
+    
+    <div layout="" vertical="" flex="">
+        <stopwatch-element id="watch_element"></stopwatch-element>
+        <tracking-element id="tracking_element"></tracking-element>
+        <history-element id="history_element"></history-element>
+    </div>
   </template> 
   
-  
 </polymer-element></div>
-
   <positioning-control></positioning-control>
+
+  
+
 
 
 <script type="application/dart" src="index.html_bootstrap.dart"></script><script src="packages/browser/dart.js"></script></body></html>

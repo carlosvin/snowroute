@@ -1,0 +1,11 @@
+html, body{
+  font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+  
+  height: 100%;
+  margin: 0;
+}
+
+.error {
+  background-color: rbga(255,0,0, 0.1);
+  color: rgb(100,0,0);
+}

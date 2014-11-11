@@ -4306,264 +4306,355 @@ var $$ = Object.create(null);
   "^": "",
   main: [function() {
     var t1, t2, t3;
-    t1 = P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_counter, new E.main_closure(), C.Symbol_delete, new E.main_closure0(), C.Symbol_gpsStatus, new E.main_closure1(), C.Symbol_historyElement, new E.main_closure2(), C.Symbol_icon, new E.main_closure3(), C.Symbol_key, new E.main_closure4(), C.Symbol_message, new E.main_closure5(), C.Symbol_onDelete, new E.main_closure6(), C.Symbol_pause, new E.main_closure7(), C.Symbol_positioning, new E.main_closure8(), C.Symbol_practices, new E.main_closure9(), C.Symbol_speedAverage, new E.main_closure10(), C.Symbol_src, new E.main_closure11(), C.Symbol_start, new E.main_closure12(), C.Symbol_state, new E.main_closure13(), C.Symbol_stop, new E.main_closure14(), C.Symbol_stopWatchStateChanged, new E.main_closure15(), C.Symbol_stopwatchElement, new E.main_closure16(), C.Symbol_trackingElement, new E.main_closure17(), C.Symbol_values, new E.main_closure18()], null, null);
-    t2 = P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_counter, new E.main_closure19(), C.Symbol_gpsStatus, new E.main_closure20(), C.Symbol_historyElement, new E.main_closure21(), C.Symbol_icon, new E.main_closure22(), C.Symbol_message, new E.main_closure23(), C.Symbol_positioning, new E.main_closure24(), C.Symbol_speedAverage, new E.main_closure25(), C.Symbol_src, new E.main_closure26(), C.Symbol_state, new E.main_closure27(), C.Symbol_stopwatchElement, new E.main_closure28(), C.Symbol_trackingElement, new E.main_closure29()], null, null);
+    t1 = P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_blurAction, new E.main_closure(), C.Symbol_contextMenuAction, new E.main_closure0(), C.Symbol_counter, new E.main_closure1(), C.Symbol_delete, new E.main_closure2(), C.Symbol_downAction, new E.main_closure3(), C.Symbol_duration, new E.main_closure4(), C.Symbol_focusAction, new E.main_closure5(), C.Symbol_gpsStatus, new E.main_closure6(), C.Symbol_historyElement, new E.main_closure7(), C.Symbol_icon, new E.main_closure8(), C.Symbol_iconSrc, new E.main_closure9(), C.Symbol_label, new E.main_closure10(), C.Symbol_message, new E.main_closure11(), C.Symbol_onDelete, new E.main_closure12(), C.Symbol_pause, new E.main_closure13(), C.Symbol_positioning, new E.main_closure14(), C.Symbol_practices, new E.main_closure15(), C.Symbol_raisedButton, new E.main_closure16(), C.Symbol_speedAverage, new E.main_closure17(), C.Symbol_speedAvg, new E.main_closure18(), C.Symbol_src, new E.main_closure19(), C.Symbol_start, new E.main_closure20(), C.Symbol_state, new E.main_closure21(), C.Symbol_stop, new E.main_closure22(), C.Symbol_stopWatchStateChanged, new E.main_closure23(), C.Symbol_stopwatchElement, new E.main_closure24(), C.Symbol_totalDistance, new E.main_closure25(), C.Symbol_trackingElement, new E.main_closure26(), C.Symbol_upAction, new E.main_closure27(), C.Symbol_values, new E.main_closure28(), C.Symbol_z, new E.main_closure29()], null, null);
+    t2 = P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_counter, new E.main_closure30(), C.Symbol_gpsStatus, new E.main_closure31(), C.Symbol_historyElement, new E.main_closure32(), C.Symbol_icon, new E.main_closure33(), C.Symbol_iconSrc, new E.main_closure34(), C.Symbol_message, new E.main_closure35(), C.Symbol_positioning, new E.main_closure36(), C.Symbol_speedAverage, new E.main_closure37(), C.Symbol_src, new E.main_closure38(), C.Symbol_state, new E.main_closure39(), C.Symbol_stopwatchElement, new E.main_closure40(), C.Symbol_trackingElement, new E.main_closure41(), C.Symbol_z, new E.main_closure42()], null, null);
     t3 = P.LinkedHashMap_LinkedHashMap$_literal([C.Type_eKh, C.Type_I2I, C.Type_ewF, C.Type_GNh, C.Type_ufO, C.Type_oyU, C.Type_TOw, C.Type_GNh, C.Type_ALf, C.Type_GNh, C.Type_GNh, C.Type_I2I, C.Type_oyU, C.Type_EOZ], null, null);
-    t2 = O.StaticConfiguration$(false, P.LinkedHashMap_LinkedHashMap$_literal([C.Type_eKh, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_practices, C.Declaration_oou], null, null), C.Type_ewF, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_historyElement, C.Declaration_ahC, C.Symbol_message, C.Declaration_8FR, C.Symbol_stopWatchStateChanged, C.Declaration_wAg, C.Symbol_stopwatchElement, C.Declaration_0bC, C.Symbol_trackingElement, C.Declaration_Wti], null, null), C.Type_ufO, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_positioning, C.Declaration_8aB], null, null), C.Type_TOw, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_counter, C.Declaration_8aB0, C.Symbol_state, C.Declaration_UAS], null, null), C.Type_ALf, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_gpsStatus, C.Declaration_RMJ, C.Symbol_speedAverage, C.Declaration_fTJ], null, null)], null, null), t1, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_counter, "counter", C.Symbol_delete, "delete", C.Symbol_gpsStatus, "gpsStatus", C.Symbol_historyElement, "historyElement", C.Symbol_icon, "icon", C.Symbol_key, "key", C.Symbol_message, "message", C.Symbol_onDelete, "onDelete", C.Symbol_pause, "pause", C.Symbol_positioning, "positioning", C.Symbol_practices, "practices", C.Symbol_speedAverage, "speedAverage", C.Symbol_src, "src", C.Symbol_start, "start", C.Symbol_state, "state", C.Symbol_stop, "stop", C.Symbol_stopWatchStateChanged, "stopWatchStateChanged", C.Symbol_stopwatchElement, "stopwatchElement", C.Symbol_trackingElement, "trackingElement", C.Symbol_values, "values"], null, null), t3, t2, null);
+    t2 = O.StaticConfiguration$(false, P.LinkedHashMap_LinkedHashMap$_literal([C.Type_eKh, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_practices, C.Declaration_oou], null, null), C.Type_ewF, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_historyElement, C.Declaration_ahC, C.Symbol_message, C.Declaration_8FR, C.Symbol_stopWatchStateChanged, C.Declaration_wAg, C.Symbol_stopwatchElement, C.Declaration_0bC, C.Symbol_trackingElement, C.Declaration_Wti], null, null), C.Type_ufO, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_positioning, C.Declaration_8aB], null, null), C.Type_TOw, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_counter, C.Declaration_8aB0, C.Symbol_state, C.Declaration_UAS], null, null), C.Type_ALf, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_gpsStatus, C.Declaration_RMJ, C.Symbol_speedAverage, C.Declaration_fTJ], null, null)], null, null), t1, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_blurAction, "blurAction", C.Symbol_contextMenuAction, "contextMenuAction", C.Symbol_counter, "counter", C.Symbol_delete, "delete", C.Symbol_downAction, "downAction", C.Symbol_duration, "duration", C.Symbol_focusAction, "focusAction", C.Symbol_gpsStatus, "gpsStatus", C.Symbol_historyElement, "historyElement", C.Symbol_icon, "icon", C.Symbol_iconSrc, "iconSrc", C.Symbol_label, "label", C.Symbol_message, "message", C.Symbol_onDelete, "onDelete", C.Symbol_pause, "pause", C.Symbol_positioning, "positioning", C.Symbol_practices, "practices", C.Symbol_raisedButton, "raisedButton", C.Symbol_speedAverage, "speedAverage", C.Symbol_speedAvg, "speedAvg", C.Symbol_src, "src", C.Symbol_start, "start", C.Symbol_state, "state", C.Symbol_stop, "stop", C.Symbol_stopWatchStateChanged, "stopWatchStateChanged", C.Symbol_stopwatchElement, "stopwatchElement", C.Symbol_totalDistance, "totalDistance", C.Symbol_trackingElement, "trackingElement", C.Symbol_upAction, "upAction", C.Symbol_values, "values", C.Symbol_z, "z"], null, null), t3, t2, null);
     $.objectAccessor = new O.GeneratedObjectAccessorService(t2);
     $.typeInspector = new O.GeneratedTypeInspectorService(t2);
     $.symbolConverter = new O.GeneratedSymbolConverterService(t2);
     new F.LogInjector(null, null).injectLogsFromUrl$1("index.html._buildLogs");
-    $.initializers = [S.upgradeCoreMeta$closure(), M.upgradeCoreIconset$closure(), L.upgradeCoreIcon$closure(), Q.upgradeCoreIconsetSvg$closure(), M.upgradeCoreIconButton$closure(), new E.main_closure30(), new E.main_closure31(), new E.main_closure32(), new E.main_closure33(), new E.main_closure34()];
+    $.initializers = [S.upgradeCoreMeta$closure(), M.upgradeCoreIconset$closure(), L.upgradeCoreIcon$closure(), D.upgradePaperFocusable$closure(), L.upgradePaperRipple$closure(), Z.upgradePaperShadow$closure(), L.upgradePaperButton$closure(), T.upgradePaperIconButton$closure(), X.upgradePaperFab$closure(), Q.upgradeCoreIconsetSvg$closure(), new E.main_closure43(), new E.main_closure44(), M.upgradeCoreIconButton$closure(), new E.main_closure45(), new E.main_closure46(), V.upgradeCoreToolbar$closure(), new E.main_closure47()];
     $.deployMode = true;
     A.initPolymer();
   }, "call$0", "main$closure", 0, 0, 14],
   main_closure: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$counter$x(o);
+      return o.get$blurAction();
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure0: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$$delete$x(o);
+      return o.get$contextMenuAction();
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure1: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$gpsStatus$x(o);
+      return J.get$counter$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure2: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$historyElement$x(o);
+      return J.get$$delete$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure3: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$icon$x(o);
+      return o.get$downAction();
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure4: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$key$x(o);
+      return J.get$duration$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure5: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$message$x(o);
+      return o.get$focusAction();
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure6: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$onDelete$x(o);
+      return J.get$gpsStatus$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure7: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$pause$x(o);
+      return J.get$historyElement$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure8: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$positioning$x(o);
+      return J.get$icon$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure9: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$practices$x(o);
+      return J.get$iconSrc$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure10: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$speedAverage$x(o);
+      return J.get$label$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure11: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$src$x(o);
+      return J.get$message$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure12: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$start$x(o);
+      return J.get$onDelete$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure13: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$state$x(o);
+      return J.get$pause$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure14: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$stop$x(o);
+      return J.get$positioning$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure15: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$stopWatchStateChanged$x(o);
+      return J.get$practices$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure16: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$stopwatchElement$x(o);
+      return J.get$raisedButton$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure17: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$trackingElement$x(o);
+      return J.get$speedAverage$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure18: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$values$x(o);
+      return o.get$speedAvg();
     }, "call$1", null, 2, 0, null, 67, "call"],
     $isFunction: true
   },
   main_closure19: {
+    "^": "Closure:59;",
+    call$1: [function(o) {
+      return J.get$src$x(o);
+    }, "call$1", null, 2, 0, null, 67, "call"],
+    $isFunction: true
+  },
+  main_closure20: {
+    "^": "Closure:59;",
+    call$1: [function(o) {
+      return J.get$start$x(o);
+    }, "call$1", null, 2, 0, null, 67, "call"],
+    $isFunction: true
+  },
+  main_closure21: {
+    "^": "Closure:59;",
+    call$1: [function(o) {
+      return J.get$state$x(o);
+    }, "call$1", null, 2, 0, null, 67, "call"],
+    $isFunction: true
+  },
+  main_closure22: {
+    "^": "Closure:59;",
+    call$1: [function(o) {
+      return J.get$stop$x(o);
+    }, "call$1", null, 2, 0, null, 67, "call"],
+    $isFunction: true
+  },
+  main_closure23: {
+    "^": "Closure:59;",
+    call$1: [function(o) {
+      return J.get$stopWatchStateChanged$x(o);
+    }, "call$1", null, 2, 0, null, 67, "call"],
+    $isFunction: true
+  },
+  main_closure24: {
+    "^": "Closure:59;",
+    call$1: [function(o) {
+      return J.get$stopwatchElement$x(o);
+    }, "call$1", null, 2, 0, null, 67, "call"],
+    $isFunction: true
+  },
+  main_closure25: {
+    "^": "Closure:59;",
+    call$1: [function(o) {
+      return o.get$totalDistance();
+    }, "call$1", null, 2, 0, null, 67, "call"],
+    $isFunction: true
+  },
+  main_closure26: {
+    "^": "Closure:59;",
+    call$1: [function(o) {
+      return J.get$trackingElement$x(o);
+    }, "call$1", null, 2, 0, null, 67, "call"],
+    $isFunction: true
+  },
+  main_closure27: {
+    "^": "Closure:59;",
+    call$1: [function(o) {
+      return o.get$upAction();
+    }, "call$1", null, 2, 0, null, 67, "call"],
+    $isFunction: true
+  },
+  main_closure28: {
+    "^": "Closure:59;",
+    call$1: [function(o) {
+      return J.get$values$x(o);
+    }, "call$1", null, 2, 0, null, 67, "call"],
+    $isFunction: true
+  },
+  main_closure29: {
+    "^": "Closure:59;",
+    call$1: [function(o) {
+      return J.get$z$x(o);
+    }, "call$1", null, 2, 0, null, 67, "call"],
+    $isFunction: true
+  },
+  main_closure30: {
     "^": "Closure:79;",
     call$2: [function(o, v) {
       J.set$counter$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 71, "call"],
     $isFunction: true
   },
-  main_closure20: {
+  main_closure31: {
     "^": "Closure:79;",
     call$2: [function(o, v) {
       J.set$gpsStatus$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 71, "call"],
     $isFunction: true
   },
-  main_closure21: {
+  main_closure32: {
     "^": "Closure:79;",
     call$2: [function(o, v) {
       J.set$historyElement$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 71, "call"],
     $isFunction: true
   },
-  main_closure22: {
+  main_closure33: {
     "^": "Closure:79;",
     call$2: [function(o, v) {
       J.set$icon$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 71, "call"],
     $isFunction: true
   },
-  main_closure23: {
+  main_closure34: {
+    "^": "Closure:79;",
+    call$2: [function(o, v) {
+      J.set$iconSrc$x(o, v);
+    }, "call$2", null, 4, 0, null, 67, 71, "call"],
+    $isFunction: true
+  },
+  main_closure35: {
     "^": "Closure:79;",
     call$2: [function(o, v) {
       J.set$message$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 71, "call"],
     $isFunction: true
   },
-  main_closure24: {
+  main_closure36: {
     "^": "Closure:79;",
     call$2: [function(o, v) {
       J.set$positioning$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 71, "call"],
     $isFunction: true
   },
-  main_closure25: {
+  main_closure37: {
     "^": "Closure:79;",
     call$2: [function(o, v) {
       J.set$speedAverage$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 71, "call"],
     $isFunction: true
   },
-  main_closure26: {
+  main_closure38: {
     "^": "Closure:79;",
     call$2: [function(o, v) {
       J.set$src$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 71, "call"],
     $isFunction: true
   },
-  main_closure27: {
+  main_closure39: {
     "^": "Closure:79;",
     call$2: [function(o, v) {
       J.set$state$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 71, "call"],
     $isFunction: true
   },
-  main_closure28: {
+  main_closure40: {
     "^": "Closure:79;",
     call$2: [function(o, v) {
       J.set$stopwatchElement$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 71, "call"],
     $isFunction: true
   },
-  main_closure29: {
+  main_closure41: {
     "^": "Closure:79;",
     call$2: [function(o, v) {
       J.set$trackingElement$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 71, "call"],
     $isFunction: true
   },
-  main_closure30: {
+  main_closure42: {
+    "^": "Closure:79;",
+    call$2: [function(o, v) {
+      J.set$z$x(o, v);
+    }, "call$2", null, 4, 0, null, 67, 71, "call"],
+    $isFunction: true
+  },
+  main_closure43: {
     "^": "Closure:15;",
     call$0: [function() {
       return A.Polymer_register("stopwatch-element", C.Type_TOw);
     }, "call$0", null, 0, 0, null, "call"],
     $isFunction: true
   },
-  main_closure31: {
+  main_closure44: {
     "^": "Closure:15;",
     call$0: [function() {
       return A.Polymer_register("tracking-element", C.Type_ALf);
     }, "call$0", null, 0, 0, null, "call"],
     $isFunction: true
   },
-  main_closure32: {
+  main_closure45: {
     "^": "Closure:15;",
     call$0: [function() {
       return A.Polymer_register("positioning-li-element", C.Type_ufO);
     }, "call$0", null, 0, 0, null, "call"],
     $isFunction: true
   },
-  main_closure33: {
+  main_closure46: {
     "^": "Closure:15;",
     call$0: [function() {
       return A.Polymer_register("history-element", C.Type_eKh);
     }, "call$0", null, 0, 0, null, "call"],
     $isFunction: true
   },
-  main_closure34: {
+  main_closure47: {
     "^": "Closure:15;",
     call$0: [function() {
       return A.Polymer_register("positioning-control", C.Type_ewF);
@@ -4816,6 +4907,9 @@ var $$ = Object.create(null);
   }, "call$0", "upgradeCoreMeta$closure", 0, 0, 15],
   CoreMeta: {
     "^": "HtmlElement_DomProxyMixin1;common$DomProxyMixin$_proxy",
+    get$label: function(receiver) {
+      return J.$index$asx(this.get$jsElement(receiver), "label");
+    },
     get$type: function(receiver) {
       return J.$index$asx(this.get$jsElement(receiver), "type");
     },
@@ -4826,6 +4920,23 @@ var $$ = Object.create(null);
       }}
   },
   HtmlElement_DomProxyMixin1: {
+    "^": "HtmlElement+DomProxyMixin;"
+  }
+}],
+["core_elements.core_toolbar", "package:core_elements/core_toolbar.dart", , V, {
+  "^": "",
+  upgradeCoreToolbar: [function() {
+    return N.registerDartType("core-toolbar", C.Type_752, null);
+  }, "call$0", "upgradeCoreToolbar$closure", 0, 0, 15],
+  CoreToolbar: {
+    "^": "HtmlElement_DomProxyMixin2;common$DomProxyMixin$_proxy",
+    static: {CoreToolbar$created: function(receiver) {
+        receiver.toString;
+        C.CoreToolbar_methods.Element$created$0(receiver);
+        return receiver;
+      }}
+  },
+  HtmlElement_DomProxyMixin2: {
     "^": "HtmlElement+DomProxyMixin;"
   }
 }],
@@ -5997,7 +6108,7 @@ var $$ = Object.create(null);
     else if (!J.getInterceptor(specification).$is_ZoneSpecification)
       throw H.wrapException(P.ArgumentError$("ZoneSpecifications must be instantiated with the provided constructor."));
     if (zoneValues == null)
-      valueMap = !!J.getInterceptor(zone).$is_Zone ? zone.get$_async$_map() : P.HashMap_HashMap(null, null, null, null, null);
+      valueMap = !!J.getInterceptor(zone).$is_Zone ? zone.get$_map() : P.HashMap_HashMap(null, null, null, null, null);
     else {
       valueMap = P.HashMap_HashMap(null, null, null, null, null);
       valueMap.addAll$1(0, zoneValues);
@@ -8075,7 +8186,7 @@ var $$ = Object.create(null);
     $is_Zone: true
   },
   _CustomZone: {
-    "^": "_Zone;_runUnary<,_run<,_runBinary<,_registerCallback<,_registerUnaryCallback<,_registerBinaryCallback<,_errorCallback<,_scheduleMicrotask<,_createTimer<,_createPeriodicTimer<,_print<,_fork<,_handleUncaughtError<,_delegateCache,parent>,_async$_map<",
+    "^": "_Zone;_runUnary<,_run<,_runBinary<,_registerCallback<,_registerUnaryCallback<,_registerBinaryCallback<,_errorCallback<,_scheduleMicrotask<,_createTimer<,_createPeriodicTimer<,_print<,_fork<,_handleUncaughtError<,_delegateCache,parent>,_map<",
     get$_delegate: function() {
       var t1 = this._delegateCache;
       if (t1 != null)
@@ -8155,7 +8266,7 @@ var $$ = Object.create(null);
     },
     $index: function(_, key) {
       var t1, result, t2, value;
-      t1 = this._async$_map;
+      t1 = this._map;
       result = t1.$index(0, key);
       if (result != null || t1.containsKey$1(0, key))
         return result;
@@ -8376,7 +8487,7 @@ var $$ = Object.create(null);
     get$parent: function(_) {
       return;
     },
-    get$_async$_map: function() {
+    get$_map: function() {
       return $.get$_RootZone__rootMap();
     },
     get$_delegate: function() {
@@ -9086,25 +9197,25 @@ var $$ = Object.create(null);
     $isFunction: true
   },
   HashMapKeyIterable: {
-    "^": "IterableBase;_map",
+    "^": "IterableBase;_collection$_map",
     get$length: function(_) {
-      return this._map._collection$_length;
+      return this._collection$_map._collection$_length;
     },
     get$isEmpty: function(_) {
-      return this._map._collection$_length === 0;
+      return this._collection$_map._collection$_length === 0;
     },
     get$iterator: function(_) {
-      var t1 = this._map;
+      var t1 = this._collection$_map;
       t1 = new P.HashMapKeyIterator(t1, t1._computeKeys$0(), 0, null);
       t1.$builtinTypeInfo = this.$builtinTypeInfo;
       return t1;
     },
     contains$1: function(_, element) {
-      return this._map.containsKey$1(0, element);
+      return this._collection$_map.containsKey$1(0, element);
     },
     forEach$1: function(_, f) {
       var t1, keys, $length, i;
-      t1 = this._map;
+      t1 = this._collection$_map;
       keys = t1._computeKeys$0();
       for ($length = keys.length, i = 0; i < $length; ++i) {
         f.call$1(keys[i]);
@@ -9115,7 +9226,7 @@ var $$ = Object.create(null);
     $isEfficientLength: true
   },
   HashMapKeyIterator: {
-    "^": "Object;_map,_keys,_offset,_collection$_current",
+    "^": "Object;_collection$_map,_keys,_offset,_collection$_current",
     get$current: function() {
       return this._collection$_current;
     },
@@ -9123,7 +9234,7 @@ var $$ = Object.create(null);
       var keys, offset, t1;
       keys = this._keys;
       offset = this._offset;
-      t1 = this._map;
+      t1 = this._collection$_map;
       if (keys !== t1._keys)
         throw H.wrapException(P.ConcurrentModificationError$(t1));
       else if (offset >= keys.length) {
@@ -9392,27 +9503,27 @@ var $$ = Object.create(null);
     "^": "Object;_key>,_value@,_next@,_previous@"
   },
   LinkedHashMapKeyIterable: {
-    "^": "IterableBase;_map",
+    "^": "IterableBase;_collection$_map",
     get$length: function(_) {
-      return this._map._collection$_length;
+      return this._collection$_map._collection$_length;
     },
     get$isEmpty: function(_) {
-      return this._map._collection$_length === 0;
+      return this._collection$_map._collection$_length === 0;
     },
     get$iterator: function(_) {
       var t1, t2;
-      t1 = this._map;
+      t1 = this._collection$_map;
       t2 = new P.LinkedHashMapKeyIterator(t1, t1._modifications, null, null);
       t2.$builtinTypeInfo = this.$builtinTypeInfo;
       t2._cell = t1._first;
       return t2;
     },
     contains$1: function(_, element) {
-      return this._map.containsKey$1(0, element);
+      return this._collection$_map.containsKey$1(0, element);
     },
     forEach$1: function(_, f) {
       var t1, cell, modifications;
-      t1 = this._map;
+      t1 = this._collection$_map;
       cell = t1._first;
       modifications = t1._modifications;
       for (; cell != null;) {
@@ -9425,12 +9536,12 @@ var $$ = Object.create(null);
     $isEfficientLength: true
   },
   LinkedHashMapKeyIterator: {
-    "^": "Object;_map,_modifications,_cell,_collection$_current",
+    "^": "Object;_collection$_map,_modifications,_cell,_collection$_current",
     get$current: function() {
       return this._collection$_current;
     },
     moveNext$0: function() {
-      var t1 = this._map;
+      var t1 = this._collection$_map;
       if (this._modifications !== t1._modifications)
         throw H.wrapException(P.ConcurrentModificationError$(t1));
       else {
@@ -9958,6 +10069,12 @@ var $$ = Object.create(null);
       for (t1 = this.get$iterator(this); t1.moveNext$0();)
         f.call$1(t1.get$current());
     },
+    fold$2: function(_, initialValue, combine) {
+      var t1, value;
+      for (t1 = this.get$iterator(this), value = initialValue; t1.moveNext$0();)
+        value = combine.call$2(value, t1.get$current());
+      return value;
+    },
     join$1: function(_, separator) {
       var iterator, buffer, t1;
       iterator = this.get$iterator(this);
@@ -10298,37 +10415,37 @@ var $$ = Object.create(null);
     $asMap: null
   },
   _MapBaseValueIterable: {
-    "^": "IterableBase;_map",
+    "^": "IterableBase;_collection$_map",
     get$length: function(_) {
-      var t1 = this._map;
+      var t1 = this._collection$_map;
       t1 = t1.get$keys(t1);
       return t1.get$length(t1);
     },
     get$isEmpty: function(_) {
-      var t1 = this._map;
+      var t1 = this._collection$_map;
       t1 = t1.get$keys(t1);
       return t1.get$isEmpty(t1);
     },
     get$isNotEmpty: function(_) {
-      var t1 = this._map;
+      var t1 = this._collection$_map;
       t1 = t1.get$keys(t1);
       return t1.get$isNotEmpty(t1);
     },
     get$first: function(_) {
       var t1, t2;
-      t1 = this._map;
+      t1 = this._collection$_map;
       t2 = t1.get$keys(t1);
       return t1.$index(0, t2.get$first(t2));
     },
     get$last: function(_) {
       var t1, t2;
-      t1 = this._map;
+      t1 = this._collection$_map;
       t2 = t1.get$keys(t1);
       return t1.$index(0, t2.get$last(t2));
     },
     get$iterator: function(_) {
       var t1, t2;
-      t1 = this._map;
+      t1 = this._collection$_map;
       t2 = t1.get$keys(t1);
       t1 = new P._MapBaseValueIterator(t2.get$iterator(t2), t1, null);
       t1.$builtinTypeInfo = this.$builtinTypeInfo;
@@ -10337,11 +10454,11 @@ var $$ = Object.create(null);
     $isEfficientLength: true
   },
   _MapBaseValueIterator: {
-    "^": "Object;_keys,_map,_collection$_current",
+    "^": "Object;_keys,_collection$_map,_collection$_current",
     moveNext$0: function() {
       var t1 = this._keys;
       if (t1.moveNext$0()) {
-        this._collection$_current = this._map.$index(0, t1.get$current());
+        this._collection$_current = this._collection$_map.$index(0, t1.get$current());
         return true;
       }
       this._collection$_current = null;
@@ -10365,42 +10482,42 @@ var $$ = Object.create(null);
   MapView: {
     "^": "Object;",
     $index: function(_, key) {
-      return this._map.$index(0, key);
+      return this._collection$_map.$index(0, key);
     },
     $indexSet: function(_, key, value) {
-      this._map.$indexSet(0, key, value);
+      this._collection$_map.$indexSet(0, key, value);
     },
     forEach$1: function(_, action) {
-      this._map.forEach$1(0, action);
+      this._collection$_map.forEach$1(0, action);
     },
     get$isEmpty: function(_) {
-      return this._map._collection$_length === 0;
+      return this._collection$_map._collection$_length === 0;
     },
     get$isNotEmpty: function(_) {
-      return this._map._collection$_length !== 0;
+      return this._collection$_map._collection$_length !== 0;
     },
     get$length: function(_) {
-      return this._map._collection$_length;
+      return this._collection$_map._collection$_length;
     },
     get$keys: function(_) {
-      var t1 = this._map;
+      var t1 = this._collection$_map;
       return H.setRuntimeTypeInfo(new P.LinkedHashMapKeyIterable(t1), [H.getTypeArgumentByIndex(t1, 0)]);
     },
     remove$1: function(_, key) {
-      return this._map.remove$1(0, key);
+      return this._collection$_map.remove$1(0, key);
     },
     toString$0: function(_) {
-      return P.Maps_mapToString(this._map);
+      return P.Maps_mapToString(this._collection$_map);
     },
     get$values: function(_) {
-      var t1 = this._map;
+      var t1 = this._collection$_map;
       return t1.get$values(t1);
     },
     $isMap: true,
     $asMap: null
   },
   UnmodifiableMapView: {
-    "^": "MapView+_UnmodifiableMapMixin;_map",
+    "^": "MapView+_UnmodifiableMapMixin;_collection$_map",
     $isMap: true,
     $asMap: null
   },
@@ -11048,16 +11165,16 @@ var $$ = Object.create(null);
     $isEfficientLength: true
   },
   _SplayTreeValueIterable: {
-    "^": "IterableBase;_map",
+    "^": "IterableBase;_collection$_map",
     get$length: function(_) {
-      return this._map._count;
+      return this._collection$_map._count;
     },
     get$isEmpty: function(_) {
-      return this._map._count === 0;
+      return this._collection$_map._count === 0;
     },
     get$iterator: function(_) {
       var t1, t2;
-      t1 = this._map;
+      t1 = this._collection$_map;
       t2 = new P._SplayTreeValueIterator(t1, H.setRuntimeTypeInfo([], [P._SplayTreeNode]), t1._modificationCount, t1._splayCount, null);
       t2.$builtinTypeInfo = this.$builtinTypeInfo;
       t2._SplayTreeIterator$1(t1, H.getTypeArgumentByIndex(this, 1));
@@ -13738,7 +13855,7 @@ var $$ = Object.create(null);
   },
   HtmlElement: {
     "^": "Element;",
-    "%": "HTMLAppletElement|HTMLBRElement|HTMLCanvasElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDirectoryElement|HTMLDivElement|HTMLFontElement|HTMLFrameElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLLabelElement|HTMLLegendElement|HTMLMarqueeElement|HTMLMenuElement|HTMLModElement|HTMLOptGroupElement|HTMLParagraphElement|HTMLPictureElement|HTMLPreElement|HTMLQuoteElement|HTMLShadowElement|HTMLSpanElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableDataCellElement|HTMLTableElement|HTMLTableHeaderCellElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTitleElement|HTMLUListElement|HTMLUnknownElement;HTMLElement;HtmlElement_DomProxyMixin|CoreIcon|HtmlElement_DomProxyMixin0|CoreIconButton|HtmlElement_DomProxyMixin1|CoreMeta|CoreIconset|CoreIconsetSvg|HtmlElement_Polymer|HtmlElement_Polymer_ChangeNotifier|PolymerElement|HistoryElement|PolymerElement_ChangeNotifier|PositioningControl|PolymerElement_ChangeNotifier0|TrackingElement|PolymerElement_ChangeNotifier1|StopwatchElement"
+    "%": "HTMLAppletElement|HTMLBRElement|HTMLCanvasElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDirectoryElement|HTMLDivElement|HTMLFontElement|HTMLFrameElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLLabelElement|HTMLLegendElement|HTMLMarqueeElement|HTMLMenuElement|HTMLModElement|HTMLParagraphElement|HTMLPictureElement|HTMLPreElement|HTMLQuoteElement|HTMLShadowElement|HTMLSpanElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableDataCellElement|HTMLTableElement|HTMLTableHeaderCellElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTitleElement|HTMLUListElement|HTMLUnknownElement;HTMLElement;HtmlElement_DomProxyMixin|CoreIcon|HtmlElement_DomProxyMixin0|CoreIconButton|HtmlElement_DomProxyMixin1|CoreMeta|CoreIconset|CoreIconsetSvg|HtmlElement_DomProxyMixin2|CoreToolbar|HtmlElement_Polymer|HtmlElement_Polymer_ChangeNotifier|PolymerElement|HistoryElement|HtmlElement_DomProxyMixin3|PaperFocusable|PaperButton|PaperIconButton|PaperFab|HtmlElement_DomProxyMixin4|PaperRipple|HtmlElement_DomProxyMixin5|PaperShadow|PolymerElement_ChangeNotifier|PositioningControl|PolymerElement_ChangeNotifier0|TrackingElement|PolymerElement_ChangeNotifier1|StopwatchElement"
   },
   _EntryArray: {
     "^": "Interceptor;",
@@ -14269,7 +14386,7 @@ var $$ = Object.create(null);
     "%": "HTMLMapElement"
   },
   MediaElement: {
-    "^": "HtmlElement;error=,src%",
+    "^": "HtmlElement;duration=,error=,src%",
     pause$0: [function(receiver) {
       return receiver.pause();
     }, "call$0", "get$pause", 0, 0, 14],
@@ -14284,7 +14401,7 @@ var $$ = Object.create(null);
     "%": "MediaKeyMessageEvent"
   },
   MediaStream: {
-    "^": "EventTarget;id=",
+    "^": "EventTarget;id=,label=",
     stop$0: [function(receiver) {
       return receiver.stop();
     }, "call$0", "get$stop", 0, 0, 14],
@@ -14435,8 +14552,12 @@ var $$ = Object.create(null);
     "^": "HtmlElement;name=,type=",
     "%": "HTMLObjectElement"
   },
+  OptGroupElement: {
+    "^": "HtmlElement;label=",
+    "%": "HTMLOptGroupElement"
+  },
   OptionElement: {
-    "^": "HtmlElement;index=,value%",
+    "^": "HtmlElement;index=,label=,value%",
     "%": "HTMLOptionElement"
   },
   OutputElement: {
@@ -14575,7 +14696,7 @@ var $$ = Object.create(null);
     "%": "HTMLTextAreaElement"
   },
   TrackElement: {
-    "^": "HtmlElement;kind=,src%",
+    "^": "HtmlElement;kind=,label=,src%",
     "%": "HTMLTrackElement"
   },
   UIEvent: {
@@ -15812,7 +15933,7 @@ var $$ = Object.create(null);
     "%": "SVGFEOffsetElement"
   },
   FEPointLightElement: {
-    "^": "SvgElement;x=,y=",
+    "^": "SvgElement;x=,y=,z=",
     "%": "SVGFEPointLightElement"
   },
   FESpecularLightingElement: {
@@ -15820,7 +15941,7 @@ var $$ = Object.create(null);
     "%": "SVGFESpecularLightingElement"
   },
   FESpotLightElement: {
-    "^": "SvgElement;x=,y=",
+    "^": "SvgElement;x=,y=,z=",
     "%": "SVGFESpotLightElement"
   },
   FETileElement: {
@@ -16819,14 +16940,21 @@ var $$ = Object.create(null);
       P.print(H.S(J.get$length$asx(receiver.practices)) + " Practices read");
     },
     add$2: function(receiver, pos, persist) {
-      var t1;
-      if (pos == null || J.get$isEmpty$asx(pos) === true)
+      var t1, line;
+      if (pos == null || J.get$isEmpty$asx(pos) === true || pos.get$positions()._collection$_length <= 1)
         return false;
       else {
         t1 = J.getInterceptor$x(pos);
         J.$indexSet$ax(receiver.practices, t1.get$key(pos), pos);
-        if (persist)
+        if (persist) {
           receiver.localStorage.setItem(t1.get$key(pos), pos.serialize$0());
+          line = "saved " + H.S(t1.get$key(pos)) + " with " + pos.get$positions()._collection$_length + " positions";
+          t1 = $.printToZone;
+          if (t1 == null)
+            H.printString(line);
+          else
+            t1.call$1(line);
+        }
         return true;
       }
     },
@@ -19366,6 +19494,129 @@ var $$ = Object.create(null);
     $isFunction: true
   }
 }],
+["paper_elements.paper_button", "package:paper_elements/paper_button.dart", , L, {
+  "^": "",
+  upgradePaperButton: [function() {
+    return N.registerDartType("paper-button", C.Type_MIo, null);
+  }, "call$0", "upgradePaperButton$closure", 0, 0, 15],
+  PaperButton: {
+    "^": "PaperFocusable;common$DomProxyMixin$_proxy",
+    get$label: function(receiver) {
+      return J.$index$asx(this.get$jsElement(receiver), "label");
+    },
+    get$raisedButton: function(receiver) {
+      return J.$index$asx(this.get$jsElement(receiver), "raisedButton");
+    },
+    get$iconSrc: function(receiver) {
+      return J.$index$asx(this.get$jsElement(receiver), "iconSrc");
+    },
+    set$iconSrc: function(receiver, value) {
+      J.$indexSet$ax(this.get$jsElement(receiver), "iconSrc", value);
+    },
+    get$icon: function(receiver) {
+      return J.$index$asx(this.get$jsElement(receiver), "icon");
+    },
+    set$icon: function(receiver, value) {
+      J.$indexSet$ax(this.get$jsElement(receiver), "icon", value);
+    },
+    static: {PaperButton$created: function(receiver) {
+        receiver.toString;
+        C.PaperButton_methods.Element$created$0(receiver);
+        return receiver;
+      }}
+  }
+}],
+["paper_elements.paper_fab", "package:paper_elements/paper_fab.dart", , X, {
+  "^": "",
+  upgradePaperFab: [function() {
+    return N.registerDartType("paper-fab", C.Type_CF2, null);
+  }, "call$0", "upgradePaperFab$closure", 0, 0, 15],
+  PaperFab: {
+    "^": "PaperIconButton;common$DomProxyMixin$_proxy",
+    get$raisedButton: function(receiver) {
+      return J.$index$asx(this.get$jsElement(receiver), "raisedButton");
+    },
+    static: {PaperFab$created: function(receiver) {
+        receiver.toString;
+        C.PaperFab_methods.Element$created$0(receiver);
+        return receiver;
+      }}
+  }
+}],
+["paper_elements.paper_focusable", "package:paper_elements/paper_focusable.dart", , D, {
+  "^": "",
+  upgradePaperFocusable: [function() {
+    return N.registerDartType("paper-focusable", C.Type_2KD, null);
+  }, "call$0", "upgradePaperFocusable$closure", 0, 0, 15],
+  PaperFocusable: {
+    "^": "HtmlElement_DomProxyMixin3;common$DomProxyMixin$_proxy",
+    static: {PaperFocusable$created: function(receiver) {
+        receiver.toString;
+        C.PaperFocusable_methods.Element$created$0(receiver);
+        return receiver;
+      }}
+  },
+  HtmlElement_DomProxyMixin3: {
+    "^": "HtmlElement+DomProxyMixin;"
+  }
+}],
+["paper_elements.paper_icon_button", "package:paper_elements/paper_icon_button.dart", , T, {
+  "^": "",
+  upgradePaperIconButton: [function() {
+    return N.registerDartType("paper-icon-button", C.Type_Ot8, null);
+  }, "call$0", "upgradePaperIconButton$closure", 0, 0, 15],
+  PaperIconButton: {
+    "^": "PaperButton;common$DomProxyMixin$_proxy",
+    static: {PaperIconButton$created: function(receiver) {
+        receiver.toString;
+        C.PaperIconButton_methods.Element$created$0(receiver);
+        return receiver;
+      }}
+  }
+}],
+["paper_elements.paper_ripple", "package:paper_elements/paper_ripple.dart", , L, {
+  "^": "",
+  upgradePaperRipple: [function() {
+    return N.registerDartType("paper-ripple", C.Type_SaW, null);
+  }, "call$0", "upgradePaperRipple$closure", 0, 0, 15],
+  PaperRipple: {
+    "^": "HtmlElement_DomProxyMixin4;common$DomProxyMixin$_proxy",
+    static: {PaperRipple$created: function(receiver) {
+        receiver.toString;
+        C.PaperRipple_methods.Element$created$0(receiver);
+        return receiver;
+      }}
+  },
+  HtmlElement_DomProxyMixin4: {
+    "^": "HtmlElement+DomProxyMixin;"
+  }
+}],
+["paper_elements.paper_shadow", "package:paper_elements/paper_shadow.dart", , Z, {
+  "^": "",
+  upgradePaperShadow: [function() {
+    return N.registerDartType("paper-shadow", C.Type_IsU, null);
+  }, "call$0", "upgradePaperShadow$closure", 0, 0, 15],
+  PaperShadow: {
+    "^": "HtmlElement_DomProxyMixin5;common$DomProxyMixin$_proxy",
+    get$target: function(receiver) {
+      return J.$index$asx(this.get$jsElement(receiver), "target");
+    },
+    get$z: function(receiver) {
+      return J.$index$asx(this.get$jsElement(receiver), "z");
+    },
+    set$z: function(receiver, value) {
+      J.$indexSet$ax(this.get$jsElement(receiver), "z", value);
+    },
+    static: {PaperShadow$created: function(receiver) {
+        receiver.toString;
+        C.PaperShadow_methods.Element$created$0(receiver);
+        return receiver;
+      }}
+  },
+  HtmlElement_DomProxyMixin5: {
+    "^": "HtmlElement+DomProxyMixin;"
+  }
+}],
 ["path", "package:path/path.dart", , B, {
   "^": "",
   current: function() {
@@ -20105,7 +20356,7 @@ var $$ = Object.create(null);
     poly.setAttribute("name", "auto-binding-dart");
     poly.setAttribute("extends", "template");
     J.$index$asx($.get$_polymerElementProto(), "init").apply$2$thisArg([], poly);
-    for (t1 = H.setRuntimeTypeInfo(new H.ListIterator(initializers, 10, 0, null), [H.getTypeArgumentByIndex(initializers, 0)]); t1.moveNext$0();)
+    for (t1 = H.setRuntimeTypeInfo(new H.ListIterator(initializers, 17, 0, null), [H.getTypeArgumentByIndex(initializers, 0)]); t1.moveNext$0();)
       t1.__internal$_current.call$0();
     A._watchWaitingFor();
   },
@@ -20875,7 +21126,7 @@ var $$ = Object.create(null);
         o._path_observer$_value = [];
         receiver.polymer$Polymer$_propertyObserver = o;
         receiver.polymer$Polymer$_observers.push(o);
-        for (t1 = H.setRuntimeTypeInfo(new P.HashMapKeyIterable(observe), [H.getTypeArgumentByIndex(observe, 0)]), t2 = t1._map, t1 = H.setRuntimeTypeInfo(new P.HashMapKeyIterator(t2, t2._computeKeys$0(), 0, null), [H.getTypeArgumentByIndex(t1, 0)]); t1.moveNext$0();) {
+        for (t1 = H.setRuntimeTypeInfo(new P.HashMapKeyIterable(observe), [H.getTypeArgumentByIndex(observe, 0)]), t2 = t1._collection$_map, t1 = H.setRuntimeTypeInfo(new P.HashMapKeyIterator(t2, t2._computeKeys$0(), 0, null), [H.getTypeArgumentByIndex(t1, 0)]); t1.moveNext$0();) {
           path = t1._collection$_current;
           o.addPath$2(receiver, path);
           this.observeArrayValue$3(receiver, path, path.getValueFrom$1(receiver), null);
@@ -24336,10 +24587,13 @@ var $$ = Object.create(null);
     toString$0: function(_) {
       return "(" + H.S(this.lat) + ", " + H.S(this.$long) + ") at " + P.DateTime$fromMillisecondsSinceEpoch(this.timestamp, false).toString$0(0);
     },
+    isSamePlace$1: function(p) {
+      return J.$eq(this.$long, p.get$$long()) && J.$eq(this.lat, p.get$lat());
+    },
     $isPosition: true
   },
   Positioning: {
-    "^": "Object;positions,distances,totalDistance",
+    "^": "Object;positions<,distances",
     _deserializePosition$1: function(s) {
       var e, t1, t2, t3, t4, exception;
       try {
@@ -24379,43 +24633,44 @@ var $$ = Object.create(null);
       return t1.charCodeAt(0) == 0 ? t1 : t1;
     },
     add$1: function(_, pos) {
-      var t1, t2, t3, t4, t5, latDiff, lonDiff, a, distance;
+      var t1, t2, lastKeyToRemove, t3, t4, t5, latDiff, lonDiff, a;
       t1 = this.positions;
-      if (t1._collection$_length !== 0) {
-        t2 = t1.get$values(t1);
-        t2 = !J.$eq(t2._f$1(J.get$last$ax(t2._iterable)), pos);
-      } else
-        t2 = true;
-      if (t2) {
-        if (t1._collection$_length !== 0) {
-          t2 = t1.get$values(t1);
-          t2 = t2._f$1(J.get$last$ax(t2._iterable)).get$lat();
-          t3 = t1.get$values(t1);
-          t3 = t3._f$1(J.get$last$ax(t3._iterable)).get$$long();
-          t4 = pos.get$lat();
-          t5 = pos.get$$long();
-          latDiff = J.$sub$n(t4, t2);
-          lonDiff = J.$sub$n(t5, t3);
-          t3 = Math.sin(H.checkNum(J.$div$n(latDiff, 2)));
-          H.checkNum(t3);
-          H.checkNum(2);
-          t3 = Math.pow(t3, 2);
-          t2 = Math.cos(H.checkNum(t2));
-          t4 = Math.cos(H.checkNum(t4));
-          t5 = Math.sin(H.checkNum(J.$div$n(lonDiff, 2)));
-          H.checkNum(t5);
-          H.checkNum(2);
-          a = t3 + t2 * t4 * Math.pow(t5, 2);
-          t5 = Math.sqrt(H.checkNum(a));
-          t4 = Math.sqrt(H.checkNum(1 - a));
-          distance = 6371 * (2 * Math.atan2(H.checkNum(t5), H.checkNum(t4)));
-          this.distances.$indexSet(0, J.get$timestamp$x(pos), distance);
-          this.totalDistance += distance;
-        }
+      if (t1._collection$_length === 0)
         t1.$indexSet(0, J.get$timestamp$x(pos), pos);
-        return true;
-      } else
-        return false;
+      else {
+        t2 = t1.get$values(t1);
+        if (t2._f$1(J.get$last$ax(t2._iterable)).isSamePlace$1(pos)) {
+          t2 = H.setRuntimeTypeInfo(new P.LinkedHashMapKeyIterable(t1), [H.getTypeArgumentByIndex(t1, 0)]);
+          lastKeyToRemove = t2.get$last(t2);
+          t1.remove$1(0, lastKeyToRemove);
+          this.distances.remove$1(0, lastKeyToRemove);
+        }
+        t2 = J.getInterceptor$x(pos);
+        t1.$indexSet(0, t2.get$timestamp(pos), pos);
+        t3 = t1.get$values(t1);
+        t3 = t3._f$1(J.get$last$ax(t3._iterable)).get$lat();
+        t1 = t1.get$values(t1);
+        t1 = t1._f$1(J.get$last$ax(t1._iterable)).get$$long();
+        t4 = pos.get$lat();
+        t5 = pos.get$$long();
+        latDiff = J.$sub$n(t4, t3);
+        lonDiff = J.$sub$n(t5, t1);
+        t1 = Math.sin(H.checkNum(J.$div$n(latDiff, 2)));
+        H.checkNum(t1);
+        H.checkNum(2);
+        t1 = Math.pow(t1, 2);
+        t3 = Math.cos(H.checkNum(t3));
+        t4 = Math.cos(H.checkNum(t4));
+        t5 = Math.sin(H.checkNum(J.$div$n(lonDiff, 2)));
+        H.checkNum(t5);
+        H.checkNum(2);
+        a = t1 + t3 * t4 * Math.pow(t5, 2);
+        t5 = Math.sqrt(H.checkNum(a));
+        t4 = Math.sqrt(H.checkNum(1 - a));
+        t4 = Math.atan2(H.checkNum(t5), H.checkNum(t4));
+        this.distances.$indexSet(0, t2.get$timestamp(pos), 6371 * (2 * t4));
+      }
+      return true;
     },
     get$last: function(_) {
       var t1 = this.positions;
@@ -24435,18 +24690,30 @@ var $$ = Object.create(null);
     get$isEmpty: function(_) {
       return this.positions._collection$_length === 0;
     },
+    get$totalDistance: function() {
+      var t1 = this.distances;
+      return t1.get$values(t1).fold$2(0, 0, new T.Positioning_totalDistance_closure());
+    },
     get$speedAvg: function() {
-      var t1 = this.positions._collection$_length;
-      if (t1 === 0)
+      var t1 = this.positions;
+      if (t1._collection$_length === 0)
         return 0;
       else
-        return this.totalDistance / t1;
+        return J.$div$n(this.get$totalDistance(), t1._collection$_length);
+    },
+    get$duration: function(_) {
+      var t1, t2;
+      t1 = this.positions;
+      t2 = t1.get$values(t1);
+      t2 = J.get$timestamp$x(t2._f$1(J.get$last$ax(t2._iterable)));
+      t1 = t1.get$values(t1);
+      return H.S(J.$div$n(J.$sub$n(t2, J.get$timestamp$x(t1._f$1(J.get$first$ax(t1._iterable)))), 1000));
     },
     Positioning$deserialize$1: function(str) {
       C.JSArray_methods.forEach$1(J.split$1$s(str, "\n"), new T.Positioning$deserialize_closure(this));
     },
     static: {Positioning$deserialize: function(str) {
-        var t1 = new T.Positioning(P.LinkedHashMap_LinkedHashMap(null, null, null, P.$int, T.Position), P.LinkedHashMap_LinkedHashMap(null, null, null, P.$int, P.num), 0);
+        var t1 = new T.Positioning(P.LinkedHashMap_LinkedHashMap(null, null, null, P.$int, T.Position), P.LinkedHashMap_LinkedHashMap(null, null, null, P.$int, P.num));
         t1.Positioning$deserialize$1(str);
         return t1;
       }}
@@ -24465,6 +24732,13 @@ var $$ = Object.create(null);
       t1.write$1(v.serialize$0());
       t1.write$1("\n");
       return;
+    },
+    $isFunction: true
+  },
+  Positioning_totalDistance_closure: {
+    "^": "Closure:79;",
+    call$2: function(prev, element) {
+      return J.$add$ns(prev, element);
     },
     $isFunction: true
   }
@@ -26347,7 +26621,7 @@ var $$ = Object.create(null);
         t6 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
         receiver._tracking$__$gpsStatus = "?";
         receiver._tracking$__$speedAverage = "?";
-        receiver.positioning = new T.Positioning(t1, t2, 0);
+        receiver.positioning = new T.Positioning(t1, t2);
         receiver.polymer$Polymer$_observers = [];
         receiver.polymer$Polymer$_readied = false;
         receiver.polymer$Polymer$_hasBeenAttached = false;
@@ -27167,6 +27441,9 @@ J.get$content$x = function(receiver) {
 J.get$counter$x = function(receiver) {
   return J.getInterceptor$x(receiver).get$counter(receiver);
 };
+J.get$duration$x = function(receiver) {
+  return J.getInterceptor$x(receiver).get$duration(receiver);
+};
 J.get$element$x = function(receiver) {
   return J.getInterceptor$x(receiver).get$element(receiver);
 };
@@ -27191,6 +27468,9 @@ J.get$historyElement$x = function(receiver) {
 J.get$icon$x = function(receiver) {
   return J.getInterceptor$x(receiver).get$icon(receiver);
 };
+J.get$iconSrc$x = function(receiver) {
+  return J.getInterceptor$x(receiver).get$iconSrc(receiver);
+};
 J.get$id$x = function(receiver) {
   return J.getInterceptor$x(receiver).get$id(receiver);
 };
@@ -27214,6 +27494,9 @@ J.get$keys$x = function(receiver) {
 };
 J.get$kind$x = function(receiver) {
   return J.getInterceptor$x(receiver).get$kind(receiver);
+};
+J.get$label$x = function(receiver) {
+  return J.getInterceptor$x(receiver).get$label(receiver);
 };
 J.get$last$ax = function(receiver) {
   return J.getInterceptor$ax(receiver).get$last(receiver);
@@ -27268,6 +27551,9 @@ J.get$positioning$x = function(receiver) {
 };
 J.get$practices$x = function(receiver) {
   return J.getInterceptor$x(receiver).get$practices(receiver);
+};
+J.get$raisedButton$x = function(receiver) {
+  return J.getInterceptor$x(receiver).get$raisedButton(receiver);
 };
 J.get$responseText$x = function(receiver) {
   return J.getInterceptor$x(receiver).get$responseText(receiver);
@@ -27328,6 +27614,9 @@ J.get$value$x = function(receiver) {
 };
 J.get$values$x = function(receiver) {
   return J.getInterceptor$x(receiver).get$values(receiver);
+};
+J.get$z$x = function(receiver) {
+  return J.getInterceptor$x(receiver).get$z(receiver);
 };
 J.getBoundingClientRect$0$x = function(receiver) {
   return J.getInterceptor$x(receiver).getBoundingClientRect$0(receiver);
@@ -27422,6 +27711,9 @@ J.set$href$x = function(receiver, value) {
 J.set$icon$x = function(receiver, value) {
   return J.getInterceptor$x(receiver).set$icon(receiver, value);
 };
+J.set$iconSrc$x = function(receiver, value) {
+  return J.getInterceptor$x(receiver).set$iconSrc(receiver, value);
+};
 J.set$length$asx = function(receiver, value) {
   return J.getInterceptor$asx(receiver).set$length(receiver, value);
 };
@@ -27448,6 +27740,9 @@ J.set$trackingElement$x = function(receiver, value) {
 };
 J.set$value$x = function(receiver, value) {
   return J.getInterceptor$x(receiver).set$value(receiver, value);
+};
+J.set$z$x = function(receiver, value) {
+  return J.getInterceptor$x(receiver).set$z(receiver, value);
 };
 J.split$1$s = function(receiver, a0) {
   return J.getInterceptor$s(receiver).split$1(receiver, a0);
@@ -27494,6 +27789,7 @@ C.CoreIcon_methods = L.CoreIcon.prototype;
 C.CoreIconsetSvg_methods = Q.CoreIconsetSvg.prototype;
 C.CoreIconset_methods = M.CoreIconset.prototype;
 C.CoreMeta_methods = S.CoreMeta.prototype;
+C.CoreToolbar_methods = V.CoreToolbar.prototype;
 C.CustomEvent_methods = W.CustomEvent.prototype;
 C.Geolocation_methods = W.Geolocation.prototype;
 C.HistoryElement_methods = S.HistoryElement.prototype;
@@ -27505,6 +27801,12 @@ C.JSNull_methods = J.JSNull.prototype;
 C.JSNumber_methods = J.JSNumber.prototype;
 C.JSString_methods = J.JSString.prototype;
 C.NodeList_methods = W.NodeList.prototype;
+C.PaperButton_methods = L.PaperButton.prototype;
+C.PaperFab_methods = X.PaperFab.prototype;
+C.PaperFocusable_methods = D.PaperFocusable.prototype;
+C.PaperIconButton_methods = T.PaperIconButton.prototype;
+C.PaperRipple_methods = L.PaperRipple.prototype;
+C.PaperShadow_methods = Z.PaperShadow.prototype;
 C.PlainJavaScriptObject_methods = J.PlainJavaScriptObject.prototype;
 C.PolymerElement_methods = A.PolymerElement.prototype;
 C.PositioningControl_methods = T.PositioningControl.prototype;
@@ -27759,31 +28061,49 @@ C.QueryOptions_sAl = new A.QueryOptions(true, true, true, C.Type_fPs, false, fal
 C.Type_oqK = H.createRuntimeType('ObserveProperty');
 C.List_M2f = Isolate.makeConstantList([C.Type_oqK]);
 C.QueryOptions_xw8 = new A.QueryOptions(false, false, true, C.Type_fPs, false, true, C.List_M2f, null);
+C.Symbol_blurAction = new H.Symbol("blurAction");
 C.Symbol_call = new H.Symbol("call");
+C.Symbol_contextMenuAction = new H.Symbol("contextMenuAction");
 C.Symbol_delete = new H.Symbol("delete");
+C.Symbol_downAction = new H.Symbol("downAction");
+C.Symbol_duration = new H.Symbol("duration");
+C.Symbol_focusAction = new H.Symbol("focusAction");
 C.Symbol_icon = new H.Symbol("icon");
-C.Symbol_key = new H.Symbol("key");
+C.Symbol_iconSrc = new H.Symbol("iconSrc");
+C.Symbol_label = new H.Symbol("label");
 C.Symbol_noSuchMethod = new H.Symbol("noSuchMethod");
 C.Symbol_onDelete = new H.Symbol("onDelete");
 C.Symbol_pause = new H.Symbol("pause");
+C.Symbol_raisedButton = new H.Symbol("raisedButton");
 C.Symbol_registerCallback = new H.Symbol("registerCallback");
+C.Symbol_speedAvg = new H.Symbol("speedAvg");
 C.Symbol_src = new H.Symbol("src");
 C.Symbol_start = new H.Symbol("start");
 C.Symbol_stop = new H.Symbol("stop");
 C.Symbol_toString = new H.Symbol("toString");
+C.Symbol_totalDistance = new H.Symbol("totalDistance");
+C.Symbol_upAction = new H.Symbol("upAction");
 C.Symbol_value = new H.Symbol("value");
+C.Symbol_z = new H.Symbol("z");
+C.Type_2KD = H.createRuntimeType('PaperFocusable');
 C.Type_3FG = H.createRuntimeType('CoreIconButton');
 C.Type_6L0 = H.createRuntimeType('Uint8List');
+C.Type_752 = H.createRuntimeType('CoreToolbar');
 C.Type_86y = H.createRuntimeType('CoreIconsetSvg');
 C.Type_ACQ = H.createRuntimeType('CoreIconset');
 C.Type_Art = H.createRuntimeType('Float32List');
 C.Type_CAk = H.createRuntimeType('Uint16List');
+C.Type_CF2 = H.createRuntimeType('PaperFab');
 C.Type_EOZ = H.createRuntimeType('_M1');
 C.Type_EsU = H.createRuntimeType('bool');
 C.Type_GNh = H.createRuntimeType('_M0');
 C.Type_HqF = H.createRuntimeType('Object');
 C.Type_I2I = H.createRuntimeType('PolymerElement');
+C.Type_IsU = H.createRuntimeType('PaperShadow');
+C.Type_MIo = H.createRuntimeType('PaperButton');
+C.Type_Ot8 = H.createRuntimeType('PaperIconButton');
 C.Type_QuW = H.createRuntimeType('Uint8ClampedList');
+C.Type_SaW = H.createRuntimeType('PaperRipple');
 C.Type_SnA = H.createRuntimeType('$int');
 C.Type_UoK = H.createRuntimeType('Int16List');
 C.Type_XXD = H.createRuntimeType('JSObject');
@@ -27868,7 +28188,7 @@ $.initializers = null;
 $.deployMode = true;
 $.TemplateBindExtension__initStyles = null;
 $.TemplateBindExtension__initBaseUriWorkaround = null;
-$.mapTypeToInterceptor = [C.Type_TOw, O.StopwatchElement, {created: O.StopwatchElement$created}, C.Type_ALf, D.TrackingElement, {created: D.TrackingElement$created}, C.Type_eKh, S.HistoryElement, {created: S.HistoryElement$created}, C.Type_fPs, W.HtmlElement, {}, C.Type_3FG, M.CoreIconButton, {created: M.CoreIconButton$created}, C.Type_86y, Q.CoreIconsetSvg, {created: Q.CoreIconsetSvg$created}, C.Type_ACQ, M.CoreIconset, {created: M.CoreIconset$created}, C.Type_I2I, A.PolymerElement, {created: A.PolymerElement$created}, C.Type_aB0, S.CoreMeta, {created: S.CoreMeta$created}, C.Type_ewF, T.PositioningControl, {created: T.PositioningControl$created}, C.Type_jWj, L.CoreIcon, {created: L.CoreIcon$created}, C.Type_s8b, Y.AutoBindingElement, {created: Y.AutoBindingElement$created}, C.Type_ufO, A.PositioningLiElement, {created: A.PositioningLiElement$created}];
+$.mapTypeToInterceptor = [C.Type_TOw, O.StopwatchElement, {created: O.StopwatchElement$created}, C.Type_ALf, D.TrackingElement, {created: D.TrackingElement$created}, C.Type_eKh, S.HistoryElement, {created: S.HistoryElement$created}, C.Type_fPs, W.HtmlElement, {}, C.Type_2KD, D.PaperFocusable, {created: D.PaperFocusable$created}, C.Type_3FG, M.CoreIconButton, {created: M.CoreIconButton$created}, C.Type_752, V.CoreToolbar, {created: V.CoreToolbar$created}, C.Type_86y, Q.CoreIconsetSvg, {created: Q.CoreIconsetSvg$created}, C.Type_ACQ, M.CoreIconset, {created: M.CoreIconset$created}, C.Type_CF2, X.PaperFab, {created: X.PaperFab$created}, C.Type_I2I, A.PolymerElement, {created: A.PolymerElement$created}, C.Type_IsU, Z.PaperShadow, {created: Z.PaperShadow$created}, C.Type_MIo, L.PaperButton, {created: L.PaperButton$created}, C.Type_Ot8, T.PaperIconButton, {created: T.PaperIconButton$created}, C.Type_SaW, L.PaperRipple, {created: L.PaperRipple$created}, C.Type_aB0, S.CoreMeta, {created: S.CoreMeta$created}, C.Type_ewF, T.PositioningControl, {created: T.PositioningControl$created}, C.Type_jWj, L.CoreIcon, {created: L.CoreIcon$created}, C.Type_s8b, Y.AutoBindingElement, {created: Y.AutoBindingElement$created}, C.Type_ufO, A.PositioningLiElement, {created: A.PositioningLiElement$created}];
 Isolate.$lazy($, "thisScript", "IsolateNatives_thisScript", "get$IsolateNatives_thisScript", function() {
   return H.IsolateNatives_computeThisScript();
 });

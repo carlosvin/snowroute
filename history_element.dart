@@ -30,12 +30,13 @@ class HistoryElement extends PolymerElement {
   }
 
   bool add(Positioning pos, [persist = true]) {
-    if (pos==null || pos.isEmpty){
+    if (pos==null || pos.isEmpty || pos.positions.length <= 1){
       return false;
     }else{
       practices[pos.key] = pos;
       if (persist){
         localStorage[pos.key] = pos.serialize();  
+        print("saved ${pos.key} with ${pos.positions.length} positions");
       }
       return true;
     }

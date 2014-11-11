@@ -31,13 +31,20 @@ class Position {
     return "($lat, $long) at ${new DateTime.fromMillisecondsSinceEpoch(timestamp)}";
   }
   
+  bool isSamePlace (Position p){
+    return long == p.long && lat == p.lat;
+  }
+  
+ /* bool operator ==(Position p){
+    return long == p.long && lat == p.lat;
+  }*/
+  
 }
 
 class Positioning  { 
 
   final Map<int, Position> positions= new Map<int, Position> ();
   final Map<int, num> distances = new Map<int, num>();
-  num totalDistance = 0;
   
   Positioning(){
     
@@ -72,17 +79,19 @@ class Positioning  {
   }
   
   bool add(Position pos){
-    if (isEmpty || last != pos){
-       if (!isEmpty){
-         var distance = calculateDistance(last.lat, last.long, pos.lat, pos.long);
-         distances[pos.timestamp] = distance;
-         totalDistance += distance; 
-       }
-       positions[pos.timestamp] = pos;
-       return true;
-     }else{
-       return false;
-     }
+    if (isEmpty){
+      positions[pos.timestamp] = pos;
+    } else {
+      if (last.isSamePlace(pos)){
+        final lastKeyToRemove = positions.keys.last;
+        positions.remove(lastKeyToRemove);
+        distances.remove(lastKeyToRemove); 
+      }
+      positions[pos.timestamp] = pos;
+      var distance = calculateDistance(last.lat, last.long, pos.lat, pos.long);
+      distances[pos.timestamp] = distance;
+    }
+    return true;
   }
   
   Position get last=> positions.values.last;
@@ -92,6 +101,8 @@ class Positioning  {
   String get key => "${positions.values.first.timestamp}";
   
   bool get isEmpty => positions.isEmpty;
+  
+  num get totalDistance => distances.values.fold(0, (prev, element) => prev + element);
 
   void clear(){
     positions.clear();
@@ -115,5 +126,7 @@ class Positioning  {
     
     return EARTH_RADIUS * angularDistance;
   }
+  
+  String get duration => "${(last.timestamp - first.timestamp)/1000}";
 
 }

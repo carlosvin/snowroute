@@ -8,21 +8,35 @@ import 'package:core_elements/core_iconset.dart' as i1;
 import 'package:polymer/src/build/log_injector.dart';
 import 'package:core_elements/core_icon.dart' as i2;
 import 'package:polymer/src/build/log_injector.dart';
-import 'package:core_elements/core_iconset_svg.dart' as i3;
+import 'package:paper_elements/paper_focusable.dart' as i3;
 import 'package:polymer/src/build/log_injector.dart';
-import 'package:core_elements/core_icon_button.dart' as i4;
+import 'package:paper_elements/paper_ripple.dart' as i4;
 import 'package:polymer/src/build/log_injector.dart';
-import 'stopwatch_element.dart' as i5;
+import 'package:paper_elements/paper_shadow.dart' as i5;
 import 'package:polymer/src/build/log_injector.dart';
-import 'tracking_element.dart' as i6;
+import 'package:paper_elements/paper_button.dart' as i6;
 import 'package:polymer/src/build/log_injector.dart';
-import 'positioning_li_element.dart' as i7;
+import 'package:paper_elements/paper_icon_button.dart' as i7;
 import 'package:polymer/src/build/log_injector.dart';
-import 'history_element.dart' as i8;
+import 'package:paper_elements/paper_fab.dart' as i8;
 import 'package:polymer/src/build/log_injector.dart';
-import 'positioning_control.dart' as i9;
+import 'package:core_elements/core_iconset_svg.dart' as i9;
 import 'package:polymer/src/build/log_injector.dart';
-import 'index.html.0.dart' as i10;
+import 'stopwatch_element.dart' as i10;
+import 'package:polymer/src/build/log_injector.dart';
+import 'tracking_element.dart' as i11;
+import 'package:polymer/src/build/log_injector.dart';
+import 'package:core_elements/core_icon_button.dart' as i12;
+import 'package:polymer/src/build/log_injector.dart';
+import 'positioning_li_element.dart' as i13;
+import 'package:polymer/src/build/log_injector.dart';
+import 'history_element.dart' as i14;
+import 'package:polymer/src/build/log_injector.dart';
+import 'package:core_elements/core_toolbar.dart' as i15;
+import 'package:polymer/src/build/log_injector.dart';
+import 'positioning_control.dart' as i16;
+import 'package:polymer/src/build/log_injector.dart';
+import 'index.html.0.dart' as i17;
 import 'package:polymer/src/build/log_injector.dart';
 import 'package:smoke/smoke.dart' show Declaration, PROPERTY, METHOD;
 import 'package:smoke/static.dart' show useGeneratedCode, StaticConfiguration;
@@ -42,32 +56,44 @@ void main() {
   useGeneratedCode(new StaticConfiguration(
       checkedMode: false,
       getters: {
+        #blurAction: (o) => o.blurAction,
+        #contextMenuAction: (o) => o.contextMenuAction,
         #counter: (o) => o.counter,
         #delete: (o) => o.delete,
+        #downAction: (o) => o.downAction,
+        #duration: (o) => o.duration,
+        #focusAction: (o) => o.focusAction,
         #gpsStatus: (o) => o.gpsStatus,
         #historyElement: (o) => o.historyElement,
         #icon: (o) => o.icon,
-        #key: (o) => o.key,
+        #iconSrc: (o) => o.iconSrc,
+        #label: (o) => o.label,
         #message: (o) => o.message,
         #onDelete: (o) => o.onDelete,
         #pause: (o) => o.pause,
         #positioning: (o) => o.positioning,
         #practices: (o) => o.practices,
+        #raisedButton: (o) => o.raisedButton,
         #speedAverage: (o) => o.speedAverage,
+        #speedAvg: (o) => o.speedAvg,
         #src: (o) => o.src,
         #start: (o) => o.start,
         #state: (o) => o.state,
         #stop: (o) => o.stop,
         #stopWatchStateChanged: (o) => o.stopWatchStateChanged,
         #stopwatchElement: (o) => o.stopwatchElement,
+        #totalDistance: (o) => o.totalDistance,
         #trackingElement: (o) => o.trackingElement,
+        #upAction: (o) => o.upAction,
         #values: (o) => o.values,
+        #z: (o) => o.z,
       },
       setters: {
         #counter: (o, v) { o.counter = v; },
         #gpsStatus: (o, v) { o.gpsStatus = v; },
         #historyElement: (o, v) { o.historyElement = v; },
         #icon: (o, v) { o.icon = v; },
+        #iconSrc: (o, v) { o.iconSrc = v; },
         #message: (o, v) { o.message = v; },
         #positioning: (o, v) { o.positioning = v; },
         #speedAverage: (o, v) { o.speedAverage = v; },
@@ -75,6 +101,7 @@ void main() {
         #state: (o, v) { o.state = v; },
         #stopwatchElement: (o, v) { o.stopwatchElement = v; },
         #trackingElement: (o, v) { o.trackingElement = v; },
+        #z: (o, v) { o.z = v; },
       },
       parents: {
         smoke_6.HistoryElement: smoke_1.PolymerElement,
@@ -109,39 +136,57 @@ void main() {
         },
       },
       names: {
+        #blurAction: r'blurAction',
+        #contextMenuAction: r'contextMenuAction',
         #counter: r'counter',
         #delete: r'delete',
+        #downAction: r'downAction',
+        #duration: r'duration',
+        #focusAction: r'focusAction',
         #gpsStatus: r'gpsStatus',
         #historyElement: r'historyElement',
         #icon: r'icon',
-        #key: r'key',
+        #iconSrc: r'iconSrc',
+        #label: r'label',
         #message: r'message',
         #onDelete: r'onDelete',
         #pause: r'pause',
         #positioning: r'positioning',
         #practices: r'practices',
+        #raisedButton: r'raisedButton',
         #speedAverage: r'speedAverage',
+        #speedAvg: r'speedAvg',
         #src: r'src',
         #start: r'start',
         #state: r'state',
         #stop: r'stop',
         #stopWatchStateChanged: r'stopWatchStateChanged',
         #stopwatchElement: r'stopwatchElement',
+        #totalDistance: r'totalDistance',
         #trackingElement: r'trackingElement',
+        #upAction: r'upAction',
         #values: r'values',
+        #z: r'z',
       }));
   new LogInjector().injectLogsFromUrl('index.html._buildLogs');
   configureForDeployment([
       i0.upgradeCoreMeta,
       i1.upgradeCoreIconset,
       i2.upgradeCoreIcon,
-      i3.upgradeCoreIconsetSvg,
-      i4.upgradeCoreIconButton,
-      () => Polymer.register('stopwatch-element', i5.StopwatchElement),
-      () => Polymer.register('tracking-element', i6.TrackingElement),
-      () => Polymer.register('positioning-li-element', i7.PositioningLiElement),
-      () => Polymer.register('history-element', i8.HistoryElement),
-      () => Polymer.register('positioning-control', i9.PositioningControl),
+      i3.upgradePaperFocusable,
+      i4.upgradePaperRipple,
+      i5.upgradePaperShadow,
+      i6.upgradePaperButton,
+      i7.upgradePaperIconButton,
+      i8.upgradePaperFab,
+      i9.upgradeCoreIconsetSvg,
+      () => Polymer.register('stopwatch-element', i10.StopwatchElement),
+      () => Polymer.register('tracking-element', i11.TrackingElement),
+      i12.upgradeCoreIconButton,
+      () => Polymer.register('positioning-li-element', i13.PositioningLiElement),
+      () => Polymer.register('history-element', i14.HistoryElement),
+      i15.upgradeCoreToolbar,
+      () => Polymer.register('positioning-control', i16.PositioningControl),
     ]);
-  i10.main();
+  i17.main();
 }
