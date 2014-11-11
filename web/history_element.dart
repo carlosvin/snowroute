@@ -2,7 +2,6 @@ library history;
 
 import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
-import 'package:jsonx/jsonx.dart';
 import 'dart:html';
 import 'positioning.dart';
 
@@ -11,7 +10,7 @@ class HistoryElement extends PolymerElement {
   
   Storage localStorage;
   
-  @observable final List<String> keys =  toObservable([]);
+  @observable final Map<String,Positioning> practices =  toObservable({});
   
   HistoryElement.created() : super.created(){
   }
@@ -20,25 +19,31 @@ class HistoryElement extends PolymerElement {
   void attached() {
    super.attached();
    localStorage = window.localStorage;
-   keys.addAll(localStorage.keys);
+   for (var v in localStorage.values){
+     try{
+       add(new Positioning.deserialize(v), false);
+     }catch(e){
+        print("ignoring $v");       
+     }
+   }
+   print ("${practices.length} Practices read");
   }
 
-  bool add(Positioning pos) {
-    if (pos.isEmpty){
+  bool add(Positioning pos, [persist = true]) {
+    if (pos==null || pos.isEmpty){
       return false;
     }else{
-      String key = new DateTime.fromMillisecondsSinceEpoch(pos.first.timestamp).toString();
-      localStorage[key] = encode(pos);
-      keys.add(key);
+      practices[pos.key] = pos;
+      if (persist){
+        localStorage[pos.key] = pos.serialize();  
+      }
       return true;
     }
   }
   
-  void delete(Event event, var detail, var target) {
-    String key = target.attributes['key'];
-    String removed = localStorage.remove(key);
-    if (removed != null){
-      keys.remove(key);
-    }
+  void onDelete(Event event, var detail, var target) {
+    String key = detail['key'];
+    localStorage.remove(key);
+    practices.remove(key);
   }
 }

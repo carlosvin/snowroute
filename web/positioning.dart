@@ -17,6 +17,16 @@ class Position {
     lat = pos.coords.latitude,
     timestamp = pos.timestamp;
   
+  
+  Position.deserialize(String str):
+    long = double.parse(str.split(',').elementAt(0)),
+    lat = double.parse(str.split(',').elementAt(1)),
+    timestamp = int.parse(str.split(',').elementAt(2));
+  
+  String serialize(){
+    return "$lat,$long,$timestamp";
+  }
+  
   String toString(){
     return "($lat, $long) at ${new DateTime.fromMillisecondsSinceEpoch(timestamp)}";
   }
@@ -33,37 +43,53 @@ class Positioning  {
     
   }
   
-  Positioning.fromRaw(key, Map value){
-    positions.addAll( value['positions']);
-    
+  Positioning.deserialize(String str){
+    str.split('\n').forEach((s) => _deserializePosition(s) );
   }
   
-  // Serialize this to an object (a Map) to insert into the database.
-  Map toRaw() {
-    return {
-      'timestamp': positions.keys.first,
-      'positions': positions
-    };
+  void _deserializePosition(String s){
+    try {
+      if (!s.isEmpty && add(new Position.deserialize(s))){
+        print("Deserialized position $s");
+      }else{
+        print("Cannot add $s");
+      }
+    }catch(e){
+      // TODO
+      print("$s <- $e");
+    }
   }
+  
+  String serialize (){
+    StringBuffer strb = new StringBuffer();
+    positions.forEach((k,v) => strb.writeln(v.serialize()));
+    return strb.toString();
+  }
+  
 
   bool addPosition(Geoposition coords){
-    Position pos = new Position.fromGeoposition(coords);
+    return add(new Position.fromGeoposition(coords));
+  }
+  
+  bool add(Position pos){
     if (isEmpty || last != pos){
-      if (!isEmpty){
-        var distance = calculateDistance(last.lat, last.long, pos.lat, pos.long);
-        distances[pos.timestamp] = distance;
-        totalDistance += distance; 
-      }
-      positions[pos.timestamp] = pos;
-      return true;
-    }else{
-      return false;
-    }
+       if (!isEmpty){
+         var distance = calculateDistance(last.lat, last.long, pos.lat, pos.long);
+         distances[pos.timestamp] = distance;
+         totalDistance += distance; 
+       }
+       positions[pos.timestamp] = pos;
+       return true;
+     }else{
+       return false;
+     }
   }
   
   Position get last=> positions.values.last;
   
   Position get first => positions.values.first;
+  
+  String get key => "${positions.values.first.timestamp}";
   
   bool get isEmpty => positions.isEmpty;
 
