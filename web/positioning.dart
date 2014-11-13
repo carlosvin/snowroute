@@ -2,6 +2,7 @@ import 'dart:html';
 import 'dart:math';
 
 final EARTH_RADIUS = 6371; // km
+final EARTH_RADIUS2 = EARTH_RADIUS * 2; // km
 
 class Position {
   final double long;
@@ -35,9 +36,18 @@ class Position {
     return long == p.long && lat == p.lat;
   }
   
- /* bool operator ==(Position p){
-    return long == p.long && lat == p.lat;
-  }*/
+
+  static num toRadians(num x){
+    return x * (PI)/180;
+  }
+  
+  num getDistanceTo (Position b){
+    num dLat = toRadians(b.lat - lat);
+    num dLong = toRadians(b.long - long);
+    
+    num a = sin(dLat/2) * sin(dLat/2) + sin(dLong/2) * sin(dLong/2) * cos(toRadians(lat)) * cos(b.lat); 
+    return EARTH_RADIUS2 * atan2(sqrt(a), sqrt(1-a)); 
+  }
   
 }
 
@@ -88,8 +98,7 @@ class Positioning  {
         distances.remove(lastKeyToRemove); 
       }
       positions[pos.timestamp] = pos;
-      var distance = calculateDistance(last.lat, last.long, pos.lat, pos.long);
-      distances[pos.timestamp] = distance;
+      distances[pos.timestamp] = last.getDistanceTo(pos);
     }
     return true;
   }
@@ -112,21 +121,10 @@ class Positioning  {
     if (isEmpty){
       return 0;
     }else{
-      return totalDistance / positions.length;      
+      return totalDistance / duration;      
     }
   }
-
-  num calculateDistance(num lat1, num lon1, num lat2, num lon2) {
-    num latDiff = lat2 - lat1;
-    num lonDiff = lon2 - lon1;
-
-    var a = pow(sin(latDiff / 2), 2) + cos(lat1) * cos (lat2) * pow(sin(lonDiff / 2), 2);
-    
-    var angularDistance = 2 * atan2(sqrt(a), sqrt(1 - a));
-    
-    return EARTH_RADIUS * angularDistance;
-  }
   
-  String get duration => "${(last.timestamp - first.timestamp)/1000}";
+  num get duration => (last.timestamp - first.timestamp)/1000;
 
 }
