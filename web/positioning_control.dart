@@ -1,5 +1,6 @@
 import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
+import 'package:paper_elements/paper_toast.dart';
 import 'stopwatch_element.dart';
 import 'tracking_element.dart';
 import 'history_element.dart';
@@ -8,10 +9,11 @@ import 'history_element.dart';
 @CustomTag('positioning-control')
 class PositioningControl extends PolymerElement {
 
-  @observable String message = '';
+  @observable String state = '';
   @observable StopwatchElement stopwatchElement;
   @observable TrackingElement trackingElement;
   @observable HistoryElement historyElement;
+  PaperToast toastElement;
 
   PositioningControl.created() : super.created(){
   }
@@ -22,34 +24,36 @@ class PositioningControl extends PolymerElement {
     historyElement = $['history_element'];
     stopwatchElement = $['watch_element'];
     trackingElement= $['tracking_element'];
+    toastElement= $['toast'];
     
   }
   
   @ObserveProperty('stopwatchElement.state')
   stopWatchStateChanged(oldValue, newValue) {
     if (stopwatchElement.state == 0){
-      message = 'stopped';
+      state = 'stopped';
       if (oldValue != null){
         save();  
       }
     } else if (stopwatchElement.state == 1){
-      message = 'started';
+      state = 'started';
     } else if (stopwatchElement.state == 2){
-      message = 'paused';
+      state = 'paused';
     } else {
-      message = 'unknown state $oldValue $newValue';
+      state = 'unknown state $oldValue $newValue';
     }
   }
   
   void save(){
     if ( historyElement.add(trackingElement.positioning)){
-      log("Saved ${trackingElement.positioning.first.timestamp}");
+      toast("Saved ${trackingElement.positioning.first.timestamp}");
     }else{
-      log("Error saving");
+      toast("Error saving");
     }
   }
   
-  void log(String m){
-    message = m;  
+  void toast(String m){
+    toastElement.text = m;
+    toastElement.show();
   }
 }

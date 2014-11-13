@@ -6,6 +6,7 @@
 
 <link rel="import" href="packages/core_elements/core_toolbar.html">
 <link rel="import" href="packages/paper_elements/paper_icon_button.html">
+<link rel="import" href="packages/paper_elements/paper_toast.html">
 
 <polymer-element name="positioning-control"> 
   <template>
@@ -37,7 +38,7 @@
     <core-toolbar>
       <paper-icon-button icon="menu"></paper-icon-button>
       <span flex>Snow Route</span>
-      <span>{{ message }}</span>
+      <span>{{ state }}</span>
     </core-toolbar>
     
     <div layout vertical flex>
@@ -45,6 +46,7 @@
         <tracking-element id="tracking_element"></tracking-element>
         <history-element id="history_element"></history-element>
     </div>
+    <paper-toast id="toast"></paper-toast>
   </template> 
   <script type="application/dart" src="positioning_control.dart"></script>
 </polymer-element>
