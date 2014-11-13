@@ -9,6 +9,7 @@ import 'positioning.dart';
 class TrackingElement extends PolymerElement {
   @observable String gpsStatus = '?';
   @observable String speedAverage = '?';
+  @published String borderColor = 'rgb(0,0,0)';
   
   final Positioning positioning = new Positioning();
 
@@ -36,9 +37,7 @@ class TrackingElement extends PolymerElement {
     if (positioning.addPosition(geoPosition)){
       speedAverage = "${positioning.speedAvg}km/h";
       gpsStatus = positioning.last.toString();
-
     }
-
   }
   
   void clear (){

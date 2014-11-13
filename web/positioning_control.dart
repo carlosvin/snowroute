@@ -1,6 +1,7 @@
 import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
 import 'package:paper_elements/paper_toast.dart';
+import 'package:paper_elements/paper_icon_button.dart';
 import 'stopwatch_element.dart';
 import 'tracking_element.dart';
 import 'history_element.dart';
@@ -14,18 +15,21 @@ class PositioningControl extends PolymerElement {
   @observable TrackingElement trackingElement;
   @observable HistoryElement historyElement;
   PaperToast toastElement;
-
+  PaperIconButton buttonToggleHistory;
+  
   PositioningControl.created() : super.created(){
   }
 
   @override
   void attached() {
     super.attached();
-    historyElement = $['history_element'];
     stopwatchElement = $['watch_element'];
     trackingElement= $['tracking_element'];
+    historyElement = $['history_element'];
     toastElement= $['toast'];
+    buttonToggleHistory = $['buttonToggleHistory'];
     
+    historyElement.hidden = true;
   }
   
   @ObserveProperty('stopwatchElement.state')
@@ -55,5 +59,15 @@ class PositioningControl extends PolymerElement {
   void toast(String m){
     toastElement.text = m;
     toastElement.show();
+  }
+  
+  void toggleHistory(){
+    historyElement.hidden = ! historyElement.hidden;
+    
+    if (historyElement.hidden){
+      buttonToggleHistory.icon = "menu";
+    }else{
+      buttonToggleHistory.icon = "chevron-left";
+    }
   }
 }
