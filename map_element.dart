@@ -17,6 +17,7 @@ class MapElementP extends PolymerElement {
   void attached() {
     super.attached();
     canvasMap = $['canvas_map'];
+    canvasMap.hidden = true;
   }
   
   void addPosition(num lat, num long){
@@ -36,6 +37,9 @@ class MapElementP extends PolymerElement {
   }
   
   void initMap(){
+    //canvasMap.style.minHeight = "100px";
+    //canvasMap.style.height = "100px";
+    canvasMap.hidden = false;
     gmap = new GMap(
         canvasMap, 
           new MapOptions()

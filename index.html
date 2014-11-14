@@ -6,8 +6,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <title>Snowroute</title>
   
-  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script src="packages/web_components/platform.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+  <script src="packages/web_components/platform.js"></script>
 <script src="packages/web_components/dart_support.js"></script>
     
   
@@ -16,7 +16,7 @@
     
 <link rel="stylesheet" type="text/css" href="packages/polymer/src/build/log_injector.css"></head>
 
-<body fullbleed="" layout="" vertical=""><div hidden=""><style shim-shadowdom="">
+<body fullbleed="" layout="" vertical="" flex=""><div hidden=""><style shim-shadowdom="">
 /*******************************
           Flex Layout
 *******************************/
@@ -2683,16 +2683,9 @@ core-icon {
   
   <template>
     <style>
-  
       
-      .canvas_map {
-        height: 100%;
-      }
-      .canvas_map > * {
-        height: 100%;
-      }
     </style>
-    <div id="canvas_map" class="canvas_map"></div>
+    <div relative="" style="height:200px;"><div fit="" id="canvas_map"></div></div>
   </template> 
   
   
@@ -4584,43 +4577,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <style>
       
-      :host {
-        height: 100%;
-      }
-      
       core-toolbar{
         background: #4285f4;
         color: #f1f1f1;
         fill: #f1f1f1;
       }
-
-
-      .content {
-        height: 100%;
-      }
-      
+     
       .content > * {
-        display: block;
         border: 1px rgba(20, 20, 100, 0.3) solid;
         margin: 1%;
         padding: 1%;
       }
-      
-      map-element {
-        height: 40%;
-      }
-      
-      stop-watch{
-        height: 20%;
-      }
-      
-      history-element {
-        height: 80%;
-      }
-      
-      tracking-element{
-        height: 15%;
-      }
+
       
     </style>
     <core-header-panel layout="" vertical="" flex="">
@@ -4631,10 +4599,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </core-toolbar>
       
       <div class="content">
-        <history-element id="history_element"></history-element>
-        <stopwatch-element id="watch_element"></stopwatch-element>
-        <map-element id="map_element"></map-element>
-        <tracking-element id="tracking_element" bordercolor="rgba(20, 20, 100, 0.3)"></tracking-element>
+        <history-element hidden="" id="history_element"></history-element>
+        <stopwatch-element block="" id="watch_element"></stopwatch-element>
+        <map-element block="" id="map_element"></map-element>
+        <tracking-element block="" id="tracking_element" bordercolor="rgba(20, 20, 100, 0.3)"></tracking-element>
       </div>
     </core-header-panel>
     
@@ -4642,11 +4610,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     
   </template> 
   
-</polymer-element><style>html, body{
+</polymer-element><style>
+body{
   font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
-  
-  /*height: 100%;
-  margin: 0;*/
 }
 
 .error {
@@ -4654,7 +4620,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   color: rgb(100,0,0);
 }</style></div>
 
-  <positioning-control fullbleed="" layout="" vertical=""></positioning-control>
+  <positioning-control fullbleed="" layout="" vertical="" flex=""></positioning-control>
 
   
   

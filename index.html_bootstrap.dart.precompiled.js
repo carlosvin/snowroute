@@ -18442,12 +18442,16 @@ var $$ = Object.create(null);
   MapElementP: {
     "^": "PolymerElement;gmap,line,canvasMap,change_notifier$ChangeNotifier$_changes,change_notifier$ChangeNotifier$_records,polymer$Polymer$_polymer$_element,polymer$Polymer$_namedObservers,polymer$Polymer$_observers,polymer$Polymer$_unbound,polymer$Polymer$_unbindAllJob,polymer$Polymer$_propertyObserver,polymer$Polymer$_readied,polymer$Polymer$_jsElem,polymer$Polymer$_hasBeenAttached,polymer$Polymer$shadowRoots,polymer$Polymer$$,polymer$Polymer$_properties,polymer$Polymer$_polyfillScopeStyleCache",
     attached$0: function(receiver) {
+      var t1;
       A.Polymer.prototype.attached$0.call(this, receiver);
-      receiver.canvasMap = this.get$$$(receiver)._observable_map$_map.$index(0, "canvas_map");
+      t1 = this.get$$$(receiver)._observable_map$_map.$index(0, "canvas_map");
+      receiver.canvasMap = t1;
+      J.set$hidden$x(t1, true);
     },
     addPosition$2: function(receiver, lat, $long) {
       var t1, t2, t3, t4, t5;
       if (receiver.gmap == null) {
+        J.set$hidden$x(receiver.canvasMap, false);
         t1 = receiver.canvasMap;
         t2 = J.$index$asx($.get$context(), "Object");
         t2 = P.JsObject_JsObject(t2, []);
