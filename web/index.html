@@ -8,19 +8,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  
   <title>Snowroute</title>
   
-  <link rel="stylesheet" href="style.css">
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script src="packages/web_components/platform.js"></script>
+  <script src="packages/web_components/dart_support.js"></script>
+  <script src="packages/browser/dart.js"></script>
+  <script src="packages/browser/interop.js"></script>
     
   <link rel="import" href="positioning_control.html">
-  
+
+  <link rel="stylesheet" href="style.css">
+    
 </head>
 
-<body unresolved fullbleed layout vertical>
+<body fullbleed layout vertical>
+
   <positioning-control fullbleed layout vertical></positioning-control>
 
   <script type="application/dart">export 'package:polymer/init.dart';</script>
+  <script src="packages/browser/dart.js"></script>
 
 </body>
 </html>
