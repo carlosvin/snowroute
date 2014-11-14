@@ -4,20 +4,16 @@
   
   <template>
     <style>
-      map-element {
-        display: block;
-        padding: 1%;
-        border: 1px dotted rgb(0,0,0);
+  
+      
+      .canvas_map {
+        height: 100%;
       }
-      
-      #canvas_map {
-        padding: 1%;
-        display: block;
-        border: 1px dotted rgb(110,0,0);
-      
+      .canvas_map > * {
+        height: 100%;
       }
     </style>
-    <div id="canvas_map"></div>
+    <div id="canvas_map" class="canvas_map"></div>
   </template> 
   
   <script type="application/dart" src="map_element.dart"></script>

@@ -24,13 +24,34 @@
         fill: #f1f1f1;
       }
 
-      .sub_element {
-        border: 1px rgba(20, 20, 100, 0.3) solid;
-      }
-      
+
       .content {
         height: 100%;
       }
+      
+      .content > * {
+        display: block;
+        border: 1px rgba(20, 20, 100, 0.3) solid;
+        margin: 1%;
+        padding: 1%;
+      }
+      
+      map-element {
+        height: 40%;
+      }
+      
+      stop-watch{
+        height: 20%;
+      }
+      
+      history-element {
+        height: 80%;
+      }
+      
+      tracking-element{
+        height: 15%;
+      }
+      
     </style>
     <core-header-panel layout vertical flex>
       <core-toolbar>
@@ -40,10 +61,10 @@
       </core-toolbar>
       
       <div class="content">
-        <history-element id="history_element" class="sub_element"></history-element>
-        <stopwatch-element id="watch_element" class="sub_element"></stopwatch-element>
-        <map-element id="map_element" class="sub_element"></map-element>
-        <tracking-element id="tracking_element"  class="sub_element" borderColor="rgba(20, 20, 100, 0.3)"></tracking-element>
+        <history-element id="history_element"></history-element>
+        <stopwatch-element id="watch_element"></stopwatch-element>
+        <map-element id="map_element"></map-element>
+        <tracking-element id="tracking_element" borderColor="rgba(20, 20, 100, 0.3)"></tracking-element>
       </div>
     </core-header-panel>
     
