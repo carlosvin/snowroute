@@ -1,5 +1,18 @@
 <link rel="import" href="packages/polymer/polymer.html">
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+    
+        function addPosition(lat,long) {
+          console.info("add position JS");
+          var mapOptions = {
+            zoom: 8,
+            center: new google.maps.LatLng(lat, long)
+          };
+          var map = new google.maps.Map(document.getElementById('map-canvas'),
+              mapOptions);
+        }
 
+    </script>
 <polymer-element name="tracking-element"> 
   
   <template>
@@ -30,7 +43,15 @@
         border-bottom: none;
 
       }
+      
+      #map-canvas{
+        height: 70%;
+        background-color: #cccccc;
+      }
     </style>
+    
+    <div id="map-canvas"></div>
+    
     <table>
       <tr>
         <td>{{ gpsStatus }}</td>
@@ -41,6 +62,7 @@
         <th>Speed AVG</th>
       </tr>
     </table>
+    
     
   </template> 
   

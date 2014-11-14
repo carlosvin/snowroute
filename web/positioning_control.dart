@@ -54,6 +54,8 @@ class PositioningControl extends PolymerElement {
     }else{
       toast("Error saving");
     }
+    
+    trackingElement.clear();
   }
   
   void toast(String m){

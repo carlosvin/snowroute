@@ -2,6 +2,7 @@ library tracking;
 
 import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
+import 'dart:js';
 import 'dart:html';
 import 'positioning.dart';
 
@@ -37,6 +38,7 @@ class TrackingElement extends PolymerElement {
     if (positioning.addPosition(geoPosition)){
       speedAverage = "${positioning.speedAvg}km/h";
       gpsStatus = positioning.last.toString();
+      context.callMethod('addPosition', [geoPosition.coords.latitude, geoPosition.coords.longitude]);
     }
   }
   

@@ -35,7 +35,6 @@ class Position {
   bool isSamePlace (Position p){
     return long == p.long && lat == p.lat;
   }
-  
 
   static num toRadians(num x){
     return x * (PI)/180;
@@ -118,13 +117,15 @@ class Positioning  {
   }
   
   num get speedAvg {
-    if (isEmpty){
+    if (positions.length <= 1){
       return 0;
     }else{
-      return totalDistance / duration;      
+      return totalDistance / durationH;      
     }
   }
   
   num get duration => (last.timestamp - first.timestamp)/1000;
+  
+  num get durationH => duration / 3600;
 
 }
