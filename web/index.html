@@ -10,8 +10,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <title>Snowroute</title>
   
-  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script src="packages/web_components/platform.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+  <script src="packages/web_components/platform.js"></script>
     
   <link rel="import" href="positioning_control.html">
 
@@ -19,9 +19,9 @@
     
 </head>
 
-<body fullbleed layout vertical>
+<body fullbleed layout vertical flex>
 
-  <positioning-control fullbleed layout vertical></positioning-control>
+  <positioning-control fullbleed layout vertical flex></positioning-control>
 
   <script type="application/dart">export 'package:polymer/init.dart';</script>
   <script src="packages/browser/dart.js"></script>
