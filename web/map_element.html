@@ -1,0 +1,25 @@
+<link rel="import" href="packages/polymer/polymer.html">
+
+<polymer-element name="map-element"> 
+  
+  <template>
+    <style>
+      map-element {
+        display: block;
+        padding: 1%;
+        border: 1px dotted rgb(0,0,0);
+      }
+      
+      #canvas_map {
+        padding: 1%;
+        display: block;
+        border: 1px dotted rgb(110,0,0);
+      
+      }
+    </style>
+    <div id="canvas_map"></div>
+  </template> 
+  
+  <script type="application/dart" src="map_element.dart"></script>
+  
+</polymer-element>

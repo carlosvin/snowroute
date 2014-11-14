@@ -5,6 +5,7 @@ import 'package:paper_elements/paper_icon_button.dart';
 import 'stopwatch_element.dart';
 import 'tracking_element.dart';
 import 'history_element.dart';
+import 'map_element.dart';
 
 
 @CustomTag('positioning-control')
@@ -14,6 +15,7 @@ class PositioningControl extends PolymerElement {
   @observable StopwatchElement stopwatchElement;
   @observable TrackingElement trackingElement;
   @observable HistoryElement historyElement;
+  @observable MapElementP mapElement;
   PaperToast toastElement;
   PaperIconButton buttonToggleHistory;
   
@@ -26,10 +28,13 @@ class PositioningControl extends PolymerElement {
     stopwatchElement = $['watch_element'];
     trackingElement= $['tracking_element'];
     historyElement = $['history_element'];
+    mapElement = $['map_element'];
     toastElement= $['toast'];
     buttonToggleHistory = $['buttonToggleHistory'];
     
     historyElement.hidden = true;
+    
+    trackingElement.init(mapElement);
   }
   
   @ObserveProperty('stopwatchElement.state')

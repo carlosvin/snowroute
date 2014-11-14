@@ -3,6 +3,7 @@
 <link rel="import" href="stopwatch_element.html">
 <link rel="import" href="tracking_element.html">
 <link rel="import" href="history_element.html">
+<link rel="import" href="map_element.html">
 
 <link rel="import" href="packages/core_elements/core_toolbar.html">
 <link rel="import" href="packages/core_elements/core_header_panel.html">
@@ -12,6 +13,7 @@
 <polymer-element name="positioning-control"> 
   <template>
     <style>
+      
       :host {
         height: 100%;
       }
@@ -21,14 +23,14 @@
         color: #f1f1f1;
         fill: #f1f1f1;
       }
-      
-      .element {
-        /*padding: 2%;
-        margin: 2%;*/
+
+      .sub_element {
         border: 1px rgba(20, 20, 100, 0.3) solid;
-        border-radius: 1%;
       }
       
+      .content {
+        height: 100%;
+      }
     </style>
     <core-header-panel layout vertical flex>
       <core-toolbar>
@@ -37,12 +39,11 @@
         <span>{{ state }}</span>
       </core-toolbar>
       
-      <div layout horizontal flex class="content">
-        <history-element id="history_element" class="element"></history-element>
-        <div layout vertical flex class="content">
-          <stopwatch-element id="watch_element" class="element"></stopwatch-element>
-          <tracking-element id="tracking_element"  class="element" borderColor="rgba(20, 20, 100, 0.3)"></tracking-element>
-        </div>
+      <div class="content">
+        <history-element id="history_element" class="sub_element"></history-element>
+        <stopwatch-element id="watch_element" class="sub_element"></stopwatch-element>
+        <map-element id="map_element" class="sub_element"></map-element>
+        <tracking-element id="tracking_element"  class="sub_element" borderColor="rgba(20, 20, 100, 0.3)"></tracking-element>
       </div>
     </core-header-panel>
     

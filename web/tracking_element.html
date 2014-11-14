@@ -1,6 +1,6 @@
 <link rel="import" href="packages/polymer/polymer.html">
 
-<polymer-element name="tracking-element"> 
+<polymer-element name="tracking-element" layout vertical> 
   
   <template>
      <style>
@@ -24,20 +24,11 @@
       tr{
         border-bottom: 1px {{borderColor}} dotted;
       }
-      
-      
+           
       tr:last-child {
         border-bottom: none;
-
-      }
-      
-      #map-canvas{
-        height: 70%;
-        background-color: #cccccc;
       }
     </style>
-    
-    <div id="map-canvas"></div>
     
     <table>
       <tr>
@@ -49,11 +40,8 @@
         <th>Speed AVG</th>
       </tr>
     </table>
-       
+    
   </template> 
-  
-  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-  <script src="packages/browser/dart.js"></script>
-  <script src="packages/browser/interop.js"></script>
+
   <script type="application/dart" src="tracking_element.dart"></script>
 </polymer-element>
