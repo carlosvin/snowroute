@@ -5,6 +5,7 @@
 <link rel="import" href="history_element.html">
 
 <link rel="import" href="packages/core_elements/core_toolbar.html">
+<link rel="import" href="packages/core_elements/core_header_panel.html">
 <link rel="import" href="packages/paper_elements/paper_icon_button.html">
 <link rel="import" href="packages/paper_elements/paper_toast.html">
 
@@ -21,26 +22,29 @@
         fill: #f1f1f1;
       }
       
-      .main > * {
-      padding: 2%;
-        margin: 2%;
+      .content > * {
+        /*padding: 2%;
+        margin: 2%;*/
         border: 1px rgba(20, 20, 100, 0.3) solid;
         border-radius: 1%;
       }
       
     </style>
-    
-    <core-toolbar>
-      <paper-icon-button icon="menu" on-tap="{{toggleHistory}}" id="buttonToggleHistory"></paper-icon-button>
-      <span flex>Snow Route</span>
-      <span>{{ state }}</span>
-    </core-toolbar>
-    
-    <div layout vertical class="main">
-        <stopwatch-element id="watch_element"></stopwatch-element>
-        <tracking-element id="tracking_element" borderColor="rgba(20, 20, 100, 0.3)"></tracking-element>
+    <core-header-panel flex>
+      <core-toolbar>
+        <paper-icon-button icon="menu" on-tap="{{toggleHistory}}" id="buttonToggleHistory"></paper-icon-button>
+        <span flex>Snow Route</span>
+        <span>{{ state }}</span>
+      </core-toolbar>
+      
+      <div layout horizontal flex class="content">
         <history-element id="history_element"></history-element>
-    </div>
+        <div layout vertical flex class="content">
+          <stopwatch-element id="watch_element"></stopwatch-element>
+          <tracking-element id="tracking_element" borderColor="rgba(20, 20, 100, 0.3)"></tracking-element>
+        </div>
+      </div>
+    </core-header-panel>
     
     <paper-toast id="toast"></paper-toast>
     
