@@ -62,12 +62,18 @@ class PositioningControl extends PolymerElement {
   }
   
   void toggleHistory(){
-    historyElement.hidden = ! historyElement.hidden;
     
-    if (historyElement.hidden){
-      buttonToggleHistory.icon = "menu";
-    }else{
-      buttonToggleHistory.icon = "chevron-left";
+    if (historyElement.isEmpty &&  historyElement.hidden ){
+      toast("There are no history");
+    } else{
+      historyElement.hidden = ! historyElement.hidden;
+          
+      if (historyElement.hidden){
+        buttonToggleHistory.icon = "menu";
+      }else{
+        buttonToggleHistory.icon = "chevron-left";
+      }
     }
+    
   }
 }

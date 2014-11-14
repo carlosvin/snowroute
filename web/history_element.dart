@@ -47,4 +47,6 @@ class HistoryElement extends PolymerElement {
     localStorage.remove(key);
     practices.remove(key);
   }
+  
+  bool get isEmpty => practices.length == 0;
 }

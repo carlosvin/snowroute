@@ -22,7 +22,7 @@
         fill: #f1f1f1;
       }
       
-      .content > * {
+      .element {
         /*padding: 2%;
         margin: 2%;*/
         border: 1px rgba(20, 20, 100, 0.3) solid;
@@ -38,10 +38,10 @@
       </core-toolbar>
       
       <div layout horizontal flex class="content">
-        <history-element id="history_element"></history-element>
+        <history-element id="history_element" class="element"></history-element>
         <div layout vertical flex class="content">
-          <stopwatch-element id="watch_element"></stopwatch-element>
-          <tracking-element id="tracking_element" borderColor="rgba(20, 20, 100, 0.3)"></tracking-element>
+          <stopwatch-element id="watch_element" class="element"></stopwatch-element>
+          <tracking-element id="tracking_element"  class="element" borderColor="rgba(20, 20, 100, 0.3)"></tracking-element>
         </div>
       </div>
     </core-header-panel>
