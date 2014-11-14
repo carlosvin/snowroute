@@ -32,11 +32,29 @@ import 'positioning_li_element.dart' as i13;
 import 'package:polymer/src/build/log_injector.dart';
 import 'history_element.dart' as i14;
 import 'package:polymer/src/build/log_injector.dart';
-import 'package:core_elements/core_toolbar.dart' as i15;
+import 'map_element.dart' as i15;
 import 'package:polymer/src/build/log_injector.dart';
-import 'positioning_control.dart' as i16;
+import 'package:core_elements/core_toolbar.dart' as i16;
 import 'package:polymer/src/build/log_injector.dart';
-import 'index.html.0.dart' as i17;
+import 'package:core_elements/core_header_panel.dart' as i17;
+import 'package:polymer/src/build/log_injector.dart';
+import 'package:core_elements/core_transition.dart' as i18;
+import 'package:polymer/src/build/log_injector.dart';
+import 'package:core_elements/core_key_helper.dart' as i19;
+import 'package:polymer/src/build/log_injector.dart';
+import 'package:core_elements/core_overlay_layer.dart' as i20;
+import 'package:polymer/src/build/log_injector.dart';
+import 'package:core_elements/core_overlay.dart' as i21;
+import 'package:polymer/src/build/log_injector.dart';
+import 'package:core_elements/core_transition_css.dart' as i22;
+import 'package:polymer/src/build/log_injector.dart';
+import 'package:core_elements/core_media_query.dart' as i23;
+import 'package:polymer/src/build/log_injector.dart';
+import 'package:paper_elements/paper_toast.dart' as i24;
+import 'package:polymer/src/build/log_injector.dart';
+import 'positioning_control.dart' as i25;
+import 'package:polymer/src/build/log_injector.dart';
+import 'index.html.0.dart' as i26;
 import 'package:polymer/src/build/log_injector.dart';
 import 'package:smoke/smoke.dart' show Declaration, PROPERTY, METHOD;
 import 'package:smoke/static.dart' show useGeneratedCode, StaticConfiguration;
@@ -47,7 +65,8 @@ import 'tracking_element.dart' as smoke_3;
 import 'positioning_li_element.dart' as smoke_4;
 import 'positioning.dart' as smoke_5;
 import 'history_element.dart' as smoke_6;
-import 'positioning_control.dart' as smoke_7;
+import 'map_element.dart' as smoke_7;
+import 'positioning_control.dart' as smoke_8;
 abstract class _M0 {} // PolymerElement & ChangeNotifier
 abstract class _M2 {} // _M1 & ChangeNotifier
 abstract class _M1 {} // Object & Polymer
@@ -56,10 +75,14 @@ void main() {
   useGeneratedCode(new StaticConfiguration(
       checkedMode: false,
       getters: {
+        #$: (o) => o.$,
         #blurAction: (o) => o.blurAction,
+        #borderColor: (o) => o.borderColor,
+        #container: (o) => o.container,
         #contextMenuAction: (o) => o.contextMenuAction,
         #counter: (o) => o.counter,
         #delete: (o) => o.delete,
+        #dismiss: (o) => o.dismiss,
         #downAction: (o) => o.downAction,
         #duration: (o) => o.duration,
         #focusAction: (o) => o.focusAction,
@@ -68,12 +91,16 @@ void main() {
         #icon: (o) => o.icon,
         #iconSrc: (o) => o.iconSrc,
         #label: (o) => o.label,
-        #message: (o) => o.message,
+        #mapElement: (o) => o.mapElement,
+        #mode: (o) => o.mode,
+        #narrowMode: (o) => o.narrowMode,
         #onDelete: (o) => o.onDelete,
+        #opened: (o) => o.opened,
         #pause: (o) => o.pause,
         #positioning: (o) => o.positioning,
         #practices: (o) => o.practices,
         #raisedButton: (o) => o.raisedButton,
+        #responsiveWidth: (o) => o.responsiveWidth,
         #speedAverage: (o) => o.speedAverage,
         #speedAvg: (o) => o.speedAvg,
         #src: (o) => o.src,
@@ -82,6 +109,8 @@ void main() {
         #stop: (o) => o.stop,
         #stopWatchStateChanged: (o) => o.stopWatchStateChanged,
         #stopwatchElement: (o) => o.stopwatchElement,
+        #text: (o) => o.text,
+        #toggleHistory: (o) => o.toggleHistory,
         #totalDistance: (o) => o.totalDistance,
         #trackingElement: (o) => o.trackingElement,
         #upAction: (o) => o.upAction,
@@ -89,12 +118,16 @@ void main() {
         #z: (o) => o.z,
       },
       setters: {
+        #borderColor: (o, v) { o.borderColor = v; },
+        #container: (o, v) { o.container = v; },
         #counter: (o, v) { o.counter = v; },
         #gpsStatus: (o, v) { o.gpsStatus = v; },
         #historyElement: (o, v) { o.historyElement = v; },
         #icon: (o, v) { o.icon = v; },
         #iconSrc: (o, v) { o.iconSrc = v; },
-        #message: (o, v) { o.message = v; },
+        #mapElement: (o, v) { o.mapElement = v; },
+        #narrowMode: (o, v) { o.narrowMode = v; },
+        #opened: (o, v) { o.opened = v; },
         #positioning: (o, v) { o.positioning = v; },
         #speedAverage: (o, v) { o.speedAverage = v; },
         #src: (o, v) { o.src = v; },
@@ -105,7 +138,8 @@ void main() {
       },
       parents: {
         smoke_6.HistoryElement: smoke_1.PolymerElement,
-        smoke_7.PositioningControl: _M0,
+        smoke_7.MapElementP: smoke_1.PolymerElement,
+        smoke_8.PositioningControl: _M0,
         smoke_4.PositioningLiElement: _M2,
         smoke_0.StopwatchElement: _M0,
         smoke_3.TrackingElement: _M0,
@@ -116,9 +150,11 @@ void main() {
         smoke_6.HistoryElement: {
           #practices: const Declaration(#practices, Map, isFinal: true, annotations: const [smoke_2.observable]),
         },
-        smoke_7.PositioningControl: {
+        smoke_7.MapElementP: {},
+        smoke_8.PositioningControl: {
           #historyElement: const Declaration(#historyElement, smoke_6.HistoryElement, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
-          #message: const Declaration(#message, String, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
+          #mapElement: const Declaration(#mapElement, smoke_7.MapElementP, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
+          #state: const Declaration(#state, String, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
           #stopWatchStateChanged: const Declaration(#stopWatchStateChanged, Function, kind: METHOD, annotations: const [const smoke_1.ObserveProperty('stopwatchElement.state')]),
           #stopwatchElement: const Declaration(#stopwatchElement, smoke_0.StopwatchElement, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
           #trackingElement: const Declaration(#trackingElement, smoke_3.TrackingElement, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
@@ -131,15 +167,20 @@ void main() {
           #state: const Declaration(#state, num, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
         },
         smoke_3.TrackingElement: {
+          #borderColor: const Declaration(#borderColor, String, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_1.published]),
           #gpsStatus: const Declaration(#gpsStatus, String, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
           #speedAverage: const Declaration(#speedAverage, String, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
         },
       },
       names: {
+        #$: r'$',
         #blurAction: r'blurAction',
+        #borderColor: r'borderColor',
+        #container: r'container',
         #contextMenuAction: r'contextMenuAction',
         #counter: r'counter',
         #delete: r'delete',
+        #dismiss: r'dismiss',
         #downAction: r'downAction',
         #duration: r'duration',
         #focusAction: r'focusAction',
@@ -148,12 +189,16 @@ void main() {
         #icon: r'icon',
         #iconSrc: r'iconSrc',
         #label: r'label',
-        #message: r'message',
+        #mapElement: r'mapElement',
+        #mode: r'mode',
+        #narrowMode: r'narrowMode',
         #onDelete: r'onDelete',
+        #opened: r'opened',
         #pause: r'pause',
         #positioning: r'positioning',
         #practices: r'practices',
         #raisedButton: r'raisedButton',
+        #responsiveWidth: r'responsiveWidth',
         #speedAverage: r'speedAverage',
         #speedAvg: r'speedAvg',
         #src: r'src',
@@ -162,6 +207,8 @@ void main() {
         #stop: r'stop',
         #stopWatchStateChanged: r'stopWatchStateChanged',
         #stopwatchElement: r'stopwatchElement',
+        #text: r'text',
+        #toggleHistory: r'toggleHistory',
         #totalDistance: r'totalDistance',
         #trackingElement: r'trackingElement',
         #upAction: r'upAction',
@@ -185,8 +232,17 @@ void main() {
       i12.upgradeCoreIconButton,
       () => Polymer.register('positioning-li-element', i13.PositioningLiElement),
       () => Polymer.register('history-element', i14.HistoryElement),
-      i15.upgradeCoreToolbar,
-      () => Polymer.register('positioning-control', i16.PositioningControl),
+      () => Polymer.register('map-element', i15.MapElementP),
+      i16.upgradeCoreToolbar,
+      i17.upgradeCoreHeaderPanel,
+      i18.upgradeCoreTransition,
+      i19.upgradeCoreKeyHelper,
+      i20.upgradeCoreOverlayLayer,
+      i21.upgradeCoreOverlay,
+      i22.upgradeCoreTransitionCss,
+      i23.upgradeCoreMediaQuery,
+      i24.upgradePaperToast,
+      () => Polymer.register('positioning-control', i25.PositioningControl),
     ]);
-  i17.main();
+  i26.main();
 }

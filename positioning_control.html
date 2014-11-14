@@ -3,13 +3,17 @@
 <link rel="import" href="stopwatch_element.html">
 <link rel="import" href="tracking_element.html">
 <link rel="import" href="history_element.html">
+<link rel="import" href="map_element.html">
 
 <link rel="import" href="packages/core_elements/core_toolbar.html">
+<link rel="import" href="packages/core_elements/core_header_panel.html">
 <link rel="import" href="packages/paper_elements/paper_icon_button.html">
+<link rel="import" href="packages/paper_elements/paper_toast.html">
 
 <polymer-element name="positioning-control"> 
   <template>
     <style>
+      
       :host {
         height: 100%;
       }
@@ -19,32 +23,53 @@
         color: #f1f1f1;
         fill: #f1f1f1;
       }
+
+
+      .content {
+        height: 100%;
+      }
       
-      stopwatch-element{
-        margin: 2%;
-        padding: 2%;
+      .content > * {
+        display: block;
         border: 1px rgba(20, 20, 100, 0.3) solid;
-        border-radius: 1%;
+        margin: 1%;
+        padding: 1%;
+      }
+      
+      map-element {
+        height: 40%;
+      }
+      
+      stop-watch{
+        height: 20%;
+      }
+      
+      history-element {
+        height: 80%;
       }
       
       tracking-element{
-        margin: 2%;
-        padding: 2%;
+        height: 15%;
       }
       
     </style>
-    
-    <core-toolbar>
-      <paper-icon-button icon="menu"></paper-icon-button>
-      <span flex>Snow Route</span>
-      <span>{{ message }}</span>
-    </core-toolbar>
-    
-    <div layout vertical flex>
-        <stopwatch-element id="watch_element"></stopwatch-element>
-        <tracking-element id="tracking_element"></tracking-element>
+    <core-header-panel layout vertical flex>
+      <core-toolbar>
+        <paper-icon-button icon="menu" on-tap="{{toggleHistory}}" id="buttonToggleHistory"></paper-icon-button>
+        <span flex>Snow Route</span>
+        <span>{{ state }}</span>
+      </core-toolbar>
+      
+      <div class="content">
         <history-element id="history_element"></history-element>
-    </div>
+        <stopwatch-element id="watch_element"></stopwatch-element>
+        <map-element id="map_element"></map-element>
+        <tracking-element id="tracking_element" borderColor="rgba(20, 20, 100, 0.3)"></tracking-element>
+      </div>
+    </core-header-panel>
+    
+    <paper-toast id="toast"></paper-toast>
+    
   </template> 
   <script type="application/dart" src="positioning_control.dart"></script>
 </polymer-element>
