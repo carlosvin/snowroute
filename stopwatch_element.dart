@@ -3,15 +3,13 @@ library watch;
 import 'dart:html';
 import 'dart:async';
 import 'package:polymer/polymer.dart';
-
+import 'state_machine.dart';
 
 @CustomTag('stopwatch-element')
-class StopwatchElement extends PolymerElement with ChangeNotifier  {
+class StopwatchElement extends PolymerElement with StateNotifier, ChangeNotifier {
   static final oneSecond = new Duration(seconds:1);
   static final initialCounterState = '00:00:00';
   
-  // 0, 1, 2 -> stopped, started, paused
-  @reflectable @observable num get state => __$state; num __$state = 0; @reflectable set state(num value) { __$state = notifyPropertyChange(#state, __$state, value); }
   @reflectable @observable String get counter => __$counter; String __$counter=initialCounterState; @reflectable set counter(String value) { __$counter = notifyPropertyChange(#counter, __$counter, value); }
   
   StopwatchElement.created() : super.created();
@@ -46,7 +44,7 @@ class StopwatchElement extends PolymerElement with ChangeNotifier  {
     startButton.hidden = true;
     stopButton.hidden = false;
     pauseButton.hidden = false;
-    state = 1;
+    notifyStart();
   }
   
   void stop(Event e, var detail, Node target) {
@@ -56,7 +54,7 @@ class StopwatchElement extends PolymerElement with ChangeNotifier  {
     pauseButton.hidden = true;
     stopButton.hidden = true;
     counter = initialCounterState;
-    state = 0;
+    notifyStop();
   }
   
   void pause(Event e, var detail, Node target) {
@@ -64,7 +62,7 @@ class StopwatchElement extends PolymerElement with ChangeNotifier  {
     startButton.hidden = false;
     pauseButton.hidden = true;
     stopButton.hidden = false;
-    state = 2;
+    notifyPause();
   }
   
   void updateTime(Timer _) {

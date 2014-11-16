@@ -67,9 +67,13 @@ import 'positioning.dart' as smoke_5;
 import 'history_element.dart' as smoke_6;
 import 'map_element.dart' as smoke_7;
 import 'positioning_control.dart' as smoke_8;
-abstract class _M0 {} // PolymerElement & ChangeNotifier
-abstract class _M2 {} // _M1 & ChangeNotifier
-abstract class _M1 {} // Object & Polymer
+abstract class _M0 {} // PolymerElement & StateNotifier
+abstract class _M1 {} // _M0 & ChangeNotifier
+abstract class _M2 {} // PolymerElement & StateListener
+abstract class _M3 {} // _M2 & ChangeNotifier
+abstract class _M5 {} // _M4 & ChangeNotifier
+abstract class _M6 {} // PolymerElement & ChangeNotifier
+abstract class _M4 {} // Object & Polymer
 
 void main() {
   useGeneratedCode(new StaticConfiguration(
@@ -107,7 +111,6 @@ void main() {
         #start: (o) => o.start,
         #state: (o) => o.state,
         #stop: (o) => o.stop,
-        #stopWatchStateChanged: (o) => o.stopWatchStateChanged,
         #stopwatchElement: (o) => o.stopwatchElement,
         #text: (o) => o.text,
         #toggleHistory: (o) => o.toggleHistory,
@@ -139,12 +142,16 @@ void main() {
       parents: {
         smoke_6.HistoryElement: smoke_1.PolymerElement,
         smoke_7.MapElementP: smoke_1.PolymerElement,
-        smoke_8.PositioningControl: _M0,
-        smoke_4.PositioningLiElement: _M2,
-        smoke_0.StopwatchElement: _M0,
-        smoke_3.TrackingElement: _M0,
+        smoke_8.PositioningControl: _M6,
+        smoke_4.PositioningLiElement: _M5,
+        smoke_0.StopwatchElement: _M1,
+        smoke_3.TrackingElement: _M3,
         _M0: smoke_1.PolymerElement,
-        _M2: _M1,
+        _M1: _M0,
+        _M2: smoke_1.PolymerElement,
+        _M3: _M2,
+        _M5: _M4,
+        _M6: smoke_1.PolymerElement,
       },
       declarations: {
         smoke_6.HistoryElement: {
@@ -155,7 +162,6 @@ void main() {
           #historyElement: const Declaration(#historyElement, smoke_6.HistoryElement, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
           #mapElement: const Declaration(#mapElement, smoke_7.MapElementP, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
           #state: const Declaration(#state, String, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
-          #stopWatchStateChanged: const Declaration(#stopWatchStateChanged, Function, kind: METHOD, annotations: const [const smoke_1.ObserveProperty('stopwatchElement.state')]),
           #stopwatchElement: const Declaration(#stopwatchElement, smoke_0.StopwatchElement, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
           #trackingElement: const Declaration(#trackingElement, smoke_3.TrackingElement, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
         },
@@ -164,7 +170,6 @@ void main() {
         },
         smoke_0.StopwatchElement: {
           #counter: const Declaration(#counter, String, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
-          #state: const Declaration(#state, num, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
         },
         smoke_3.TrackingElement: {
           #borderColor: const Declaration(#borderColor, String, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_1.published]),
@@ -205,7 +210,6 @@ void main() {
         #start: r'start',
         #state: r'state',
         #stop: r'stop',
-        #stopWatchStateChanged: r'stopWatchStateChanged',
         #stopwatchElement: r'stopwatchElement',
         #text: r'text',
         #toggleHistory: r'toggleHistory',
