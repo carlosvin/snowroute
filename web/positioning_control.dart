@@ -6,10 +6,11 @@ import 'stopwatch_element.dart';
 import 'tracking_element.dart';
 import 'history_element.dart';
 import 'map_element.dart';
+import 'state_machine.dart';
 
 
 @CustomTag('positioning-control')
-class PositioningControl extends PolymerElement {
+class PositioningControl extends PolymerElement implements StateListener{
 
   @observable String state = '';
   @observable StopwatchElement stopwatchElement;
@@ -31,36 +32,31 @@ class PositioningControl extends PolymerElement {
     mapElement = $['map_element'];
     toastElement= $['toast'];
     buttonToggleHistory = $['buttonToggleHistory'];
+    historyElement.hidden = true;    
     
-    historyElement.hidden = true;
+    stopwatchElement.register(this);
+    stopwatchElement.register(trackingElement);
     
-    trackingElement.init(mapElement);
+    trackingElement.listener = mapElement;
   }
   
-  @ObserveProperty('stopwatchElement.state')
-  stopWatchStateChanged(oldValue, newValue) {
-    if (stopwatchElement.state == 0){
-      state = 'stopped';
-      if (oldValue != null){
-        save();  
-      }
-    } else if (stopwatchElement.state == 1){
-      state = 'started';
-    } else if (stopwatchElement.state == 2){
-      state = 'paused';
-    } else {
-      state = 'unknown state $oldValue $newValue';
-    }
-  }
-  
-  void save(){
+  void onStateStopped(){
+    state = 'stopped';
     if ( historyElement.add(trackingElement.positioning)){
       toast("Saved ${trackingElement.positioning.first.timestamp}");
     }else{
       toast("Error saving");
     }
     
-    trackingElement.clear();
+  }
+  
+  void onStateStarted(){
+    state = 'started';
+  }
+  
+  @override
+  void onStatePaused(){
+    state = 'paused';
   }
   
   void toast(String m){

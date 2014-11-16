@@ -3,15 +3,13 @@ library watch;
 import 'dart:html';
 import 'dart:async';
 import 'package:polymer/polymer.dart';
-
+import 'state_machine.dart';
 
 @CustomTag('stopwatch-element')
-class StopwatchElement extends PolymerElement {
+class StopwatchElement extends PolymerElement with StateNotifier {
   static final oneSecond = new Duration(seconds:1);
   static final initialCounterState = '00:00:00';
   
-  // 0, 1, 2 -> stopped, started, paused
-  @observable num state = 0;
   @observable String counter=initialCounterState;
   
   StopwatchElement.created() : super.created();
@@ -46,7 +44,7 @@ class StopwatchElement extends PolymerElement {
     startButton.hidden = true;
     stopButton.hidden = false;
     pauseButton.hidden = false;
-    state = 1;
+    notifyStart();
   }
   
   void stop(Event e, var detail, Node target) {
@@ -56,7 +54,7 @@ class StopwatchElement extends PolymerElement {
     pauseButton.hidden = true;
     stopButton.hidden = true;
     counter = initialCounterState;
-    state = 0;
+    notifyStop();
   }
   
   void pause(Event e, var detail, Node target) {
@@ -64,7 +62,7 @@ class StopwatchElement extends PolymerElement {
     startButton.hidden = false;
     pauseButton.hidden = true;
     stopButton.hidden = false;
-    state = 2;
+    notifyPause();
   }
   
   void updateTime(Timer _) {

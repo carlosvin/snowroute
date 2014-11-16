@@ -3,14 +3,16 @@ library map;
 import 'package:polymer/polymer.dart';
 import 'package:google_maps/google_maps.dart';
 import 'dart:html';
+import 'tracking_element.dart';
 
 @CustomTag('map-element')
-class MapElementP extends PolymerElement {
+class MapElementP extends PolymerElement implements TrackingListener{
 
+  bool isInit = false;
   GMap gmap;
   Polyline line;
   Element canvasMap;
-    
+  Marker endMarker;
   MapElementP.created() : super.created();
 
   @override
@@ -20,31 +22,54 @@ class MapElementP extends PolymerElement {
     canvasMap.hidden = true;
   }
   
-  void addPosition(num lat, num long){
-    if (gmap == null){
-      initMap();
+  @override
+  void stopTracking(){
+    isInit = false;
+  }
+  
+  @override
+  void newPosition(num lat, num long, bool tracking){
+    LatLng pos = new LatLng(lat, long);
+    if (!isInit){
+      _initMap(pos);
     }
-    _drawMap(lat, long);
+    _drawMap(pos, tracking);
   }
   
-  void _drawMap(num lat, num long){
-    gmap.center = new LatLng(lat, long);
-    line.path.push(gmap.center);
+  void _drawMap(LatLng pos, bool tracking){
+    gmap.center = pos;
+    endMarker.position = pos;
+    if (tracking){
+      line.path.push(pos);
+    }
   }
-  
-  void clear(){
+
+  void _initMap(LatLng pos){
+    
+    if (!isInstantiated){
+      _instatiate(pos);
+    }
+    
     line.path.clear();
+    
+    final marker = new Marker(new MarkerOptions()
+      ..position = pos
+      ..map = gmap
+      ..title = 'Initial position'
+    );
+    
+    isInit = true;
+
   }
   
-  void initMap(){
-    //canvasMap.style.minHeight = "100px";
-    //canvasMap.style.height = "100px";
+  void _instatiate(LatLng pos){
     canvasMap.hidden = false;
+
     gmap = new GMap(
         canvasMap, 
           new MapOptions()
             ..zoom = 18
-            ..center = new LatLng(0, 0)
+            ..center = pos
             ..mapTypeId = MapTypeId.ROADMAP
           );
     
@@ -56,6 +81,12 @@ class MapElementP extends PolymerElement {
           ..strokeOpacity=0.7
           ..strokeWeight=2
           ..visible=true);
+    
+    endMarker = new Marker(new MarkerOptions()
+    ..position = pos
+    ..map = gmap
+    ..title = 'Last position');
   }
   
+  bool get isInstantiated => gmap != null;
 }
