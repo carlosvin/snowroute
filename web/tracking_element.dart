@@ -14,6 +14,7 @@ abstract class TrackingListener {
 @CustomTag('tracking-element')
 class TrackingElement extends PolymerElement with StateListener{
   @observable String gpsStatus = '?';
+  @observable String totalDistance = '?';
   @observable String speedAverage = '?';
   @published String borderColor = 'rgb(0,0,0)';
   
@@ -53,6 +54,7 @@ class TrackingElement extends PolymerElement with StateListener{
   
   void _addPosition(Geoposition geoPosition){
     if (positioning.addPosition(geoPosition.coords.latitude, geoPosition.coords.longitude, geoPosition.timestamp)){
+      totalDistance = "${positioning.totalDistance}km";
       speedAverage = "${positioning.speedAvg}km/h";
       gpsStatus = positioning.last.toString();
     }
