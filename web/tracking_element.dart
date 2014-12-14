@@ -54,8 +54,8 @@ class TrackingElement extends PolymerElement with StateListener{
   
   void _addPosition(Geoposition geoPosition){
     if (positioning.addPosition(geoPosition.coords.latitude, geoPosition.coords.longitude, geoPosition.timestamp)){
-      totalDistance = "${positioning.totalDistance}km";
-      speedAverage = "${positioning.speedAvg}km/h";
+      totalDistance = "${positioning.totalDistance.toStringAsPrecision(2)}km";
+      speedAverage = "${positioning.speedAvg.toStringAsPrecision(2)}km/h";
       gpsStatus = positioning.last.toString();
     }
     

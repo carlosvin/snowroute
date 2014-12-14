@@ -22,7 +22,7 @@ class Position {
   }
   
   String toString(){
-    return "($lat, $long) at ${new DateTime.fromMillisecondsSinceEpoch(timestamp)}";
+    return "(${lat.toStringAsPrecision(2)}, ${long.toStringAsPrecision(2)})";
   }
   
   bool isSamePlace (Position p){
