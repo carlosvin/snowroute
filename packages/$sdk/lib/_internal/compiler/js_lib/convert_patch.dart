@@ -337,3 +337,42 @@ class _JsonMap implements LinkedHashMap {
   static _newJavaScriptObject()
       => JS('=Object', 'Object.create(null)');
 }
+
+@patch class JsonDecoder {
+  @patch
+  StringConversionSink startChunkedConversion(Sink<Object> sink) {
+    return new _JsonDecoderSink(_reviver, sink);
+  }
+}
+
+/**
+ * Implements the chunked conversion from a JSON string to its corresponding
+ * object.
+ *
+ * The sink only creates one object, but its input can be chunked.
+ */
+// TODO(floitsch): don't accumulate everything before starting to decode.
+class _JsonDecoderSink extends _StringSinkConversionSink {
+  final _Reviver _reviver;
+  final Sink<Object> _sink;
+
+  _JsonDecoderSink(this._reviver, this._sink)
+      : super(new StringBuffer());
+
+  void close() {
+    super.close();
+    StringBuffer buffer = _stringSink;
+    String accumulated = buffer.toString();
+    buffer.clear();
+    Object decoded = _parseJson(accumulated, _reviver);
+    _sink.add(decoded);
+    _sink.close();
+  }
+}
+
+@patch class Utf8Decoder {
+  @patch
+  Converter<List<int>,dynamic> fuse(Converter<String, dynamic> next) {
+    return super.fuse(next);
+  }
+}

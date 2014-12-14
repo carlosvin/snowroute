@@ -195,12 +195,13 @@ class _LinterVisitor extends TreeVisitor {
       case 'script': _validateScriptElement(node); break;
       case 'template':
         var isTag = node.attributes['is'];
+        var oldInAutoBindingElement = _inAutoBindingElement;
         if (isTag != null && AUTO_BINDING_ELEMENTS.contains(isTag)) {
           _inAutoBindingElement = true;
         }
         _validateNormalElement(node);
         super.visitElement(node);
-        _inAutoBindingElement = false;
+        _inAutoBindingElement = oldInAutoBindingElement;
         break;
       default:
         _validateNormalElement(node);
@@ -311,6 +312,14 @@ class _LinterVisitor extends TreeVisitor {
 
     if (src != null && src.endsWith('web_components/dart_support.js')) {
       _logger.warning(DART_SUPPORT_NO_LONGER_REQUIRED, span: node.sourceSpan);
+    }
+
+    if (src != null && src.contains('web_components/webcomponents.')) {
+      _logger.warning(WEB_COMPONENTS_NO_LONGER_REQUIRED, span: node.sourceSpan);
+    }
+
+    if (src != null && src.contains('web_components/platform.')) {
+      _logger.warning(PLATFORM_JS_RENAMED, span: node.sourceSpan);
     }
 
     var isEmpty = node.innerHtml.trim() == '';

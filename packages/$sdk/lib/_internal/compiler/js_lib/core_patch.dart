@@ -6,8 +6,9 @@
 import "dart:_internal" as _symbol_dev;
 import 'dart:_interceptors';
 import 'dart:_js_helper' show patch,
-                              checkNull,
+                              checkInt,
                               getRuntimeType,
+                              jsonEncodeNative,
                               JSSyntaxRegExp,
                               Primitives,
                               stringJoinUnchecked,
@@ -141,6 +142,11 @@ class Error {
   }
 
   @patch
+  static String _stringToSafeString(String string) {
+    return jsonEncodeNative(string);
+  }
+
+  @patch
   StackTrace get stackTrace => Primitives.extractStackTrace(this);
 }
 
@@ -156,19 +162,16 @@ class DateTime {
                      int second,
                      int millisecond,
                      bool isUtc)
-      : this.isUtc = checkNull(isUtc),
-        millisecondsSinceEpoch = Primitives.valueFromDecomposedDate(
-            year, month, day, hour, minute, second, millisecond, isUtc) {
-    if (millisecondsSinceEpoch == null) throw new ArgumentError();
-    Primitives.lazyAsJsDate(this);
-  }
+        // checkBool is manually inlined here because dart2js doesn't inline it
+        // and [isUtc] is usually a constant.
+      : this.isUtc = isUtc is bool ? isUtc : throw new ArgumentError(isUtc),
+        millisecondsSinceEpoch = checkInt(Primitives.valueFromDecomposedDate(
+            year, month, day, hour, minute, second, millisecond, isUtc));
 
   @patch
   DateTime._now()
       : isUtc = false,
-        millisecondsSinceEpoch = Primitives.dateNow() {
-    Primitives.lazyAsJsDate(this);
-  }
+        millisecondsSinceEpoch = Primitives.dateNow();
 
   @patch
   static int _brokenDownDateToMillisecondsSinceEpoch(
@@ -270,11 +273,28 @@ class List<E> {
 @patch
 class String {
   @patch
-  factory String.fromCharCodes(Iterable<int> charCodes) {
+  factory String.fromCharCodes(Iterable<int> charCodes,
+                               [int start = 0, int end]) {
+    // If possible, recognize typed lists too.
     if (charCodes is! JSArray) {
-      charCodes = new List.from(charCodes);
+      return _stringFromIterable(charCodes, start, end);
     }
-    return Primitives.stringFromCharCodes(charCodes);
+
+    List list = charCodes;
+    int len = list.length;
+    if (start < 0 || start > len) {
+      throw new RangeError.range(start, 0, len);
+    }
+    if (end == null) {
+      end = len;
+    } else if (end < start || end > len) {
+      throw new RangeError.range(end, start, len);
+    }
+
+    if (start > 0 || end < len) {
+      list = list.sublist(start, end);
+    }
+    return Primitives.stringFromCharCodes(list);
   }
 
   @patch
@@ -286,6 +306,32 @@ class String {
   factory String.fromEnvironment(String name, {String defaultValue}) {
     throw new UnsupportedError(
         'String.fromEnvironment can only be used as a const constructor');
+  }
+
+  static String _stringFromIterable(Iterable<int> charCodes,
+                                    int start, int end) {
+    if (start < 0) throw new RangeError.range(start, 0, charCodes.length);
+    if (end != null && end < start) {
+      throw new RangeError.range(end, start, charCodes.length);
+    }
+    var it = charCodes.iterator;
+    for (int i = 0; i < start; i++) {
+      if (!it.moveNext()) {
+        throw new RangeError.range(start, 0, i);
+      }
+    }
+    var list = [];
+    if (end == null) {
+      while (it.moveNext()) list.add(it.current);
+    } else {
+      for (int i = start; i < end; i++) {
+        if (!it.moveNext()) {
+          throw new RangeError.range(end, start, i);
+        }
+        list.add(it.current);
+      }
+    }
+    return Primitives.stringFromCharCodes(list);
   }
 }
 

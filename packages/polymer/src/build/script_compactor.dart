@@ -249,13 +249,19 @@ class _ScriptCompactor extends PolymerTransformer {
     // Process all classes and top-level functions to include initializers,
     // register custom elements, and include special fields and methods in
     // custom element classes.
+    var functionsSeen = new Set<FunctionElement>();
+    var classesSeen = new Set<ClassElement>();
     for (var id in entryLibraries) {
       var lib = resolver.getLibrary(id);
       for (var fun in _visibleTopLevelMethodsOf(lib)) {
+        if (functionsSeen.contains(fun)) continue;
+        functionsSeen.add(fun);
         _processFunction(fun, id);
       }
 
       for (var cls in _visibleClassesOf(lib)) {
+        if (classesSeen.contains(cls)) continue;
+        classesSeen.add(cls);
         _processClass(cls, id, recorder);
       }
     }
@@ -544,13 +550,26 @@ class _HtmlExtractor extends TreeVisitor {
   final _SubExpressionVisitor expressionVisitor;
   final BuildLogger logger;
   bool _inTemplate = false;
+  bool _inPolymerJs = false;
 
   _HtmlExtractor(this.logger, this.generator, this.publishedAttributes,
       this.expressionVisitor);
 
   void visitElement(Element node) {
+    var lastInPolymerJs = _inPolymerJs;
+    if (node.localName == 'template'
+        && node.attributes['is'] == 'auto-binding') {
+      _inPolymerJs = true;
+    }
+
     if (_inTemplate) _processNormalElement(node);
+
     if (node.localName == 'polymer-element') {
+      // Detect Polymer JS elements, the current logic is any element with only
+      // non-dart script tags.
+      var scripts = node.querySelectorAll('script');
+      _inPolymerJs = scripts.isNotEmpty &&
+          scripts.every((s) => s.attributes['type'] != 'application/dart');
       _processPolymerElement(node);
       _processNormalElement(node);
     }
@@ -563,10 +582,12 @@ class _HtmlExtractor extends TreeVisitor {
     } else {
       super.visitElement(node);
     }
+    _inPolymerJs = lastInPolymerJs;
   }
 
   void visitText(Text node) {
-    if (!_inTemplate) return;
+    // Nothing here applies if inside a polymer js element
+    if (!_inTemplate || _inPolymerJs) return;
     var bindings = _Mustaches.parse(node.data);
     if (bindings == null) return;
     for (var e in bindings.expressions) {
@@ -576,6 +597,9 @@ class _HtmlExtractor extends TreeVisitor {
 
   /// Registers getters and setters for all published attributes.
   void _processPolymerElement(Element node) {
+    // Nothing here applies if inside a polymer js element
+    if (_inPolymerJs) return;
+
     var tagName = node.attributes['name'];
     var value = node.attributes['attributes'];
     if (value != null) {
@@ -587,6 +611,9 @@ class _HtmlExtractor extends TreeVisitor {
   /// Produces warnings for misuses of on-foo event handlers, and for instanting
   /// custom tags incorrectly.
   void _processNormalElement(Element node) {
+    // Nothing here applies if inside a polymer js element
+    if (_inPolymerJs) return;
+
     var tag = node.localName;
     var isCustomTag = isCustomTagName(tag) || node.attributes['is'] != null;
 
@@ -824,8 +851,7 @@ List<FunctionElement> _visibleTopLevelMethodsOf(LibraryElement lib) {
   var result = [];
   result.addAll(lib.units.expand((u) => u.functions));
   for (var e in lib.exports) {
-    var exported = e.exportedLibrary.units
-        .expand((u) => u.functions).toList();
+    var exported = e.exportedLibrary.units.expand((u) => u.functions).toList();
     _filter(exported, e.combinators);
     result.addAll(exported);
   }
