@@ -1,8 +1,8 @@
 library tracking;
 
+import 'dart:html';
 import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
-import 'dart:html';
 import 'positioning.dart';
 import 'state_machine.dart';
 
@@ -52,7 +52,7 @@ class TrackingElement extends PolymerElement with StateListener{
   }
   
   void _addPosition(Geoposition geoPosition){
-    if (positioning.addPosition(geoPosition)){
+    if (positioning.addPosition(geoPosition.coords.latitude, geoPosition.coords.longitude, geoPosition.timestamp)){
       speedAverage = "${positioning.speedAvg}km/h";
       gpsStatus = positioning.last.toString();
     }

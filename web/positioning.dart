@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'dart:math';
 
 final EARTH_RADIUS = 6371; // km
@@ -12,12 +11,6 @@ class Position {
   Position(this.long, this.lat, this.timestamp){
     
   }
-  
-  Position.fromGeoposition(Geoposition pos): 
-    long = pos.coords.longitude,
-    lat = pos.coords.latitude,
-    timestamp = pos.timestamp;
-  
   
   Position.deserialize(String str):
     long = double.parse(str.split(',').elementAt(0)),
@@ -41,11 +34,12 @@ class Position {
   }
   
   num getDistanceTo (Position b){
-    num dLat = toRadians(b.lat - lat);
-    num dLong = toRadians(b.long - long);
+    num dlon = toRadians(b.long - long);
+    num dlat = toRadians(b.lat - lat);
     
-    num a = sin(dLat/2) * sin(dLat/2) + sin(dLong/2) * sin(dLong/2) * cos(toRadians(lat)) * cos(b.lat); 
-    return EARTH_RADIUS2 * atan2(sqrt(a), sqrt(1-a)); 
+    num a = pow(sin(dlat/2), 2) + cos(toRadians(lat)) * cos(toRadians(b.lat)) * pow(sin(dlon/2),2); 
+    num c = 2 * atan2( sqrt(a), sqrt(1-a) ); 
+    return EARTH_RADIUS * c;
   }
   
 }
@@ -83,8 +77,8 @@ class Positioning  {
   }
   
 
-  bool addPosition(Geoposition coords){
-    return add(new Position.fromGeoposition(coords));
+  bool addPosition(double lat, double long, int ts){
+    return add(new Position(lat, long , ts));
   }
   
   bool add(Position pos){
@@ -124,8 +118,14 @@ class Positioning  {
     }
   }
   
-  num get duration => (last.timestamp - first.timestamp)/1000;
-  
+  num get duration {
+      if (isEmpty) {
+        return 0;
+      }
+      else {
+        return (last.timestamp - first.timestamp)/1000;
+      }
+  }
   num get durationH => duration / 3600;
 
 }
