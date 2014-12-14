@@ -48,11 +48,22 @@ void main() {
       //expect(positioning.last, throwsStateError);
     });
     
-    test("2 positions", () {
+    test("Several positions", () {
       int now = new DateTime.now().millisecondsSinceEpoch;
       positioning.addPosition(0.0, 0.0, now);
       positioning.addPosition(0.1, 0.1, now + 1000);
-     
+      expect(positioning.distances.isEmpty, false);
+      expect(positioning.distances.length, 1);
+      expect(positioning.totalDistance.round(), 16);
+      
+      positioning.addPosition(1.0, 1.0, now + 10000);
+      expect(positioning.totalDistance.round(), 157);
+
+      positioning.addPosition(0.0, 0.0, now + 11000);
+      expect(positioning.totalDistance.round(), 2* 157);
+
+      positioning.addPosition(-1.0, -1.0, now + 12000);
+      expect(positioning.totalDistance.round(), 472);
     });
   });
 }

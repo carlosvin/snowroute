@@ -90,8 +90,8 @@ class Positioning  {
         positions.remove(lastKeyToRemove);
         distances.remove(lastKeyToRemove); 
       }
-      positions[pos.timestamp] = pos;
       distances[pos.timestamp] = last.getDistanceTo(pos);
+      positions[pos.timestamp] = pos;
     }
     return true;
   }
