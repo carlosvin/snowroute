@@ -55,15 +55,19 @@ void main() {
       expect(positioning.distances.isEmpty, false);
       expect(positioning.distances.length, 1);
       expect(positioning.totalDistance.round(), 16);
+      expect(positioning.speedAvg, positioning.totalDistance * 3600);
       
       positioning.addPosition(1.0, 1.0, now + 10000);
       expect(positioning.totalDistance.round(), 157);
+      expect(positioning.speedAvg, positioning.totalDistance * 360);
 
       positioning.addPosition(0.0, 0.0, now + 11000);
       expect(positioning.totalDistance.round(), 2* 157);
+      expect(positioning.speedAvg, positioning.totalDistance * 3600 / 11);
 
       positioning.addPosition(-1.0, -1.0, now + 12000);
       expect(positioning.totalDistance.round(), 472);
+      expect(positioning.speedAvg, positioning.totalDistance * 3600 / 12);
     });
   });
 }

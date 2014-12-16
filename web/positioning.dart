@@ -42,6 +42,10 @@ class Position {
     return EARTH_RADIUS * c;
   }
   
+  num getSlope(Position b){
+    return (b.long - long) / (b.lat - lat);
+  }
+  
 }
 
 class Positioning  { 
@@ -127,5 +131,51 @@ class Positioning  {
       }
   }
   num get durationH => duration / 3600;
+}
 
+class TimeRange {
+  num startMs, stopMs, n, distanceM;
+}
+
+class PositioningNoLifts extends Positioning {
+  
+  PositioningNoLifts(Positioning positioning, num toleranceMeter){
+    this.positions.addAll(positioning.positions);
+    
+    List<TimeRange> rectLines = detectRectLines(this.positions, 0.01);
+  }
+  
+  
+  static List<TimeRange> detectRectLines(Map<int, Position> positions, num tolerance){
+    Map<int, num> slopes = new Map();
+
+    int beforeT;
+    for (int t in positions.keys){
+      if (t == positions.keys.first) {
+        beforeT = t;
+      }else{
+        slopes[beforeT] = positions[beforeT].getSlope(positions[t]);
+        beforeT = t;
+      }
+    }
+    
+    Map<int, bool> candidates = new Map();
+
+    for (int t in positions.keys){
+      if (t == positions.keys.first) {
+        beforeT = t;
+      }else{
+        if ((slopes[beforeT] - slopes[t]).abs() < tolerance){
+          candidates[beforeT] = true;
+        }else{
+          candidates[beforeT] = false;
+        }
+        beforeT = t;
+      }
+    }
+    
+    
+  }
+  
+  
 }
