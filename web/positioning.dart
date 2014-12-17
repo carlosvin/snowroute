@@ -174,7 +174,16 @@ class PositioningNoLifts extends Positioning {
       }
     }
     
-    
+    for (int t in positions.keys){
+      if (t == positions.keys.first) {
+        beforeT = t;
+      }else{
+        if (candidates[beforeT] && candidates[t]){
+          
+        }
+        beforeT = t;
+      }
+    }
   }
   
   
