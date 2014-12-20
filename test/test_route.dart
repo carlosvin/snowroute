@@ -62,5 +62,31 @@ void main() {
 
     });
   });
+  //group('Equality', () {
+
+  group('Serialization', () {
+      Route route;
+      setUp(() {
+        route = new Route.fromCoords(-1.0, -1.0);
+        for (double i=0.0; i<10; i+=1) {
+          route.add(i, i*2);
+          sleep(new Duration(milliseconds: 10));
+        }
+      });
+      tearDown(() {
+        route = null;
+      });
+      
+      test("Serialize", () {
+        String serializedStr = route.serialize();
+
+        Route deserialized = new Route.deserialize(serializedStr);
+        
+        expect(deserialized.serialize(), serializedStr);
+        expect(deserialized, route);
+        
+      });
+         
+    });
 }
 

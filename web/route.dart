@@ -26,7 +26,9 @@ class Pos {
     _distanceNext = distanceTo(_next);
   }
   
-  bool get hasNext => _next == null;
+  Pos get next => _next;
+  
+  bool get hasNext => _next != null;
   
   num get distancePrev => _distancePrev;
   num get distanceNext=> _distanceNext;
@@ -47,27 +49,64 @@ class Pos {
      return EARTH_RADIUS * c;
    }
   
+  bool operator ==(Pos b) {
+    return lat == b.lat && long == b.long && timestamp== b.timestamp && _next == b._next; 
+  }
 }
 
 
-class Route {
+class Route  {
   
-  final Pos ini;
+  Pos _ini;
   Pos _last;
   num _distance = 0;
   
-  Route (this.ini){
+  Route (Pos ini){
+    _init(ini);
+  }
+  
+  Route.fromCoords (num  lat, num long){
+    _init(new Pos(lat, long, new DateTime.now() ,null));
+  }
+  
+  Route.deserialize (String routeStr){
+    routeStr.split('\n').forEach((s) => _deserializePosition(s) );
+  }
+  
+  void _init(Pos ini){
+    this._ini = ini;
     this._last = ini;
   }
   
-  Route.fromCoords (num  lat, num long): this.ini = new Pos(lat, long, new DateTime.now() ,null){
-    this._last = ini;
+  void _deserializePosition(String posStr){
+    List<String> values = posStr.split(',');
+    
+    if (values.length == 3){
+      num lat = double.parse(values[0]);
+      num long = double.parse(values[1]);
+      DateTime timestamp = new DateTime.fromMillisecondsSinceEpoch(int.parse(values[2]));
+      
+      if (_ini == null){
+        _init(new Pos(lat, long, timestamp, null));
+      }else{
+        _add(lat, long, timestamp);
+      }
+    } 
   }
   
+  String serialize (){
+    StringBuffer strb = new StringBuffer();
+    for (Pos pos=_ini; pos != null; pos = pos.next) {
+      strb.writeln("${pos.lat},${pos.long},${pos.timestamp.millisecondsSinceEpoch}");      
+    }
+    return strb.toString();
+  }
+
+
   void _add(num x, num y, DateTime time){
     Pos p;
-    if (_last == ini){
-      p = new Pos(x, y, time, ini);
+    if (_last == _ini){
+      p = new Pos(x, y, time, _ini);
     }else{
       p = new Pos(x, y, time, _last);
     }
@@ -89,7 +128,11 @@ class Route {
   /**
    * @return total duration of route
    */
-  Duration get duration => last.timestamp.difference(ini.timestamp);
+  Duration get duration => last.timestamp.difference(_ini.timestamp);
   
   num get speedAvg => distance / duration.inSeconds;
+  
+  bool operator ==(Route b) {
+    return _ini == b._ini; 
+  }
 }
