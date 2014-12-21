@@ -3,17 +3,17 @@ library map;
 import 'package:polymer/polymer.dart';
 import 'package:google_maps/google_maps.dart';
 import 'dart:html';
-import 'tracking_element.dart';
+import 'interfaces.dart';
 
 @CustomTag('map-element')
-class MapElementP extends PolymerElement implements TrackingListener{
+class MapElementView extends PolymerElement implements TrackingListener{
 
   bool isInit = false;
   GMap gmap;
   Polyline line;
   Element canvasMap;
   Marker endMarker;
-  MapElementP.created() : super.created();
+  MapElementView.created() : super.created();
 
   @override
   void attached() {
@@ -37,7 +37,8 @@ class MapElementP extends PolymerElement implements TrackingListener{
   }
   
   void _drawMap(LatLng pos, bool tracking){
-    gmap.center = pos;
+    gmap.panTo(pos);
+    //gmap.center = ;
     endMarker.position = pos;
     if (tracking){
       line.path.push(pos);

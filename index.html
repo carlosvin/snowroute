@@ -2052,12 +2052,10 @@ html /deep/ .paper-shadow-bottom-z-5 {
       <tbody><tr>
         <td>{{ totalDistance }}</td>
         <td>{{ speedAverage }}</td>
-        <td>{{ gpsStatus }}</td>
       </tr>
       <tr>
         <th>Total distance</th>
         <th>Speed AVG</th>
-        <th>GPS Status</th>
       </tr>
     </tbody></table>
     
@@ -2353,506 +2351,6 @@ core-icon {
   
   
 </polymer-element>
-
-
-
-<polymer-element name="core-toolbar" attributes="justify middleJustify bottomJustify">
-<template>
-
-  <style>/*
-Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
-*/
-
-:host {
-  /* technical */
-  display: block;
-  position: relative;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  /* size */
-  height: 64px;
-  /* typography */
-  font-size: 1.3em;
-  /* background */
-  background-color: #CFD8DC;
-}
-
-:host(.animate) {
-  /* transition */
-  transition: height 0.18s ease-in;
-}
-
-:host(.medium-tall) {
-  height: 128px;
-}
-
-:host(.tall) {
-  height: 192px;
-}
-
-.toolbar-tools {
-  position: relative;
-  height: 64px;
-  padding: 0 8px;
-  pointer-events: none;
-}
-
-/* narrow layout */
-:host(.core-narrow),
-:host-context(.core-narrow) {
-  height: 56px;
-}
-
-polyfill-next-selector { content: ':host.core-narrow.medium-tall, .core-narrow :host.medium-tall'; }
-:host(.core-narrow.medium-tall),
-:host-context(.core-narrow):host(.medium-tall) {
-  height: 112px;
-}
-
-polyfill-next-selector { content: ':host.core-narrow.tall, .core-narrow :host.tall'; }
-:host(.core-narrow.tall),
-:host-context(.core-narrow):host(.tall) {
-  height: 168px;
-}
-
-polyfill-next-selector { content: ':host.core-narrow .toolbar-tools, .core-narrow :host .toolbar-tools'; }
-:host(.core-narrow) .toolbar-tools,
-:host-context(.core-narrow) .toolbar-tools {
-  height: 56px;
-  padding: 0;
-}
-
-/* middle bar */
-#middleBar {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-}
-
-:host(.tall, .medium-tall) #middleBar {
-  -webkit-transform: translateY(100%);
-  transform: translateY(100%);
-}
-
-/* bottom bar */
-#bottomBar {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-/* make elements (e.g. buttons) respond to mouse/touch events */
-polyfill-next-selector { content: '.toolbar-tools > *:not([disabled])'; }
-::content > *:not([disabled]) {
-  pointer-events: auto;
-}
-
-/* elements spacing */
-polyfill-next-selector { content: '.toolbar-tools > *'; }
-::content > * {
-  margin: 0 8px;
-}
-
-/* misc helpers */
-polyfill-next-selector { content: '.toolbar-tools > .fit'; }
-::content > .fit {
-  position: absolute;
-  top: auto;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: auto;
-  margin: 0;
-}
-
-polyfill-next-selector { content: ':host .indent'; }
-::content > .indent {
-  margin-left: 60px;
-}
-</style>
-
-  <div id="bottomBar" class="toolbar-tools" center="" horizontal="" layout="">
-    <content select=".bottom"></content>
-  </div>
-
-  <div id="middleBar" class="toolbar-tools" center="" horizontal="" layout="">
-    <content select=".middle"></content>
-  </div>
-
-  <div id="topBar" class="toolbar-tools" center="" horizontal="" layout="">
-    <content></content>
-  </div>
-
-</template>
-<script>
-
-(function() {
-
-  Polymer('core-toolbar', {
-    
-    /**
-     * Controls how the items are aligned horizontally.
-     * Options are `start`, `center`, `end`, `between` and `around`.
-     *
-     * @attribute justify
-     * @type string
-     * @default ''
-     */
-    justify: '',
-    
-    /**
-     * Controls how the items are aligned horizontally when they are placed
-     * in the middle.
-     * Options are `start`, `center`, `end`, `between` and `around`.
-     *
-     * @attribute middleJustify
-     * @type string
-     * @default ''
-     */
-    middleJustify: '',
-    
-    /**
-     * Controls how the items are aligned horizontally when they are placed
-     * at the bottom.
-     * Options are `start`, `center`, `end`, `between` and `around`.
-     *
-     * @attribute bottomJustify
-     * @type string
-     * @default ''
-     */
-    bottomJustify: '',
-    
-    justifyChanged: function(old) {
-      this.updateBarJustify(this.$.topBar, this.justify, old);
-    },
-    
-    middleJustifyChanged: function(old) {
-      this.updateBarJustify(this.$.middleBar, this.middleJustify, old);
-    },
-    
-    bottomJustifyChanged: function(old) {
-      this.updateBarJustify(this.$.bottomBar, this.bottomJustify, old);
-    },
-    
-    updateBarJustify: function(bar, justify, old) {
-      if (old) {
-        bar.removeAttribute(this.toLayoutAttrName(old));
-      }
-      if (this.justify) {
-        bar.setAttribute(this.toLayoutAttrName(justify), '');
-      }
-    },
-    
-    toLayoutAttrName: function(value) {
-      return value === 'between' ? 'justified' : value + '-justified';
-    }
-    
-  });
-
-})();
-
-</script>
-</polymer-element>
-
-
-
-
-
-<polymer-element name="core-header-panel">
-<template>
-
-  <style>/*
-Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
-*/
-
-:host {
-  display: block;
-  position: relative;
-}
-
-#outerContainer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-#mainPanel {
-  position: relative;
-}
-
-#mainContainer {
-  position: relative;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-}
-
-#dropShadow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 6px;
-  box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
-}
-
-#dropShadow.hidden {
-  display: none;
-}
-
-/* 
-mode: scroll 
-*/
-:host([mode=scroll]) #mainContainer {
-  overflow: visible;
-}
-
-:host([mode=scroll]) #outerContainer {
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-}
-
-/*
-mode: cover
-*/
-:host([mode=cover]) #mainPanel {
-  position: static;
-}
-
-:host([mode=cover]) #mainContainer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-:host([mode=cover]) #dropShadow {
-  position: static;
-  width: 100%;
-}
-</style>
-
-  <div id="outerContainer" vertical="" layout="">
-
-    <content id="headerContent" select="core-toolbar, .core-header"></content>
-
-    <div id="mainPanel" flex="" vertical="" layout="">
-
-      <div id="mainContainer" flex?="{{mode !== 'cover'}}">
-        <content id="mainContent" select="*"></content>
-      </div>
-
-      <div id="dropShadow"></div>
-
-    </div>
-
-  </div>
-
-</template>
-<script>
-
-  Polymer({
-
-    /**
-     * Fired when the content has been scrolled.  `event.detail.target` returns
-     * the scrollable element which you can use to access scroll info such as
-     * `scrollTop`.
-     *
-     *     <core-header-panel on-scroll="{{scrollHandler}}">
-     *       ...
-     *     </core-header-panel>
-     *
-     *
-     *     scrollHandler: function(event) {
-     *       var scroller = event.detail.target;
-     *       console.log(scroller.scrollTop);
-     *     }
-     *
-     * @event scroll
-     */
-
-    publish: {
-      /**
-       * Controls header and scrolling behavior. Options are
-       * `standard`, `seamed`, `waterfall`, `waterfall-tall`, `scroll` and 
-       * `cover`. Default is `standard`.
-       *
-       * `standard`: The header is a step above the panel. The header will consume the
-       * panel at the point of entry, preventing it from passing through to the
-       * opposite side.
-       *
-       * `seamed`: The header is presented as seamed with the panel.
-       *
-       * `waterfall`: Similar to standard mode, but header is initially presented as
-       * seamed with panel, but then separates to form the step.
-       *
-       * `waterfall-tall`: The header is initially taller (`tall` class is added to
-       * the header).  As the user scrolls, the header separates (forming an edge)
-       * while condensing (`tall` class is removed from the header).
-       *
-       * `scroll`: The header keeps its seam with the panel, and is pushed off screen.
-       *
-       * `cover`: The panel covers the whole `core-header-panel` including the
-       * header. This allows user to style the panel in such a way that the panel is
-       * partially covering the header.
-       *
-       *     <style>
-       *       core-header-panel[mode=cover]::shadow #mainContainer {
-       *         left: 80px;
-       *       }
-       *       .content {
-       *         margin: 60px 60px 60px 0;
-       *       }
-       *     </style>
-       *
-       *     <core-header-panel mode="cover">
-       *       <core-toolbar class="tall">
-       *         <core-icon-button icon="menu"></core-icon-button>
-       *       </core-toolbar>
-       *       <div class="content"></div>
-       *     </core-header-panel>
-       *
-       * @attribute mode
-       * @type string
-       * @default ''
-       */
-      mode: {value: '', reflect: true},
-
-      /**
-       * The class used in waterfall-tall mode.  Change this if the header
-       * accepts a different class for toggling height, e.g. "medium-tall"
-       *
-       * @attribute tallClass
-       * @type string
-       * @default 'tall'
-       */
-      tallClass: 'tall',
-
-      /**
-       * If true, the drop-shadow is always shown no matter what mode is set to.
-       *
-       * @attribute shadow
-       * @type boolean
-       * @default false
-       */
-      shadow: false
-    },
-
-    animateDuration: 200,
-
-    modeConfigs: {
-      shadowMode: {'waterfall': 1, 'waterfall-tall': 1},
-      noShadow: {'seamed': 1, 'cover': 1, 'scroll': 1},
-      tallMode: {'waterfall-tall': 1},
-      outerScroll: {'scroll': 1}
-    },
-    
-    ready: function() {
-      this.scrollHandler = this.scroll.bind(this);
-      this.addListener();
-    },
-    
-    detached: function() {
-      this.removeListener(this.mode);
-    },
-    
-    addListener: function() {
-      this.scroller.addEventListener('scroll', this.scrollHandler);
-    },
-    
-    removeListener: function(mode) {
-      var s = this.getScrollerForMode(mode);
-      s.removeEventListener('scroll', this.scrollHandler);
-    },
-
-    domReady: function() {
-      this.async('scroll');
-    },
-
-    modeChanged: function(old) {
-      var configs = this.modeConfigs;
-      var header = this.header;
-      if (header) {
-        // in tallMode it may add tallClass to the header; so do the cleanup
-        // when mode is changed from tallMode to not tallMode
-        if (configs.tallMode[old] && !configs.tallMode[this.mode]) {
-          header.classList.remove(this.tallClass);
-          this.async(function() {
-            header.classList.remove('animate');
-          }, null, this.animateDuration);
-        } else {
-          header.classList.toggle('animate', configs.tallMode[this.mode]);
-        }
-      }
-      if (configs && (configs.outerScroll[this.mode] || configs.outerScroll[old])) {
-        this.removeListener(old);
-        this.addListener();
-      }
-      this.scroll();
-    },
-
-    get header() {
-      return this.$.headerContent.getDistributedNodes()[0];
-    },
-    
-    getScrollerForMode: function(mode) {
-      return this.modeConfigs.outerScroll[mode] ?
-          this.$.outerContainer : this.$.mainContainer;
-    },
-
-    /**
-     * Returns the scrollable element.
-     *
-     * @property scroller
-     * @type Object
-     */
-    get scroller() {
-      return this.getScrollerForMode(this.mode);
-    },
-
-    scroll: function() {
-      var configs = this.modeConfigs;
-      var main = this.$.mainContainer;
-      var header = this.header;
-
-      var sTop = main.scrollTop;
-      var atTop = sTop === 0;
-
-      this.$.dropShadow.classList.toggle('hidden', !this.shadow &&
-          (atTop && configs.shadowMode[this.mode] || configs.noShadow[this.mode]));
-
-      if (header && configs.tallMode[this.mode]) {
-        header.classList.toggle(this.tallClass, atTop ||
-            header.classList.contains(this.tallClass) &&
-            main.scrollHeight < this.$.outerContainer.offsetHeight);
-      }
-
-      this.fire('scroll', {target: this.scroller}, this, false);
-    }
-
-  });
-
-</script>
-</polymer-element>
-
-
-
 
 
 
@@ -4333,6 +3831,525 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
 
+<polymer-element name="toast-levels-element"> 
+  <template>
+    <style>
+      .error{
+        color: rgb(255,100,100);
+      }
+      
+      .warn{
+        color: rgb(255,225,100);
+      }
+    </style>
+    
+    <paper-toast id="toast"></paper-toast>
+    
+  </template> 
+  
+</polymer-element>
+
+
+
+<polymer-element name="core-toolbar" attributes="justify middleJustify bottomJustify">
+<template>
+
+  <style>/*
+Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
+
+:host {
+  /* technical */
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  /* size */
+  height: 64px;
+  /* typography */
+  font-size: 1.3em;
+  /* background */
+  background-color: #CFD8DC;
+}
+
+:host(.animate) {
+  /* transition */
+  transition: height 0.18s ease-in;
+}
+
+:host(.medium-tall) {
+  height: 128px;
+}
+
+:host(.tall) {
+  height: 192px;
+}
+
+.toolbar-tools {
+  position: relative;
+  height: 64px;
+  padding: 0 8px;
+  pointer-events: none;
+}
+
+/* narrow layout */
+:host(.core-narrow),
+:host-context(.core-narrow) {
+  height: 56px;
+}
+
+polyfill-next-selector { content: ':host.core-narrow.medium-tall, .core-narrow :host.medium-tall'; }
+:host(.core-narrow.medium-tall),
+:host-context(.core-narrow):host(.medium-tall) {
+  height: 112px;
+}
+
+polyfill-next-selector { content: ':host.core-narrow.tall, .core-narrow :host.tall'; }
+:host(.core-narrow.tall),
+:host-context(.core-narrow):host(.tall) {
+  height: 168px;
+}
+
+polyfill-next-selector { content: ':host.core-narrow .toolbar-tools, .core-narrow :host .toolbar-tools'; }
+:host(.core-narrow) .toolbar-tools,
+:host-context(.core-narrow) .toolbar-tools {
+  height: 56px;
+  padding: 0;
+}
+
+/* middle bar */
+#middleBar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+:host(.tall, .medium-tall) #middleBar {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+/* bottom bar */
+#bottomBar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* make elements (e.g. buttons) respond to mouse/touch events */
+polyfill-next-selector { content: '.toolbar-tools > *:not([disabled])'; }
+::content > *:not([disabled]) {
+  pointer-events: auto;
+}
+
+/* elements spacing */
+polyfill-next-selector { content: '.toolbar-tools > *'; }
+::content > * {
+  margin: 0 8px;
+}
+
+/* misc helpers */
+polyfill-next-selector { content: '.toolbar-tools > .fit'; }
+::content > .fit {
+  position: absolute;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  margin: 0;
+}
+
+polyfill-next-selector { content: ':host .indent'; }
+::content > .indent {
+  margin-left: 60px;
+}
+</style>
+
+  <div id="bottomBar" class="toolbar-tools" center="" horizontal="" layout="">
+    <content select=".bottom"></content>
+  </div>
+
+  <div id="middleBar" class="toolbar-tools" center="" horizontal="" layout="">
+    <content select=".middle"></content>
+  </div>
+
+  <div id="topBar" class="toolbar-tools" center="" horizontal="" layout="">
+    <content></content>
+  </div>
+
+</template>
+<script>
+
+(function() {
+
+  Polymer('core-toolbar', {
+    
+    /**
+     * Controls how the items are aligned horizontally.
+     * Options are `start`, `center`, `end`, `between` and `around`.
+     *
+     * @attribute justify
+     * @type string
+     * @default ''
+     */
+    justify: '',
+    
+    /**
+     * Controls how the items are aligned horizontally when they are placed
+     * in the middle.
+     * Options are `start`, `center`, `end`, `between` and `around`.
+     *
+     * @attribute middleJustify
+     * @type string
+     * @default ''
+     */
+    middleJustify: '',
+    
+    /**
+     * Controls how the items are aligned horizontally when they are placed
+     * at the bottom.
+     * Options are `start`, `center`, `end`, `between` and `around`.
+     *
+     * @attribute bottomJustify
+     * @type string
+     * @default ''
+     */
+    bottomJustify: '',
+    
+    justifyChanged: function(old) {
+      this.updateBarJustify(this.$.topBar, this.justify, old);
+    },
+    
+    middleJustifyChanged: function(old) {
+      this.updateBarJustify(this.$.middleBar, this.middleJustify, old);
+    },
+    
+    bottomJustifyChanged: function(old) {
+      this.updateBarJustify(this.$.bottomBar, this.bottomJustify, old);
+    },
+    
+    updateBarJustify: function(bar, justify, old) {
+      if (old) {
+        bar.removeAttribute(this.toLayoutAttrName(old));
+      }
+      if (this.justify) {
+        bar.setAttribute(this.toLayoutAttrName(justify), '');
+      }
+    },
+    
+    toLayoutAttrName: function(value) {
+      return value === 'between' ? 'justified' : value + '-justified';
+    }
+    
+  });
+
+})();
+
+</script>
+</polymer-element>
+
+
+
+
+
+<polymer-element name="core-header-panel">
+<template>
+
+  <style>/*
+Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
+
+:host {
+  display: block;
+  position: relative;
+}
+
+#outerContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+#mainPanel {
+  position: relative;
+}
+
+#mainContainer {
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+#dropShadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
+}
+
+#dropShadow.hidden {
+  display: none;
+}
+
+/* 
+mode: scroll 
+*/
+:host([mode=scroll]) #mainContainer {
+  overflow: visible;
+}
+
+:host([mode=scroll]) #outerContainer {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/*
+mode: cover
+*/
+:host([mode=cover]) #mainPanel {
+  position: static;
+}
+
+:host([mode=cover]) #mainContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+:host([mode=cover]) #dropShadow {
+  position: static;
+  width: 100%;
+}
+</style>
+
+  <div id="outerContainer" vertical="" layout="">
+
+    <content id="headerContent" select="core-toolbar, .core-header"></content>
+
+    <div id="mainPanel" flex="" vertical="" layout="">
+
+      <div id="mainContainer" flex?="{{mode !== 'cover'}}">
+        <content id="mainContent" select="*"></content>
+      </div>
+
+      <div id="dropShadow"></div>
+
+    </div>
+
+  </div>
+
+</template>
+<script>
+
+  Polymer({
+
+    /**
+     * Fired when the content has been scrolled.  `event.detail.target` returns
+     * the scrollable element which you can use to access scroll info such as
+     * `scrollTop`.
+     *
+     *     <core-header-panel on-scroll="{{scrollHandler}}">
+     *       ...
+     *     </core-header-panel>
+     *
+     *
+     *     scrollHandler: function(event) {
+     *       var scroller = event.detail.target;
+     *       console.log(scroller.scrollTop);
+     *     }
+     *
+     * @event scroll
+     */
+
+    publish: {
+      /**
+       * Controls header and scrolling behavior. Options are
+       * `standard`, `seamed`, `waterfall`, `waterfall-tall`, `scroll` and 
+       * `cover`. Default is `standard`.
+       *
+       * `standard`: The header is a step above the panel. The header will consume the
+       * panel at the point of entry, preventing it from passing through to the
+       * opposite side.
+       *
+       * `seamed`: The header is presented as seamed with the panel.
+       *
+       * `waterfall`: Similar to standard mode, but header is initially presented as
+       * seamed with panel, but then separates to form the step.
+       *
+       * `waterfall-tall`: The header is initially taller (`tall` class is added to
+       * the header).  As the user scrolls, the header separates (forming an edge)
+       * while condensing (`tall` class is removed from the header).
+       *
+       * `scroll`: The header keeps its seam with the panel, and is pushed off screen.
+       *
+       * `cover`: The panel covers the whole `core-header-panel` including the
+       * header. This allows user to style the panel in such a way that the panel is
+       * partially covering the header.
+       *
+       *     <style>
+       *       core-header-panel[mode=cover]::shadow #mainContainer {
+       *         left: 80px;
+       *       }
+       *       .content {
+       *         margin: 60px 60px 60px 0;
+       *       }
+       *     </style>
+       *
+       *     <core-header-panel mode="cover">
+       *       <core-toolbar class="tall">
+       *         <core-icon-button icon="menu"></core-icon-button>
+       *       </core-toolbar>
+       *       <div class="content"></div>
+       *     </core-header-panel>
+       *
+       * @attribute mode
+       * @type string
+       * @default ''
+       */
+      mode: {value: '', reflect: true},
+
+      /**
+       * The class used in waterfall-tall mode.  Change this if the header
+       * accepts a different class for toggling height, e.g. "medium-tall"
+       *
+       * @attribute tallClass
+       * @type string
+       * @default 'tall'
+       */
+      tallClass: 'tall',
+
+      /**
+       * If true, the drop-shadow is always shown no matter what mode is set to.
+       *
+       * @attribute shadow
+       * @type boolean
+       * @default false
+       */
+      shadow: false
+    },
+
+    animateDuration: 200,
+
+    modeConfigs: {
+      shadowMode: {'waterfall': 1, 'waterfall-tall': 1},
+      noShadow: {'seamed': 1, 'cover': 1, 'scroll': 1},
+      tallMode: {'waterfall-tall': 1},
+      outerScroll: {'scroll': 1}
+    },
+    
+    ready: function() {
+      this.scrollHandler = this.scroll.bind(this);
+      this.addListener();
+    },
+    
+    detached: function() {
+      this.removeListener(this.mode);
+    },
+    
+    addListener: function() {
+      this.scroller.addEventListener('scroll', this.scrollHandler);
+    },
+    
+    removeListener: function(mode) {
+      var s = this.getScrollerForMode(mode);
+      s.removeEventListener('scroll', this.scrollHandler);
+    },
+
+    domReady: function() {
+      this.async('scroll');
+    },
+
+    modeChanged: function(old) {
+      var configs = this.modeConfigs;
+      var header = this.header;
+      if (header) {
+        // in tallMode it may add tallClass to the header; so do the cleanup
+        // when mode is changed from tallMode to not tallMode
+        if (configs.tallMode[old] && !configs.tallMode[this.mode]) {
+          header.classList.remove(this.tallClass);
+          this.async(function() {
+            header.classList.remove('animate');
+          }, null, this.animateDuration);
+        } else {
+          header.classList.toggle('animate', configs.tallMode[this.mode]);
+        }
+      }
+      if (configs && (configs.outerScroll[this.mode] || configs.outerScroll[old])) {
+        this.removeListener(old);
+        this.addListener();
+      }
+      this.scroll();
+    },
+
+    get header() {
+      return this.$.headerContent.getDistributedNodes()[0];
+    },
+    
+    getScrollerForMode: function(mode) {
+      return this.modeConfigs.outerScroll[mode] ?
+          this.$.outerContainer : this.$.mainContainer;
+    },
+
+    /**
+     * Returns the scrollable element.
+     *
+     * @property scroller
+     * @type Object
+     */
+    get scroller() {
+      return this.getScrollerForMode(this.mode);
+    },
+
+    scroll: function() {
+      var configs = this.modeConfigs;
+      var main = this.$.mainContainer;
+      var header = this.header;
+
+      var sTop = main.scrollTop;
+      var atTop = sTop === 0;
+
+      this.$.dropShadow.classList.toggle('hidden', !this.shadow &&
+          (atTop && configs.shadowMode[this.mode] || configs.noShadow[this.mode]));
+
+      if (header && configs.tallMode[this.mode]) {
+        header.classList.toggle(this.tallClass, atTop ||
+            header.classList.contains(this.tallClass) &&
+            main.scrollHeight < this.$.outerContainer.offsetHeight);
+      }
+
+      this.fire('scroll', {target: this.scroller}, this, false);
+    }
+
+  });
+
+</script>
+</polymer-element>
+
+
+
+
+
 <polymer-element name="positioning-control"> 
   <template>
     <style>
@@ -4348,8 +4365,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin: 1%;
         padding: 1%;
       }
-
-      
     </style>
     <core-header-panel layout="" vertical="" flex="">
       <core-toolbar>
@@ -4366,7 +4381,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </div>
     </core-header-panel>
     
-    <paper-toast id="toast"></paper-toast>
+    <toast-levels-element id="toast"></toast-levels-element>
     
   </template> 
   

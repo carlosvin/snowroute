@@ -4,23 +4,21 @@ import 'dart:html';
 import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
 import 'route.dart';
-import 'state_machine.dart';
+import 'interfaces.dart';
 
-abstract class TrackingListener {
-  void newPosition(num lat, num long, bool tracking);
-  void stopTracking();
-}
+
 
 @CustomTag('tracking-element')
 class TrackingElement extends PolymerElement with StateListener, ChangeNotifier{
-  @reflectable @observable String get gpsStatus => __$gpsStatus; String __$gpsStatus = '?'; @reflectable set gpsStatus(String value) { __$gpsStatus = notifyPropertyChange(#gpsStatus, __$gpsStatus, value); }
   @reflectable @observable String get totalDistance => __$totalDistance; String __$totalDistance = '?'; @reflectable set totalDistance(String value) { __$totalDistance = notifyPropertyChange(#totalDistance, __$totalDistance, value); }
   @reflectable @observable String get speedAverage => __$speedAverage; String __$speedAverage = '?'; @reflectable set speedAverage(String value) { __$speedAverage = notifyPropertyChange(#speedAverage, __$speedAverage, value); }
   @reflectable @published String get borderColor => __$borderColor; String __$borderColor = 'rgb(0,0,0)'; @reflectable set borderColor(String value) { __$borderColor = notifyPropertyChange(#borderColor, __$borderColor, value); }
   
-  Route route;
   TrackingElement.created() : super.created();
+
+  Route route;
   TrackingListener listener;
+  MessageNotifier notifier;
   bool tracking = false;
   
   @override
@@ -29,6 +27,11 @@ class TrackingElement extends PolymerElement with StateListener, ChangeNotifier{
     window.navigator.geolocation.watchPosition(enableHighAccuracy: true)
       .listen((Geoposition position) {_addPosition(position);},
       onError: (PositionError error) => _handleError(error)); 
+  }
+  
+  void init (TrackingListener listener, MessageNotifier notifier){
+    this.listener = listener;
+    this.notifier = notifier;
   }
   
   @override
@@ -48,7 +51,7 @@ class TrackingElement extends PolymerElement with StateListener, ChangeNotifier{
   }
   
   void _handleError(PositionError  error){
-    gpsStatus = error.message;      
+    notifier.error(error.message);
   }
   
   void _addPosition(Geoposition geoPosition){
@@ -61,7 +64,7 @@ class TrackingElement extends PolymerElement with StateListener, ChangeNotifier{
       totalDistance = "${route.distance.round()}m";
       speedAverage = "${(route.speedAvg * 3.6).toStringAsFixed(2)}km/h";
     }else{
-      gpsStatus = "Not tracking";
+      // TODO anything?
     }
     
     if (listener != null){

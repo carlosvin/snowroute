@@ -6,7 +6,8 @@ import 'stopwatch_element.dart';
 import 'tracking_element.dart';
 import 'history_element.dart';
 import 'map_element.dart';
-import 'state_machine.dart';
+import 'toast_levels_element.dart';
+import 'interfaces.dart';
 
 
 @CustomTag('positioning-control')
@@ -16,8 +17,9 @@ class PositioningControl extends PolymerElement with ChangeNotifier  implements 
   @reflectable @observable StopwatchElement get stopwatchElement => __$stopwatchElement; StopwatchElement __$stopwatchElement; @reflectable set stopwatchElement(StopwatchElement value) { __$stopwatchElement = notifyPropertyChange(#stopwatchElement, __$stopwatchElement, value); }
   @reflectable @observable TrackingElement get trackingElement => __$trackingElement; TrackingElement __$trackingElement; @reflectable set trackingElement(TrackingElement value) { __$trackingElement = notifyPropertyChange(#trackingElement, __$trackingElement, value); }
   @reflectable @observable HistoryElement get historyElement => __$historyElement; HistoryElement __$historyElement; @reflectable set historyElement(HistoryElement value) { __$historyElement = notifyPropertyChange(#historyElement, __$historyElement, value); }
-  @reflectable @observable MapElementP get mapElement => __$mapElement; MapElementP __$mapElement; @reflectable set mapElement(MapElementP value) { __$mapElement = notifyPropertyChange(#mapElement, __$mapElement, value); }
-  PaperToast toastElement;
+  @reflectable @observable MapElementView get mapElement => __$mapElement; MapElementView __$mapElement; @reflectable set mapElement(MapElementView value) { __$mapElement = notifyPropertyChange(#mapElement, __$mapElement, value); }
+  
+  ToastLevelsElement toastElement;
   PaperIconButton buttonToggleHistory;
   
   PositioningControl.created() : super.created(){
@@ -34,20 +36,20 @@ class PositioningControl extends PolymerElement with ChangeNotifier  implements 
     buttonToggleHistory = $['buttonToggleHistory'];
     historyElement.hidden = true;    
     
+    trackingElement.init(mapElement, toastElement);
+
     stopwatchElement.register(this);
     stopwatchElement.register(trackingElement);
     
-    trackingElement.listener = mapElement;
   }
   
   void onStateStopped(){
     state = 'stopped';
     if ( historyElement.add(trackingElement.route)){
-      toast("Saved ${trackingElement.route.key}");
+      toastElement.info("Saved ${trackingElement.route.key}");
     }else{
-      toast("Error saving");
+      toastElement.error("Error saving");
     }
-    
   }
   
   void onStateStarted(){
@@ -59,24 +61,17 @@ class PositioningControl extends PolymerElement with ChangeNotifier  implements 
     state = 'paused';
   }
   
-  void toast(String m){
-    toastElement.text = m;
-    toastElement.show();
-  }
-  
   void toggleHistory(){
-    
     if (historyElement.isEmpty &&  historyElement.hidden ){
-      toast("There are no history");
+      toastElement.warn("There are no history");
     } else{
       historyElement.hidden = ! historyElement.hidden;
-          
+      
       if (historyElement.hidden){
         buttonToggleHistory.icon = "menu";
       }else{
         buttonToggleHistory.icon = "chevron-left";
       }
     }
-    
   }
 }

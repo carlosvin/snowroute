@@ -34,27 +34,29 @@ import 'history_element.dart' as i14;
 import 'package:polymer/src/build/log_injector.dart';
 import 'map_element.dart' as i15;
 import 'package:polymer/src/build/log_injector.dart';
-import 'package:core_elements/core_toolbar.dart' as i16;
+import 'package:core_elements/core_transition.dart' as i16;
 import 'package:polymer/src/build/log_injector.dart';
-import 'package:core_elements/core_header_panel.dart' as i17;
+import 'package:core_elements/core_key_helper.dart' as i17;
 import 'package:polymer/src/build/log_injector.dart';
-import 'package:core_elements/core_transition.dart' as i18;
+import 'package:core_elements/core_overlay_layer.dart' as i18;
 import 'package:polymer/src/build/log_injector.dart';
-import 'package:core_elements/core_key_helper.dart' as i19;
+import 'package:core_elements/core_overlay.dart' as i19;
 import 'package:polymer/src/build/log_injector.dart';
-import 'package:core_elements/core_overlay_layer.dart' as i20;
+import 'package:core_elements/core_transition_css.dart' as i20;
 import 'package:polymer/src/build/log_injector.dart';
-import 'package:core_elements/core_overlay.dart' as i21;
+import 'package:core_elements/core_media_query.dart' as i21;
 import 'package:polymer/src/build/log_injector.dart';
-import 'package:core_elements/core_transition_css.dart' as i22;
+import 'package:paper_elements/paper_toast.dart' as i22;
 import 'package:polymer/src/build/log_injector.dart';
-import 'package:core_elements/core_media_query.dart' as i23;
+import 'toast_levels_element.dart' as i23;
 import 'package:polymer/src/build/log_injector.dart';
-import 'package:paper_elements/paper_toast.dart' as i24;
+import 'package:core_elements/core_toolbar.dart' as i24;
 import 'package:polymer/src/build/log_injector.dart';
-import 'positioning_control.dart' as i25;
+import 'package:core_elements/core_header_panel.dart' as i25;
 import 'package:polymer/src/build/log_injector.dart';
-import 'index.html.0.dart' as i26;
+import 'positioning_control.dart' as i26;
+import 'package:polymer/src/build/log_injector.dart';
+import 'index.html.0.dart' as i27;
 import 'package:polymer/src/build/log_injector.dart';
 import 'package:smoke/smoke.dart' show Declaration, PROPERTY, METHOD;
 import 'package:smoke/static.dart' show useGeneratedCode, StaticConfiguration;
@@ -66,7 +68,8 @@ import 'positioning_li_element.dart' as smoke_4;
 import 'route.dart' as smoke_5;
 import 'history_element.dart' as smoke_6;
 import 'map_element.dart' as smoke_7;
-import 'positioning_control.dart' as smoke_8;
+import 'toast_levels_element.dart' as smoke_8;
+import 'positioning_control.dart' as smoke_9;
 abstract class _M0 {} // PolymerElement & StateNotifier
 abstract class _M1 {} // _M0 & ChangeNotifier
 abstract class _M2 {} // PolymerElement & StateListener
@@ -83,7 +86,6 @@ void main() {
         #counter: (o) => o.counter,
         #delete: (o) => o.delete,
         #duration: (o) => o.duration,
-        #gpsStatus: (o) => o.gpsStatus,
         #historyElement: (o) => o.historyElement,
         #mapElement: (o) => o.mapElement,
         #onDelete: (o) => o.onDelete,
@@ -105,7 +107,6 @@ void main() {
       setters: {
         #borderColor: (o, v) { o.borderColor = v; },
         #counter: (o, v) { o.counter = v; },
-        #gpsStatus: (o, v) { o.gpsStatus = v; },
         #historyElement: (o, v) { o.historyElement = v; },
         #mapElement: (o, v) { o.mapElement = v; },
         #positioning: (o, v) { o.positioning = v; },
@@ -118,10 +119,11 @@ void main() {
       },
       parents: {
         smoke_6.HistoryElement: smoke_1.PolymerElement,
-        smoke_7.MapElementP: smoke_1.PolymerElement,
-        smoke_8.PositioningControl: _M6,
+        smoke_7.MapElementView: smoke_1.PolymerElement,
+        smoke_9.PositioningControl: _M6,
         smoke_4.PositioningLiElement: _M5,
         smoke_0.StopwatchElement: _M1,
+        smoke_8.ToastLevelsElement: smoke_1.PolymerElement,
         smoke_3.TrackingElement: _M3,
         _M0: smoke_1.PolymerElement,
         _M1: _M0,
@@ -134,10 +136,10 @@ void main() {
         smoke_6.HistoryElement: {
           #practices: const Declaration(#practices, Map, isFinal: true, annotations: const [smoke_2.observable]),
         },
-        smoke_7.MapElementP: {},
-        smoke_8.PositioningControl: {
+        smoke_7.MapElementView: {},
+        smoke_9.PositioningControl: {
           #historyElement: const Declaration(#historyElement, smoke_6.HistoryElement, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
-          #mapElement: const Declaration(#mapElement, smoke_7.MapElementP, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
+          #mapElement: const Declaration(#mapElement, smoke_7.MapElementView, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
           #state: const Declaration(#state, String, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
           #stopwatchElement: const Declaration(#stopwatchElement, smoke_0.StopwatchElement, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
           #trackingElement: const Declaration(#trackingElement, smoke_3.TrackingElement, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
@@ -148,9 +150,9 @@ void main() {
         smoke_0.StopwatchElement: {
           #counter: const Declaration(#counter, String, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
         },
+        smoke_8.ToastLevelsElement: {},
         smoke_3.TrackingElement: {
           #borderColor: const Declaration(#borderColor, String, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_1.published]),
-          #gpsStatus: const Declaration(#gpsStatus, String, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
           #speedAverage: const Declaration(#speedAverage, String, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
           #totalDistance: const Declaration(#totalDistance, String, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
         },
@@ -160,7 +162,6 @@ void main() {
         #counter: r'counter',
         #delete: r'delete',
         #duration: r'duration',
-        #gpsStatus: r'gpsStatus',
         #historyElement: r'historyElement',
         #mapElement: r'mapElement',
         #onDelete: r'onDelete',
@@ -195,17 +196,18 @@ void main() {
       i12.upgradePaperIconButton,
       () => Polymer.register('positioning-li-element', i13.PositioningLiElement),
       () => Polymer.register('history-element', i14.HistoryElement),
-      () => Polymer.register('map-element', i15.MapElementP),
-      i16.upgradeCoreToolbar,
-      i17.upgradeCoreHeaderPanel,
-      i18.upgradeCoreTransition,
-      i19.upgradeCoreKeyHelper,
-      i20.upgradeCoreOverlayLayer,
-      i21.upgradeCoreOverlay,
-      i22.upgradeCoreTransitionCss,
-      i23.upgradeCoreMediaQuery,
-      i24.upgradePaperToast,
-      () => Polymer.register('positioning-control', i25.PositioningControl),
+      () => Polymer.register('map-element', i15.MapElementView),
+      i16.upgradeCoreTransition,
+      i17.upgradeCoreKeyHelper,
+      i18.upgradeCoreOverlayLayer,
+      i19.upgradeCoreOverlay,
+      i20.upgradeCoreTransitionCss,
+      i21.upgradeCoreMediaQuery,
+      i22.upgradePaperToast,
+      () => Polymer.register('toast-levels-element', i23.ToastLevelsElement),
+      i24.upgradeCoreToolbar,
+      i25.upgradeCoreHeaderPanel,
+      () => Polymer.register('positioning-control', i26.PositioningControl),
     ]);
-  i26.main();
+  i27.main();
 }

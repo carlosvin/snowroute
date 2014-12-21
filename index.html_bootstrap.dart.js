@@ -456,6 +456,9 @@ var $$ = Object.create(null);
       for (t1 = J.get$iterator$ax(collection); t1.moveNext$0();)
         this.add$1(receiver, t1.get$current());
     },
+    clear$0: function(receiver) {
+      this.set$length(receiver, 0);
+    },
     forEach$1: function(receiver, f) {
       var $length, i;
       $length = receiver.length;
@@ -3537,6 +3540,9 @@ var $$ = Object.create(null);
     remove$1: function(_, key) {
       return this._throwUnmodifiable$0();
     },
+    clear$0: function(_) {
+      return this._throwUnmodifiable$0();
+    },
     $isMap: true,
     $asMap: null
   },
@@ -4318,15 +4324,15 @@ var $$ = Object.create(null);
   "^": "",
   main: [function() {
     var t1, t2, t3;
-    t1 = P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_borderColor, new E.main_closure(), C.Symbol_counter, new E.main_closure0(), C.Symbol_delete, new E.main_closure1(), C.Symbol_duration, new E.main_closure2(), C.Symbol_gpsStatus, new E.main_closure3(), C.Symbol_historyElement, new E.main_closure4(), C.Symbol_mapElement, new E.main_closure5(), C.Symbol_onDelete, new E.main_closure6(), C.Symbol_pause, new E.main_closure7(), C.Symbol_positioning, new E.main_closure8(), C.Symbol_practices, new E.main_closure9(), C.Symbol_route, new E.main_closure10(), C.Symbol_speedAverage, new E.main_closure11(), C.Symbol_speedAvg, new E.main_closure12(), C.Symbol_start, new E.main_closure13(), C.Symbol_state, new E.main_closure14(), C.Symbol_stop, new E.main_closure15(), C.Symbol_stopwatchElement, new E.main_closure16(), C.Symbol_toggleHistory, new E.main_closure17(), C.Symbol_totalDistance, new E.main_closure18(), C.Symbol_trackingElement, new E.main_closure19(), C.Symbol_values, new E.main_closure20()], null, null);
-    t2 = P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_borderColor, new E.main_closure21(), C.Symbol_counter, new E.main_closure22(), C.Symbol_gpsStatus, new E.main_closure23(), C.Symbol_historyElement, new E.main_closure24(), C.Symbol_mapElement, new E.main_closure25(), C.Symbol_positioning, new E.main_closure26(), C.Symbol_route, new E.main_closure27(), C.Symbol_speedAverage, new E.main_closure28(), C.Symbol_state, new E.main_closure29(), C.Symbol_stopwatchElement, new E.main_closure30(), C.Symbol_totalDistance, new E.main_closure31(), C.Symbol_trackingElement, new E.main_closure32()], null, null);
-    t3 = P.LinkedHashMap_LinkedHashMap$_literal([C.Type_eKh, C.Type_I2I, C.Type_wEo, C.Type_I2I, C.Type_ewF, C.Type_CxZ, C.Type_ufO, C.Type_QGy, C.Type_TOw, C.Type_EOZ, C.Type_ALf, C.Type_rxe, C.Type_GNh, C.Type_I2I, C.Type_EOZ, C.Type_GNh, C.Type_oyU, C.Type_I2I, C.Type_rxe, C.Type_oyU, C.Type_QGy, C.Type_Opy, C.Type_CxZ, C.Type_I2I], null, null);
-    t2 = O.StaticConfiguration$(false, P.LinkedHashMap_LinkedHashMap$_literal([C.Type_eKh, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_practices, C.Declaration_oou], null, null), C.Type_wEo, P.LinkedHashMap_LinkedHashMap$_empty(null, null), C.Type_ewF, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_historyElement, C.Declaration_ahC, C.Symbol_mapElement, C.Declaration_8Gl, C.Symbol_state, C.Declaration_cgt, C.Symbol_stopwatchElement, C.Declaration_0bC, C.Symbol_trackingElement, C.Declaration_Wti], null, null), C.Type_ufO, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_route, C.Declaration_gQB], null, null), C.Type_TOw, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_counter, C.Declaration_8aB], null, null), C.Type_ALf, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_borderColor, C.Declaration_9t5, C.Symbol_gpsStatus, C.Declaration_RMJ, C.Symbol_speedAverage, C.Declaration_fTJ, C.Symbol_totalDistance, C.Declaration_K2q], null, null)], null, null), t1, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_borderColor, "borderColor", C.Symbol_counter, "counter", C.Symbol_delete, "delete", C.Symbol_duration, "duration", C.Symbol_gpsStatus, "gpsStatus", C.Symbol_historyElement, "historyElement", C.Symbol_mapElement, "mapElement", C.Symbol_onDelete, "onDelete", C.Symbol_pause, "pause", C.Symbol_positioning, "positioning", C.Symbol_practices, "practices", C.Symbol_route, "route", C.Symbol_speedAverage, "speedAverage", C.Symbol_speedAvg, "speedAvg", C.Symbol_start, "start", C.Symbol_state, "state", C.Symbol_stop, "stop", C.Symbol_stopwatchElement, "stopwatchElement", C.Symbol_toggleHistory, "toggleHistory", C.Symbol_totalDistance, "totalDistance", C.Symbol_trackingElement, "trackingElement", C.Symbol_values, "values"], null, null), t3, t2, null);
+    t1 = P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_borderColor, new E.main_closure(), C.Symbol_counter, new E.main_closure0(), C.Symbol_delete, new E.main_closure1(), C.Symbol_duration, new E.main_closure2(), C.Symbol_historyElement, new E.main_closure3(), C.Symbol_mapElement, new E.main_closure4(), C.Symbol_onDelete, new E.main_closure5(), C.Symbol_pause, new E.main_closure6(), C.Symbol_positioning, new E.main_closure7(), C.Symbol_practices, new E.main_closure8(), C.Symbol_route, new E.main_closure9(), C.Symbol_speedAverage, new E.main_closure10(), C.Symbol_speedAvg, new E.main_closure11(), C.Symbol_start, new E.main_closure12(), C.Symbol_state, new E.main_closure13(), C.Symbol_stop, new E.main_closure14(), C.Symbol_stopwatchElement, new E.main_closure15(), C.Symbol_toggleHistory, new E.main_closure16(), C.Symbol_totalDistance, new E.main_closure17(), C.Symbol_trackingElement, new E.main_closure18(), C.Symbol_values, new E.main_closure19()], null, null);
+    t2 = P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_borderColor, new E.main_closure20(), C.Symbol_counter, new E.main_closure21(), C.Symbol_historyElement, new E.main_closure22(), C.Symbol_mapElement, new E.main_closure23(), C.Symbol_positioning, new E.main_closure24(), C.Symbol_route, new E.main_closure25(), C.Symbol_speedAverage, new E.main_closure26(), C.Symbol_state, new E.main_closure27(), C.Symbol_stopwatchElement, new E.main_closure28(), C.Symbol_totalDistance, new E.main_closure29(), C.Symbol_trackingElement, new E.main_closure30()], null, null);
+    t3 = P.LinkedHashMap_LinkedHashMap$_literal([C.Type_eKh, C.Type_I2I, C.Type_FQs, C.Type_I2I, C.Type_ewF, C.Type_CxZ, C.Type_ufO, C.Type_QGy, C.Type_TOw, C.Type_EOZ, C.Type_iIK, C.Type_I2I, C.Type_ALf, C.Type_rxe, C.Type_GNh, C.Type_I2I, C.Type_EOZ, C.Type_GNh, C.Type_oyU, C.Type_I2I, C.Type_rxe, C.Type_oyU, C.Type_QGy, C.Type_Opy, C.Type_CxZ, C.Type_I2I], null, null);
+    t2 = O.StaticConfiguration$(false, P.LinkedHashMap_LinkedHashMap$_literal([C.Type_eKh, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_practices, C.Declaration_oou], null, null), C.Type_FQs, P.LinkedHashMap_LinkedHashMap$_empty(null, null), C.Type_ewF, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_historyElement, C.Declaration_ahC, C.Symbol_mapElement, C.Declaration_qKV, C.Symbol_state, C.Declaration_cgt, C.Symbol_stopwatchElement, C.Declaration_0bC, C.Symbol_trackingElement, C.Declaration_Wti], null, null), C.Type_ufO, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_route, C.Declaration_gQB], null, null), C.Type_TOw, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_counter, C.Declaration_8aB], null, null), C.Type_iIK, P.LinkedHashMap_LinkedHashMap$_empty(null, null), C.Type_ALf, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_borderColor, C.Declaration_9t5, C.Symbol_speedAverage, C.Declaration_fTJ, C.Symbol_totalDistance, C.Declaration_K2q], null, null)], null, null), t1, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_borderColor, "borderColor", C.Symbol_counter, "counter", C.Symbol_delete, "delete", C.Symbol_duration, "duration", C.Symbol_historyElement, "historyElement", C.Symbol_mapElement, "mapElement", C.Symbol_onDelete, "onDelete", C.Symbol_pause, "pause", C.Symbol_positioning, "positioning", C.Symbol_practices, "practices", C.Symbol_route, "route", C.Symbol_speedAverage, "speedAverage", C.Symbol_speedAvg, "speedAvg", C.Symbol_start, "start", C.Symbol_state, "state", C.Symbol_stop, "stop", C.Symbol_stopwatchElement, "stopwatchElement", C.Symbol_toggleHistory, "toggleHistory", C.Symbol_totalDistance, "totalDistance", C.Symbol_trackingElement, "trackingElement", C.Symbol_values, "values"], null, null), t3, t2, null);
     $.objectAccessor = new O.GeneratedObjectAccessorService(t2);
     $.typeInspector = new O.GeneratedTypeInspectorService(t2);
     $.symbolConverter = new O.GeneratedSymbolConverterService(t2);
     new F.LogInjector(null, null).injectLogsFromUrl$1("index.html._buildLogs");
-    $.initializers = [S.upgradeCoreMeta$closure(), M.upgradeCoreIconset$closure(), L.upgradeCoreIcon$closure(), V.upgradePaperButtonBase$closure(), L.upgradePaperRipple$closure(), Z.upgradePaperShadow$closure(), X.upgradePaperFab$closure(), Q.upgradeCoreIconsetSvg$closure(), new E.main_closure33(), new E.main_closure34(), M.upgradeCoreIconButton$closure(), T.upgradePaperIconButton$closure(), new E.main_closure35(), new E.main_closure36(), new E.main_closure37(), V.upgradeCoreToolbar$closure(), T.upgradeCoreHeaderPanel$closure(), V.upgradeCoreTransition$closure(), E.upgradeCoreKeyHelper$closure(), D.upgradeCoreOverlayLayer$closure(), U.upgradeCoreOverlay$closure(), T.upgradeCoreTransitionCss$closure(), D.upgradeCoreMediaQuery$closure(), U.upgradePaperToast$closure(), new E.main_closure38()];
+    $.initializers = [S.upgradeCoreMeta$closure(), M.upgradeCoreIconset$closure(), L.upgradeCoreIcon$closure(), V.upgradePaperButtonBase$closure(), L.upgradePaperRipple$closure(), Z.upgradePaperShadow$closure(), X.upgradePaperFab$closure(), Q.upgradeCoreIconsetSvg$closure(), new E.main_closure31(), new E.main_closure32(), M.upgradeCoreIconButton$closure(), T.upgradePaperIconButton$closure(), new E.main_closure33(), new E.main_closure34(), new E.main_closure35(), V.upgradeCoreTransition$closure(), E.upgradeCoreKeyHelper$closure(), D.upgradeCoreOverlayLayer$closure(), U.upgradeCoreOverlay$closure(), T.upgradeCoreTransitionCss$closure(), D.upgradeCoreMediaQuery$closure(), U.upgradePaperToast$closure(), new E.main_closure36(), V.upgradeCoreToolbar$closure(), T.upgradeCoreHeaderPanel$closure(), new E.main_closure37()];
     $.deployMode = true;
     A.initPolymer();
   }, "call$0", "main$closure", 0, 0, 0],
@@ -4357,214 +4363,208 @@ var $$ = Object.create(null);
   main_closure3: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$gpsStatus$x(o);
+      return J.get$historyElement$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure4: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$historyElement$x(o);
+      return J.get$mapElement$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure5: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$mapElement$x(o);
+      return J.get$onDelete$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure6: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$onDelete$x(o);
+      return J.get$pause$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure7: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$pause$x(o);
+      return o.get$positioning();
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure8: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return o.get$positioning();
+      return J.get$practices$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure9: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$practices$x(o);
+      return J.get$route$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure10: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$route$x(o);
+      return J.get$speedAverage$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure11: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$speedAverage$x(o);
+      return o.get$speedAvg();
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure12: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return o.get$speedAvg();
+      return J.get$start$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure13: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$start$x(o);
+      return J.get$state$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure14: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$state$x(o);
+      return J.get$stop$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure15: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$stop$x(o);
+      return J.get$stopwatchElement$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure16: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$stopwatchElement$x(o);
+      return J.get$toggleHistory$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure17: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$toggleHistory$x(o);
+      return J.get$totalDistance$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure18: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$totalDistance$x(o);
+      return J.get$trackingElement$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure19: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$trackingElement$x(o);
-    }, "call$1", null, 2, 0, null, 67, "call"]
-  },
-  main_closure20: {
-    "^": "Closure:59;",
-    call$1: [function(o) {
       return J.get$values$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
-  main_closure21: {
+  main_closure20: {
     "^": "Closure:85;",
     call$2: [function(o, v) {
       J.set$borderColor$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 76, "call"]
   },
-  main_closure22: {
+  main_closure21: {
     "^": "Closure:85;",
     call$2: [function(o, v) {
       J.set$counter$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 76, "call"]
   },
-  main_closure23: {
-    "^": "Closure:85;",
-    call$2: [function(o, v) {
-      J.set$gpsStatus$x(o, v);
-    }, "call$2", null, 4, 0, null, 67, 76, "call"]
-  },
-  main_closure24: {
+  main_closure22: {
     "^": "Closure:85;",
     call$2: [function(o, v) {
       J.set$historyElement$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 76, "call"]
   },
-  main_closure25: {
+  main_closure23: {
     "^": "Closure:85;",
     call$2: [function(o, v) {
       J.set$mapElement$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 76, "call"]
   },
-  main_closure26: {
+  main_closure24: {
     "^": "Closure:85;",
     call$2: [function(o, v) {
       o.set$positioning(v);
     }, "call$2", null, 4, 0, null, 67, 76, "call"]
   },
-  main_closure27: {
+  main_closure25: {
     "^": "Closure:85;",
     call$2: [function(o, v) {
       J.set$route$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 76, "call"]
   },
-  main_closure28: {
+  main_closure26: {
     "^": "Closure:85;",
     call$2: [function(o, v) {
       J.set$speedAverage$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 76, "call"]
   },
-  main_closure29: {
+  main_closure27: {
     "^": "Closure:85;",
     call$2: [function(o, v) {
       J.set$state$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 76, "call"]
   },
-  main_closure30: {
+  main_closure28: {
     "^": "Closure:85;",
     call$2: [function(o, v) {
       J.set$stopwatchElement$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 76, "call"]
   },
-  main_closure31: {
+  main_closure29: {
     "^": "Closure:85;",
     call$2: [function(o, v) {
       J.set$totalDistance$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 76, "call"]
   },
-  main_closure32: {
+  main_closure30: {
     "^": "Closure:85;",
     call$2: [function(o, v) {
       J.set$trackingElement$x(o, v);
     }, "call$2", null, 4, 0, null, 67, 76, "call"]
   },
-  main_closure33: {
+  main_closure31: {
     "^": "Closure:15;",
     call$0: [function() {
       return A.Polymer_register("stopwatch-element", C.Type_TOw);
     }, "call$0", null, 0, 0, null, "call"]
   },
-  main_closure34: {
+  main_closure32: {
     "^": "Closure:15;",
     call$0: [function() {
       return A.Polymer_register("tracking-element", C.Type_ALf);
     }, "call$0", null, 0, 0, null, "call"]
   },
-  main_closure35: {
+  main_closure33: {
     "^": "Closure:15;",
     call$0: [function() {
       return A.Polymer_register("positioning-li-element", C.Type_ufO);
     }, "call$0", null, 0, 0, null, "call"]
   },
-  main_closure36: {
+  main_closure34: {
     "^": "Closure:15;",
     call$0: [function() {
       return A.Polymer_register("history-element", C.Type_eKh);
     }, "call$0", null, 0, 0, null, "call"]
   },
-  main_closure37: {
+  main_closure35: {
     "^": "Closure:15;",
     call$0: [function() {
-      return A.Polymer_register("map-element", C.Type_wEo);
+      return A.Polymer_register("map-element", C.Type_FQs);
     }, "call$0", null, 0, 0, null, "call"]
   },
-  main_closure38: {
+  main_closure36: {
+    "^": "Closure:15;",
+    call$0: [function() {
+      return A.Polymer_register("toast-levels-element", C.Type_iIK);
+    }, "call$0", null, 0, 0, null, "call"]
+  },
+  main_closure37: {
     "^": "Closure:15;",
     call$0: [function() {
       return A.Polymer_register("positioning-control", C.Type_ewF);
@@ -5822,6 +5822,9 @@ var $$ = Object.create(null);
     },
     remove$1: function(receiver, element) {
       throw H.wrapException(P.UnsupportedError$("Cannot remove from a fixed-length list"));
+    },
+    clear$0: function(receiver) {
+      throw H.wrapException(P.UnsupportedError$("Cannot clear a fixed-length list"));
     }
   },
   UnmodifiableListMixin: {
@@ -5837,6 +5840,9 @@ var $$ = Object.create(null);
     },
     remove$1: function(_, element) {
       throw H.wrapException(P.UnsupportedError$("Cannot remove from an unmodifiable list"));
+    },
+    clear$0: function(_) {
+      throw H.wrapException(P.UnsupportedError$("Cannot clear an unmodifiable list"));
     },
     setRange$4: function(_, start, end, iterable, skipCount) {
       throw H.wrapException(P.UnsupportedError$("Cannot modify an unmodifiable list"));
@@ -7384,9 +7390,13 @@ var $$ = Object.create(null);
       return t1;
     },
     add$1: function(_, value) {
-      if (this._state >= 4)
+      var t1 = this._state;
+      if (t1 >= 4)
         throw H.wrapException(this._badEventState$0());
-      this._async$_add$1(0, value);
+      if ((t1 & 1) !== 0)
+        this._sendData$1(value);
+      else if ((t1 & 3) === 0)
+        this._ensurePendingEvents$0().add$1(0, H.setRuntimeTypeInfo(new P._DelayedData(value, null), [H.getRuntimeTypeArgument(this, "_StreamController", 0)]));
     },
     addError$2: function(error, stackTrace) {
       var replacement, t1;
@@ -7920,6 +7930,9 @@ var $$ = Object.create(null);
   },
   _DelayedError: {
     "^": "_DelayedEvent;error>,stackTrace<,next",
+    error$1: function($receiver, arg0) {
+      return this.error.call$1(arg0);
+    },
     perform$1: function(dispatch) {
       dispatch._sendError$2(this.error, this.stackTrace);
     }
@@ -7989,6 +8002,12 @@ var $$ = Object.create(null);
       if (t1 == null)
         this.lastPendingEvent = null;
       $event.perform$1(dispatch);
+    },
+    clear$0: function(_) {
+      if (this._state === 1)
+        this._state = 3;
+      this.lastPendingEvent = null;
+      this.firstPendingEvent = null;
     }
   },
   _DoneStreamSubscription: {
@@ -8189,6 +8208,9 @@ var $$ = Object.create(null);
   },
   AsyncError: {
     "^": "Object;error>,stackTrace<",
+    error$1: function($receiver, arg0) {
+      return this.error.call$1(arg0);
+    },
     toString$0: function(_) {
       return J.toString$0(this.error);
     },
@@ -9065,6 +9087,15 @@ var $$ = Object.create(null);
       this._keys = null;
       return bucket.splice(index, 2)[1];
     },
+    clear$0: function(_) {
+      if (this._collection$_length > 0) {
+        this._keys = null;
+        this._rest = null;
+        this._nums = null;
+        this._strings = null;
+        this._collection$_length = 0;
+      }
+    },
     forEach$1: function(_, action) {
       var keys, $length, i, key;
       keys = this._computeKeys$0();
@@ -9742,6 +9773,15 @@ var $$ = Object.create(null);
       bucket.splice(index, 1);
       return true;
     },
+    clear$0: function(_) {
+      if (this._collection$_length > 0) {
+        this._elements = null;
+        this._rest = null;
+        this._nums = null;
+        this._strings = null;
+        this._collection$_length = 0;
+      }
+    },
     _computeElements$0: function() {
       var t1, result, strings, names, entries, index, i, nums, rest, bucket, $length, i0;
       t1 = this._elements;
@@ -10361,6 +10401,9 @@ var $$ = Object.create(null);
       }
       return false;
     },
+    clear$0: function(receiver) {
+      this.set$length(receiver, 0);
+    },
     _rangeCheck$2: function(receiver, start, end) {
       var t1 = J.getInterceptor$n(start);
       if (t1.$lt(start, 0) || t1.$gt(start, this.get$length(receiver)))
@@ -10522,6 +10565,9 @@ var $$ = Object.create(null);
     $indexSet: function(_, key, value) {
       throw H.wrapException(P.UnsupportedError$("Cannot modify unmodifiable map"));
     },
+    clear$0: function(_) {
+      throw H.wrapException(P.UnsupportedError$("Cannot modify unmodifiable map"));
+    },
     remove$1: function(_, key) {
       throw H.wrapException(P.UnsupportedError$("Cannot modify unmodifiable map"));
     },
@@ -10535,6 +10581,9 @@ var $$ = Object.create(null);
     },
     $indexSet: function(_, key, value) {
       this._map.$indexSet(0, key, value);
+    },
+    clear$0: function(_) {
+      this._map.clear$0(0);
     },
     forEach$1: function(_, action) {
       this._map.forEach$1(0, action);
@@ -10826,10 +10875,18 @@ var $$ = Object.create(null);
     get$isNotEmpty: function(_) {
       return this.get$length(this) !== 0;
     },
+    clear$0: function(_) {
+      this.removeAll$1(this.toList$0(0));
+    },
     addAll$1: function(_, elements) {
       var t1;
       for (t1 = J.get$iterator$ax(elements); t1.moveNext$0();)
         this.add$1(0, t1.get$current());
+    },
+    removeAll$1: function(elements) {
+      var t1;
+      for (t1 = H.setRuntimeTypeInfo(new H.ListIterator(elements, elements.length, 0, null), [H.getTypeArgumentByIndex(elements, 0)]); t1.moveNext$0();)
+        this.remove$1(0, t1.__internal$_current);
     },
     toList$1$growable: function(_, growable) {
       var result, t1, i, element, i0;
@@ -11101,6 +11158,11 @@ var $$ = Object.create(null);
     get$length: function(_) {
       return this._count;
     },
+    clear$0: function(_) {
+      this._root = null;
+      this._count = 0;
+      ++this._modificationCount;
+    },
     get$keys: function(_) {
       return H.setRuntimeTypeInfo(new P._SplayTreeKeyIterable(this), [H.getTypeArgumentByIndex(this, 0)]);
     },
@@ -11365,6 +11427,19 @@ var $$ = Object.create(null);
       if (this._processed != null && !this.containsKey$1(0, key))
         return;
       return this._upgrade$0().remove$1(0, key);
+    },
+    clear$0: function(_) {
+      var t1;
+      if (this._processed == null)
+        this._data.clear$0(0);
+      else {
+        t1 = this._data;
+        if (t1 != null)
+          J.clear$0$ax(t1);
+        this._processed = null;
+        this._original = null;
+        this._data = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
+      }
     },
     forEach$1: function(_, f) {
       var keys, i, key, value;
@@ -12608,6 +12683,9 @@ var $$ = Object.create(null);
         }
       }
     },
+    clear$0: function(_) {
+      this._contents = "";
+    },
     toString$0: function(_) {
       var t1 = this._contents;
       return t1.charCodeAt(0) == 0 ? t1 : t1;
@@ -13759,7 +13837,7 @@ var $$ = Object.create(null);
   "^": "",
   HtmlElement: {
     "^": "Element;",
-    "%": "HTMLAppletElement|HTMLBRElement|HTMLCanvasElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDirectoryElement|HTMLDivElement|HTMLFontElement|HTMLFrameElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLImageElement|HTMLLabelElement|HTMLLegendElement|HTMLMarqueeElement|HTMLModElement|HTMLOptGroupElement|HTMLParagraphElement|HTMLPictureElement|HTMLPreElement|HTMLQuoteElement|HTMLShadowElement|HTMLSpanElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableDataCellElement|HTMLTableElement|HTMLTableHeaderCellElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTitleElement|HTMLUListElement|HTMLUnknownElement;HTMLElement;HtmlElement_DomProxyMixin|HtmlElement_DomProxyMixin_PolymerProxyMixin|CoreHeaderPanel|HtmlElement_DomProxyMixin0|HtmlElement_DomProxyMixin_PolymerProxyMixin0|CoreIcon|HtmlElement_DomProxyMixin1|HtmlElement_DomProxyMixin_PolymerProxyMixin1|CoreIconButton|HtmlElement_DomProxyMixin2|HtmlElement_DomProxyMixin_PolymerProxyMixin2|CoreMeta|CoreIconset|CoreIconsetSvg|HtmlElement_DomProxyMixin3|HtmlElement_DomProxyMixin_PolymerProxyMixin3|CoreKeyHelper|HtmlElement_DomProxyMixin4|HtmlElement_DomProxyMixin_PolymerProxyMixin4|CoreMediaQuery|HtmlElement_DomProxyMixin5|HtmlElement_DomProxyMixin_PolymerProxyMixin5|CoreOverlay|HtmlElement_DomProxyMixin6|HtmlElement_DomProxyMixin_PolymerProxyMixin6|CoreOverlayLayer|HtmlElement_DomProxyMixin7|HtmlElement_DomProxyMixin_PolymerProxyMixin7|CoreToolbar|CoreTransition|CoreTransitionCss|HtmlElement_Polymer|HtmlElement_Polymer_ChangeNotifier|PolymerElement|HistoryElement|MapElementP|HtmlElement_DomProxyMixin8|HtmlElement_DomProxyMixin_PolymerProxyMixin8|HtmlElement_DomProxyMixin_PolymerProxyMixin_CoreFocusable|PaperButtonBase|PaperFab|PaperIconButton|HtmlElement_DomProxyMixin9|HtmlElement_DomProxyMixin_PolymerProxyMixin9|PaperRipple|HtmlElement_DomProxyMixin10|HtmlElement_DomProxyMixin_PolymerProxyMixin10|PaperShadow|HtmlElement_DomProxyMixin11|HtmlElement_DomProxyMixin_PolymerProxyMixin11|PaperToast|PolymerElement_ChangeNotifier|PositioningControl|PolymerElement_StateListener|PolymerElement_StateListener_ChangeNotifier|TrackingElement|PolymerElement_StateNotifier|PolymerElement_StateNotifier_ChangeNotifier|StopwatchElement"
+    "%": "HTMLAppletElement|HTMLBRElement|HTMLCanvasElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDirectoryElement|HTMLDivElement|HTMLFontElement|HTMLFrameElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLImageElement|HTMLLabelElement|HTMLLegendElement|HTMLMarqueeElement|HTMLModElement|HTMLOptGroupElement|HTMLParagraphElement|HTMLPictureElement|HTMLPreElement|HTMLQuoteElement|HTMLShadowElement|HTMLSpanElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableDataCellElement|HTMLTableElement|HTMLTableHeaderCellElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTitleElement|HTMLUListElement|HTMLUnknownElement;HTMLElement;HtmlElement_DomProxyMixin|HtmlElement_DomProxyMixin_PolymerProxyMixin|CoreHeaderPanel|HtmlElement_DomProxyMixin0|HtmlElement_DomProxyMixin_PolymerProxyMixin0|CoreIcon|HtmlElement_DomProxyMixin1|HtmlElement_DomProxyMixin_PolymerProxyMixin1|CoreIconButton|HtmlElement_DomProxyMixin2|HtmlElement_DomProxyMixin_PolymerProxyMixin2|CoreMeta|CoreIconset|CoreIconsetSvg|HtmlElement_DomProxyMixin3|HtmlElement_DomProxyMixin_PolymerProxyMixin3|CoreKeyHelper|HtmlElement_DomProxyMixin4|HtmlElement_DomProxyMixin_PolymerProxyMixin4|CoreMediaQuery|HtmlElement_DomProxyMixin5|HtmlElement_DomProxyMixin_PolymerProxyMixin5|CoreOverlay|HtmlElement_DomProxyMixin6|HtmlElement_DomProxyMixin_PolymerProxyMixin6|CoreOverlayLayer|HtmlElement_DomProxyMixin7|HtmlElement_DomProxyMixin_PolymerProxyMixin7|CoreToolbar|CoreTransition|CoreTransitionCss|HtmlElement_Polymer|HtmlElement_Polymer_ChangeNotifier|PolymerElement|HistoryElement|MapElementView|HtmlElement_DomProxyMixin8|HtmlElement_DomProxyMixin_PolymerProxyMixin8|HtmlElement_DomProxyMixin_PolymerProxyMixin_CoreFocusable|PaperButtonBase|PaperFab|PaperIconButton|HtmlElement_DomProxyMixin9|HtmlElement_DomProxyMixin_PolymerProxyMixin9|PaperRipple|HtmlElement_DomProxyMixin10|HtmlElement_DomProxyMixin_PolymerProxyMixin10|PaperShadow|HtmlElement_DomProxyMixin11|HtmlElement_DomProxyMixin_PolymerProxyMixin11|PaperToast|PolymerElement_ChangeNotifier|PositioningControl|ToastLevelsElement|PolymerElement_StateListener|PolymerElement_StateListener_ChangeNotifier|TrackingElement|PolymerElement_StateNotifier|PolymerElement_StateNotifier_ChangeNotifier|StopwatchElement"
   },
   _EntryArray: {
     "^": "Interceptor;",
@@ -14140,6 +14218,9 @@ var $$ = Object.create(null);
   },
   ErrorEvent: {
     "^": "Event;error=,message=",
+    error$1: function($receiver, arg0) {
+      return $receiver.error.call$1(arg0);
+    },
     "%": "ErrorEvent"
   },
   Event: {
@@ -14339,6 +14420,9 @@ var $$ = Object.create(null);
   },
   MediaElement: {
     "^": "HtmlElement;duration=,error=",
+    error$1: function($receiver, arg0) {
+      return $receiver.error.call$1(arg0);
+    },
     pause$0: [function(receiver) {
       return receiver.pause();
     }, "call$0", "get$pause", 0, 0, 0],
@@ -14442,6 +14526,11 @@ var $$ = Object.create(null);
       var t1 = receiver.parentNode;
       if (t1 != null)
         t1.removeChild(receiver);
+    },
+    _clearChildren$0: function(receiver) {
+      var t1;
+      for (; t1 = receiver.firstChild, t1 != null;)
+        receiver.removeChild(t1);
     },
     toString$0: function(receiver) {
       var t1 = receiver.nodeValue;
@@ -14573,6 +14662,9 @@ var $$ = Object.create(null);
   },
   SpeechRecognitionError: {
     "^": "Event;error=,message=",
+    error$1: function($receiver, arg0) {
+      return $receiver.error.call$1(arg0);
+    },
     "%": "SpeechRecognitionError"
   },
   SpeechSynthesisEvent: {
@@ -14591,6 +14683,9 @@ var $$ = Object.create(null);
       var value = receiver.getItem(key);
       receiver.removeItem(key);
       return value;
+    },
+    clear$0: function(receiver) {
+      return receiver.clear();
     },
     forEach$1: function(receiver, f) {
       var i, key;
@@ -14992,6 +15087,12 @@ var $$ = Object.create(null);
     set$borderColor: function(receiver, value) {
       this.setProperty$3(receiver, "border-color", value, "");
     },
+    get$clear: function(receiver) {
+      return this.getPropertyValue$1(receiver, "clear");
+    },
+    clear$0: function($receiver) {
+      return this.get$clear($receiver).call$0();
+    },
     get$content: function(receiver) {
       return this.getPropertyValue$1(receiver, "content");
     },
@@ -15070,12 +15171,16 @@ var $$ = Object.create(null);
   Geolocation_watchPosition__closure: {
     "^": "Closure:59;box_0,this_3",
     call$1: [function(position) {
-      var t1, t2;
+      var t1, t2, t3;
       t1 = this.box_0.controller_1;
       t2 = C.Geolocation_methods._ensurePosition$1(this.this_3, position);
       if (t1._state >= 4)
         H.throwExpression(t1._badEventState$0());
-      t1._async$_add$1(0, t2);
+      t3 = t1._state;
+      if ((t3 & 1) !== 0)
+        t1._sendData$1(t2);
+      else if ((t3 & 3) === 0)
+        t1._ensurePendingEvents$0().add$1(0, H.setRuntimeTypeInfo(new P._DelayedData(t2, null), [H.getRuntimeTypeArgument(t1, "_StreamController", 0)]));
     }, "call$1", null, 2, 0, null, 113, "call"]
   },
   Geolocation_watchPosition__closure0: {
@@ -15179,6 +15284,9 @@ var $$ = Object.create(null);
         return false;
       t1.removeChild(object);
       return true;
+    },
+    clear$0: function(_) {
+      J._clearChildren$0$x(this._this);
     },
     $indexSet: function(_, index, value) {
       var t1, t2;
@@ -16309,10 +16417,10 @@ var $$ = Object.create(null);
       }}
   },
   JsObject__convertDataTree__convert: {
-    "^": "Closure:59;_js$_convertedObjects_0",
+    "^": "Closure:59;_convertedObjects_0",
     call$1: [function(o) {
       var t1, t2, convertedMap, key, convertedList;
-      t1 = this._js$_convertedObjects_0;
+      t1 = this._convertedObjects_0;
       if (t1.containsKey$1(0, o))
         return t1.$index(0, o);
       t2 = J.getInterceptor(o);
@@ -17156,6 +17264,9 @@ var $$ = Object.create(null);
       this._onRemoveAt = t1.getStreamProviderFor$3(this, "remove_at", new Z.MVCArray__initStreams_closure(this));
       this._onSetAt = t1.getStreamProviderFor$3(this, "set_at", new Z.MVCArray__initStreams_closure0(this));
     },
+    clear$0: function(_) {
+      this.$$unsafe.callMethod$1("clear");
+    },
     forEach$1: function(_, callback) {
       return this.$$unsafe.callMethod$2("forEach", [new Z.MVCArray_forEach_closure(this, callback)]);
     },
@@ -17485,7 +17596,7 @@ var $$ = Object.create(null);
       J.remove$1$ax(receiver.practices, key);
     }, "call$3", "get$onDelete", 6, 0, 129, 130, 131, 132],
     get$isEmpty: function(receiver) {
-      return J.$eq(J.get$length$asx(receiver.practices), 0);
+      return J.get$isEmpty$asx(receiver.practices);
     },
     static: {HistoryElement$created: function(receiver) {
         var t1, t2, t3, t4, t5;
@@ -17855,6 +17966,9 @@ var $$ = Object.create(null);
     toList$0: function($receiver) {
       return this.toList$1$growable($receiver, true);
     },
+    clear$0: function(_) {
+      this.modify$1(new P.CssClassSetImpl_clear_closure());
+    },
     modify$1: function(f) {
       var s, ret;
       s = this.readClasses$0();
@@ -17873,6 +17987,19 @@ var $$ = Object.create(null);
     call$1: [function(s) {
       return J.add$1$ax(s, this.value_0);
     }, "call$1", null, 2, 0, null, 134, "call"]
+  },
+  CssClassSetImpl_clear_closure: {
+    "^": "Closure:59;",
+    call$1: [function(s) {
+      return J.clear$0$ax(s);
+    }, "call$1", null, 2, 0, null, 134, "call"]
+  }
+}],
+["interfaces", "interfaces.dart", , T, {
+  "^": "",
+  StateListener: {
+    "^": "Object;",
+    $isStateListener: true
   }
 }],
 ["js_wrapping", "package:js_wrapping/js_wrapping.dart", , A, {
@@ -17920,10 +18047,10 @@ var $$ = Object.create(null);
     }
   },
   jsify__convert: {
-    "^": "Closure:59;_convertedObjects_0",
+    "^": "Closure:59;_js_wrapping$_convertedObjects_0",
     call$1: [function(o) {
       var t1, t2, convertedMap, t3, key, convertedList;
-      t1 = this._convertedObjects_0;
+      t1 = this._js_wrapping$_convertedObjects_0;
       if (t1.containsKey$1(0, o))
         return t1.$index(0, o);
       t2 = J.getInterceptor(o);
@@ -18089,11 +18216,11 @@ var $$ = Object.create(null);
     fine$1: function(message) {
       return this.fine$3(message, null, null);
     },
-    info$3: function(message, error, stackTrace) {
+    info$3: function(_, message, error, stackTrace) {
       return this.log$4(C.Level_INFO_800, message, error, stackTrace);
     },
-    info$1: function(message) {
-      return this.info$3(message, null, null);
+    info$1: function($receiver, message) {
+      return this.info$3($receiver, message, null, null);
     },
     warning$3: function(message, error, stackTrace) {
       return this.log$4(C.Level_WARNING_900, message, error, stackTrace);
@@ -18199,6 +18326,9 @@ var $$ = Object.create(null);
   },
   LogRecord: {
     "^": "Object;level<,message>,loggerName,time,sequenceNumber,error>,stackTrace<",
+    error$1: function($receiver, arg0) {
+      return this.error.call$1(arg0);
+    },
     toString$0: function(_) {
       return "[" + this.level.name + "] " + this.loggerName + ": " + H.S(this.message);
     },
@@ -18208,7 +18338,7 @@ var $$ = Object.create(null);
 }],
 ["map", "map_element.dart", , R, {
   "^": "",
-  MapElementP: {
+  MapElementView: {
     "^": "PolymerElement;isInit,gmap,line,canvasMap,endMarker,change_notifier$ChangeNotifier$_changes,change_notifier$ChangeNotifier$_records,polymer$Polymer$_polymer$_element,polymer$Polymer$_namedObservers,polymer$Polymer$_observers,polymer$Polymer$_unbound,polymer$Polymer$_unbindAllJob,polymer$Polymer$_propertyObserver,polymer$Polymer$_readied,polymer$Polymer$_jsElem,polymer$Polymer$_hasBeenAttached,polymer$Polymer$shadowRoots,polymer$Polymer$$,polymer$Polymer$_properties,polymer$Polymer$_polyfillScopeStyleCache",
     attached$0: function(receiver) {
       var t1;
@@ -18285,7 +18415,7 @@ var $$ = Object.create(null);
         receiver.isInit = true;
       }
       t1 = receiver.gmap.$$unsafe;
-      t1.callMethod$2("setCenter", [t2]);
+      t1.callMethod$2("panTo", [t2]);
       t1 = receiver.endMarker.$$unsafe;
       t1.callMethod$2("setPosition", [t2]);
       if (tracking) {
@@ -18293,7 +18423,7 @@ var $$ = Object.create(null);
         t1.$$unsafe.callMethod$2("push", [t1._unwrap$1(new Z.LatLng(t2))]);
       }
     },
-    static: {MapElementP$created: function(receiver) {
+    static: {MapElementView$created: function(receiver) {
         var t1, t2, t3, t4;
         t1 = P.LinkedHashMap_LinkedHashMap(null, null, null, P.String, W.ShadowRoot);
         t2 = P.String;
@@ -18308,8 +18438,8 @@ var $$ = Object.create(null);
         receiver.polymer$Polymer$$ = t2;
         receiver.polymer$Polymer$_properties = t3;
         receiver.polymer$Polymer$_polyfillScopeStyleCache = t4;
-        C.MapElementP_methods.Element$created$0(receiver);
-        C.MapElementP_methods.PolymerElement$created$0(receiver);
+        C.MapElementView_methods.Element$created$0(receiver);
+        C.MapElementView_methods.PolymerElement$created$0(receiver);
         return receiver;
       }}
   }
@@ -19392,6 +19522,23 @@ var $$ = Object.create(null);
       }
       return result;
     },
+    clear$0: function(_) {
+      var t1, len, t2, t3;
+      t1 = this._observable_map$_map;
+      len = t1.get$length(t1);
+      t2 = this.change_notifier$ChangeNotifier$_changes;
+      if (t2 != null) {
+        t3 = t2._async$_next;
+        t2 = t3 == null ? t2 != null : t3 !== t2;
+      } else
+        t2 = false;
+      if (t2 && len > 0) {
+        t1.forEach$1(0, new V.ObservableMap_clear_closure(this));
+        F.notifyPropertyChangeHelper(this, C.Symbol_length, len, 0);
+        this._notifyKeysValuesChanged$0();
+      }
+      t1.clear$0(0);
+    },
     forEach$1: function(_, f) {
       return this._observable_map$_map.forEach$1(0, f);
     },
@@ -19413,6 +19560,13 @@ var $$ = Object.create(null);
           result = !!t1.$isLinkedHashMap ? H.setRuntimeTypeInfo(new V.ObservableMap(P.LinkedHashMap_LinkedHashMap(null, null, null, $K, $V), null, null), [$K, $V]) : H.setRuntimeTypeInfo(new V.ObservableMap(P.HashMap_HashMap(null, null, null, $K, $V), null, null), [$K, $V]);
         return result;
       }}
+  },
+  ObservableMap_clear_closure: {
+    "^": "Closure:85;this_0",
+    call$2: function(key, value) {
+      var t1 = this.this_0;
+      t1.notifyChange$1(t1, H.setRuntimeTypeInfo(new V.MapChangeRecord(key, value, null, false, true), [null, null]));
+    }
   }
 }],
 ["observe.src.observer_transform", "package:observe/src/observer_transform.dart", , Y, {
@@ -21107,7 +21261,7 @@ var $$ = Object.create(null);
     poly.setAttribute("name", "auto-binding-dart");
     poly.setAttribute("extends", "template");
     J.$index$asx($.get$_polymerElementProto(), "init").apply$2$thisArg([], poly);
-    for (t1 = H.setRuntimeTypeInfo(new H.ListIterator(initializers, 25, 0, null), [H.getTypeArgumentByIndex(initializers, 0)]); t1.moveNext$0();)
+    for (t1 = H.setRuntimeTypeInfo(new H.ListIterator(initializers, 26, 0, null), [H.getTypeArgumentByIndex(initializers, 0)]); t1.moveNext$0();)
       t1.__internal$_current.call$0();
     A._watchWaitingFor();
   },
@@ -21675,7 +21829,7 @@ var $$ = Object.create(null);
       this.createComputedProperties$0(receiver);
       this.parseDeclarations$1(receiver, receiver.polymer$Polymer$_polymer$_element);
       this.get$attributes(receiver).remove$1(0, "unresolved");
-      $.get$_readyLog().info$1(new A.Polymer__makeElementReady_closure(receiver));
+      J.info$1$x($.get$_readyLog(), new A.Polymer__makeElementReady_closure(receiver));
     },
     attached$0: function(receiver) {
       if (receiver.polymer$Polymer$_polymer$_element == null)
@@ -21884,7 +22038,7 @@ var $$ = Object.create(null);
     }, "call$1", "get$_propertyChangeWorkaround", 2, 0, 149, 141],
     _propertyChange$3: function(receiver, nameSymbol, newValue, oldValue) {
       var $name, reflect;
-      $.get$_watchLog().info$1(new A.Polymer__propertyChange_closure(receiver, nameSymbol, newValue, oldValue));
+      J.info$1$x($.get$_watchLog(), new A.Polymer__propertyChange_closure(receiver, nameSymbol, newValue, oldValue));
       $name = $.get$symbolConverter()._configuration.names.$index(0, nameSymbol);
       reflect = receiver.polymer$Polymer$_polymer$_element.get$_reflect();
       if (reflect != null && reflect.contains$1(0, $name))
@@ -22044,7 +22198,7 @@ var $$ = Object.create(null);
     dispatchMethod$3: function(receiver, object, callbackOrMethod, args) {
       var t1, maxArgs, t2;
       t1 = $.get$_eventsLog();
-      t1.info$1(new A.Polymer_dispatchMethod_closure(receiver, callbackOrMethod));
+      J.info$1$x(t1, new A.Polymer_dispatchMethod_closure(receiver, callbackOrMethod));
       if (!!J.getInterceptor(callbackOrMethod).$isFunction) {
         maxArgs = X.maxArgs(callbackOrMethod);
         if (maxArgs === -1)
@@ -22503,6 +22657,9 @@ var $$ = Object.create(null);
     },
     set$bindingDelegate: function(receiver, value) {
       J.set$bindingDelegate$x(receiver._auto_binding$_self, value);
+    },
+    clear$0: function(receiver) {
+      return J.clear$0$ax(receiver._auto_binding$_self);
     },
     get$syntax: function(receiver) {
       return J.get$bindingDelegate$x(receiver._auto_binding$_self);
@@ -25259,21 +25416,19 @@ var $$ = Object.create(null);
       receiver.toastElement = this.get$$$(receiver)._observable_map$_map.$index(0, "toast");
       receiver.buttonToggleHistory = this.get$$$(receiver)._observable_map$_map.$index(0, "buttonToggleHistory");
       J.set$hidden$x(receiver._positioning_control$__$historyElement, true);
+      J.init$2$x(receiver._positioning_control$__$trackingElement, receiver._positioning_control$__$mapElement, receiver.toastElement);
       J.register$1$x(receiver._positioning_control$__$stopwatchElement, receiver);
       J.register$1$x(receiver._positioning_control$__$stopwatchElement, receiver._positioning_control$__$trackingElement);
-      J.set$listener$x(receiver._positioning_control$__$trackingElement, receiver._positioning_control$__$mapElement);
     },
     onStateStopped$0: function(receiver) {
-      var t1;
+      var t1, t2;
       receiver._positioning_control$__$state = this.notifyPropertyChange$3(receiver, C.Symbol_state, receiver._positioning_control$__$state, "stopped");
-      if (J.add$1$ax(receiver._positioning_control$__$historyElement, J.get$route$x(receiver._positioning_control$__$trackingElement)) === true) {
-        t1 = "Saved " + H.S(J.get$key$x(J.get$route$x(receiver._positioning_control$__$trackingElement)));
-        J.set$text$x(receiver.toastElement, t1);
-        J.show$0$x(receiver.toastElement);
-      } else {
-        J.set$text$x(receiver.toastElement, "Error saving");
-        J.show$0$x(receiver.toastElement);
-      }
+      t1 = J.add$1$ax(receiver._positioning_control$__$historyElement, J.get$route$x(receiver._positioning_control$__$trackingElement));
+      t2 = receiver.toastElement;
+      if (t1 === true)
+        J.info$1$x(t2, "Saved " + H.S(J.get$key$x(J.get$route$x(receiver._positioning_control$__$trackingElement))));
+      else
+        J.error$1$x(t2, "Error saving");
     },
     onStateStarted$0: function(receiver) {
       receiver._positioning_control$__$state = this.notifyPropertyChange$3(receiver, C.Symbol_state, receiver._positioning_control$__$state, "started");
@@ -25283,10 +25438,9 @@ var $$ = Object.create(null);
     },
     toggleHistory$0: [function(receiver) {
       var t1, t2;
-      if (J.get$isEmpty$asx(receiver._positioning_control$__$historyElement) === true && J.get$hidden$x(receiver._positioning_control$__$historyElement) === true) {
-        J.set$text$x(receiver.toastElement, "There are no history");
-        J.show$0$x(receiver.toastElement);
-      } else {
+      if (J.get$isEmpty$asx(receiver._positioning_control$__$historyElement) === true && J.get$hidden$x(receiver._positioning_control$__$historyElement) === true)
+        J.warn$1$x(receiver.toastElement, "There are no history");
+      else {
         t1 = receiver._positioning_control$__$historyElement;
         t2 = J.getInterceptor$x(t1);
         t2.set$hidden(t1, t2.get$hidden(t1) !== true);
@@ -25327,7 +25481,7 @@ var $$ = Object.create(null);
 ["", "route.dart", , D, {
   "^": "",
   Pos: {
-    "^": "Object;timestamp>,prev,lat>,$long>,_distancePrev,_distanceNext,_route$_next<",
+    "^": "Object;timestamp>,prev,lat>,$long>,_distancePrev,_distanceNext,_route$_next",
     set$next: function(n) {
       this._route$_next = n;
       this._distanceNext = this.distanceTo$1(n);
@@ -25354,13 +25508,6 @@ var $$ = Object.create(null);
       t1 = Math.sqrt(H.checkNum(1 - a));
       return 6371000 * (2 * Math.atan2(H.checkNum(t4), H.checkNum(t1)));
     },
-    $eq: function(_, b) {
-      var t1;
-      if (b == null)
-        return false;
-      t1 = J.getInterceptor$x(b);
-      return J.$eq(this.lat, t1.get$lat(b)) && J.$eq(this.$long, t1.get$$long(b)) && this.timestamp.$eq(0, t1.get$timestamp(b)) && J.$eq(this._route$_next, b.get$_route$_next());
-    },
     Pos$4: function(lat, $long, timestamp, prev) {
       var t1 = this.prev;
       if (t1 == null)
@@ -25378,7 +25525,7 @@ var $$ = Object.create(null);
       }}
   },
   Route: {
-    "^": "Object;_ini<,_route$_last,_distance",
+    "^": "Object;_ini,_route$_last,_distance",
     serialize$0: function() {
       var strb, pos, t1;
       strb = P.StringBuffer$("");
@@ -25392,8 +25539,10 @@ var $$ = Object.create(null);
       return t1.charCodeAt(0) == 0 ? t1 : t1;
     },
     _route$_add$3: function(_, x, y, time) {
-      var p, t1, t2;
-      p = J.$eq(this._route$_last, this._ini) ? D.Pos$(x, y, time, this._ini) : D.Pos$(x, y, time, this._route$_last);
+      var t1, t2, p;
+      t1 = this._route$_last;
+      t2 = this._ini;
+      p = (t1 == null ? t2 == null : t1 === t2) ? D.Pos$(x, y, time, t2) : D.Pos$(x, y, time, t1);
       t1 = this._distance;
       t2 = p._distancePrev;
       if (typeof t2 !== "number")
@@ -25415,11 +25564,6 @@ var $$ = Object.create(null);
     },
     get$speedAvg: function() {
       return this._distance / C.JSNumber_methods._tdivFast$1(this._route$_last.timestamp.difference$1(this._ini.timestamp)._duration, 1000000);
-    },
-    $eq: function(_, b) {
-      if (b == null)
-        return false;
-      return J.$eq(this._ini, b.get$_ini());
     },
     get$key: function(_) {
       return this._ini.timestamp.toString$0(0);
@@ -26034,10 +26178,6 @@ var $$ = Object.create(null);
     call$1: function(l) {
       return J.onStatePaused$0$x(l);
     }
-  },
-  StateListener: {
-    "^": "Object;",
-    $isStateListener: true
   }
 }],
 ["template_binding", "package:template_binding/template_binding.dart", , M, {
@@ -26393,7 +26533,10 @@ var $$ = Object.create(null);
       old = M.jsObjectToBindable(J.$index$asx(t2, M._dartToJsName(t1, $name)));
       t2.deleteProperty$1($name);
       return old;
-    }, "call$1", "get$remove", 2, 0, null, 62],
+    }, "call$1", "get$remove", 2, 0, 175, 62],
+    clear$0: function(_) {
+      J.forEach$1$ax(this.get$keys(this), this.get$remove(this));
+    },
     $asMapBase: function() {
       return [P.String, A.Bindable];
     },
@@ -26617,6 +26760,23 @@ var $$ = Object.create(null);
       t1 = this._template_binding$_iterator;
       t1._updateIteratedValue$1(t1._getUpdatedValue$0());
     },
+    clear$0: function(_) {
+      var ref, t1;
+      this._model = null;
+      this._bindingDelegate = null;
+      if (this.get$bindings(this) != null) {
+        ref = this.get$bindings(this).remove$1(0, "ref");
+        if (ref != null)
+          ref.close$0(0);
+      }
+      this._refContent = null;
+      t1 = this._template_binding$_iterator;
+      if (t1 == null)
+        return;
+      t1._valueChanged$1(null);
+      this._template_binding$_iterator.close$0(0);
+      this._template_binding$_iterator = null;
+    },
     get$_ref: function() {
       var ref, nextRef;
       this._decorate$0();
@@ -26783,7 +26943,7 @@ var $$ = Object.create(null);
       var t1 = this.this_0;
       J.get$attributes$x(t1._node)._element.setAttribute("ref", ref);
       t1._refChanged$0();
-    }, "call$1", null, 2, 0, null, 175, "call"]
+    }, "call$1", null, 2, 0, null, 176, "call"]
   },
   TemplateBindExtension_bootstrap__bootstrap: {
     "^": "Closure:17;",
@@ -26934,7 +27094,7 @@ var $$ = Object.create(null);
         return;
       }
       this._updateValue$1(this._getUpdatedValue$0());
-    }, "call$1", "get$_updateIfValue", 2, 0, 17, 176],
+    }, "call$1", "get$_updateIfValue", 2, 0, 17, 177],
     _updateIteratedValue$1: [function(value) {
       var ifValue;
       if (this._hasIf === true) {
@@ -27078,7 +27238,7 @@ var $$ = Object.create(null);
       }
       for (t1 = instanceCache.get$values(instanceCache), t1 = H.setRuntimeTypeInfo(new H.MappedIterator(null, J.get$iterator$ax(t1._iterable), t1._f), [H.getTypeArgumentByIndex(t1, 0), H.getTypeArgumentByIndex(t1, 1)]); t1.moveNext$0();)
         this._closeInstanceBindings$1(t1.__internal$_current);
-    }, "call$1", "get$_handleSplices", 2, 0, 177, 178],
+    }, "call$1", "get$_handleSplices", 2, 0, 178, 179],
     _closeInstanceBindings$1: [function(instance) {
       var t1, values;
       t1 = $.get$_instanceExtension();
@@ -27086,7 +27246,7 @@ var $$ = Object.create(null);
       values = H.Primitives_getProperty(instance, "expando$values");
       for (t1 = J.get$iterator$ax((values == null ? null : H.Primitives_getProperty(values, t1._getKey$0())).get$_bindings()); t1.moveNext$0();)
         J.close$0$x(t1.get$current());
-    }, "call$1", "get$_closeInstanceBindings", 2, 0, 179],
+    }, "call$1", "get$_closeInstanceBindings", 2, 0, 180],
     _unobserve$0: function() {
       var t1 = this._listSub;
       if (t1 == null)
@@ -27178,7 +27338,7 @@ var $$ = Object.create(null);
       if (t4 >= t3)
         return H.ioore(t1, t4);
       return t2 + H.S(t1[t4]);
-    }, "call$1", "get$_singleCombinator", 2, 0, 180, 18],
+    }, "call$1", "get$_singleCombinator", 2, 0, 181, 18],
     _listCombinator$1: [function(values) {
       var t1, newValue, len, t2, i, value, t3, str;
       t1 = this._mustache_tokens$_tokens;
@@ -27199,7 +27359,7 @@ var $$ = Object.create(null);
       }
       t1 = newValue._contents;
       return t1.charCodeAt(0) == 0 ? t1 : t1;
-    }, "call$1", "get$_listCombinator", 2, 0, 181, 182],
+    }, "call$1", "get$_listCombinator", 2, 0, 182, 183],
     MustacheTokens$_$2: function(_tokens, onlyOneTime) {
       this._combinator = this._mustache_tokens$_tokens.length === 5 ? this.get$_singleCombinator() : this.get$_listCombinator();
     },
@@ -27252,16 +27412,56 @@ var $$ = Object.create(null);
       }}
   }
 }],
+["", "toast_levels_element.dart", , V, {
+  "^": "",
+  ToastLevelsElement: {
+    "^": "PolymerElement;toastElement,change_notifier$ChangeNotifier$_changes,change_notifier$ChangeNotifier$_records,polymer$Polymer$_polymer$_element,polymer$Polymer$_namedObservers,polymer$Polymer$_observers,polymer$Polymer$_unbound,polymer$Polymer$_unbindAllJob,polymer$Polymer$_propertyObserver,polymer$Polymer$_readied,polymer$Polymer$_jsElem,polymer$Polymer$_hasBeenAttached,polymer$Polymer$shadowRoots,polymer$Polymer$$,polymer$Polymer$_properties,polymer$Polymer$_polyfillScopeStyleCache",
+    attached$0: function(receiver) {
+      A.Polymer.prototype.attached$0.call(this, receiver);
+      receiver.toastElement = this.get$$$(receiver)._observable_map$_map.$index(0, "toast");
+    },
+    error$1: [function(receiver, m) {
+      J.get$classes$x(receiver.toastElement).clear$0(0);
+      J.get$classes$x(receiver.toastElement).add$1(0, "error");
+      J.set$text$x(receiver.toastElement, m);
+      J.show$0$x(receiver.toastElement);
+    }, "call$1", "get$error", 2, 0, 43, 161],
+    warn$1: function(receiver, m) {
+      J.get$classes$x(receiver.toastElement).clear$0(0);
+      J.get$classes$x(receiver.toastElement).add$1(0, "warn");
+      J.set$text$x(receiver.toastElement, m);
+      J.show$0$x(receiver.toastElement);
+    },
+    info$1: function(receiver, m) {
+      J.get$classes$x(receiver.toastElement).clear$0(0);
+      J.get$classes$x(receiver.toastElement).add$1(0, "info");
+      J.set$text$x(receiver.toastElement, m);
+      J.show$0$x(receiver.toastElement);
+    },
+    static: {ToastLevelsElement$created: function(receiver) {
+        var t1, t2, t3, t4;
+        t1 = P.LinkedHashMap_LinkedHashMap(null, null, null, P.String, W.ShadowRoot);
+        t2 = P.String;
+        t2 = H.setRuntimeTypeInfo(new V.ObservableMap(P.HashMap_HashMap(null, null, null, t2, null), null, null), [t2, null]);
+        t3 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
+        t4 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
+        receiver.polymer$Polymer$_observers = [];
+        receiver.polymer$Polymer$_readied = false;
+        receiver.polymer$Polymer$_hasBeenAttached = false;
+        receiver.polymer$Polymer$shadowRoots = t1;
+        receiver.polymer$Polymer$$ = t2;
+        receiver.polymer$Polymer$_properties = t3;
+        receiver.polymer$Polymer$_polyfillScopeStyleCache = t4;
+        C.ToastLevelsElement_methods.Element$created$0(receiver);
+        C.ToastLevelsElement_methods.PolymerElement$created$0(receiver);
+        return receiver;
+      }}
+  }
+}],
 ["tracking", "tracking_element.dart", , D, {
   "^": "",
   TrackingElement: {
-    "^": "PolymerElement_StateListener_ChangeNotifier;_tracking$__$gpsStatus,_tracking$__$totalDistance,_tracking$__$speedAverage,_tracking$__$borderColor,route%,listener},tracking,change_notifier$ChangeNotifier$_changes,change_notifier$ChangeNotifier$_records,change_notifier$ChangeNotifier$_changes,change_notifier$ChangeNotifier$_records,polymer$Polymer$_polymer$_element,polymer$Polymer$_namedObservers,polymer$Polymer$_observers,polymer$Polymer$_unbound,polymer$Polymer$_unbindAllJob,polymer$Polymer$_propertyObserver,polymer$Polymer$_readied,polymer$Polymer$_jsElem,polymer$Polymer$_hasBeenAttached,polymer$Polymer$shadowRoots,polymer$Polymer$$,polymer$Polymer$_properties,polymer$Polymer$_polyfillScopeStyleCache",
-    get$gpsStatus: function(receiver) {
-      return receiver._tracking$__$gpsStatus;
-    },
-    set$gpsStatus: function(receiver, value) {
-      receiver._tracking$__$gpsStatus = this.notifyPropertyChange$3(receiver, C.Symbol_gpsStatus, receiver._tracking$__$gpsStatus, value);
-    },
+    "^": "PolymerElement_StateListener_ChangeNotifier;_tracking$__$totalDistance,_tracking$__$speedAverage,_tracking$__$borderColor,route%,listener,notifier,tracking,change_notifier$ChangeNotifier$_changes,change_notifier$ChangeNotifier$_records,change_notifier$ChangeNotifier$_changes,change_notifier$ChangeNotifier$_records,polymer$Polymer$_polymer$_element,polymer$Polymer$_namedObservers,polymer$Polymer$_observers,polymer$Polymer$_unbound,polymer$Polymer$_unbindAllJob,polymer$Polymer$_propertyObserver,polymer$Polymer$_readied,polymer$Polymer$_jsElem,polymer$Polymer$_hasBeenAttached,polymer$Polymer$shadowRoots,polymer$Polymer$$,polymer$Polymer$_properties,polymer$Polymer$_polyfillScopeStyleCache",
     get$totalDistance: function(receiver) {
       return receiver._tracking$__$totalDistance;
     },
@@ -27283,6 +27483,10 @@ var $$ = Object.create(null);
     attached$0: function(receiver) {
       A.Polymer.prototype.attached$0.call(this, receiver);
       J.watchPosition$1$enableHighAccuracy$x(window.navigator.geolocation, true).listen$2$onError(new D.TrackingElement_attached_closure(receiver), new D.TrackingElement_attached_closure0(receiver));
+    },
+    init$2: function(receiver, listener, notifier) {
+      receiver.listener = listener;
+      receiver.notifier = notifier;
     },
     onStateStarted$0: function(receiver) {
       receiver.tracking = true;
@@ -27308,7 +27512,6 @@ var $$ = Object.create(null);
         t2 = H.setRuntimeTypeInfo(new V.ObservableMap(P.HashMap_HashMap(null, null, null, t2, null), null, null), [t2, null]);
         t3 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
         t4 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
-        receiver._tracking$__$gpsStatus = "?";
         receiver._tracking$__$totalDistance = "?";
         receiver._tracking$__$speedAverage = "?";
         receiver._tracking$__$borderColor = "rgb(0,0,0)";
@@ -27334,7 +27537,7 @@ var $$ = Object.create(null);
     $isObservable: true
   },
   TrackingElement_attached_closure: {
-    "^": "Closure:183;this_0",
+    "^": "Closure:184;this_0",
     call$1: [function(position) {
       var t1, t2, t3;
       t1 = this.this_0;
@@ -27354,8 +27557,7 @@ var $$ = Object.create(null);
         t1._tracking$__$totalDistance = t3.notifyPropertyChange$3(t1, C.Symbol_totalDistance, t1._tracking$__$totalDistance, t2);
         t2 = C.JSNumber_methods.toStringAsFixed$1(t1.route.get$speedAvg() * 3.6, 2) + "km/h";
         t1._tracking$__$speedAverage = t3.notifyPropertyChange$3(t1, C.Symbol_speedAverage, t1._tracking$__$speedAverage, t2);
-      } else
-        t1._tracking$__$gpsStatus = J.notifyPropertyChange$3$x(t1, C.Symbol_gpsStatus, t1._tracking$__$gpsStatus, "Not tracking");
+      }
       t2 = t1.listener;
       if (t2 != null) {
         t3 = J.getInterceptor$x(position);
@@ -27364,12 +27566,9 @@ var $$ = Object.create(null);
     }, "call$1", null, 2, 0, null, 113, "call"]
   },
   TrackingElement_attached_closure0: {
-    "^": "Closure:184;this_1",
+    "^": "Closure:185;this_1",
     call$1: [function(error) {
-      var t1, t2;
-      t1 = this.this_1;
-      t2 = J.get$message$x(error);
-      t1._tracking$__$gpsStatus = J.notifyPropertyChange$3$x(t1, C.Symbol_gpsStatus, t1._tracking$__$gpsStatus, t2);
+      J.error$1$x(this.this_1.notifier, J.get$message$x(error));
       return;
     }, "call$1", null, 2, 0, null, 21, "call"]
   }
@@ -27511,7 +27710,7 @@ var $$ = Object.create(null);
       J.set$hidden$x(receiver.stopButton, false);
       J.set$hidden$x(receiver.pauseButton, false);
       this.notifyStart$0(receiver);
-    }, "call$3", "get$start", 6, 0, 185, 3, 131, 132],
+    }, "call$3", "get$start", 6, 0, 186, 3, 131, 132],
     stop$3: [function(receiver, e, detail, target) {
       receiver.watch.reset$0(0);
       receiver.timer.cancel$0();
@@ -27520,14 +27719,14 @@ var $$ = Object.create(null);
       J.set$hidden$x(receiver.stopButton, true);
       receiver._watch$__$counter = this.notifyPropertyChange$3(receiver, C.Symbol_counter, receiver._watch$__$counter, "00:00:00");
       this.notifyStop$0(receiver);
-    }, "call$3", "get$stop", 6, 0, 185, 3, 131, 132],
+    }, "call$3", "get$stop", 6, 0, 186, 3, 131, 132],
     pause$3: [function(receiver, e, detail, target) {
       receiver.watch.stop$0(0);
       J.set$hidden$x(receiver.startButton, false);
       J.set$hidden$x(receiver.pauseButton, true);
       J.set$hidden$x(receiver.stopButton, false);
       this.notifyPause$0(receiver);
-    }, "call$3", "get$pause", 6, 0, 185, 3, 131, 132],
+    }, "call$3", "get$pause", 6, 0, 186, 3, 131, 132],
     updateTime$1: [function(receiver, _) {
       var t1, hour, minute, second;
       t1 = receiver.watch;
@@ -27536,7 +27735,7 @@ var $$ = Object.create(null);
       second = this.numberToDigits$1(receiver, C.JSNumber_methods._tdivFast$1(P.Duration$(0, 0, J.$tdiv$n(J.$mul$ns(t1.get$elapsedTicks(), 1000000), $.Stopwatch__frequency), 0, 0, 0)._duration, 1000000));
       t1 = hour + ":" + minute + ":" + second;
       receiver._watch$__$counter = this.notifyPropertyChange$3(receiver, C.Symbol_counter, receiver._watch$__$counter, t1);
-    }, "call$1", "get$updateTime", 2, 0, 186, 89],
+    }, "call$1", "get$updateTime", 2, 0, 187, 89],
     numberToDigits$1: function(receiver, n) {
       if (n < 10)
         return "0" + H.S(n);
@@ -27547,7 +27746,7 @@ var $$ = Object.create(null);
         var t1, t2, t3, t4, t5;
         H.Primitives_initTicker();
         $.Stopwatch__frequency = $.Primitives_timerFrequency;
-        t1 = P.LinkedHashSet_LinkedHashSet(null, null, null, Z.StateListener);
+        t1 = P.LinkedHashSet_LinkedHashSet(null, null, null, T.StateListener);
         t2 = P.LinkedHashMap_LinkedHashMap(null, null, null, P.String, W.ShadowRoot);
         t3 = P.String;
         t3 = H.setRuntimeTypeInfo(new V.ObservableMap(P.HashMap_HashMap(null, null, null, t3, null), null, null), [t3, null]);
@@ -27648,6 +27847,9 @@ $$ = null;
   _.$isComparable = TRUE;
   _.$asComparable = [N.Level];
   _.$isObject = TRUE;
+  _ = A.Bindable;
+  _.$isBindable = TRUE;
+  _.$isObject = TRUE;
   _ = P.JsObject;
   _.$isJsObject = TRUE;
   _.$isObject = TRUE;
@@ -27666,9 +27868,6 @@ $$ = null;
   _ = T.SourceSpan;
   _.$isComparable = TRUE;
   _.$asComparable = [T.SourceSpan];
-  _.$isObject = TRUE;
-  _ = A.Bindable;
-  _.$isBindable = TRUE;
   _.$isObject = TRUE;
   _ = U.TernaryOperator;
   _.$isExpression = TRUE;
@@ -27760,7 +27959,7 @@ $$ = null;
   _ = U.Expression;
   _.$isExpression = TRUE;
   _.$isObject = TRUE;
-  _ = Z.StateListener;
+  _ = T.StateListener;
   _.$isStateListener = TRUE;
   _.$isObject = TRUE;
   _ = P.Timer;
@@ -28057,6 +28256,9 @@ J.__isolate_helper$_add$1$x = function(receiver, a0) {
 J._async$_add$1$x = function(receiver, a0) {
   return J.getInterceptor$x(receiver)._async$_add$1(receiver, a0);
 };
+J._clearChildren$0$x = function(receiver) {
+  return J.getInterceptor$x(receiver)._clearChildren$0(receiver);
+};
 J._initCustomEvent$4$x = function(receiver, a0, a1, a2, a3) {
   return J.getInterceptor$x(receiver)._initCustomEvent$4(receiver, a0, a1, a2, a3);
 };
@@ -28096,6 +28298,9 @@ J.attributeChanged$3$x = function(receiver, a0, a1, a2) {
 J.bind$3$oneTime$x = function(receiver, a0, a1, a2) {
   return J.getInterceptor$x(receiver).bind$3$oneTime(receiver, a0, a1, a2);
 };
+J.clear$0$ax = function(receiver) {
+  return J.getInterceptor$ax(receiver).clear$0(receiver);
+};
 J.close$0$x = function(receiver) {
   return J.getInterceptor$x(receiver).close$0(receiver);
 };
@@ -28131,6 +28336,9 @@ J.elementAt$1$ax = function(receiver, a0) {
 };
 J.endsWith$1$s = function(receiver, a0) {
   return J.getInterceptor$s(receiver).endsWith$1(receiver, a0);
+};
+J.error$1$x = function(receiver, a0) {
+  return J.getInterceptor$x(receiver).error$1(receiver, a0);
 };
 J.forEach$1$ax = function(receiver, a0) {
   return J.getInterceptor$ax(receiver).forEach$1(receiver, a0);
@@ -28197,9 +28405,6 @@ J.get$element$x = function(receiver) {
 };
 J.get$error$x = function(receiver) {
   return J.getInterceptor$x(receiver).get$error(receiver);
-};
-J.get$gpsStatus$x = function(receiver) {
-  return J.getInterceptor$x(receiver).get$gpsStatus(receiver);
 };
 J.get$hashCode$ = function(receiver) {
   return J.getInterceptor(receiver).get$hashCode(receiver);
@@ -28363,6 +28568,12 @@ J.getBoundingClientRect$0$x = function(receiver) {
 J.importNode$2$x = function(receiver, a0, a1) {
   return J.getInterceptor$x(receiver).importNode$2(receiver, a0, a1);
 };
+J.info$1$x = function(receiver, a0) {
+  return J.getInterceptor$x(receiver).info$1(receiver, a0);
+};
+J.init$2$x = function(receiver, a0, a1) {
+  return J.getInterceptor$x(receiver).init$2(receiver, a0, a1);
+};
 J.join$1$ax = function(receiver, a0) {
   return J.getInterceptor$ax(receiver).join$1(receiver, a0);
 };
@@ -28380,9 +28591,6 @@ J.newPosition$3$x = function(receiver, a0, a1, a2) {
 };
 J.noSuchMethod$1 = function(receiver, a0) {
   return J.getInterceptor(receiver).noSuchMethod$1(receiver, a0);
-};
-J.notifyPropertyChange$3$x = function(receiver, a0, a1, a2) {
-  return J.getInterceptor$x(receiver).notifyPropertyChange$3(receiver, a0, a1, a2);
 };
 J.observe$3$attributeFilter$attributes$x = function(receiver, a0, a1, a2) {
   return J.getInterceptor$x(receiver).observe$3$attributeFilter$attributes(receiver, a0, a1, a2);
@@ -28453,9 +28661,6 @@ J.set$className$x = function(receiver, value) {
 J.set$counter$x = function(receiver, value) {
   return J.getInterceptor$x(receiver).set$counter(receiver, value);
 };
-J.set$gpsStatus$x = function(receiver, value) {
-  return J.getInterceptor$x(receiver).set$gpsStatus(receiver, value);
-};
 J.set$hidden$x = function(receiver, value) {
   return J.getInterceptor$x(receiver).set$hidden(receiver, value);
 };
@@ -28470,9 +28675,6 @@ J.set$icon$x = function(receiver, value) {
 };
 J.set$length$asx = function(receiver, value) {
   return J.getInterceptor$asx(receiver).set$length(receiver, value);
-};
-J.set$listener$x = function(receiver, value) {
-  return J.getInterceptor$x(receiver).set$listener(receiver, value);
 };
 J.set$mapElement$x = function(receiver, value) {
   return J.getInterceptor$x(receiver).set$mapElement(receiver, value);
@@ -28540,6 +28742,9 @@ J.toggle$2$x = function(receiver, a0, a1) {
 J.trim$0$s = function(receiver) {
   return J.getInterceptor$s(receiver).trim$0(receiver);
 };
+J.warn$1$x = function(receiver, a0) {
+  return J.getInterceptor$x(receiver).warn$1(receiver, a0);
+};
 J.watchPosition$1$enableHighAccuracy$x = function(receiver, a0) {
   return J.getInterceptor$x(receiver).watchPosition$1$enableHighAccuracy(receiver, a0);
 };
@@ -28576,7 +28781,7 @@ C.JSInt_methods = J.JSInt.prototype;
 C.JSNull_methods = J.JSNull.prototype;
 C.JSNumber_methods = J.JSNumber.prototype;
 C.JSString_methods = J.JSString.prototype;
-C.MapElementP_methods = R.MapElementP.prototype;
+C.MapElementView_methods = R.MapElementView.prototype;
 C.NodeList_methods = W.NodeList.prototype;
 C.PaperButtonBase_methods = V.PaperButtonBase.prototype;
 C.PaperFab_methods = X.PaperFab.prototype;
@@ -28589,6 +28794,7 @@ C.PolymerElement_methods = A.PolymerElement.prototype;
 C.PositioningControl_methods = T.PositioningControl.prototype;
 C.PositioningLiElement_methods = A.PositioningLiElement.prototype;
 C.StopwatchElement_methods = O.StopwatchElement.prototype;
+C.ToastLevelsElement_methods = V.ToastLevelsElement.prototype;
 C.TrackingElement_methods = D.TrackingElement.prototype;
 C.UnknownJavaScriptObject_methods = J.UnknownJavaScriptObject.prototype;
 C.Window_methods = W.Window.prototype;
@@ -28611,9 +28817,6 @@ C.C_Reflectable = new K.Reflectable();
 C.C_ObservableProperty = new K.ObservableProperty();
 C.List_Reflectable_ObservableProperty = Isolate.makeConstantList([C.C_Reflectable, C.C_ObservableProperty]);
 C.Declaration_0bC = new A.Declaration(C.Symbol_stopwatchElement, C.DeclarationKind_1, false, C.Type_TOw, false, C.List_Reflectable_ObservableProperty);
-C.Symbol_mapElement = new H.Symbol("mapElement");
-C.Type_wEo = H.createRuntimeType('MapElementP');
-C.Declaration_8Gl = new A.Declaration(C.Symbol_mapElement, C.DeclarationKind_1, false, C.Type_wEo, false, C.List_Reflectable_ObservableProperty);
 C.Symbol_counter = new H.Symbol("counter");
 C.Type_Ejg = H.createRuntimeType('String');
 C.Declaration_8aB = new A.Declaration(C.Symbol_counter, C.DeclarationKind_1, false, C.Type_Ejg, false, C.List_Reflectable_ObservableProperty);
@@ -28623,8 +28826,6 @@ C.List_bTJ = Isolate.makeConstantList([C.C_Reflectable, C.PublishedProperty_fals
 C.Declaration_9t5 = new A.Declaration(C.Symbol_borderColor, C.DeclarationKind_1, false, C.Type_Ejg, false, C.List_bTJ);
 C.Symbol_totalDistance = new H.Symbol("totalDistance");
 C.Declaration_K2q = new A.Declaration(C.Symbol_totalDistance, C.DeclarationKind_1, false, C.Type_Ejg, false, C.List_Reflectable_ObservableProperty);
-C.Symbol_gpsStatus = new H.Symbol("gpsStatus");
-C.Declaration_RMJ = new A.Declaration(C.Symbol_gpsStatus, C.DeclarationKind_1, false, C.Type_Ejg, false, C.List_Reflectable_ObservableProperty);
 C.Symbol_trackingElement = new H.Symbol("trackingElement");
 C.Type_ALf = H.createRuntimeType('TrackingElement');
 C.Declaration_Wti = new A.Declaration(C.Symbol_trackingElement, C.DeclarationKind_1, false, C.Type_ALf, false, C.List_Reflectable_ObservableProperty);
@@ -28642,6 +28843,9 @@ C.Symbol_practices = new H.Symbol("practices");
 C.Type_46y = H.createRuntimeType('Map');
 C.List_ObservableProperty = Isolate.makeConstantList([C.C_ObservableProperty]);
 C.Declaration_oou = new A.Declaration(C.Symbol_practices, C.DeclarationKind_0, true, C.Type_46y, false, C.List_ObservableProperty);
+C.Symbol_mapElement = new H.Symbol("mapElement");
+C.Type_FQs = H.createRuntimeType('MapElementView');
+C.Declaration_qKV = new A.Declaration(C.Symbol_mapElement, C.DeclarationKind_1, false, C.Type_FQs, false, C.List_Reflectable_ObservableProperty);
 C.Duration_0 = new P.Duration(0);
 C.HtmlEscapeMode_p2v = new P.HtmlEscapeMode("unknown", true, true, true, true);
 C.JS_CONST_0 = function(hooks) {
@@ -28891,6 +29095,7 @@ C.Type_dVs = H.createRuntimeType('DateTime');
 C.Type_dynamic = H.createRuntimeType('dynamic');
 C.Type_eZO = H.createRuntimeType('Null');
 C.Type_ewF = H.createRuntimeType('PositioningControl');
+C.Type_iIK = H.createRuntimeType('ToastLevelsElement');
 C.Type_irB = H.createRuntimeType('Uint32List');
 C.Type_jWj = H.createRuntimeType('CoreIcon');
 C.Type_mp3 = H.createRuntimeType('Int8List');
@@ -28977,7 +29182,7 @@ $.initializers = null;
 $.deployMode = true;
 $.TemplateBindExtension__initStyles = null;
 $.TemplateBindExtension__initBaseUriWorkaround = null;
-$.mapTypeToInterceptor = [C.Type_TOw, O.StopwatchElement, {created: O.StopwatchElement$created}, C.Type_wEo, R.MapElementP, {created: R.MapElementP$created}, C.Type_ALf, D.TrackingElement, {created: D.TrackingElement$created}, C.Type_eKh, S.HistoryElement, {created: S.HistoryElement$created}, C.Type_fPs, W.HtmlElement, {}, C.Type_3FG, M.CoreIconButton, {created: M.CoreIconButton$created}, C.Type_752, V.CoreToolbar, {created: V.CoreToolbar$created}, C.Type_86y, Q.CoreIconsetSvg, {created: Q.CoreIconsetSvg$created}, C.Type_ACQ, M.CoreIconset, {created: M.CoreIconset$created}, C.Type_CF2, X.PaperFab, {created: X.PaperFab$created}, C.Type_F6m, V.PaperButtonBase, {created: V.PaperButtonBase$created}, C.Type_FKn, D.CoreOverlayLayer, {created: D.CoreOverlayLayer$created}, C.Type_I2I, A.PolymerElement, {created: A.PolymerElement$created}, C.Type_IsU, Z.PaperShadow, {created: Z.PaperShadow$created}, C.Type_MQu, U.PaperToast, {created: U.PaperToast$created}, C.Type_MmH, T.CoreTransitionCss, {created: T.CoreTransitionCss$created}, C.Type_Ot8, T.PaperIconButton, {created: T.PaperIconButton$created}, C.Type_SaW, L.PaperRipple, {created: L.PaperRipple$created}, C.Type_TMJ, U.CoreOverlay, {created: U.CoreOverlay$created}, C.Type_X8O, E.CoreKeyHelper, {created: E.CoreKeyHelper$created}, C.Type_aB0, S.CoreMeta, {created: S.CoreMeta$created}, C.Type_aTW, T.CoreHeaderPanel, {created: T.CoreHeaderPanel$created}, C.Type_ewF, T.PositioningControl, {created: T.PositioningControl$created}, C.Type_jWj, L.CoreIcon, {created: L.CoreIcon$created}, C.Type_qFQ, D.CoreMediaQuery, {created: D.CoreMediaQuery$created}, C.Type_s8b, Y.AutoBindingElement, {created: Y.AutoBindingElement$created}, C.Type_su2, V.CoreTransition, {created: V.CoreTransition$created}, C.Type_ufO, A.PositioningLiElement, {created: A.PositioningLiElement$created}];
+$.mapTypeToInterceptor = [C.Type_TOw, O.StopwatchElement, {created: O.StopwatchElement$created}, C.Type_ALf, D.TrackingElement, {created: D.TrackingElement$created}, C.Type_eKh, S.HistoryElement, {created: S.HistoryElement$created}, C.Type_FQs, R.MapElementView, {created: R.MapElementView$created}, C.Type_fPs, W.HtmlElement, {}, C.Type_3FG, M.CoreIconButton, {created: M.CoreIconButton$created}, C.Type_752, V.CoreToolbar, {created: V.CoreToolbar$created}, C.Type_86y, Q.CoreIconsetSvg, {created: Q.CoreIconsetSvg$created}, C.Type_ACQ, M.CoreIconset, {created: M.CoreIconset$created}, C.Type_CF2, X.PaperFab, {created: X.PaperFab$created}, C.Type_F6m, V.PaperButtonBase, {created: V.PaperButtonBase$created}, C.Type_FKn, D.CoreOverlayLayer, {created: D.CoreOverlayLayer$created}, C.Type_I2I, A.PolymerElement, {created: A.PolymerElement$created}, C.Type_IsU, Z.PaperShadow, {created: Z.PaperShadow$created}, C.Type_MQu, U.PaperToast, {created: U.PaperToast$created}, C.Type_MmH, T.CoreTransitionCss, {created: T.CoreTransitionCss$created}, C.Type_Ot8, T.PaperIconButton, {created: T.PaperIconButton$created}, C.Type_SaW, L.PaperRipple, {created: L.PaperRipple$created}, C.Type_TMJ, U.CoreOverlay, {created: U.CoreOverlay$created}, C.Type_X8O, E.CoreKeyHelper, {created: E.CoreKeyHelper$created}, C.Type_aB0, S.CoreMeta, {created: S.CoreMeta$created}, C.Type_aTW, T.CoreHeaderPanel, {created: T.CoreHeaderPanel$created}, C.Type_ewF, T.PositioningControl, {created: T.PositioningControl$created}, C.Type_iIK, V.ToastLevelsElement, {created: V.ToastLevelsElement$created}, C.Type_jWj, L.CoreIcon, {created: L.CoreIcon$created}, C.Type_qFQ, D.CoreMediaQuery, {created: D.CoreMediaQuery$created}, C.Type_s8b, Y.AutoBindingElement, {created: Y.AutoBindingElement$created}, C.Type_su2, V.CoreTransition, {created: V.CoreTransition$created}, C.Type_ufO, A.PositioningLiElement, {created: A.PositioningLiElement$created}];
 Isolate.$lazy($, "thisScript", "IsolateNatives_thisScript", "get$IsolateNatives_thisScript", function() {
   return H.IsolateNatives_computeThisScript();
 });
@@ -29431,7 +29636,8 @@ C.C__Undefined,
 {func: "String__String__dynamic", ret: P.String, args: [P.String], named: {color: null}},
 "message",
 "color",
-{func: "dynamic__StateListener", args: [Z.StateListener]},
+{func: "dynamic__StateListener", args: [T.StateListener]},
+{func: "Bindable__String", ret: A.Bindable, args: [P.String]},
 "ref",
 "ifValue",
 {func: "void__List0", void: true, args: [[P.List, G.ListChangeRecord]]},

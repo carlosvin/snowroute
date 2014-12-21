@@ -1,0 +1,20 @@
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/paper_elements/paper_toast.html">
+
+<polymer-element name="toast-levels-element"> 
+  <template>
+    <style>
+      .error{
+        color: rgb(255,100,100);
+      }
+      
+      .warn{
+        color: rgb(255,225,100);
+      }
+    </style>
+    
+    <paper-toast id="toast"></paper-toast>
+    
+  </template> 
+  <script type="application/dart" src="toast_levels_element.dart"></script>
+</polymer-element>

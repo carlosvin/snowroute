@@ -4,11 +4,11 @@
 <link rel="import" href="tracking_element.html">
 <link rel="import" href="history_element.html">
 <link rel="import" href="map_element.html">
+<link rel="import" href="toast_levels_element.html">
 
 <link rel="import" href="packages/core_elements/core_toolbar.html">
 <link rel="import" href="packages/core_elements/core_header_panel.html">
 <link rel="import" href="packages/paper_elements/paper_icon_button.html">
-<link rel="import" href="packages/paper_elements/paper_toast.html">
 
 <polymer-element name="positioning-control"> 
   <template>
@@ -25,8 +25,6 @@
         margin: 1%;
         padding: 1%;
       }
-
-      
     </style>
     <core-header-panel layout vertical flex>
       <core-toolbar>
@@ -43,7 +41,7 @@
       </div>
     </core-header-panel>
     
-    <paper-toast id="toast"></paper-toast>
+    <toast-levels-element id="toast"></toast-levels-element>
     
   </template> 
   <script type="application/dart" src="positioning_control.dart"></script>
