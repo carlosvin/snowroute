@@ -1,5 +1,7 @@
 library state;
 
+import 'interfaces.dart';
+
 abstract class StateNotifier {
   
   final Set<StateListener> listeners = new Set<StateListener>();
@@ -23,11 +25,4 @@ abstract class StateNotifier {
   void notifyPause(){
     listeners.forEach((StateListener l) => l.onStatePaused());
   }
-}
-
-abstract class StateListener {
-
-  void onStateStarted();
-  void onStateStopped();
-  void onStatePaused();
 }

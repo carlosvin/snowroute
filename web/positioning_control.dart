@@ -6,17 +6,18 @@ import 'stopwatch_element.dart';
 import 'tracking_element.dart';
 import 'history_element.dart';
 import 'map_element.dart';
-import 'state_machine.dart';
+import 'interfaces.dart';
 
 
 @CustomTag('positioning-control')
-class PositioningControl extends PolymerElement implements StateListener{
+class PositioningControl extends PolymerElement implements StateListener, MessageNotifier{
 
   @observable String state = '';
   @observable StopwatchElement stopwatchElement;
   @observable TrackingElement trackingElement;
   @observable HistoryElement historyElement;
-  @observable MapElementP mapElement;
+  @observable MapElementView mapElement;
+  
   PaperToast toastElement;
   PaperIconButton buttonToggleHistory;
   
@@ -37,17 +38,16 @@ class PositioningControl extends PolymerElement implements StateListener{
     stopwatchElement.register(this);
     stopwatchElement.register(trackingElement);
     
-    trackingElement.listener = mapElement;
+    trackingElement.init(mapElement, this);
   }
   
   void onStateStopped(){
     state = 'stopped';
     if ( historyElement.add(trackingElement.route)){
-      toast("Saved ${trackingElement.route.key}");
+      info("Saved ${trackingElement.route.key}");
     }else{
-      toast("Error saving");
+      error("Error saving");
     }
-    
   }
   
   void onStateStarted(){
@@ -59,7 +59,29 @@ class PositioningControl extends PolymerElement implements StateListener{
     state = 'paused';
   }
   
-  void toast(String m){
+  @override
+  void error(String m){
+    toastElement.classes.clear();
+    toastElement.classes.add("error");
+    _toast(m);
+  }
+  
+  @override
+  void warn(String m){
+    toastElement.classes.clear();
+    toastElement.classes.add("warn");
+    _toast(m);
+  }
+
+  @override
+  void info(String m){
+    toastElement.classes.clear();
+    toastElement.classes.add("info");
+    _toast(m);
+  }
+  
+  // TODO create a toast element to manage errors and implements MessageNotifier
+  void _toast(String m){
     toastElement.text = m;
     toastElement.show();
   }
@@ -67,7 +89,7 @@ class PositioningControl extends PolymerElement implements StateListener{
   void toggleHistory(){
     
     if (historyElement.isEmpty &&  historyElement.hidden ){
-      toast("There are no history");
+      warn("There are no history");
     } else{
       historyElement.hidden = ! historyElement.hidden;
           
