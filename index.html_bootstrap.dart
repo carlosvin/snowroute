@@ -63,7 +63,7 @@ import 'package:polymer/polymer.dart' as smoke_1;
 import 'package:observe/src/metadata.dart' as smoke_2;
 import 'tracking_element.dart' as smoke_3;
 import 'positioning_li_element.dart' as smoke_4;
-import 'positioning.dart' as smoke_5;
+import 'route.dart' as smoke_5;
 import 'history_element.dart' as smoke_6;
 import 'map_element.dart' as smoke_7;
 import 'positioning_control.dart' as smoke_8;
@@ -90,6 +90,7 @@ void main() {
         #pause: (o) => o.pause,
         #positioning: (o) => o.positioning,
         #practices: (o) => o.practices,
+        #route: (o) => o.route,
         #speedAverage: (o) => o.speedAverage,
         #speedAvg: (o) => o.speedAvg,
         #start: (o) => o.start,
@@ -108,6 +109,7 @@ void main() {
         #historyElement: (o, v) { o.historyElement = v; },
         #mapElement: (o, v) { o.mapElement = v; },
         #positioning: (o, v) { o.positioning = v; },
+        #route: (o, v) { o.route = v; },
         #speedAverage: (o, v) { o.speedAverage = v; },
         #state: (o, v) { o.state = v; },
         #stopwatchElement: (o, v) { o.stopwatchElement = v; },
@@ -141,7 +143,7 @@ void main() {
           #trackingElement: const Declaration(#trackingElement, smoke_3.TrackingElement, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
         },
         smoke_4.PositioningLiElement: {
-          #positioning: const Declaration(#positioning, smoke_5.Positioning, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_1.published]),
+          #route: const Declaration(#route, smoke_5.Route, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_1.published]),
         },
         smoke_0.StopwatchElement: {
           #counter: const Declaration(#counter, String, kind: PROPERTY, annotations: const [smoke_2.reflectable, smoke_2.observable]),
@@ -165,6 +167,7 @@ void main() {
         #pause: r'pause',
         #positioning: r'positioning',
         #practices: r'practices',
+        #route: r'route',
         #speedAverage: r'speedAverage',
         #speedAvg: r'speedAvg',
         #start: r'start',

@@ -42,8 +42,8 @@ class PositioningControl extends PolymerElement with ChangeNotifier  implements 
   
   void onStateStopped(){
     state = 'stopped';
-    if ( historyElement.add(trackingElement.positioning)){
-      toast("Saved ${trackingElement.positioning.first.timestamp}");
+    if ( historyElement.add(trackingElement.route)){
+      toast("Saved ${trackingElement.route.key}");
     }else{
       toast("Error saving");
     }
