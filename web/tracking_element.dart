@@ -3,7 +3,7 @@ library tracking;
 import 'dart:html';
 import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
-import 'positioning.dart';
+import 'route.dart';
 import 'state_machine.dart';
 
 abstract class TrackingListener {
@@ -18,7 +18,7 @@ class TrackingElement extends PolymerElement with StateListener{
   @observable String speedAverage = '?';
   @published String borderColor = 'rgb(0,0,0)';
   
-  final Positioning positioning = new Positioning();
+  Route route;
   TrackingElement.created() : super.created();
   TrackingListener listener;
   bool tracking = false;
@@ -33,14 +33,13 @@ class TrackingElement extends PolymerElement with StateListener{
   
   @override
   void onStateStarted(){
-    positioning.clear();
     tracking = true;
   }
   
   @override
   void onStateStopped (){
     tracking = false;
-    positioning.clear();
+    route = null;
     listener.stopTracking();
   }
   
@@ -53,10 +52,16 @@ class TrackingElement extends PolymerElement with StateListener{
   }
   
   void _addPosition(Geoposition geoPosition){
-    if (positioning.addPosition(geoPosition.coords.latitude, geoPosition.coords.longitude, geoPosition.timestamp)){
-      totalDistance = "${positioning.totalDistance.toStringAsPrecision(2)}km";
-      speedAverage = "${positioning.speedAvg.toStringAsPrecision(2)}km/h";
-      gpsStatus = positioning.last.toString();
+    if (tracking){
+      if (route == null){
+        route = new Route.fromCoords(geoPosition.coords.latitude, geoPosition.coords.longitude);
+      }else{
+        route.add(geoPosition.coords.latitude, geoPosition.coords.longitude);
+      }
+      totalDistance = "${route.distance.round()}m";
+      speedAverage = "${(route.speedAvg * 3.6).toStringAsFixed(2)}km/h";
+    }else{
+      gpsStatus = "Not tracking";
     }
     
     if (listener != null){
@@ -64,8 +69,8 @@ class TrackingElement extends PolymerElement with StateListener{
     }
   }
   
-  num get lat => positioning.last.lat; 
-  num get long => positioning.last.long; 
+  num get lat => route.last.lat; 
+  num get long => route.last.long; 
   
   
 }
