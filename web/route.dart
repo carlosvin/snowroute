@@ -48,7 +48,7 @@ class Pos {
      num c = 2 * atan2( sqrt(a), sqrt(1-a) ); 
      return EARTH_RADIUS * c;
    }
-  
+  /*
   bool operator ==(Pos b) {
     return lat == b.lat && long == b.long && timestamp== b.timestamp && _next == b._next; 
   }
@@ -59,7 +59,7 @@ class Pos {
       prim = prim * next.hashCode;
     }
     return prim* (lat.hashCode + long.hashCode + timestamp.hashCode);
-  }
+  }*/
 }
 
 
@@ -140,11 +140,11 @@ class Route  {
   
   num get speedAvg => distance / duration.inSeconds;
   
-  bool operator ==(Route b) {
+  /* bool operator ==(Route b) {
     return _ini == b._ini; 
   }
   
-  get hashCode => _ini.hashCode;
+ get hashCode => _ini.hashCode;*/
   
   String get key => _ini.timestamp.toString();
 }

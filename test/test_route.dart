@@ -62,8 +62,48 @@ void main() {
 
     });
   });
-  //group('Equality', () {
-
+  
+/* By the moment we dont need equality operators, so they are removed.
+  group('Equality', () {
+    Route route1, route2,routediff1,routediff2;
+    setUp(() {
+      route1 = new Route.fromCoords(12.12, 3.3);
+      route2 = new Route.fromCoords(12.12, 3.3);
+      routediff1 = new Route.fromCoords(12.12, 3.3);
+      routediff2 = new Route.fromCoords(12.12, 3.3);
+      for (double i=0.0; i<10; i+=1) {
+        var long = i*1.1;
+        route1.add(i,long);
+        route2.add(i, long);
+        routediff1.add(i, long + 1);
+        sleep(new Duration(milliseconds: 10));
+        routediff2.add(i, i*1.1);
+      }
+    });
+    tearDown(() {
+      route1 = null;
+      route2 = null;
+      routediff1 = null;
+      routediff2 = null;
+    });
+  test("Equals", () {
+      expect(route1, route2);
+      expect(route1 == routediff1, false);
+      expect(route1 == routediff2, false);
+      expect(route2 == routediff1, false);
+      expect(route2 == routediff2, false);
+      expect(routediff1 == routediff2, false);
+    });
+    
+    test("HashCode", () {
+      expect(route1.hashCode, route2.hashCode);
+      expect(route1.hashCode == routediff1.hashCode,  false);
+      expect(route1.hashCode != routediff1.hashCode,  true);
+      expect(route2.hashCode == routediff2.hashCode,  false);
+      expect(route2.hashCode != routediff2.hashCode,  true);    });
+       
+  });
+*/
   group('Serialization', () {
       Route route;
       setUp(() {
@@ -83,7 +123,6 @@ void main() {
         Route deserialized = new Route.deserialize(serializedStr);
         
         expect(deserialized.serialize(), serializedStr);
-        expect(deserialized, route);
         
       });
          
