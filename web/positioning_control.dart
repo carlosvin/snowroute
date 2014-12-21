@@ -34,7 +34,7 @@ class PositioningControl extends PolymerElement implements StateListener{
     mapElement = $['map_element'];
     toastElement= $['toast'];
     buttonToggleHistory = $['buttonToggleHistory'];
-    historyElement.hidden = true;    
+    historyElement.hidden = false;    
     
     trackingElement.init(mapElement, toastElement);
 
@@ -46,7 +46,7 @@ class PositioningControl extends PolymerElement implements StateListener{
   void onStateStopped(){
     state = 'stopped';
     if ( historyElement.add(trackingElement.route)){
-      toastElement.info("Saved ${trackingElement.route.key}");
+      toastElement.info("Saved ${trackingElement.route.key }");
     }else{
       toastElement.error("Error saving");
     }
