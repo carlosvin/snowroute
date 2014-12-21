@@ -52,6 +52,14 @@ class Pos {
   bool operator ==(Pos b) {
     return lat == b.lat && long == b.long && timestamp== b.timestamp && _next == b._next; 
   }
+  
+  get hashCode {
+    int prim = 31;
+    if (hasNext){
+      prim = prim * next.hashCode;
+    }
+    return prim* (lat.hashCode + long.hashCode + timestamp.hashCode);
+  }
 }
 
 
@@ -135,6 +143,8 @@ class Route  {
   bool operator ==(Route b) {
     return _ini == b._ini; 
   }
+  
+  get hashCode => _ini.hashCode;
   
   String get key => _ini.timestamp.toString();
 }
