@@ -6,11 +6,12 @@ import 'stopwatch_element.dart';
 import 'tracking_element.dart';
 import 'history_element.dart';
 import 'map_element.dart';
+import 'toast_levels_element.dart';
 import 'interfaces.dart';
 
 
 @CustomTag('positioning-control')
-class PositioningControl extends PolymerElement implements StateListener, MessageNotifier{
+class PositioningControl extends PolymerElement implements StateListener{
 
   @observable String state = '';
   @observable StopwatchElement stopwatchElement;
@@ -18,7 +19,7 @@ class PositioningControl extends PolymerElement implements StateListener, Messag
   @observable HistoryElement historyElement;
   @observable MapElementView mapElement;
   
-  PaperToast toastElement;
+  ToastLevelsElement toastElement;
   PaperIconButton buttonToggleHistory;
   
   PositioningControl.created() : super.created(){
@@ -35,18 +36,19 @@ class PositioningControl extends PolymerElement implements StateListener, Messag
     buttonToggleHistory = $['buttonToggleHistory'];
     historyElement.hidden = true;    
     
+    trackingElement.init(mapElement, toastElement);
+
     stopwatchElement.register(this);
     stopwatchElement.register(trackingElement);
     
-    trackingElement.init(mapElement, this);
   }
   
   void onStateStopped(){
     state = 'stopped';
     if ( historyElement.add(trackingElement.route)){
-      info("Saved ${trackingElement.route.key}");
+      toastElement.info("Saved ${trackingElement.route.key}");
     }else{
-      error("Error saving");
+      toastElement.error("Error saving");
     }
   }
   
@@ -59,46 +61,17 @@ class PositioningControl extends PolymerElement implements StateListener, Messag
     state = 'paused';
   }
   
-  @override
-  void error(String m){
-    toastElement.classes.clear();
-    toastElement.classes.add("error");
-    _toast(m);
-  }
-  
-  @override
-  void warn(String m){
-    toastElement.classes.clear();
-    toastElement.classes.add("warn");
-    _toast(m);
-  }
-
-  @override
-  void info(String m){
-    toastElement.classes.clear();
-    toastElement.classes.add("info");
-    _toast(m);
-  }
-  
-  // TODO create a toast element to manage errors and implements MessageNotifier
-  void _toast(String m){
-    toastElement.text = m;
-    toastElement.show();
-  }
-  
   void toggleHistory(){
-    
     if (historyElement.isEmpty &&  historyElement.hidden ){
-      warn("There are no history");
+      toastElement.warn("There are no history");
     } else{
       historyElement.hidden = ! historyElement.hidden;
-          
+      
       if (historyElement.hidden){
         buttonToggleHistory.icon = "menu";
       }else{
         buttonToggleHistory.icon = "chevron-left";
       }
     }
-    
   }
 }

@@ -48,5 +48,5 @@ class HistoryElement extends PolymerElement {
     practices.remove(key);
   }
   
-  bool get isEmpty => practices.length == 0;
+  bool get isEmpty => practices.isEmpty;
 }
