@@ -34,7 +34,6 @@ class PositioningControl extends PolymerElement implements StateListener{
     mapElement = $['map_element'];
     toastElement= $['toast'];
     buttonToggleHistory = $['buttonToggleHistory'];
-    historyElement.hidden = false;    
     
     trackingElement.init(mapElement, toastElement);
 
