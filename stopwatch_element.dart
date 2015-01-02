@@ -7,8 +7,8 @@ import 'state_machine.dart';
 
 @CustomTag('stopwatch-element')
 class StopwatchElement extends PolymerElement with StateNotifier, ChangeNotifier {
-  static final oneSecond = new Duration(seconds:1);
-  static final initialCounterState = '00:00:00';
+  static final Duration oneSecond = new Duration(seconds:1);
+  static final String initialCounterState = '00:00:00';
   
   @reflectable @observable String get counter => __$counter; String __$counter=initialCounterState; @reflectable set counter(String value) { __$counter = notifyPropertyChange(#counter, __$counter, value); }
   
@@ -39,7 +39,11 @@ class StopwatchElement extends PolymerElement with StateNotifier, ChangeNotifier
   }
   
   void start(Event e, var detail, Node target) {
+    if (isStopped){
+      watch.reset();            
+    }
     watch.start();
+
     timer = new Timer.periodic(oneSecond, updateTime);
     startButton.hidden = true;
     stopButton.hidden = false;
@@ -48,12 +52,12 @@ class StopwatchElement extends PolymerElement with StateNotifier, ChangeNotifier
   }
   
   void stop(Event e, var detail, Node target) {
-    watch.reset();
     timer.cancel();
+    counter = initialCounterState;
+    watch.reset();
     startButton.hidden = false;
     pauseButton.hidden = true;
     stopButton.hidden = true;
-    counter = initialCounterState;
     notifyStop();
   }
   
@@ -66,9 +70,10 @@ class StopwatchElement extends PolymerElement with StateNotifier, ChangeNotifier
   }
   
   void updateTime(Timer _) {
-    final hour = numberToDigits(watch.elapsed.inHours);
-    final minute = numberToDigits(watch.elapsed.inMinutes);
-    final second = numberToDigits(watch.elapsed.inSeconds);
+    final seconds = watch.elapsedMilliseconds ~/ 1000;
+    final hour = numberToDigits(seconds ~/ 3600);
+    final minute = numberToDigits(seconds ~/ 60);
+    final second = numberToDigits(seconds % 60);
     
     counter = '$hour:$minute:$second';
   }

@@ -34,7 +34,6 @@ class PositioningControl extends PolymerElement with ChangeNotifier  implements 
     mapElement = $['map_element'];
     toastElement= $['toast'];
     buttonToggleHistory = $['buttonToggleHistory'];
-    historyElement.hidden = true;    
     
     trackingElement.init(mapElement, toastElement);
 
@@ -45,10 +44,12 @@ class PositioningControl extends PolymerElement with ChangeNotifier  implements 
   
   void onStateStopped(){
     state = 'stopped';
-    if ( historyElement.add(trackingElement.route)){
-      toastElement.info("Saved ${trackingElement.route.key}");
+    if (trackingElement.route == null || trackingElement.route.isTooShort){
+      toastElement.error("The practice is too short");      
+    }else if (historyElement.add(trackingElement.route)) {
+      toastElement.info("Saved ${trackingElement.route.key }");
     }else{
-      toastElement.error("Error saving");
+      toastElement.error("Error saving");      
     }
   }
   
@@ -62,9 +63,9 @@ class PositioningControl extends PolymerElement with ChangeNotifier  implements 
   }
   
   void toggleHistory(){
-    if (historyElement.isEmpty &&  historyElement.hidden ){
+    if (historyElement.isEmpty){
       toastElement.warn("There are no history");
-    } else{
+    }else{
       historyElement.hidden = ! historyElement.hidden;
       
       if (historyElement.hidden){

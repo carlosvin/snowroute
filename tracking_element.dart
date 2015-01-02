@@ -42,8 +42,8 @@ class TrackingElement extends PolymerElement with StateListener, ChangeNotifier{
   @override
   void onStateStopped (){
     tracking = false;
-    route = null;
     listener.stopTracking();
+    route = null;
   }
   
   void onStatePaused(){

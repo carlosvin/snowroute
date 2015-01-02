@@ -21,9 +21,9 @@ class HistoryElement extends PolymerElement {
    localStorage = window.localStorage;
    for (var v in localStorage.values){
      try{
-       add(new Route.deserialize(v), false);
+      add(new Route.deserialize(v), false);
      }catch(e){
-        print("ignoring $v");       
+      print("ignoring $v");       
      }
    }
    print ("${practices.length} Practices read");
@@ -36,7 +36,6 @@ class HistoryElement extends PolymerElement {
       practices[route.key] = route;
       if (persist){
         localStorage[route.key] = route.serialize();  
-        print("saved ${route.key}");
       }
       return true;
     }

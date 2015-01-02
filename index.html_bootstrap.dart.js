@@ -910,12 +910,13 @@ var $$ = Object.create(null);
       return result;
     },
     startsWith$2: function(receiver, pattern, index) {
-      var endIndex;
+      var t1, endIndex;
       H.checkInt(index);
-      if (index > receiver.length)
+      t1 = J.getInterceptor$n(index);
+      if (t1.$lt(index, 0) || t1.$gt(index, receiver.length))
         throw H.wrapException(P.RangeError$range(index, 0, receiver.length, null, null));
-      endIndex = index + pattern.length;
-      if (endIndex > receiver.length)
+      endIndex = t1.$add(index, pattern.length);
+      if (J.$gt$n(endIndex, receiver.length))
         return false;
       return pattern === receiver.substring(index, endIndex);
     },
@@ -1405,7 +1406,7 @@ var $$ = Object.create(null);
       }, "call$1", "_Manager__serializePrintMessage$closure", 2, 0, null, 1]}
   },
   _IsolateContext: {
-    "^": "Object;id>,ports,weakPorts,isolateStatics<,controlPort<,pauseCapability,terminateCapability,initialized?,isPaused<,delayedEvents<,pauseTokens,doneHandlers,_scheduledControlEvents,_isExecutingEvent,errorsAreFatal,errorPorts",
+    "^": "Object;id>,ports,weakPorts,isolateStatics<,controlPort<,pauseCapability,terminateCapability,initialized?,isPaused>,delayedEvents<,pauseTokens,doneHandlers,_scheduledControlEvents,_isExecutingEvent,errorsAreFatal,errorPorts",
     addPause$2: function(authentification, resume) {
       if (!this.pauseCapability.$eq(0, authentification))
         return;
@@ -1701,7 +1702,7 @@ var $$ = Object.create(null);
     "^": "Object;isolate,fn,message>",
     process$0: function() {
       var t1 = this.isolate;
-      if (t1.get$isPaused()) {
+      if (J.get$isPaused$x(t1)) {
         t1.get$delayedEvents().push(this);
         return;
       }
@@ -4307,7 +4308,7 @@ var $$ = Object.create(null);
   StringMatch: {
     "^": "Object;start>,input,pattern",
     get$end: function() {
-      return this.start + this.pattern.length;
+      return J.$add$ns(this.start, this.pattern.length);
     },
     $index: function(_, g) {
       return this.group$1(g);
@@ -6340,7 +6341,7 @@ var $$ = Object.create(null);
   },
   _BroadcastStreamController: {
     "^": "Object;_async$_next@,_async$_previous@",
-    get$isPaused: function() {
+    get$isPaused: function(_) {
       return false;
     },
     _ensureDoneFuture$0: function() {
@@ -7348,7 +7349,7 @@ var $$ = Object.create(null);
   },
   _StreamController: {
     "^": "Object;",
-    get$isPaused: function() {
+    get$isPaused: function(_) {
       var t1 = this._state;
       return (t1 & 1) !== 0 ? this.get$_subscription().get$_isInputPaused() : (t1 & 2) === 0;
     },
@@ -7703,7 +7704,7 @@ var $$ = Object.create(null);
     get$_isInputPaused: function() {
       return (this._state & 4) !== 0;
     },
-    get$isPaused: function() {
+    get$isPaused: function(_) {
       return this._state >= 128;
     },
     _cancel$0: function() {
@@ -8012,7 +8013,7 @@ var $$ = Object.create(null);
   },
   _DoneStreamSubscription: {
     "^": "Object;_zone<,_state,_onDone",
-    get$isPaused: function() {
+    get$isPaused: function(_) {
       return this._state >= 4;
     },
     _schedule$0: function() {
@@ -12157,8 +12158,6 @@ var $$ = Object.create(null);
         var t1 = J.$mul$ns(milliseconds, 1000);
         if (typeof t1 !== "number")
           return H.iae(t1);
-        if (typeof microseconds !== "number")
-          return H.iae(microseconds);
         return new P.Duration(days * 86400000000 + hours * 3600000000 + minutes * 60000000 + seconds * 1000000 + t1 + microseconds);
       }}
   },
@@ -15662,7 +15661,7 @@ var $$ = Object.create(null);
     }, function($receiver) {
       return this.pause$1($receiver, null);
     }, "pause$0", "call$1", "call$0", "get$pause", 0, 2, 97, 20, 98],
-    get$isPaused: function() {
+    get$isPaused: function(_) {
       return this._pauseCount > 0;
     },
     resume$0: [function() {
@@ -17569,21 +17568,14 @@ var $$ = Object.create(null);
       P.print(H.S(J.get$length$asx(receiver.practices)) + " Practices read");
     },
     add$2: function(receiver, route, persist) {
-      var t1, line;
+      var t1;
       if (route == null)
         return false;
       else {
         t1 = J.getInterceptor$x(route);
         J.$indexSet$ax(receiver.practices, t1.get$key(route), route);
-        if (persist === true) {
+        if (persist === true)
           receiver.localStorage.setItem(t1.get$key(route), route.serialize$0());
-          line = "saved " + H.S(t1.get$key(route));
-          t1 = $.printToZone;
-          if (t1 == null)
-            H.printString(line);
-          else
-            t1.call$1(line);
-        }
         return true;
       }
     },
@@ -20576,15 +20568,15 @@ var $$ = Object.create(null);
       return this.join$8($receiver, part1, null, null, null, null, null, null, null);
     },
     joinAll$1: function(parts) {
-      var buffer, t1, t2, t3, needsSeparator, isAbsoluteAndNotRootRelative, part, parsed, t4, root, t5, str;
+      var buffer, t1, t2, t3, needsSeparator, isAbsoluteAndNotRootRelative, part, parsed, t4, t5, str;
       buffer = P.StringBuffer$("");
       for (t1 = H.setRuntimeTypeInfo(new H.WhereIterable(parts, new F.Context_joinAll_closure()), [H.getRuntimeTypeArgument(parts, "IterableBase", 0)]), t1 = H.setRuntimeTypeInfo(new H.WhereIterator(J.get$iterator$ax(t1._iterable), t1._f), [H.getTypeArgumentByIndex(t1, 0)]), t2 = this.style, t3 = t1._iterator, needsSeparator = false, isAbsoluteAndNotRootRelative = false; t1.moveNext$0();) {
         part = t3.get$current();
-        if (Q.ParsedPath_ParsedPath$parse(part, t2).isRootRelative && isAbsoluteAndNotRootRelative) {
+        if (t2.isRootRelative$1(part) && isAbsoluteAndNotRootRelative) {
           parsed = Q.ParsedPath_ParsedPath$parse(part, t2);
           t4 = buffer._contents;
-          root = Q.ParsedPath_ParsedPath$parse(t4.charCodeAt(0) == 0 ? t4 : t4, t2).root;
-          t4 = root == null ? "" : root;
+          t4 = t4.charCodeAt(0) == 0 ? t4 : t4;
+          t4 = J.substring$2$s(t4, 0, t2.rootLength$1(t4));
           parsed.root = t4;
           if (t2.needsSeparator$1(t4)) {
             t4 = parsed.separators;
@@ -20596,8 +20588,8 @@ var $$ = Object.create(null);
           buffer._contents = "";
           str = parsed.toString$0(0);
           buffer._contents += typeof str === "string" ? str : H.S(str);
-        } else if (Q.ParsedPath_ParsedPath$parse(part, t2).root != null) {
-          isAbsoluteAndNotRootRelative = !Q.ParsedPath_ParsedPath$parse(part, t2).isRootRelative;
+        } else if (J.$gt$n(t2.rootLength$1(part), 0)) {
+          isAbsoluteAndNotRootRelative = !t2.isRootRelative$1(part);
           buffer._contents = "";
           buffer._contents += typeof part === "string" ? part : H.S(part);
         } else {
@@ -20636,11 +20628,11 @@ var $$ = Object.create(null);
       var t1, fromParsed, pathParsed, t2, t3;
       from = B.current();
       t1 = this.style;
-      if (Q.ParsedPath_ParsedPath$parse(from, t1).root == null && Q.ParsedPath_ParsedPath$parse(path, t1).root != null)
+      if (!J.$gt$n(t1.rootLength$1(from), 0) && J.$gt$n(t1.rootLength$1(path), 0))
         return this.normalize$1(path);
-      if (Q.ParsedPath_ParsedPath$parse(path, t1).root == null || Q.ParsedPath_ParsedPath$parse(path, t1).isRootRelative)
+      if (!J.$gt$n(t1.rootLength$1(path), 0) || t1.isRootRelative$1(path))
         path = this.join$8(0, B.current(), path, null, null, null, null, null, null);
-      if (Q.ParsedPath_ParsedPath$parse(path, t1).root == null && Q.ParsedPath_ParsedPath$parse(from, t1).root != null)
+      if (!J.$gt$n(t1.rootLength$1(path), 0) && J.$gt$n(t1.rootLength$1(from), 0))
         throw H.wrapException(E.PathException$("Unable to find a path to \"" + H.S(path) + "\" from \"" + H.S(from) + "\"."));
       fromParsed = Q.ParsedPath_ParsedPath$parse(from, t1);
       fromParsed.normalize$0();
@@ -20773,7 +20765,13 @@ var $$ = Object.create(null);
 ["path.internal_style", "package:path/src/internal_style.dart", , E, {
   "^": "",
   InternalStyle: {
-    "^": "Style;"
+    "^": "Style;",
+    getRoot$1: function(path) {
+      var $length = this.rootLength$1(path);
+      if (J.$gt$n($length, 0))
+        return J.substring$2$s(path, 0, $length);
+      return this.isRootRelative$1(path) ? J.$index$asx(path, 0) : null;
+    }
   }
 }],
 ["path.parsed_path", "package:path/src/parsed_path.dart", , Q, {
@@ -20860,16 +20858,16 @@ var $$ = Object.create(null);
       return t1.charCodeAt(0) == 0 ? t1 : t1;
     },
     static: {ParsedPath_ParsedPath$parse: function(path, style) {
-        var root, t1, parts, separators, t2, start, i, t3;
+        var root, isRootRelative, parts, separators, t1, start, i, t2;
         root = style.getRoot$1(path);
-        t1 = style.getRelativeRoot$1(path);
+        isRootRelative = style.isRootRelative$1(path);
         if (root != null)
           path = J.substring$1$s(path, J.get$length$asx(root));
         parts = [];
         separators = [];
-        t2 = J.getInterceptor$asx(path);
-        if (t2.get$isNotEmpty(path) && style.isSeparator$1(t2.codeUnitAt$1(path, 0))) {
-          separators.push(t2.$index(path, 0));
+        t1 = J.getInterceptor$asx(path);
+        if (t1.get$isNotEmpty(path) && style.isSeparator$1(t1.codeUnitAt$1(path, 0))) {
+          separators.push(t1.$index(path, 0));
           start = 1;
         } else {
           separators.push("");
@@ -20877,26 +20875,26 @@ var $$ = Object.create(null);
         }
         i = start;
         while (true) {
-          t3 = t2.get$length(path);
-          if (typeof t3 !== "number")
-            return H.iae(t3);
-          if (!(i < t3))
+          t2 = t1.get$length(path);
+          if (typeof t2 !== "number")
+            return H.iae(t2);
+          if (!(i < t2))
             break;
-          if (style.isSeparator$1(t2.codeUnitAt$1(path, i))) {
-            parts.push(t2.substring$2(path, start, i));
-            separators.push(t2.$index(path, i));
+          if (style.isSeparator$1(t1.codeUnitAt$1(path, i))) {
+            parts.push(t1.substring$2(path, start, i));
+            separators.push(t1.$index(path, i));
             start = i + 1;
           }
           ++i;
         }
-        t3 = t2.get$length(path);
-        if (typeof t3 !== "number")
-          return H.iae(t3);
-        if (start < t3) {
-          parts.push(t2.substring$1(path, start));
+        t2 = t1.get$length(path);
+        if (typeof t2 !== "number")
+          return H.iae(t2);
+        if (start < t2) {
+          parts.push(t1.substring$1(path, start));
           separators.push("");
         }
-        return new Q.ParsedPath(style, root, t1 != null, parts, separators);
+        return new Q.ParsedPath(style, root, isRootRelative, parts, separators);
       }}
   },
   ParsedPath_normalize_closure: {
@@ -20964,14 +20962,14 @@ var $$ = Object.create(null);
       var t1 = J.getInterceptor$asx(path);
       return t1.get$isNotEmpty(path) && t1.codeUnitAt$1(path, J.$sub$n(t1.get$length(path), 1)) !== 47;
     },
-    getRoot$1: function(path) {
+    rootLength$1: function(path) {
       var t1 = J.getInterceptor$asx(path);
       if (t1.get$isNotEmpty(path) && t1.codeUnitAt$1(path, 0) === 47)
-        return "/";
-      return;
+        return 1;
+      return 0;
     },
-    getRelativeRoot$1: function(path) {
-      return;
+    isRootRelative$1: function(path) {
+      return false;
     },
     pathFromUri$1: function(uri) {
       var t1 = uri.scheme;
@@ -20992,72 +20990,36 @@ var $$ = Object.create(null);
       return codeUnit === 47;
     },
     needsSeparator$1: function(path) {
-      var t1, root;
-      t1 = J.getInterceptor$asx(path);
+      var t1 = J.getInterceptor$asx(path);
       if (t1.get$isEmpty(path) === true)
         return false;
       if (t1.codeUnitAt$1(path, J.$sub$n(t1.get$length(path), 1)) !== 47)
         return true;
-      root = this._url$_getRoot$1(path);
-      return root != null && C.JSString_methods.endsWith$1(root, "://");
+      return t1.endsWith$1(path, "://") && J.$eq(this.rootLength$1(path), t1.get$length(path));
     },
-    getRoot$1: function(path) {
-      var root = this._url$_getRoot$1(path);
-      return root == null ? this.getRelativeRoot$1(path) : root;
-    },
-    getRelativeRoot$1: function(path) {
-      var t1 = J.getInterceptor$asx(path);
+    rootLength$1: function(path) {
+      var t1, index, t2;
+      t1 = J.getInterceptor$asx(path);
       if (t1.get$isEmpty(path) === true)
-        return;
-      return t1.codeUnitAt$1(path, 0) === 47 ? "/" : null;
+        return 0;
+      if (t1.codeUnitAt$1(path, 0) === 47)
+        return 1;
+      index = t1.indexOf$1(path, "/");
+      t2 = J.getInterceptor$n(index);
+      if (t2.$gt(index, 0) && t1.startsWith$2(path, "://", t2.$sub(index, 1))) {
+        index = t1.indexOf$2(path, "/", t2.$add(index, 2));
+        if (J.$gt$n(index, 0))
+          return index;
+        return t1.get$length(path);
+      }
+      return 0;
+    },
+    isRootRelative$1: function(path) {
+      var t1 = J.getInterceptor$asx(path);
+      return t1.get$isNotEmpty(path) && t1.codeUnitAt$1(path, 0) === 47;
     },
     pathFromUri$1: function(uri) {
       return uri.toString$0(0);
-    },
-    _url$_getRoot$1: function(path) {
-      var t1, start, t2, $char, start0;
-      t1 = J.getInterceptor$asx(path);
-      if (t1.get$isEmpty(path) === true)
-        return;
-      if (!N.isAlphabetic(t1.codeUnitAt$1(path, 0)))
-        return;
-      start = 1;
-      while (true) {
-        t2 = t1.get$length(path);
-        if (typeof t2 !== "number")
-          return H.iae(t2);
-        if (!(start < t2))
-          break;
-        c$0: {
-          $char = t1.codeUnitAt$1(path, start);
-          if (N.isAlphabetic($char))
-            break c$0;
-          if ($char >= 48 && $char <= 57)
-            break c$0;
-          if ($char === 45 || $char === 43 || $char === 46)
-            break c$0;
-          break;
-        }
-        ++start;
-      }
-      start0 = start + 3;
-      t2 = t1.get$length(path);
-      if (typeof t2 !== "number")
-        return H.iae(t2);
-      if (start0 > t2)
-        return;
-      if (t1.substring$2(path, start, start0) !== "://")
-        return;
-      start = start0;
-      while (true) {
-        t2 = t1.get$length(path);
-        if (typeof t2 !== "number")
-          return H.iae(t2);
-        if (!(start < t2 && t1.codeUnitAt$1(path, start) !== 47))
-          break;
-        ++start;
-      }
-      return t1.substring$2(path, 0, start);
     }
   }
 }],
@@ -21078,26 +21040,43 @@ var $$ = Object.create(null);
       t1 = t1.codeUnitAt$1(path, J.$sub$n(t1.get$length(path), 1));
       return !(t1 === 47 || t1 === 92);
     },
-    getRoot$1: function(path) {
-      var root = this._getRoot$1(path);
-      return root == null ? this.getRelativeRoot$1(path) : root;
-    },
-    getRelativeRoot$1: function(path) {
-      var t1, t2;
+    rootLength$1: function(path) {
+      var t1, index, t2;
       t1 = J.getInterceptor$asx(path);
       if (t1.get$isEmpty(path) === true)
-        return;
+        return 0;
+      if (t1.codeUnitAt$1(path, 0) === 47)
+        return 1;
+      if (t1.codeUnitAt$1(path, 0) === 92) {
+        if (J.$lt$n(t1.get$length(path), 2) || t1.codeUnitAt$1(path, 1) !== 92)
+          return 1;
+        index = t1.indexOf$2(path, "\\", 2);
+        t2 = J.getInterceptor$n(index);
+        if (t2.$gt(index, 0)) {
+          index = t1.indexOf$2(path, "\\", t2.$add(index, 1));
+          if (J.$gt$n(index, 0))
+            return index;
+        }
+        return t1.get$length(path);
+      }
+      if (J.$lt$n(t1.get$length(path), 3))
+        return 0;
       t2 = t1.codeUnitAt$1(path, 0);
-      if (!(t2 === 47 || t2 === 92))
-        return;
-      if (J.$gt$n(t1.get$length(path), 1)) {
-        t2 = t1.codeUnitAt$1(path, 1);
-        t2 = t2 === 47 || t2 === 92;
-      } else
-        t2 = false;
-      if (t2)
-        return;
-      return t1.$index(path, 0);
+      if (!(t2 >= 65 && t2 <= 90))
+        t2 = t2 >= 97 && t2 <= 122;
+      else
+        t2 = true;
+      if (!t2)
+        return 0;
+      if (t1.codeUnitAt$1(path, 1) !== 58)
+        return 0;
+      t1 = t1.codeUnitAt$1(path, 2);
+      if (!(t1 === 47 || t1 === 92))
+        return 0;
+      return 3;
+    },
+    isRootRelative$1: function(path) {
+      return J.$eq(this.rootLength$1(path), 1);
     },
     pathFromUri$1: function(uri) {
       var t1, path;
@@ -21112,58 +21091,7 @@ var $$ = Object.create(null);
       } else
         path = "\\\\" + H.S(uri.get$host(uri)) + H.S(path);
       return P.Uri__uriDecode(J.replaceAll$2$s(path, "/", "\\"), C.Utf8Codec_false, false);
-    },
-    _getRoot$1: function(path) {
-      var t1, t2, start;
-      t1 = J.getInterceptor$asx(path);
-      if (J.$lt$n(t1.get$length(path), 3))
-        return;
-      if (N.isAlphabetic(t1.codeUnitAt$1(path, 0))) {
-        if (t1.codeUnitAt$1(path, 1) !== 58)
-          return;
-        t2 = t1.codeUnitAt$1(path, 2);
-        if (!(t2 === 47 || t2 === 92))
-          return;
-        return t1.substring$2(path, 0, 3);
-      }
-      if (!t1.startsWith$1(path, "\\\\"))
-        return;
-      start = 2;
-      while (true) {
-        t2 = t1.get$length(path);
-        if (typeof t2 !== "number")
-          return H.iae(t2);
-        if (!(start < t2 && t1.codeUnitAt$1(path, start) !== 92))
-          break;
-        ++start;
-      }
-      if (start === 2 || start === t1.get$length(path))
-        return;
-      ++start;
-      if (t1.codeUnitAt$1(path, start) === 92)
-        return;
-      ++start;
-      while (true) {
-        t2 = t1.get$length(path);
-        if (typeof t2 !== "number")
-          return H.iae(t2);
-        if (!(start < t2 && t1.codeUnitAt$1(path, start) !== 92))
-          break;
-        ++start;
-      }
-      return t1.substring$2(path, 0, start);
     }
-  }
-}],
-["path.utils", "package:path/src/utils.dart", , N, {
-  "^": "",
-  isAlphabetic: function($char) {
-    var t1;
-    if (!($char >= 65 && $char <= 90))
-      t1 = $char >= 97 && $char <= 122;
-    else
-      t1 = true;
-    return t1;
   }
 }],
 ["polymer", "package:polymer/polymer.dart", , A, {
@@ -25415,7 +25343,6 @@ var $$ = Object.create(null);
       receiver._positioning_control$__$mapElement = this.notifyPropertyChange$3(receiver, C.Symbol_mapElement, receiver._positioning_control$__$mapElement, t1);
       receiver.toastElement = this.get$$$(receiver)._observable_map$_map.$index(0, "toast");
       receiver.buttonToggleHistory = this.get$$$(receiver)._observable_map$_map.$index(0, "buttonToggleHistory");
-      J.set$hidden$x(receiver._positioning_control$__$historyElement, true);
       J.init$2$x(receiver._positioning_control$__$trackingElement, receiver._positioning_control$__$mapElement, receiver.toastElement);
       J.register$1$x(receiver._positioning_control$__$stopwatchElement, receiver);
       J.register$1$x(receiver._positioning_control$__$stopwatchElement, receiver._positioning_control$__$trackingElement);
@@ -25423,12 +25350,16 @@ var $$ = Object.create(null);
     onStateStopped$0: function(receiver) {
       var t1, t2;
       receiver._positioning_control$__$state = this.notifyPropertyChange$3(receiver, C.Symbol_state, receiver._positioning_control$__$state, "stopped");
-      t1 = J.add$1$ax(receiver._positioning_control$__$historyElement, J.get$route$x(receiver._positioning_control$__$trackingElement));
-      t2 = receiver.toastElement;
-      if (t1 === true)
-        J.info$1$x(t2, "Saved " + H.S(J.get$key$x(J.get$route$x(receiver._positioning_control$__$trackingElement))));
-      else
-        J.error$1$x(t2, "Error saving");
+      if (J.get$route$x(receiver._positioning_control$__$trackingElement) == null || J.get$route$x(receiver._positioning_control$__$trackingElement).get$isTooShort())
+        J.error$1$x(receiver.toastElement, "The practice is too short");
+      else {
+        t1 = J.add$1$ax(receiver._positioning_control$__$historyElement, J.get$route$x(receiver._positioning_control$__$trackingElement));
+        t2 = receiver.toastElement;
+        if (t1 === true)
+          J.info$1$x(t2, "Saved " + H.S(J.get$key$x(J.get$route$x(receiver._positioning_control$__$trackingElement))));
+        else
+          J.error$1$x(t2, "Error saving");
+      }
     },
     onStateStarted$0: function(receiver) {
       receiver._positioning_control$__$state = this.notifyPropertyChange$3(receiver, C.Symbol_state, receiver._positioning_control$__$state, "started");
@@ -25438,7 +25369,7 @@ var $$ = Object.create(null);
     },
     toggleHistory$0: [function(receiver) {
       var t1, t2;
-      if (J.get$isEmpty$asx(receiver._positioning_control$__$historyElement) === true && J.get$hidden$x(receiver._positioning_control$__$historyElement) === true)
+      if (J.get$isEmpty$asx(receiver._positioning_control$__$historyElement) === true)
         J.warn$1$x(receiver.toastElement, "There are no history");
       else {
         t1 = receiver._positioning_control$__$historyElement;
@@ -25568,10 +25499,13 @@ var $$ = Object.create(null);
     get$key: function(_) {
       return this._ini.timestamp.toString$0(0);
     },
+    get$isTooShort: function() {
+      return C.JSNumber_methods._tdivFast$1(this._route$_last.timestamp.difference$1(this._ini.timestamp)._duration, 1000000) < 10;
+    },
     Route$deserialize$1: function(routeStr) {
       C.JSArray_methods.forEach$1(J.split$1$s(routeStr, "\n"), new D.Route$deserialize_closure(this));
     },
-    static: {Route$deserialize: function(routeStr) {
+    static: {"^": "Route_MIN_DURATION_SECONDS", Route$deserialize: function(routeStr) {
         var t1 = new D.Route(null, null, 0);
         t1.Route$deserialize$1(routeStr);
         return t1;
@@ -26152,13 +26086,28 @@ var $$ = Object.create(null);
       receiver.state$StateNotifier$listeners.add$1(0, listener);
     },
     notifyStart$0: function(receiver) {
+      receiver.state$StateNotifier$_isStarted = true;
+      receiver.state$StateNotifier$_isPaused = false;
+      receiver.state$StateNotifier$_isStopped = false;
       receiver.state$StateNotifier$listeners.forEach$1(0, new Z.StateNotifier_notifyStart_closure());
     },
     notifyStop$0: function(receiver) {
+      receiver.state$StateNotifier$_isStarted = false;
+      receiver.state$StateNotifier$_isPaused = false;
+      receiver.state$StateNotifier$_isStopped = true;
       receiver.state$StateNotifier$listeners.forEach$1(0, new Z.StateNotifier_notifyStop_closure());
     },
     notifyPause$0: function(receiver) {
+      receiver.state$StateNotifier$_isStarted = false;
+      receiver.state$StateNotifier$_isPaused = true;
+      receiver.state$StateNotifier$_isStopped = false;
       receiver.state$StateNotifier$listeners.forEach$1(0, new Z.StateNotifier_notifyPause_closure());
+    },
+    get$isStopped: function(receiver) {
+      return receiver.state$StateNotifier$_isStopped;
+    },
+    get$isPaused: function(receiver) {
+      return receiver.state$StateNotifier$_isPaused;
     }
   },
   StateNotifier_notifyStart_closure: {
@@ -27493,8 +27442,8 @@ var $$ = Object.create(null);
     },
     onStateStopped$0: function(receiver) {
       receiver.tracking = false;
-      receiver.route = null;
       J.stopTracking$0$x(receiver.listener);
+      receiver.route = null;
     },
     onStatePaused$0: function(receiver) {
       receiver.tracking = false;
@@ -27684,7 +27633,7 @@ var $$ = Object.create(null);
 ["watch", "stopwatch_element.dart", , O, {
   "^": "",
   StopwatchElement: {
-    "^": "PolymerElement_StateNotifier_ChangeNotifier;_watch$__$counter,watch,timer,stopButton,startButton,pauseButton,change_notifier$ChangeNotifier$_changes,change_notifier$ChangeNotifier$_records,state$StateNotifier$listeners,change_notifier$ChangeNotifier$_changes,change_notifier$ChangeNotifier$_records,polymer$Polymer$_polymer$_element,polymer$Polymer$_namedObservers,polymer$Polymer$_observers,polymer$Polymer$_unbound,polymer$Polymer$_unbindAllJob,polymer$Polymer$_propertyObserver,polymer$Polymer$_readied,polymer$Polymer$_jsElem,polymer$Polymer$_hasBeenAttached,polymer$Polymer$shadowRoots,polymer$Polymer$$,polymer$Polymer$_properties,polymer$Polymer$_polyfillScopeStyleCache",
+    "^": "PolymerElement_StateNotifier_ChangeNotifier;_watch$__$counter,watch,timer,stopButton,startButton,pauseButton,change_notifier$ChangeNotifier$_changes,change_notifier$ChangeNotifier$_records,state$StateNotifier$listeners,state$StateNotifier$_isStarted,state$StateNotifier$_isStopped,state$StateNotifier$_isPaused,change_notifier$ChangeNotifier$_changes,change_notifier$ChangeNotifier$_records,polymer$Polymer$_polymer$_element,polymer$Polymer$_namedObservers,polymer$Polymer$_observers,polymer$Polymer$_unbound,polymer$Polymer$_unbindAllJob,polymer$Polymer$_propertyObserver,polymer$Polymer$_readied,polymer$Polymer$_jsElem,polymer$Polymer$_hasBeenAttached,polymer$Polymer$shadowRoots,polymer$Polymer$$,polymer$Polymer$_properties,polymer$Polymer$_polyfillScopeStyleCache",
     get$counter: function(receiver) {
       return receiver._watch$__$counter;
     },
@@ -27704,6 +27653,8 @@ var $$ = Object.create(null);
       receiver.timer.cancel$0();
     },
     start$3: [function(receiver, e, detail, target) {
+      if (this.get$isStopped(receiver))
+        receiver.watch.reset$0(0);
       receiver.watch.start$0(0);
       receiver.timer = P.Timer_Timer$periodic($.get$StopwatchElement_oneSecond(), this.get$updateTime(receiver));
       J.set$hidden$x(receiver.startButton, true);
@@ -27712,12 +27663,12 @@ var $$ = Object.create(null);
       this.notifyStart$0(receiver);
     }, "call$3", "get$start", 6, 0, 186, 3, 131, 132],
     stop$3: [function(receiver, e, detail, target) {
-      receiver.watch.reset$0(0);
       receiver.timer.cancel$0();
+      receiver._watch$__$counter = this.notifyPropertyChange$3(receiver, C.Symbol_counter, receiver._watch$__$counter, "00:00:00");
+      receiver.watch.reset$0(0);
       J.set$hidden$x(receiver.startButton, false);
       J.set$hidden$x(receiver.pauseButton, true);
       J.set$hidden$x(receiver.stopButton, true);
-      receiver._watch$__$counter = this.notifyPropertyChange$3(receiver, C.Symbol_counter, receiver._watch$__$counter, "00:00:00");
       this.notifyStop$0(receiver);
     }, "call$3", "get$stop", 6, 0, 186, 3, 131, 132],
     pause$3: [function(receiver, e, detail, target) {
@@ -27728,16 +27679,17 @@ var $$ = Object.create(null);
       this.notifyPause$0(receiver);
     }, "call$3", "get$pause", 6, 0, 186, 3, 131, 132],
     updateTime$1: [function(receiver, _) {
-      var t1, hour, minute, second;
-      t1 = receiver.watch;
-      hour = this.numberToDigits$1(receiver, C.JSNumber_methods._tdivFast$1(P.Duration$(0, 0, J.$tdiv$n(J.$mul$ns(t1.get$elapsedTicks(), 1000000), $.Stopwatch__frequency), 0, 0, 0)._duration, 3600000000));
-      minute = this.numberToDigits$1(receiver, C.JSNumber_methods._tdivFast$1(P.Duration$(0, 0, J.$tdiv$n(J.$mul$ns(t1.get$elapsedTicks(), 1000000), $.Stopwatch__frequency), 0, 0, 0)._duration, 60000000));
-      second = this.numberToDigits$1(receiver, C.JSNumber_methods._tdivFast$1(P.Duration$(0, 0, J.$tdiv$n(J.$mul$ns(t1.get$elapsedTicks(), 1000000), $.Stopwatch__frequency), 0, 0, 0)._duration, 1000000));
+      var seconds, t1, hour, minute, second;
+      seconds = J.$tdiv$n(J.$tdiv$n(J.$mul$ns(receiver.watch.get$elapsedTicks(), 1000), $.Stopwatch__frequency), 1000);
+      t1 = J.getInterceptor$n(seconds);
+      hour = this.numberToDigits$1(receiver, t1.$tdiv(seconds, 3600));
+      minute = this.numberToDigits$1(receiver, t1.$tdiv(seconds, 60));
+      second = this.numberToDigits$1(receiver, t1.$mod(seconds, 60));
       t1 = hour + ":" + minute + ":" + second;
       receiver._watch$__$counter = this.notifyPropertyChange$3(receiver, C.Symbol_counter, receiver._watch$__$counter, t1);
     }, "call$1", "get$updateTime", 2, 0, 187, 89],
     numberToDigits$1: function(receiver, n) {
-      if (n < 10)
+      if (J.$lt$n(n, 10))
         return "0" + H.S(n);
       else
         return H.S(n);
@@ -27755,6 +27707,9 @@ var $$ = Object.create(null);
         receiver._watch$__$counter = "00:00:00";
         receiver.watch = new P.Stopwatch(null, null);
         receiver.state$StateNotifier$listeners = t1;
+        receiver.state$StateNotifier$_isStarted = false;
+        receiver.state$StateNotifier$_isStopped = false;
+        receiver.state$StateNotifier$_isPaused = false;
         receiver.polymer$Polymer$_observers = [];
         receiver.polymer$Polymer$_readied = false;
         receiver.polymer$Polymer$_hasBeenAttached = false;
@@ -28429,6 +28384,9 @@ J.get$isEmpty$asx = function(receiver) {
 };
 J.get$isNotEmpty$asx = function(receiver) {
   return J.getInterceptor$asx(receiver).get$isNotEmpty(receiver);
+};
+J.get$isPaused$x = function(receiver) {
+  return J.getInterceptor$x(receiver).get$isPaused(receiver);
 };
 J.get$iterator$ax = function(receiver) {
   return J.getInterceptor$ax(receiver).get$iterator(receiver);

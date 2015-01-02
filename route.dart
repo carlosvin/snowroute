@@ -65,6 +65,8 @@ class Pos {
 
 class Route  {
   
+  static final int MIN_DURATION_SECONDS = 10;
+
   Pos _ini;
   Pos _last;
   num _distance = 0;
@@ -140,11 +142,7 @@ class Route  {
   
   num get speedAvg => distance / duration.inSeconds;
   
-  /* bool operator ==(Route b) {
-    return _ini == b._ini; 
-  }
-  
- get hashCode => _ini.hashCode;*/
-  
   String get key => _ini.timestamp.toString();
+  
+  bool get isTooShort => duration.inSeconds < MIN_DURATION_SECONDS;
 }
