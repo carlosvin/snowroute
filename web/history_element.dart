@@ -3,7 +3,7 @@ library history;
 import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
 import 'dart:html';
-import 'route.dart';
+import '../core/route.dart';
 
 @CustomTag('history-element')
 class HistoryElement extends PolymerElement {

@@ -3,7 +3,7 @@ library map;
 import 'package:polymer/polymer.dart';
 import 'package:google_maps/google_maps.dart';
 import 'dart:html';
-import 'interfaces.dart';
+import '../core/interfaces.dart';
 
 @CustomTag('map-element')
 class MapElementView extends PolymerElement implements TrackingListener{

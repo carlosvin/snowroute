@@ -1,6 +1,6 @@
 library state;
 
-import 'interfaces.dart';
+import '../core/interfaces.dart';
 
 
 abstract class StateNotifier {

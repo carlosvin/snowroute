@@ -1,7 +1,7 @@
 library route_test;
 
 import 'package:unittest/unittest.dart';
-import '../web/route.dart';
+import '../core/route.dart';
 import 'dart:io';
 
 void main() {

@@ -7,7 +7,7 @@ import 'tracking_element.dart';
 import 'history_element.dart';
 import 'map_element.dart';
 import 'toast_levels_element.dart';
-import 'interfaces.dart';
+import '../core/interfaces.dart';
 
 
 @CustomTag('positioning-control')

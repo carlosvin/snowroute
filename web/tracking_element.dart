@@ -3,8 +3,8 @@ library tracking;
 import 'dart:html';
 import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
-import 'route.dart';
-import 'interfaces.dart';
+import '../core/route.dart';
+import '../core/interfaces.dart';
 
 
 

@@ -3,7 +3,7 @@ library position;
 import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
 import 'dart:html';
-import 'route.dart';
+import '../core/route.dart';
 
 @CustomTag('positioning-li-element')
 class PositioningLiElement extends LIElement with Polymer, Observable {

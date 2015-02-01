@@ -116,23 +116,28 @@ class RestServer{
       this.server = server;
       
       server.listen((HttpRequest request) {
-        print("${request.method}: ${request.uri.path}");
-        _addCorsHeaders(request.response);
-        EndpointHandler handler = _getEndpointHandler(request);
-        switch (request.method) {
-          case "GET":
-            _handleGet(request);
-            break;
-          case "POST": 
-            _handlePost(request);
-            break;
-          case "PUT": 
-            _handlePut(request);
-            break;
-          case "DELETE": 
-            _handleDelete(request);
-            break;
-          default: errorPageHandler(request);
+        try{
+          print("${request.method}: ${request.uri.path}");
+          _addCorsHeaders(request.response);
+          EndpointHandler handler = _getEndpointHandler(request);
+          
+          switch (request.method) {
+            case "GET":
+              _handleGet(request);
+              break;
+            case "POST": 
+              _handlePost(request);
+              break;
+            case "PUT": 
+              _handlePut(request);
+              break;
+            case "DELETE": 
+              _handleDelete(request);
+              break;
+            default: errorPageHandler(request);
+          }
+        }catch(e){
+          errorPageHandlerException(request, e);            
         }
       }, 
       onError: onStartError);
@@ -215,6 +220,15 @@ class RestServer{
     request.response
       ..statusCode = HttpStatus.NOT_FOUND
       ..write('Not found ${request.uri.path}')
+      ..close();
+  }
+  
+  
+  void errorPageHandlerException(HttpRequest request, Exception e) {
+    request.response
+      ..statusCode = HttpStatus.BAD_REQUEST
+      ..writeln('${request.uri.path}')
+      ..writeln('$e')
       ..close();
   }
   
