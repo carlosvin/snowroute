@@ -2,59 +2,177 @@ import 'dart:io';
 import 'dart:async' show Future;
 import 'dart:convert' show UTF8;
 
-/* 
- * Provides CORS headers, so can be accessed from any other page
- */
 
+class RelativeEndpoint{
+  final String id;
+  final String current;
+  final Iterable<String> nextPath;
+  final RelativeEndpoint parent;
+  
+  RelativeEndpoint(this.id, this.nextPath, this.parent, this.current);
+  
+  bool get hasNextEndpoint => nextPath != null && nextPath.isNotEmpty;
+  bool get hasParent => parent != null;
+  
+  String get nextEndpoint {
+    if (hasNextEndpoint){
+      return nextPath.first;
+    }else{
+      return null;
+    }
+  }
+
+  @override
+  String toString(){
+    return "$current/$id";
+  }
+}
 
 abstract class EndpointHandler {
-  String endpoint;
+  
+  final String endpoint;
+  final Map<String, EndpointHandler> endpointHandlers = new Map<String, EndpointHandler>();
   
   EndpointHandler(this.endpoint);
   
-  String handlePut(String received){
-    return "Not implemented PUT for endpoint ${this.endpoint}";
+  void register(EndpointHandler handler){
+    endpointHandlers[handler.endpoint]= handler; 
   }
-  String handlePost(String received){
-    return "Not implemented POST for endpoint ${this.endpoint} <- $received";
+
+  RelativeEndpoint createRelativeEndpoint(RelativeEndpoint parentRelativeEndpoint){
+    List<String> pathElements = parentRelativeEndpoint.nextPath;
+    if (pathElements==null || pathElements.isEmpty){
+      throw new ArgumentError("Current endpoint ($endpoint) path cannot be null");
+    } else {
+      if (pathElements.first == endpoint){
+        if (pathElements.length > 1){
+          String id = pathElements.elementAt(1);
+          return new RelativeEndpoint(id, pathElements.getRange(2,pathElements.length), parentRelativeEndpoint, endpoint);
+        }else{
+          return new RelativeEndpoint(null,null, parentRelativeEndpoint, endpoint);
+        }
+      }else{
+        throw new ArgumentError("Unexpected entity (${pathElements.first}), expected ($endpoint)");
+      }
+    }
   }
-  String handleGet(Iterable<String> pathElements){
-    return "Not implemented GET for endpoint ${this.endpoint}/${pathElements}";
+  
+  String handlePut(String received,RelativeEndpoint parentRelativeEndpoint){
+    RelativeEndpoint relEp = createRelativeEndpoint(parentRelativeEndpoint);
+    if (relEp.hasNextEndpoint && endpointHandlers.containsKey(relEp.nextEndpoint)){
+      return endpointHandlers[relEp.nextEndpoint].handlePut(received, relEp);
+    } else {
+      return _handlePut(received, relEp);
+    }
   }
-  String handleDelete(String id){
-    return "Not implemented DELETE for endpoint ${this.endpoint}";
+  
+  String handlePost(String received,RelativeEndpoint parentRelativeEndpoint){
+    RelativeEndpoint relEp = createRelativeEndpoint(parentRelativeEndpoint);
+    if (relEp.hasNextEndpoint && endpointHandlers.containsKey(relEp.nextEndpoint)){
+      return endpointHandlers[relEp.nextEndpoint].handlePost(received, relEp);
+    } else {
+      return _handlePost(received, relEp);
+    }
   }
+  
+  String handleGet(RelativeEndpoint parentRelativeEndpoint){
+    RelativeEndpoint relEp = createRelativeEndpoint(parentRelativeEndpoint);
+    if (relEp.hasNextEndpoint && endpointHandlers.containsKey(relEp.nextEndpoint)){
+      return endpointHandlers[relEp.nextEndpoint].handleGet(relEp);
+    } else {
+      return _handleGet(relEp);
+    }
+  }
+  
+  String handleDelete(RelativeEndpoint parentRelativeEndpoint){
+    RelativeEndpoint relEp = createRelativeEndpoint(parentRelativeEndpoint);
+    if (relEp.hasNextEndpoint && endpointHandlers.containsKey(relEp.nextEndpoint)){
+      return endpointHandlers[relEp.nextEndpoint].handleDelete(relEp);
+    } else {
+      return _handleDelete(relEp);
+    }
+  }
+  
+  String _handlePut(String received, RelativeEndpoint relEp);
+  String _handlePost(String received, RelativeEndpoint relEp);
+  String _handleGet(RelativeEndpoint relEp);
+  String _handleDelete(RelativeEndpoint relEp);
 }
 
 class RouteHandler extends  EndpointHandler{
   
-  RouteHandler(): super("route");
+  RouteHandler(): super("routes");
   
   @override 
-  String handlePost(String received){
-    return received;
+  String _handlePost(String received, RelativeEndpoint relEp){
+    if (relEp.id == null){
+      throw new ArgumentError.notNull("$relEp");
+    }
+    return "$relEp <- $received";  
   }
   
   @override 
-  String handlePut(String received){
-    return received;  
+  String _handlePut(String received, RelativeEndpoint relEp){
+    if (relEp.id == null){
+      throw new ArgumentError.notNull("$relEp");
+    }
+    return "$relEp <- $received";  
   }
   
   @override 
-  String handleGet(Iterable<String> pathElements){
-    return pathElements.toString();
+  String _handleGet(RelativeEndpoint relEp){
+    if (relEp.id == null){
+      return "list";
+    }else{
+      return "getting ${relEp}";
+    }
   }
   
   @override 
-  String handleDelete(String id){
-    return id;
+  String _handleDelete(RelativeEndpoint relEp){
+    if (relEp.id == null){
+      throw new ArgumentError.notNull("$relEp");
+    }
+    return "deleting $relEp";
   }
 }
 
 class UserHandler extends  EndpointHandler{
   
-  UserHandler(): super("user");
- 
+  UserHandler(): super("users");
+  
+  @override 
+   String _handlePost(String received, RelativeEndpoint relEp){
+     if (relEp.id == null){
+       throw new ArgumentError.notNull("$relEp");
+     }
+     return "$relEp <- $received";  
+   }
+   
+   @override 
+   String _handlePut(String received, RelativeEndpoint relEp){
+     if (relEp.id == null){
+       throw new ArgumentError.notNull("$relEp");
+     }
+     return "$relEp <- $received";  
+   }
+   
+   @override 
+   String _handleGet(RelativeEndpoint relEp){
+     if (relEp.id == null){
+       return "list";
+     }else{
+       return "getting ${relEp}";
+     }
+   }
+   
+   @override 
+   String _handleDelete(RelativeEndpoint relEp){
+     if (relEp.id == null){
+       throw new ArgumentError.notNull("$relEp");
+     }
+     return "deleting $relEp";
+   }
 }
 
 class RestServer{
@@ -71,10 +189,10 @@ class RestServer{
       
       server.listen((HttpRequest request) {
         print("${request.method}: ${request.uri.path}");
-        addCorsHeaders(request.response);
-
+        _addCorsHeaders(request.response);
+        EndpointHandler handler = _getEndpointHandler(request);
         switch (request.method) {
-          case "GET": 
+          case "GET":
             _handleGet(request);
             break;
           case "POST": 
@@ -86,10 +204,6 @@ class RestServer{
           case "DELETE": 
             _handleDelete(request);
             break;
-          /*TODO research about uses of options
-           *  case "OPTIONS": 
-           * handleOptions(request);
-           * break;*/
           default: errorPageHandler(request);
         }
       }, 
@@ -122,9 +236,8 @@ class RestServer{
     if (handler == null){
       errorPageHandler(req);
     } else {
-      String jsonResp = handler.handleGet(req.uri.pathSegments.getRange(1,req.uri.pathSegments.length));
+      String jsonResp = handler.handleGet(new RelativeEndpoint(null, req.uri.pathSegments, null, ''));
       _responseJson(jsonResp, req.response);
-
     }
   }
   
@@ -133,7 +246,7 @@ class RestServer{
     if (handler == null){
       errorPageHandler(req);
     } else {
-      String jsonResp = handler.handleDelete(getId(req.uri.pathSegments));
+      String jsonResp = handler.handleDelete(new RelativeEndpoint(null, req.uri.pathSegments, null, ''));
       _responseJson(jsonResp, req.response);
     }
   }
@@ -160,13 +273,13 @@ class RestServer{
     if (pathSegments.length < 2){
       return null;
     }else{
-      return pathSegments[2];
+      return pathSegments[1];
     }
   }
   
   void _handleInputContent (var handler, HttpRequest req){
     UTF8.decodeStream(req).
-          then( (str)=>_responseJson(handler(str), req.response)).
+          then( (str)=>_responseJson(handler(str, new RelativeEndpoint(null, req.uri.pathSegments, null, '')), req.response)).
           catchError((error) => errorPageHandler(req));
   }
   
@@ -195,7 +308,7 @@ class RestServer{
    * See: http://www.html5rocks.com/en/tutorials/cors/ 
    * and http://enable-cors.org/server.html
    */
-  void addCorsHeaders(HttpResponse res) {
+  void _addCorsHeaders(HttpResponse res) {
     res.headers.add("Access-Control-Allow-Origin", "*, ");
     res.headers.add("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
     res.headers.add("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -213,8 +326,9 @@ final PORT = 8080;
 void main() {
   RestServer server = new RestServer(HOST, PORT);
   
-  server.registerEndpoint(new RouteHandler());
-  server.registerEndpoint(new UserHandler());
+  UserHandler userHandler = new UserHandler();
+  userHandler.register(new RouteHandler());
+  server.registerEndpoint(userHandler);
   
   server.listen();
 }
