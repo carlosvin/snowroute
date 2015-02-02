@@ -2,19 +2,26 @@ library routehandler;
 
 import 'server_rest.dart';
 import 'persistence.dart';
+import '../core/route.dart';
 
 class RouteHandler extends  EndpointHandler{
   
-  final Persistence persistence;
+  final String basePath;
   
-  RouteHandler(this.persistence): super("routes");
+  RouteHandler(this.basePath): super("routes");
   
   @override 
   String handlePostRel(String received, RelativeEndpoint relEp){
     if (relEp.id == null){
       throw new ArgumentError.notNull("$relEp");
     }
-    return "$relEp <- $received";  
+    Route route = new Route.deserialize(received);
+    if (route.id == relEp.id){
+      getPersistence(relEp).update(route);
+      return "updated <- $route";
+    }else{
+      throw new ArgumentError.value("Route Ids don't match: ${relEp.id} != ${route.id}");
+    }
   }
   
   @override 
@@ -22,7 +29,14 @@ class RouteHandler extends  EndpointHandler{
     if (relEp.id == null){
       throw new ArgumentError.notNull("$relEp");
     }
-    return "$relEp <- $received";  
+    Route route = new Route.deserialize(received);
+    if (route.id == relEp.id){
+      getPersistence(relEp).create(route);
+      return "created <- $route";
+    }else{
+      throw new ArgumentError.value("Route Ids don't match: ${relEp.id} != ${route.id}");
+    }
+
   }
   
   @override
@@ -30,7 +44,7 @@ class RouteHandler extends  EndpointHandler{
     if (relEp.id == null){
       return "list";
     }else{
-      return "getting ${relEp}";
+      return getPersistence(relEp).get(relEp.id).serialize();
     }
   }
   
@@ -39,7 +53,12 @@ class RouteHandler extends  EndpointHandler{
     if (relEp.id == null){
       throw new ArgumentError.notNull("$relEp");
     }
-    return "deleting $relEp";
+    getPersistence(relEp).delete(relEp.id);
+    return "deleted $relEp";
+  }
+  
+  RoutePersistence getPersistence(RelativeEndpoint relEndPoint){
+    return new RoutePersistence("$basePath/${relEndPoint.parent.id}");
   }
 }
 

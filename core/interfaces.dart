@@ -20,3 +20,13 @@ abstract class TrackingListener {
   void newPosition(num lat, num long, bool tracking);
   void stopTracking();
 }
+
+abstract class Identifiable {
+  
+  String get id;
+  
+  String serialize();
+  
+  
+  
+}

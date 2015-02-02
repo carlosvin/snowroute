@@ -6,10 +6,12 @@ import 'dart:convert' show UTF8;
 class RelativeEndpoint{
   final String id;
   final String current;
-  final Iterable<String> nextPath;
+  List<String> nextPath;
   final RelativeEndpoint parent;
   
-  RelativeEndpoint(this.id, this.nextPath, this.parent, this.current);
+  RelativeEndpoint(this.id, Iterable<String> nextPath, this.parent, this.current){
+    this.nextPath = new List.from(nextPath);
+  }
   
   bool get hasNextEndpoint => nextPath != null && nextPath.isNotEmpty;
   bool get hasParent => parent != null;
@@ -213,7 +215,7 @@ class RestServer{
   void _handleInputContent (var handler, HttpRequest req){
     UTF8.decodeStream(req).
           then( (str)=>_responseJson(handler(str, new RelativeEndpoint(null, req.uri.pathSegments, null, '')), req.response)).
-          catchError((error) => errorPageHandler(req));
+          catchError((error) => errorPageHandlerException(req, error));
   }
   
   void errorPageHandler(HttpRequest request) {
@@ -224,7 +226,7 @@ class RestServer{
   }
   
   
-  void errorPageHandlerException(HttpRequest request, Exception e) {
+  void errorPageHandlerException(HttpRequest request,  e) {
     request.response
       ..statusCode = HttpStatus.BAD_REQUEST
       ..writeln('${request.uri.path}')

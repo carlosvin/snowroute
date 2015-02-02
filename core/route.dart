@@ -1,6 +1,7 @@
 library route;
 
 import 'dart:math';
+import 'interfaces.dart';
 
 final EARTH_RADIUS = 6371000; // m
 
@@ -64,9 +65,11 @@ class Pos {
 }
 
 
-class Route  {
+class Route extends Identifiable {
   
   static final int MIN_DURATION_SECONDS = 10;
+  static final String POSITION_SEPARATOR = ";";
+  static final String ELEMENTS_SEPARATOR = ",";
 
   Pos _ini;
   Pos _last;
@@ -81,7 +84,7 @@ class Route  {
   }
   
   Route.deserialize (String routeStr){
-    routeStr.split('\n').forEach((s) => _deserializePosition(s) );
+    routeStr.split(POSITION_SEPARATOR).forEach((s) => _deserializePosition(s) );
   }
   
   void _init(Pos ini){
@@ -90,7 +93,7 @@ class Route  {
   }
   
   void _deserializePosition(String posStr){
-    List<String> values = posStr.split(',');
+    List<String> values = posStr.split(ELEMENTS_SEPARATOR);
     
     if (values.length == 3){
       num lat = double.parse(values[0]);
@@ -108,7 +111,7 @@ class Route  {
   String serialize (){
     StringBuffer strb = new StringBuffer();
     for (Pos pos=_ini; pos != null; pos = pos.next) {
-      strb.writeln("${pos.lat},${pos.long},${pos.timestamp.millisecondsSinceEpoch}");      
+      strb.write("${pos.lat}$ELEMENTS_SEPARATOR${pos.long}$ELEMENTS_SEPARATOR${pos.timestamp.millisecondsSinceEpoch}$POSITION_SEPARATOR");      
     }
     return strb.toString();
   }
@@ -146,4 +149,7 @@ class Route  {
   String get key => _ini.timestamp.toString();
   
   bool get isTooShort => duration.inSeconds < MIN_DURATION_SECONDS;
+  
+  @override
+  get id => _ini.timestamp.millisecondsSinceEpoch.toString();
 }

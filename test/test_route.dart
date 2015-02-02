@@ -124,6 +124,7 @@ void main() {
         
         expect(deserialized.serialize(), serializedStr);
         
+        print(serializedStr);
       });
          
     });

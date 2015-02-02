@@ -2,11 +2,11 @@ library userhandler;
 
 import 'server_rest.dart';
 import '../core/user.dart';
-import 'persistence.dart';
+import '../core/persistence.dart';
 
 class UserHandler extends EndpointHandler{
   
-  final Persistence persistence;
+  final Persistence<User> persistence;
   
   UserHandler(this.persistence): super("users");
   
@@ -17,7 +17,7 @@ class UserHandler extends EndpointHandler{
      }
      User user = new User.deserialize(received);
      
-     persistence.updateUser(user);
+     persistence.update(user);
      
      return "Updated $user";  
    }
@@ -29,7 +29,7 @@ class UserHandler extends EndpointHandler{
       }
       User user = new User.deserialize(received);
       if (user.name == relEp.id){
-        persistence.createUser(user);
+        persistence.create(user);
         return "Created $user";   
       }else{
         throw new StateError("${user.name} != ${relEp.id}"); 
@@ -41,7 +41,7 @@ class UserHandler extends EndpointHandler{
      if (relEp.id == null){
         return "list";
      }else{
-        return persistence.getUser(relEp.id).serialize();
+        return persistence.get(relEp.id).serialize();
      }
    }
    
@@ -50,7 +50,7 @@ class UserHandler extends EndpointHandler{
      if (relEp.id == null){
        throw new ArgumentError.notNull("$relEp");
      }
-     persistence.deleteUser(relEp.id);
+     persistence.delete(relEp.id);
      return "deleted $relEp";
    }
 }

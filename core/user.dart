@@ -1,6 +1,9 @@
 library user;
 
-class User{
+
+import 'interfaces.dart';
+
+class User extends Identifiable{
   String name;
   String pass;
   
@@ -20,4 +23,7 @@ class User{
   String toString(){
     return name;
   }
+  
+  @override
+  String get id => name;
 }
