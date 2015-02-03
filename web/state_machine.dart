@@ -1,6 +1,6 @@
 library state;
 
-import '../core/interfaces.dart';
+import 'package:snowroute/interfaces.dart';
 
 
 abstract class StateNotifier {

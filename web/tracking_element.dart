@@ -3,8 +3,8 @@ library tracking;
 import 'dart:html';
 import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
-import '../core/route.dart';
-import '../core/interfaces.dart';
+import 'package:snowroute/route.dart';
+import 'package:snowroute/interfaces.dart';
 
 
 

@@ -1,8 +1,8 @@
 library userhandler;
 
 import 'server_rest.dart';
-import '../core/user.dart';
-import '../core/persistence.dart';
+import 'package:snowroute/user.dart';
+import 'package:snowroute/persistence.dart';
 
 class UserHandler extends EndpointHandler{
   

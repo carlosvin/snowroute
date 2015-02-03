@@ -1,7 +1,7 @@
 library route_test;
 
 import 'package:unittest/unittest.dart';
-import '../core/user.dart';
+import 'package:snowroute/user.dart';
 import 'dart:io';
 
 void main() {

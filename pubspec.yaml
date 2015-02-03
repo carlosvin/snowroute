@@ -7,6 +7,7 @@ dependencies:
   core_elements: any
   paper_elements: any
   google_maps: any
+  firebase: any
   
 dev_dependencies:
   unittest: any

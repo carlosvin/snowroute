@@ -1,13 +1,13 @@
 import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
-import 'package:paper_elements/paper_toast.dart';
 import 'package:paper_elements/paper_icon_button.dart';
 import 'stopwatch_element.dart';
+import 'data_sync.dart';
 import 'tracking_element.dart';
 import 'history_element.dart';
 import 'map_element.dart';
 import 'toast_levels_element.dart';
-import '../core/interfaces.dart';
+import 'package:snowroute/interfaces.dart';
 
 
 @CustomTag('positioning-control')
@@ -21,6 +21,8 @@ class PositioningControl extends PolymerElement implements StateListener{
   
   ToastLevelsElement toastElement;
   PaperIconButton buttonToggleHistory;
+  
+  FirebaseConnector firebaseconnector;
   
   PositioningControl.created() : super.created(){
   }
@@ -40,6 +42,8 @@ class PositioningControl extends PolymerElement implements StateListener{
     stopwatchElement.register(this);
     stopwatchElement.register(trackingElement);
     
+    firebaseconnector = new FirebaseConnector();
+    firebaseconnector.save("bla");
   }
   
   void onStateStopped(){

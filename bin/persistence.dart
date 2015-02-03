@@ -1,8 +1,8 @@
 library server_persistence;
 
-import "../core/persistence.dart";
-import "../core/user.dart";
-import "../core/route.dart";
+import "package:snowroute/persistence.dart";
+import "package:snowroute/user.dart";
+import "package:snowroute/route.dart";
 
 class UserPersistence extends Persistence<User>{
   

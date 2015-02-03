@@ -2,7 +2,7 @@ library routehandler;
 
 import 'server_rest.dart';
 import 'persistence.dart';
-import '../core/route.dart';
+import 'package:snowroute/route.dart';
 
 class RouteHandler extends  EndpointHandler{
   
