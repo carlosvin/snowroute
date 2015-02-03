@@ -50,7 +50,18 @@ abstract class  Persistence<I extends Identifiable> {
     return new File("${getDirectory(name).path}/info");
   }
   
+  List<String> get list {
+    List<String> subDirs = new List<String> ();
+    for (FileSystemEntity fse in baseDir.listSync(recursive: false, followLinks: true)){
+      if (fse.statSync().type == FileSystemEntityType.DIRECTORY){
+        subDirs.add(fse.path.replaceFirst("${fse.parent.path}/", ""));
+      }
+    }
+    return subDirs;
+  }
+  
   I deserialize(String str);
+  
   
   
 }

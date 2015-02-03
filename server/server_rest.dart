@@ -6,12 +6,12 @@ import 'dart:convert' show UTF8;
 class RelativeEndpoint{
   final String id;
   final String current;
-  List<String> nextPath;
+  final List<String> nextPath;
   final RelativeEndpoint parent;
   
-  RelativeEndpoint(this.id, Iterable<String> nextPath, this.parent, this.current){
-    this.nextPath = new List.from(nextPath);
-  }
+  RelativeEndpoint(this.id, Iterable<String> nextPath, this.parent, this.current): this.nextPath = new List.from(nextPath);
+  RelativeEndpoint.list(this.parent, this.current): this.id = null, this.nextPath = null;
+    
   
   bool get hasNextEndpoint => nextPath != null && nextPath.isNotEmpty;
   bool get hasParent => parent != null;
@@ -54,7 +54,7 @@ abstract class EndpointHandler {
           }
           return new RelativeEndpoint(id, pathElements.getRange(2,pathElements.length), parentRelativeEndpoint, endpoint);
         }else{
-          return new RelativeEndpoint(null,null, parentRelativeEndpoint, endpoint);
+          return new RelativeEndpoint.list(parentRelativeEndpoint, endpoint);
         }
       }else{
         throw new ArgumentError("Unexpected entity (${pathElements.first}), expected ($endpoint)");

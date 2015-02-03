@@ -39,7 +39,7 @@ class UserHandler extends EndpointHandler{
    @override 
    String handleGetRel(RelativeEndpoint relEp){
      if (relEp.id == null){
-        return "list";
+        return persistence.list.toString();
      }else{
         return persistence.get(relEp.id).serialize();
      }

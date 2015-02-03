@@ -42,7 +42,7 @@ class RouteHandler extends  EndpointHandler{
   @override
   String handleGetRel(RelativeEndpoint relEp){
     if (relEp.id == null){
-      return "list";
+      return getPersistence(relEp).list.toString();
     }else{
       return getPersistence(relEp).get(relEp.id).serialize();
     }
