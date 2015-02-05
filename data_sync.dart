@@ -3,37 +3,38 @@ import 'package:firebase/firebase.dart';
 import 'package:snowroute/route.dart';
 
 final String  URL = "https://fiery-torch-9606.firebaseio.com/";  
+final String  USER = "carlos";  
 
 class FirebaseConnector {
   final Firebase firebaseRef;
-  Firebase usersRef;
-  FirebaseConnector.fromUrl(String url) : this.firebaseRef = new Firebase(url){
-    usersRef= firebaseRef.child("snowroute").child("user"); 
-  }
+  
+  FirebaseConnector.fromUrl(String url, String user) : this.firebaseRef = _fbInstance(url,user);
 
-  FirebaseConnector() : this.fromUrl(URL);
-  
-  void save(String user, Route r){
-    getUserRoutesRoot(user).child(r.id).update(r.toMap()); 
+  // TODO remove when multi-user is ready
+  FirebaseConnector() : this.fromUrl(URL, USER);
+
+  static  Firebase _fbInstance(String url, String user){
+    return new Firebase(url).child("snowroute").child("users").child(user).child("routes");
   }
   
-  void register(String user, onAdd, onUpdate, onDelete){
-    getUserRoutesRoot(user).onChildAdded.listen((e)=> onAdd(_create(e)));
-    getUserRoutesRoot(user).onChildChanged.listen((e)=> onUpdate(_create(e)));
-    getUserRoutesRoot(user).onChildRemoved.listen((e)=> onDelete(_create(e)));
+  void save(Route r){
+    firebaseRef.child(r.id).update(r.toMap()); 
   }
   
-  Firebase getUserRoutesRoot(String user){
-    return usersRef.child(user).child("routes");
+  void register(onAdd, onUpdate, onDelete){
+    firebaseRef.onChildAdded.listen((e)=> onAdd(_create(e)));
+    firebaseRef.onChildChanged.listen((e)=> onUpdate(_create(e)));
+    firebaseRef.onChildRemoved.listen((e)=> onDelete(_create(e)));
+  }
+  
+  void delete(String key){
+    firebaseRef.child(key).remove();
   }
   
   Route _create(Event e){
     return new Route.fromMap(e.snapshot.val());
   }
-  
-  void delete(String user, String key){
-    getUserRoutesRoot(user).child(key).remove();
-  }
+
 }
 
   

@@ -84,17 +84,6 @@ class CoreList extends PolymerElement with ChangeNotifier  {
   @reflectable @published Element get scrollTarget => __$scrollTarget; Element __$scrollTarget; @reflectable set scrollTarget(Element value) { __$scrollTarget = notifyPropertyChange(#scrollTarget, __$scrollTarget, value); }
 
   /**
-   *
-   * The number of extra items rendered above the minimum set required to
-   * fill the list's height.
-   *
-   * @attribute extraItems
-   * @type number
-   * @default 30
-   */
-  @reflectable @published int get extraItems => __$extraItems; int __$extraItems = 30; @reflectable set extraItems(int value) { __$extraItems = notifyPropertyChange(#extraItems, __$extraItems, value); }
-
-  /**
    * 
    * When true, tapping a row will select the item, placing its data model
    * in the set of selected items retrievable via the `selection` property.
@@ -225,9 +214,7 @@ class CoreList extends PolymerElement with ChangeNotifier  {
 
   Element _target;
   var _targetScrollSubscription;
-  int _visibleCount;
   int _physicalCount;
-  int _physicalHeight;
   int _scrollTop = 0;
   bool _oldMulti = false;
   bool _oldSelectionEnabled = false;
@@ -238,9 +225,6 @@ class CoreList extends PolymerElement with ChangeNotifier  {
 
   Expando _selectedData;
   Expando<_PhysicalItemData> _physicalItemData = new Expando();
-
-  int firstPhysicalIndex;
-  int baseVirtualIndex;
 
   Element template;
 
@@ -288,6 +272,7 @@ class CoreList extends PolymerElement with ChangeNotifier  {
    * @method updateSize
    */
   void updateSize() {
+    if (_physicalCount == null) return;
     _resetIndex(_getFirstVisibleIndex());
     initializeData();
   }
@@ -680,7 +665,7 @@ class CoreList extends PolymerElement with ChangeNotifier  {
       physicalDatum.index = virtualIndex;
       physicalDatum.physicalIndex = physicalIndex;
       physicalDatum.selected = selectionEnabled && virtualDatum != null ?
-          _selectedData[virtualDatum] : null;
+          (_selectedData[virtualDatum] == true) : null;
       // Set group-related fields
       if (_grouped) {
         var groupModel = groups[groupIndex];
@@ -1135,7 +1120,10 @@ class CoreList extends PolymerElement with ChangeNotifier  {
   // jsinterop, unless the object is previsously jsified. This extra logic here
   // is used to ensure that core-selection works correctly in `multi` mode
   // (tapping an element twice should deselect it).
-  _invokeSelect(item) => _selection.select(_wrap(item));
+  _invokeSelect(item) {
+    if (item != null) item = _wrap(item);
+    _selection.select(item);
+  }
 
   _getSelection() {
     var s = _selection.getSelection();

@@ -12,17 +12,13 @@ class HistoryElement extends PolymerElement {
   
   @observable final Map<String,Route> routes =  toObservable({});
   
-  FirebaseConnector db;
-  String user;
+  FirebaseConnector _db;
   
-  HistoryElement.created() : super.created(){
-  }
-
+  HistoryElement.created() : super.created();
   
   void init(String user, FirebaseConnector db){
-    this.db = db;
-    this.user = user;
-    this.db.register(user, _onAdd, _onAdd, _onDelete);
+    this._db = db;
+    this._db.register(_onAdd, _onAdd, _onDelete);
   }
 
   void _onAdd(Route route) {
@@ -34,7 +30,7 @@ class HistoryElement extends PolymerElement {
   }
   
   void onDelete(Event event, var detail, var target){
-    db.delete(user, detail['route'].id);
+    _db.delete(detail['route'].id);
   }
   
   bool get isEmpty => routes.isEmpty;

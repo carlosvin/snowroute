@@ -50,22 +50,7 @@ class Pos {
      num c = 2 * atan2( sqrt(a), sqrt(1-a) ); 
      return EARTH_RADIUS * c;
    }
-  
-  Map toMap(){
-    return {'timestamp': timestamp, 'lat': lat, 'long': long };
-  }
-  /*
-  bool operator ==(Pos b) {
-    return lat == b.lat && long == b.long && timestamp== b.timestamp && _next == b._next; 
-  }
-  
-  get hashCode {
-    int prim = 31;
-    if (hasNext){
-      prim = prim * next.hashCode;
-    }
-    return prim* (lat.hashCode + long.hashCode + timestamp.hashCode);
-  }*/
+
 }
 
 
@@ -92,9 +77,17 @@ class Route extends Identifiable {
   }
   
   Route.fromMap(Map map){
-    map.forEach((k,v) => _add(v['lat'], v['long'], k));
+    map.forEach((k,v) => _add(v['lat'], v['long'], new DateTime.fromMillisecondsSinceEpoch( v['timestamp'])));
   }
   
+  Map toMap (){
+    Map map = new Map();
+    for (Pos pos=_ini; pos != null; pos = pos.next) {
+      map[pos.timestamp.millisecondsSinceEpoch.toString()] = {'timestamp': pos.timestamp.millisecondsSinceEpoch, 'lat': pos.lat, 'long': pos.long };
+    }
+    return map;
+  }
+ 
   void _init(Pos ini){
     this._ini = ini;
     this._last = ini;
@@ -123,25 +116,20 @@ class Route extends Identifiable {
     }
     return strb.toString();
   }
-  
-  Map toMap (){
-    Map map = new Map();
-    for (Pos pos=_ini; pos != null; pos = pos.next) {
-      map[pos.timestamp] = pos.toMap();
-    }
-    return map;
-  }
-
 
   void _add(num x, num y, DateTime time){
-    Pos p;
-    if (_last == _ini){
-      p = new Pos(x, y, time, _ini);
+    if (_ini == null){
+      _init(new Pos(x, y, time, null));
     }else{
-      p = new Pos(x, y, time, _last);
+      Pos p;
+      if (_last == _ini){
+        p = new Pos(x, y, time, _ini);
+      }else{
+        p = new Pos(x, y, time, _last);
+      }
+      _distance = _distance + p.distancePrev;
+      _last = p;
     }
-    _distance = _distance + p.distancePrev;
-    _last = p;
   }
   
   void add(num x, num y){
@@ -161,9 +149,7 @@ class Route extends Identifiable {
   Duration get duration => last.timestamp.difference(_ini.timestamp);
   
   num get speedAvg => distance / duration.inSeconds;
-  
-  String get key => _ini.timestamp.toString();
-  
+    
   bool get isTooShort => duration.inSeconds < MIN_DURATION_SECONDS;
   
   @override

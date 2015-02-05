@@ -11,9 +11,7 @@ import 'package:snowroute/interfaces.dart';
 
 @CustomTag('positioning-control')
 class PositioningControl extends PolymerElement with ChangeNotifier  implements StateListener{
-  //TODO add multi-user feature
-  final String USER = "carlos";
-  
+
   @reflectable @observable String get state => __$state; String __$state = ''; @reflectable set state(String value) { __$state = notifyPropertyChange(#state, __$state, value); }
   @reflectable @observable StopwatchElement get stopwatchElement => __$stopwatchElement; StopwatchElement __$stopwatchElement; @reflectable set stopwatchElement(StopwatchElement value) { __$stopwatchElement = notifyPropertyChange(#stopwatchElement, __$stopwatchElement, value); }
   @reflectable @observable TrackingElement get trackingElement => __$trackingElement; TrackingElement __$trackingElement; @reflectable set trackingElement(TrackingElement value) { __$trackingElement = notifyPropertyChange(#trackingElement, __$trackingElement, value); }
@@ -38,7 +36,7 @@ class PositioningControl extends PolymerElement with ChangeNotifier  implements 
     toastElement= $['toast'];
     buttonToggleHistory = $['buttonToggleHistory'];
     
-    trackingElement.init(mapElement, toastElement);
+    trackingElement.init(mapElement, toastElement,firebaseconnector);
     historyElement.init(USER, firebaseconnector);
     
     stopwatchElement.register(this);
@@ -46,17 +44,12 @@ class PositioningControl extends PolymerElement with ChangeNotifier  implements 
     
   }
   
-  
+  @override
   void onStateStopped(){
     state = 'stopped';
-    if (trackingElement.route == null || trackingElement.route.isTooShort){
-      toastElement.error("The practice is too short");      
-    }else{
-      firebaseconnector.save(USER, trackingElement.route);
-      toastElement.info("Saved ${trackingElement.route.key }");
-    }
   }
   
+  @override
   void onStateStarted(){
     state = 'started';
   }
