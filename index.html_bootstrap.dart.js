@@ -4322,10 +4322,10 @@ var $$ = Object.create(null);
   "^": "",
   main: [function() {
     var t1, t2, t3;
-    t1 = P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_borderColor, new E.main_closure(), C.Symbol_counter, new E.main_closure0(), C.Symbol_delete, new E.main_closure1(), C.Symbol_duration, new E.main_closure2(), C.Symbol_historyElement, new E.main_closure3(), C.Symbol_key, new E.main_closure4(), C.Symbol_keys, new E.main_closure5(), C.Symbol_mapElement, new E.main_closure6(), C.Symbol_onDelete, new E.main_closure7(), C.Symbol_pause, new E.main_closure8(), C.Symbol_positioning, new E.main_closure9(), C.Symbol_route, new E.main_closure10(), C.Symbol_routes, new E.main_closure11(), C.Symbol_speedAverage, new E.main_closure12(), C.Symbol_speedAvg, new E.main_closure13(), C.Symbol_start, new E.main_closure14(), C.Symbol_state, new E.main_closure15(), C.Symbol_stop, new E.main_closure16(), C.Symbol_stopwatchElement, new E.main_closure17(), C.Symbol_toggleHistory, new E.main_closure18(), C.Symbol_totalDistance, new E.main_closure19(), C.Symbol_trackingElement, new E.main_closure20()], null, null);
+    t1 = P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_borderColor, new E.main_closure(), C.Symbol_counter, new E.main_closure0(), C.Symbol_delete, new E.main_closure1(), C.Symbol_distance, new E.main_closure2(), C.Symbol_duration, new E.main_closure3(), C.Symbol_historyElement, new E.main_closure4(), C.Symbol_key, new E.main_closure5(), C.Symbol_keys, new E.main_closure6(), C.Symbol_mapElement, new E.main_closure7(), C.Symbol_onDelete, new E.main_closure8(), C.Symbol_pause, new E.main_closure9(), C.Symbol_route, new E.main_closure10(), C.Symbol_routes, new E.main_closure11(), C.Symbol_speedAverage, new E.main_closure12(), C.Symbol_speedAvg, new E.main_closure13(), C.Symbol_start, new E.main_closure14(), C.Symbol_state, new E.main_closure15(), C.Symbol_stop, new E.main_closure16(), C.Symbol_stopwatchElement, new E.main_closure17(), C.Symbol_toggleHistory, new E.main_closure18(), C.Symbol_totalDistance, new E.main_closure19(), C.Symbol_trackingElement, new E.main_closure20()], null, null);
     t2 = P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_borderColor, new E.main_closure21(), C.Symbol_counter, new E.main_closure22(), C.Symbol_historyElement, new E.main_closure23(), C.Symbol_mapElement, new E.main_closure24(), C.Symbol_route, new E.main_closure25(), C.Symbol_speedAverage, new E.main_closure26(), C.Symbol_state, new E.main_closure27(), C.Symbol_stopwatchElement, new E.main_closure28(), C.Symbol_totalDistance, new E.main_closure29(), C.Symbol_trackingElement, new E.main_closure30()], null, null);
     t3 = P.LinkedHashMap_LinkedHashMap$_literal([C.Type_eKh, C.Type_I2I, C.Type_FQs, C.Type_I2I, C.Type_ewF, C.Type_CxZ, C.Type_ufO, C.Type_QGy, C.Type_TOw, C.Type_EOZ, C.Type_iIK, C.Type_I2I, C.Type_ALf, C.Type_rxe, C.Type_GNh, C.Type_I2I, C.Type_EOZ, C.Type_GNh, C.Type_oyU, C.Type_I2I, C.Type_rxe, C.Type_oyU, C.Type_QGy, C.Type_Opy, C.Type_CxZ, C.Type_I2I], null, null);
-    t2 = O.StaticConfiguration$(false, P.LinkedHashMap_LinkedHashMap$_literal([C.Type_eKh, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_routes, C.Declaration_Ppd], null, null), C.Type_FQs, P.LinkedHashMap_LinkedHashMap$_empty(null, null), C.Type_ewF, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_historyElement, C.Declaration_ahC, C.Symbol_mapElement, C.Declaration_qKV, C.Symbol_state, C.Declaration_cgt, C.Symbol_stopwatchElement, C.Declaration_0bC, C.Symbol_trackingElement, C.Declaration_Wti], null, null), C.Type_ufO, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_route, C.Declaration_fZx], null, null), C.Type_TOw, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_counter, C.Declaration_8aB], null, null), C.Type_iIK, P.LinkedHashMap_LinkedHashMap$_empty(null, null), C.Type_ALf, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_borderColor, C.Declaration_9t5, C.Symbol_speedAverage, C.Declaration_fTJ, C.Symbol_totalDistance, C.Declaration_K2q], null, null)], null, null), t1, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_borderColor, "borderColor", C.Symbol_counter, "counter", C.Symbol_delete, "delete", C.Symbol_duration, "duration", C.Symbol_historyElement, "historyElement", C.Symbol_key, "key", C.Symbol_keys, "keys", C.Symbol_mapElement, "mapElement", C.Symbol_onDelete, "onDelete", C.Symbol_pause, "pause", C.Symbol_positioning, "positioning", C.Symbol_route, "route", C.Symbol_routes, "routes", C.Symbol_speedAverage, "speedAverage", C.Symbol_speedAvg, "speedAvg", C.Symbol_start, "start", C.Symbol_state, "state", C.Symbol_stop, "stop", C.Symbol_stopwatchElement, "stopwatchElement", C.Symbol_toggleHistory, "toggleHistory", C.Symbol_totalDistance, "totalDistance", C.Symbol_trackingElement, "trackingElement"], null, null), t3, t2, null);
+    t2 = O.StaticConfiguration$(false, P.LinkedHashMap_LinkedHashMap$_literal([C.Type_eKh, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_routes, C.Declaration_Ppd], null, null), C.Type_FQs, P.LinkedHashMap_LinkedHashMap$_empty(null, null), C.Type_ewF, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_historyElement, C.Declaration_ahC, C.Symbol_mapElement, C.Declaration_qKV, C.Symbol_state, C.Declaration_cgt, C.Symbol_stopwatchElement, C.Declaration_0bC, C.Symbol_trackingElement, C.Declaration_Wti], null, null), C.Type_ufO, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_route, C.Declaration_fZx], null, null), C.Type_TOw, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_counter, C.Declaration_8aB], null, null), C.Type_iIK, P.LinkedHashMap_LinkedHashMap$_empty(null, null), C.Type_ALf, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_borderColor, C.Declaration_9t5, C.Symbol_speedAverage, C.Declaration_fTJ, C.Symbol_totalDistance, C.Declaration_K2q], null, null)], null, null), t1, P.LinkedHashMap_LinkedHashMap$_literal([C.Symbol_borderColor, "borderColor", C.Symbol_counter, "counter", C.Symbol_delete, "delete", C.Symbol_distance, "distance", C.Symbol_duration, "duration", C.Symbol_historyElement, "historyElement", C.Symbol_key, "key", C.Symbol_keys, "keys", C.Symbol_mapElement, "mapElement", C.Symbol_onDelete, "onDelete", C.Symbol_pause, "pause", C.Symbol_route, "route", C.Symbol_routes, "routes", C.Symbol_speedAverage, "speedAverage", C.Symbol_speedAvg, "speedAvg", C.Symbol_start, "start", C.Symbol_state, "state", C.Symbol_stop, "stop", C.Symbol_stopwatchElement, "stopwatchElement", C.Symbol_toggleHistory, "toggleHistory", C.Symbol_totalDistance, "totalDistance", C.Symbol_trackingElement, "trackingElement"], null, null), t3, t2, null);
     $.objectAccessor = new O.GeneratedObjectAccessorService(t2);
     $.typeInspector = new O.GeneratedTypeInspectorService(t2);
     $.symbolConverter = new O.GeneratedSymbolConverterService(t2);
@@ -4355,49 +4355,49 @@ var $$ = Object.create(null);
   main_closure2: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$duration$x(o);
+      return o.get$distance();
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure3: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$historyElement$x(o);
+      return J.get$duration$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure4: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$key$x(o);
+      return J.get$historyElement$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure5: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return o.get$keys();
+      return J.get$key$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure6: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$mapElement$x(o);
+      return o.get$keys();
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure7: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$onDelete$x(o);
+      return J.get$mapElement$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure8: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return J.get$pause$x(o);
+      return J.get$onDelete$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure9: {
     "^": "Closure:59;",
     call$1: [function(o) {
-      return o.get$positioning();
+      return J.get$pause$x(o);
     }, "call$1", null, 2, 0, null, 67, "call"]
   },
   main_closure10: {
@@ -26050,13 +26050,11 @@ var $$ = Object.create(null);
       return H.S(this.sourceUrl) + ":" + H.S(J.$add$ns(this.line, 1)) + ":" + H.S(J.$add$ns(this.column, 1));
     },
     distance$1: [function(other) {
-      var t1, t2;
-      t1 = this.sourceUrl;
-      t2 = other.sourceUrl;
-      if (!t1.$eq(0, t2))
-        throw H.wrapException(P.ArgumentError$("Source URLs \"" + H.S(t1) + "\" and \"" + H.S(t2) + "\" don't match."));
-      return J.abs$0$n(J.$sub$n(this.offset, other.offset));
-    }, "call$1", "get$distance", 2, 0, 178],
+      var t1 = this.sourceUrl;
+      if (!t1.$eq(0, other.get$sourceUrl()))
+        throw H.wrapException(P.ArgumentError$("Source URLs \"" + H.S(t1) + "\" and \"" + H.S(other.get$sourceUrl()) + "\" don't match."));
+      return J.abs$0$n(J.$sub$n(this.offset, J.get$offset$x(other)));
+    }, "call$1", "get$distance", 2, 0, 178, 179],
     compareTo$1: function(_, other) {
       var t1 = this.sourceUrl;
       if (!t1.$eq(0, other.get$sourceUrl()))
@@ -26167,7 +26165,7 @@ var $$ = Object.create(null);
       return t1.charCodeAt(0) == 0 ? t1 : t1;
     }, function($receiver, message) {
       return this.message$2$color($receiver, message, null);
-    }, "message$1", "call$2$color", "call$1", "get$message", 2, 3, 179, 20, 180, 181],
+    }, "message$1", "call$2$color", "call$1", "get$message", 2, 3, 180, 20, 181, 182],
     $eq: function(_, other) {
       var t1, t2;
       if (other == null)
@@ -26245,19 +26243,19 @@ var $$ = Object.create(null);
     }
   },
   StateNotifier_notifyStart_closure: {
-    "^": "Closure:182;",
+    "^": "Closure:183;",
     call$1: function(l) {
       return J.onStateStarted$0$x(l);
     }
   },
   StateNotifier_notifyStop_closure: {
-    "^": "Closure:182;",
+    "^": "Closure:183;",
     call$1: function(l) {
       return J.onStateStopped$0$x(l);
     }
   },
   StateNotifier_notifyPause_closure: {
-    "^": "Closure:182;",
+    "^": "Closure:183;",
     call$1: function(l) {
       return J.onStatePaused$0$x(l);
     }
@@ -26616,7 +26614,7 @@ var $$ = Object.create(null);
       old = M.jsObjectToBindable(J.$index$asx(t2, M._dartToJsName(t1, $name)));
       t2.deleteProperty$1($name);
       return old;
-    }, "call$1", "get$remove", 2, 0, 183, 62],
+    }, "call$1", "get$remove", 2, 0, 184, 62],
     clear$0: function(_) {
       J.forEach$1$ax(this.get$keys(), this.get$remove(this));
     },
@@ -27026,7 +27024,7 @@ var $$ = Object.create(null);
       var t1 = this.this_0;
       J.get$attributes$x(t1._node)._element.setAttribute("ref", ref);
       t1._refChanged$0();
-    }, "call$1", null, 2, 0, null, 184, "call"]
+    }, "call$1", null, 2, 0, null, 185, "call"]
   },
   TemplateBindExtension_bootstrap__bootstrap: {
     "^": "Closure:17;",
@@ -27177,7 +27175,7 @@ var $$ = Object.create(null);
         return;
       }
       this._updateValue$1(this._getUpdatedValue$0());
-    }, "call$1", "get$_updateIfValue", 2, 0, 17, 185],
+    }, "call$1", "get$_updateIfValue", 2, 0, 17, 186],
     _updateIteratedValue$1: [function(value) {
       var ifValue;
       if (this._hasIf === true) {
@@ -27321,7 +27319,7 @@ var $$ = Object.create(null);
       }
       for (t1 = instanceCache.get$values(instanceCache), t1 = H.setRuntimeTypeInfo(new H.MappedIterator(null, J.get$iterator$ax(t1._iterable), t1._f), [H.getTypeArgumentByIndex(t1, 0), H.getTypeArgumentByIndex(t1, 1)]); t1.moveNext$0();)
         this._closeInstanceBindings$1(t1.__internal$_current);
-    }, "call$1", "get$_handleSplices", 2, 0, 186, 187],
+    }, "call$1", "get$_handleSplices", 2, 0, 187, 188],
     _closeInstanceBindings$1: [function(instance) {
       var t1, values;
       t1 = $.get$_instanceExtension();
@@ -27329,7 +27327,7 @@ var $$ = Object.create(null);
       values = H.Primitives_getProperty(instance, "expando$values");
       for (t1 = J.get$iterator$ax((values == null ? null : H.Primitives_getProperty(values, t1._getKey$0())).get$_bindings()); t1.moveNext$0();)
         J.close$0$x(t1.get$current());
-    }, "call$1", "get$_closeInstanceBindings", 2, 0, 188],
+    }, "call$1", "get$_closeInstanceBindings", 2, 0, 189],
     _unobserve$0: function() {
       var t1 = this._listSub;
       if (t1 == null)
@@ -27421,7 +27419,7 @@ var $$ = Object.create(null);
       if (t4 >= t3)
         return H.ioore(t1, t4);
       return t2 + H.S(t1[t4]);
-    }, "call$1", "get$_singleCombinator", 2, 0, 189, 18],
+    }, "call$1", "get$_singleCombinator", 2, 0, 190, 18],
     _listCombinator$1: [function(values) {
       var t1, newValue, len, t2, i, value, t3, str;
       t1 = this._mustache_tokens$_tokens;
@@ -27442,7 +27440,7 @@ var $$ = Object.create(null);
       }
       t1 = newValue._contents;
       return t1.charCodeAt(0) == 0 ? t1 : t1;
-    }, "call$1", "get$_listCombinator", 2, 0, 190, 191],
+    }, "call$1", "get$_listCombinator", 2, 0, 191, 192],
     MustacheTokens$_$2: function(_tokens, onlyOneTime) {
       this._combinator = this._mustache_tokens$_tokens.length === 5 ? this.get$_singleCombinator() : this.get$_listCombinator();
     },
@@ -27620,7 +27618,7 @@ var $$ = Object.create(null);
     $isObservable: true
   },
   TrackingElement_attached_closure: {
-    "^": "Closure:192;this_0",
+    "^": "Closure:193;this_0",
     call$1: [function(position) {
       var t1, t2, t3;
       t1 = this.this_0;
@@ -27649,7 +27647,7 @@ var $$ = Object.create(null);
     }, "call$1", null, 2, 0, null, 113, "call"]
   },
   TrackingElement_attached_closure0: {
-    "^": "Closure:193;this_1",
+    "^": "Closure:194;this_1",
     call$1: [function(error) {
       J.error$1$x(this.this_1.notifier, J.get$message$x(error));
       return;
@@ -27795,7 +27793,7 @@ var $$ = Object.create(null);
       J.set$hidden$x(receiver.stopButton, false);
       J.set$hidden$x(receiver.pauseButton, false);
       this.notifyStart$0(receiver);
-    }, "call$3", "get$start", 6, 0, 194, 3, 141, 142],
+    }, "call$3", "get$start", 6, 0, 195, 3, 141, 142],
     stop$3: [function(receiver, e, detail, target) {
       receiver.timer.cancel$0();
       receiver._watch$__$counter = this.notifyPropertyChange$3(receiver, C.Symbol_counter, receiver._watch$__$counter, "00:00:00");
@@ -27804,14 +27802,14 @@ var $$ = Object.create(null);
       J.set$hidden$x(receiver.pauseButton, true);
       J.set$hidden$x(receiver.stopButton, true);
       this.notifyStop$0(receiver);
-    }, "call$3", "get$stop", 6, 0, 194, 3, 141, 142],
+    }, "call$3", "get$stop", 6, 0, 195, 3, 141, 142],
     pause$3: [function(receiver, e, detail, target) {
       receiver.watch.stop$0(0);
       J.set$hidden$x(receiver.startButton, false);
       J.set$hidden$x(receiver.pauseButton, true);
       J.set$hidden$x(receiver.stopButton, false);
       this.notifyPause$0(receiver);
-    }, "call$3", "get$pause", 6, 0, 194, 3, 141, 142],
+    }, "call$3", "get$pause", 6, 0, 195, 3, 141, 142],
     updateTime$1: [function(receiver, _) {
       var seconds, t1, hour, minute, second;
       seconds = J.$tdiv$n(J.$tdiv$n(J.$mul$ns(receiver.watch.get$elapsedTicks(), 1000), $.Stopwatch__frequency), 1000);
@@ -27821,7 +27819,7 @@ var $$ = Object.create(null);
       second = this.numberToDigits$1(receiver, t1.$mod(seconds, 60));
       t1 = hour + ":" + minute + ":" + second;
       receiver._watch$__$counter = this.notifyPropertyChange$3(receiver, C.Symbol_counter, receiver._watch$__$counter, t1);
-    }, "call$1", "get$updateTime", 2, 0, 195, 89],
+    }, "call$1", "get$updateTime", 2, 0, 196, 89],
     numberToDigits$1: function(receiver, n) {
       if (J.$lt$n(n, 10))
         return "0" + H.S(n);
@@ -29147,6 +29145,7 @@ C.Symbol_call = new H.Symbol("call");
 C.Symbol_children = new H.Symbol("children");
 C.Symbol_classes = new H.Symbol("classes");
 C.Symbol_delete = new H.Symbol("delete");
+C.Symbol_distance = new H.Symbol("distance");
 C.Symbol_duration = new H.Symbol("duration");
 C.Symbol_hidden = new H.Symbol("hidden");
 C.Symbol_id = new H.Symbol("id");
@@ -29154,7 +29153,6 @@ C.Symbol_key = new H.Symbol("key");
 C.Symbol_noSuchMethod = new H.Symbol("noSuchMethod");
 C.Symbol_onDelete = new H.Symbol("onDelete");
 C.Symbol_pause = new H.Symbol("pause");
-C.Symbol_positioning = new H.Symbol("positioning");
 C.Symbol_registerCallback = new H.Symbol("registerCallback");
 C.Symbol_speedAvg = new H.Symbol("speedAvg");
 C.Symbol_start = new H.Symbol("start");
@@ -29747,6 +29745,7 @@ C.C__Undefined,
 {func: "Index__Expression_Expression", ret: U.Index, args: [U.Expression, U.Expression]},
 {func: "dynamic__Expression", args: [U.Expression]},
 {func: "int__SourceLocation", ret: P.$int, args: [O.SourceLocation]},
+"other",
 {func: "String__String__dynamic", ret: P.String, args: [P.String], named: {color: null}},
 "message",
 "color",
