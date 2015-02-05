@@ -87,8 +87,7 @@ class Route extends Identifiable {
     }
     return map;
   }
-
-  
+ 
   void _init(Pos ini){
     this._ini = ini;
     this._last = ini;
@@ -119,14 +118,18 @@ class Route extends Identifiable {
   }
 
   void _add(num x, num y, DateTime time){
-    Pos p;
-    if (_last == _ini){
-      p = new Pos(x, y, time, _ini);
+    if (_ini == null){
+      _init(new Pos(x, y, time, null));
     }else{
-      p = new Pos(x, y, time, _last);
+      Pos p;
+      if (_last == _ini){
+        p = new Pos(x, y, time, _ini);
+      }else{
+        p = new Pos(x, y, time, _last);
+      }
+      _distance = _distance + p.distancePrev;
+      _last = p;
     }
-    _distance = _distance + p.distancePrev;
-    _last = p;
   }
   
   void add(num x, num y){
