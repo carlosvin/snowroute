@@ -14,6 +14,6 @@ class PositioningLiElement extends LIElement with Polymer, Observable {
   PositioningLiElement.created() : super.created() { polymerCreated(); }
   
   void delete(Event event, var detail, var target) {
-    fire('delete', detail: {'key': route.key });
+    fire('delete', detail: {'route': route });
   }
 }

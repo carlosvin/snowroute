@@ -9,8 +9,8 @@
 
     </style>
     <ul on-delete="{{onDelete}}">
-      <template repeat="{{ positioning in practices.values }}">
-        <li is="positioning-li-element" positioning="{{ positioning }}"> </li>
+      <template repeat="{{ key in routes.keys }}">
+          <li is="positioning-li-element" positioning="{{ routes[key] }}"> </li>
       </template>
     </ul>
   </template> 

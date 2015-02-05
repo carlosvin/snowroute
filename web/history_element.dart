@@ -2,50 +2,36 @@ library history;
 
 import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
-import 'dart:html';
 import 'package:snowroute/route.dart';
+import 'data_sync.dart';
+import 'dart:html';
 
 @CustomTag('history-element')
 class HistoryElement extends PolymerElement {
   
-  Storage localStorage;
   
-  @observable final Map<String,Route> practices =  toObservable({});
+  @observable final Map<String,Route> routes =  toObservable({});
   
-  HistoryElement.created() : super.created(){
-  }
+  FirebaseConnector _db;
   
-  @override
-  void attached() {
-   super.attached();
-   localStorage = window.localStorage;
-   for (var v in localStorage.values){
-     try{
-      add(new Route.deserialize(v), false);
-     }catch(e){
-      print("ignoring $v");       
-     }
-   }
-   print ("${practices.length} Practices read");
+  HistoryElement.created() : super.created();
+  
+  void init(String user, FirebaseConnector db){
+    this._db = db;
+    this._db.register(_onAdd, _onAdd, _onDelete);
   }
 
-  bool add(Route route, [persist = true]) {
-    if (route == null){
-      return false;
-    }else{
-      practices[route.key] = route;
-      if (persist){
-        localStorage[route.key] = route.serialize();  
-      }
-      return true;
-    }
+  void _onAdd(Route route) {
+    routes[route.id] = route;
   }
   
-  void onDelete(Event event, var detail, var target) {
-    String key = detail['key'];
-    localStorage.remove(key);
-    practices.remove(key);
+  void _onDelete(Route route) {
+    routes.remove(route.id);
   }
   
-  bool get isEmpty => practices.isEmpty;
+  void onDelete(Event event, var detail, var target){
+    _db.delete(detail['route'].id);
+  }
+  
+  bool get isEmpty => routes.isEmpty;
 }

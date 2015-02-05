@@ -2,10 +2,12 @@ library user;
 
 
 import 'interfaces.dart';
+import 'route.dart';
 
 class User extends Identifiable{
   String name;
   String pass;
+  final Map<num, Route> routes = new Map();
   
   User(this.name, this.pass);
   
@@ -26,4 +28,13 @@ class User extends Identifiable{
   
   @override
   String get id => name;
+  
+  Map toMap(){
+    Map map = new Map();
+    map['name'] = name;
+    map['pass'] = pass;
+    //map['routes'] = routes.values.map((Route r) => r.toMap());
+    return map;
+  }  
+  
 }

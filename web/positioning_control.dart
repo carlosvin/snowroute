@@ -9,7 +9,6 @@ import 'map_element.dart';
 import 'toast_levels_element.dart';
 import 'package:snowroute/interfaces.dart';
 
-
 @CustomTag('positioning-control')
 class PositioningControl extends PolymerElement implements StateListener{
 
@@ -22,7 +21,7 @@ class PositioningControl extends PolymerElement implements StateListener{
   ToastLevelsElement toastElement;
   PaperIconButton buttonToggleHistory;
   
-  FirebaseConnector firebaseconnector;
+  final FirebaseConnector firebaseconnector = new FirebaseConnector();
   
   PositioningControl.created() : super.created(){
   }
@@ -37,26 +36,20 @@ class PositioningControl extends PolymerElement implements StateListener{
     toastElement= $['toast'];
     buttonToggleHistory = $['buttonToggleHistory'];
     
-    trackingElement.init(mapElement, toastElement);
-
+    trackingElement.init(mapElement, toastElement,firebaseconnector);
+    historyElement.init(USER, firebaseconnector);
+    
     stopwatchElement.register(this);
     stopwatchElement.register(trackingElement);
     
-    firebaseconnector = new FirebaseConnector();
-    firebaseconnector.save("bla");
   }
   
+  @override
   void onStateStopped(){
     state = 'stopped';
-    if (trackingElement.route == null || trackingElement.route.isTooShort){
-      toastElement.error("The practice is too short");      
-    }else if (historyElement.add(trackingElement.route)) {
-      toastElement.info("Saved ${trackingElement.route.key }");
-    }else{
-      toastElement.error("Error saving");      
-    }
   }
   
+  @override
   void onStateStarted(){
     state = 'started';
   }

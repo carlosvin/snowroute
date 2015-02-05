@@ -5,7 +5,7 @@ import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
 import 'package:snowroute/route.dart';
 import 'package:snowroute/interfaces.dart';
-
+import 'data_sync.dart';
 
 
 @CustomTag('tracking-element')
@@ -16,10 +16,11 @@ class TrackingElement extends PolymerElement with StateListener{
   
   TrackingElement.created() : super.created();
 
-  Route route;
-  TrackingListener listener;
-  MessageNotifier notifier;
-  bool tracking = false;
+  Route _route;
+  TrackingListener _listener;
+  MessageNotifier _notifier;
+  bool _tracking = false;
+  FirebaseConnector _db;
   
   @override
   void attached(){
@@ -29,51 +30,70 @@ class TrackingElement extends PolymerElement with StateListener{
       onError: (PositionError error) => _handleError(error)); 
   }
   
-  void init (TrackingListener listener, MessageNotifier notifier){
-    this.listener = listener;
-    this.notifier = notifier;
+  void init (TrackingListener listener, MessageNotifier notifier, FirebaseConnector db){
+    this._listener = listener;
+    this._notifier = notifier;
+    this._db = db;
   }
   
   @override
   void onStateStarted(){
-    tracking = true;
+    _tracking = true;
+    _addPositionCoords(50.0, 40.0);
   }
   
   @override
   void onStateStopped (){
-    tracking = false;
-    listener.stopTracking();
-    route = null;
+    _addPositionCoords(55.0, 44.0);
+    _tracking = false;
+    _listener.stopTracking();
+    _save();
+    _route = null;
   }
   
+  @override
   void onStatePaused(){
-    tracking = false;
+    _tracking = false;
+  }
+  
+  void _save(){
+    if (_route == null || _route.isTooShort){
+      _notifier.error("The practice is too short");      
+    }else{
+      _notifier.info("Saving ${_route.id }");
+      _db.save(_route);
+      _notifier.info("Saved ${_route.id }");
+    }
   }
   
   void _handleError(PositionError  error){
-    notifier.error(error.message);
+    _notifier.error(error.message);
   }
   
   void _addPosition(Geoposition geoPosition){
-    if (tracking){
-      if (route == null){
-        route = new Route.fromCoords(geoPosition.coords.latitude, geoPosition.coords.longitude);
+    _addPositionCoords(geoPosition.coords.latitude, geoPosition.coords.longitude);
+  }
+  
+  void _addPositionCoords(num lat, num long){
+    if (_tracking){
+      if (_route == null){
+        _route = new Route.fromCoords(lat, long);
       }else{
-        route.add(geoPosition.coords.latitude, geoPosition.coords.longitude);
+        _route.add(lat, long);
       }
-      totalDistance = "${route.distance.round()}m";
-      speedAverage = "${(route.speedAvg * 3.6).toStringAsFixed(2)}km/h";
+      totalDistance = "${_route.distance.round()}m";
+      speedAverage = "${(_route.speedAvg * 3.6).toStringAsFixed(2)}km/h";
     }else{
-      // TODO anything?
+      _notifier.warn("It is not tracking");
     }
     
-    if (listener != null){
-      listener.newPosition(geoPosition.coords.latitude, geoPosition.coords.longitude, tracking);        
+    if (_listener != null){
+      _listener.newPosition(lat, long, _tracking);        
     }
   }
   
-  num get lat => route.last.lat; 
-  num get long => route.last.long; 
+  num get lat => _route.last.lat; 
+  num get long => _route.last.long; 
   
   
 }

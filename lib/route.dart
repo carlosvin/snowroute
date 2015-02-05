@@ -50,18 +50,7 @@ class Pos {
      num c = 2 * atan2( sqrt(a), sqrt(1-a) ); 
      return EARTH_RADIUS * c;
    }
-  /*
-  bool operator ==(Pos b) {
-    return lat == b.lat && long == b.long && timestamp== b.timestamp && _next == b._next; 
-  }
-  
-  get hashCode {
-    int prim = 31;
-    if (hasNext){
-      prim = prim * next.hashCode;
-    }
-    return prim* (lat.hashCode + long.hashCode + timestamp.hashCode);
-  }*/
+
 }
 
 
@@ -86,6 +75,19 @@ class Route extends Identifiable {
   Route.deserialize (String routeStr){
     routeStr.split(POSITION_SEPARATOR).forEach((s) => _deserializePosition(s) );
   }
+  
+  Route.fromMap(Map map){
+    map.forEach((k,v) => _add(v['lat'], v['long'], new DateTime.fromMillisecondsSinceEpoch( v['timestamp'])));
+  }
+  
+  Map toMap (){
+    Map map = new Map();
+    for (Pos pos=_ini; pos != null; pos = pos.next) {
+      map[pos.timestamp.millisecondsSinceEpoch.toString()] = {'timestamp': pos.timestamp.millisecondsSinceEpoch, 'lat': pos.lat, 'long': pos.long };
+    }
+    return map;
+  }
+
   
   void _init(Pos ini){
     this._ini = ini;
@@ -116,7 +118,6 @@ class Route extends Identifiable {
     return strb.toString();
   }
 
-
   void _add(num x, num y, DateTime time){
     Pos p;
     if (_last == _ini){
@@ -145,9 +146,7 @@ class Route extends Identifiable {
   Duration get duration => last.timestamp.difference(_ini.timestamp);
   
   num get speedAvg => distance / duration.inSeconds;
-  
-  String get key => _ini.timestamp.toString();
-  
+    
   bool get isTooShort => duration.inSeconds < MIN_DURATION_SECONDS;
   
   @override
