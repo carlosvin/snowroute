@@ -1,18 +1,19 @@
 import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
-import 'package:paper_elements/paper_toast.dart';
 import 'package:paper_elements/paper_icon_button.dart';
 import 'stopwatch_element.dart';
+import 'data_sync.dart';
 import 'tracking_element.dart';
 import 'history_element.dart';
 import 'map_element.dart';
 import 'toast_levels_element.dart';
-import 'interfaces.dart';
-
+import 'package:snowroute/interfaces.dart';
 
 @CustomTag('positioning-control')
 class PositioningControl extends PolymerElement with ChangeNotifier  implements StateListener{
-
+  //TODO add multi-user feature
+  final String USER = "carlos";
+  
   @reflectable @observable String get state => __$state; String __$state = ''; @reflectable set state(String value) { __$state = notifyPropertyChange(#state, __$state, value); }
   @reflectable @observable StopwatchElement get stopwatchElement => __$stopwatchElement; StopwatchElement __$stopwatchElement; @reflectable set stopwatchElement(StopwatchElement value) { __$stopwatchElement = notifyPropertyChange(#stopwatchElement, __$stopwatchElement, value); }
   @reflectable @observable TrackingElement get trackingElement => __$trackingElement; TrackingElement __$trackingElement; @reflectable set trackingElement(TrackingElement value) { __$trackingElement = notifyPropertyChange(#trackingElement, __$trackingElement, value); }
@@ -21,6 +22,8 @@ class PositioningControl extends PolymerElement with ChangeNotifier  implements 
   
   ToastLevelsElement toastElement;
   PaperIconButton buttonToggleHistory;
+  
+  final FirebaseConnector firebaseconnector = new FirebaseConnector();
   
   PositioningControl.created() : super.created(){
   }
@@ -36,20 +39,21 @@ class PositioningControl extends PolymerElement with ChangeNotifier  implements 
     buttonToggleHistory = $['buttonToggleHistory'];
     
     trackingElement.init(mapElement, toastElement);
-
+    historyElement.init(USER, firebaseconnector);
+    
     stopwatchElement.register(this);
     stopwatchElement.register(trackingElement);
     
   }
   
+  
   void onStateStopped(){
     state = 'stopped';
     if (trackingElement.route == null || trackingElement.route.isTooShort){
       toastElement.error("The practice is too short");      
-    }else if (historyElement.add(trackingElement.route)) {
-      toastElement.info("Saved ${trackingElement.route.key }");
     }else{
-      toastElement.error("Error saving");      
+      firebaseconnector.save(USER, trackingElement.route);
+      toastElement.info("Saved ${trackingElement.route.key }");
     }
   }
   

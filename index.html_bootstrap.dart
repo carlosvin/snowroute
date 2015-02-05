@@ -65,7 +65,7 @@ import 'package:polymer/polymer.dart' as smoke_1;
 import 'package:observe/src/metadata.dart' as smoke_2;
 import 'tracking_element.dart' as smoke_3;
 import 'positioning_li_element.dart' as smoke_4;
-import 'route.dart' as smoke_5;
+import 'package:snowroute/route.dart' as smoke_5;
 import 'history_element.dart' as smoke_6;
 import 'map_element.dart' as smoke_7;
 import 'toast_levels_element.dart' as smoke_8;
@@ -87,12 +87,14 @@ void main() {
         #delete: (o) => o.delete,
         #duration: (o) => o.duration,
         #historyElement: (o) => o.historyElement,
+        #key: (o) => o.key,
+        #keys: (o) => o.keys,
         #mapElement: (o) => o.mapElement,
         #onDelete: (o) => o.onDelete,
         #pause: (o) => o.pause,
         #positioning: (o) => o.positioning,
-        #practices: (o) => o.practices,
         #route: (o) => o.route,
+        #routes: (o) => o.routes,
         #speedAverage: (o) => o.speedAverage,
         #speedAvg: (o) => o.speedAvg,
         #start: (o) => o.start,
@@ -102,14 +104,12 @@ void main() {
         #toggleHistory: (o) => o.toggleHistory,
         #totalDistance: (o) => o.totalDistance,
         #trackingElement: (o) => o.trackingElement,
-        #values: (o) => o.values,
       },
       setters: {
         #borderColor: (o, v) { o.borderColor = v; },
         #counter: (o, v) { o.counter = v; },
         #historyElement: (o, v) { o.historyElement = v; },
         #mapElement: (o, v) { o.mapElement = v; },
-        #positioning: (o, v) { o.positioning = v; },
         #route: (o, v) { o.route = v; },
         #speedAverage: (o, v) { o.speedAverage = v; },
         #state: (o, v) { o.state = v; },
@@ -134,7 +134,7 @@ void main() {
       },
       declarations: {
         smoke_6.HistoryElement: {
-          #practices: const Declaration(#practices, Map, isFinal: true, annotations: const [smoke_2.observable]),
+          #routes: const Declaration(#routes, Map, isFinal: true, annotations: const [smoke_2.observable]),
         },
         smoke_7.MapElementView: {},
         smoke_9.PositioningControl: {
@@ -163,12 +163,14 @@ void main() {
         #delete: r'delete',
         #duration: r'duration',
         #historyElement: r'historyElement',
+        #key: r'key',
+        #keys: r'keys',
         #mapElement: r'mapElement',
         #onDelete: r'onDelete',
         #pause: r'pause',
         #positioning: r'positioning',
-        #practices: r'practices',
         #route: r'route',
+        #routes: r'routes',
         #speedAverage: r'speedAverage',
         #speedAvg: r'speedAvg',
         #start: r'start',
@@ -178,7 +180,6 @@ void main() {
         #toggleHistory: r'toggleHistory',
         #totalDistance: r'totalDistance',
         #trackingElement: r'trackingElement',
-        #values: r'values',
       }));
   new LogInjector().injectLogsFromUrl('index.html._buildLogs');
   configureForDeployment([

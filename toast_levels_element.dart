@@ -1,7 +1,7 @@
 
 import 'package:polymer/polymer.dart';
 import 'package:paper_elements/paper_toast.dart';
-import 'interfaces.dart';
+import 'package:snowroute/interfaces.dart';
 
 
 @CustomTag("toast-levels-element")

@@ -60,7 +60,7 @@ class CoreAjax extends PolymerElement with ChangeNotifier  {
    * The URL target of the request.
    */
   @reflectable @published
-  String get url => __$url; String __$url; @reflectable set url(String value) { __$url = notifyPropertyChange(#url, __$url, value); }
+  String get url => __$url; String __$url = ''; @reflectable set url(String value) { __$url = notifyPropertyChange(#url, __$url, value); }
 
   /**
    * Specifies what data to store in the `response` property, and
@@ -279,7 +279,7 @@ class CoreAjax extends PolymerElement with ChangeNotifier  {
   }
 
   urlChanged() {
-    if (!isBlank(this.handleAs) && url != null) {
+    if (!isBlank(this.handleAs)) {
       var ext = this.url.split('.').last;
       switch (ext) {
         case 'json':
@@ -366,9 +366,8 @@ class CoreAjax extends PolymerElement with ChangeNotifier  {
       activeRequest.on['progress'].listen((ProgressEvent e) {
         processProgress(e, request);
       });
-      if (!HttpRequest.supportsProgressEvent) {
-        progress = new CoreAjaxProgress(lengthComputable: false);
-      }
+    } else {
+      progress = new CoreAjaxProgress(lengthComputable: false);
     }
     return this.activeRequest;
   }

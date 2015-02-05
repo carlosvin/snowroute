@@ -46,7 +46,6 @@ class Parser {
 
   /// Parses the arguments. This can only be called once.
   ArgResults parse() {
-    var arguments = args.toList();
     var commandResults = null;
 
     // Parse the args.
@@ -92,8 +91,7 @@ class Parser {
     // Add in the leftover arguments we didn't parse to the innermost command.
     rest.addAll(args);
     args.clear();
-    return newArgResults(grammar, results, commandName, commandResults, rest,
-        arguments);
+    return newArgResults(grammar, results, commandName, commandResults, rest);
   }
 
   /// Pulls the value for [option] from the second argument in [args].

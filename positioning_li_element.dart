@@ -3,7 +3,7 @@ library position;
 import 'package:observe/observe.dart';
 import 'package:polymer/polymer.dart';
 import 'dart:html';
-import 'route.dart';
+import 'package:snowroute/route.dart';
 
 @CustomTag('positioning-li-element')
 class PositioningLiElement extends LIElement with Polymer, ChangeNotifier {
@@ -14,6 +14,6 @@ class PositioningLiElement extends LIElement with Polymer, ChangeNotifier {
   PositioningLiElement.created() : super.created() { polymerCreated(); }
   
   void delete(Event event, var detail, var target) {
-    fire('delete', detail: {'key': route.key });
+    fire('delete', detail: {'route': route });
   }
 }
